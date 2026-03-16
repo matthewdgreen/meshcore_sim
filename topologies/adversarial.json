@@ -1,0 +1,27 @@
+{
+  "_comment": "Linear chain with a compromised middle relay demonstrating all three adversarial modes.",
+  "_comment2": "Change evil_relay.adversarial.mode to 'drop', 'corrupt', or 'replay' to test each.",
+  "nodes": [
+    { "name": "sender",    "relay": false },
+    { "name": "evil_relay",
+      "relay": true,
+      "adversarial": {
+        "mode": "corrupt",
+        "probability": 0.5,
+        "corrupt_byte_count": 2
+      }
+    },
+    { "name": "receiver",  "relay": false }
+  ],
+  "edges": [
+    { "a": "sender",    "b": "evil_relay", "loss": 0.0, "latency_ms": 10, "snr": 9.0, "rssi": -82.0 },
+    { "a": "evil_relay", "b": "receiver",  "loss": 0.0, "latency_ms": 10, "snr": 9.0, "rssi": -82.0 }
+  ],
+  "simulation": {
+    "warmup_secs": 5,
+    "duration_secs": 60,
+    "traffic_interval_secs": 8,
+    "advert_interval_secs": 15,
+    "agent_binary": "./node_agent/build/node_agent"
+  }
+}

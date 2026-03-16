@@ -1,0 +1,23 @@
+{
+  "_comment": "Hub-and-spoke: four endpoints all connect through one central relay",
+  "nodes": [
+    { "name": "hub",    "relay": true  },
+    { "name": "alpha",  "relay": false },
+    { "name": "beta",   "relay": false },
+    { "name": "gamma",  "relay": false },
+    { "name": "delta",  "relay": false }
+  ],
+  "edges": [
+    { "a": "alpha", "b": "hub", "loss": 0.02, "latency_ms": 15, "snr": 10.0, "rssi": -80.0 },
+    { "a": "beta",  "b": "hub", "loss": 0.05, "latency_ms": 25, "snr":  7.0, "rssi": -88.0 },
+    { "a": "gamma", "b": "hub", "loss": 0.10, "latency_ms": 40, "snr":  5.0, "rssi": -95.0 },
+    { "a": "delta", "b": "hub", "loss": 0.15, "latency_ms": 60, "snr":  3.0, "rssi": -100.0 }
+  ],
+  "simulation": {
+    "warmup_secs": 5,
+    "duration_secs": 90,
+    "traffic_interval_secs": 8,
+    "advert_interval_secs": 25,
+    "agent_binary": "./node_agent/build/node_agent"
+  }
+}

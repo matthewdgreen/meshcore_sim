@@ -1,0 +1,19 @@
+{
+  "_comment": "alice -- relay1 -- bob  (simple linear chain)",
+  "nodes": [
+    { "name": "alice",  "relay": false },
+    { "name": "relay1", "relay": true  },
+    { "name": "bob",    "relay": false }
+  ],
+  "edges": [
+    { "a": "alice",  "b": "relay1", "loss": 0.05, "latency_ms": 20, "snr":  8.0, "rssi": -85.0 },
+    { "a": "relay1", "b": "bob",    "loss": 0.05, "latency_ms": 20, "snr":  8.0, "rssi": -85.0 }
+  ],
+  "simulation": {
+    "warmup_secs": 5,
+    "duration_secs": 60,
+    "traffic_interval_secs": 10,
+    "advert_interval_secs": 20,
+    "agent_binary": "./node_agent/build/node_agent"
+  }
+}
