@@ -35,11 +35,13 @@ from .packet import (
 @dataclass
 class HopRecord:
     """One observed radio transmission (sender → receiver) of a given packet."""
-    t: float           # asyncio event-loop time of delivery
-    sender: str        # node that transmitted
-    receiver: str      # node that received (after latency + filters)
-    route_type: int    # route type from the packet header at this hop
-    path_count: int    # number of relay hashes in path[] at TX time
+    t: float               # asyncio event-loop time of delivery
+    sender: str            # node that transmitted
+    receiver: str          # node that received (after latency + filters)
+    route_type: int        # route type from the packet header at this hop
+    path_count: int        # number of relay hashes in path[] at TX time
+    tx_id: Optional[int]   # monotonic counter, one per TX event;
+                           # all hops sharing a tx_id came from the same broadcast
 
 
 @dataclass
@@ -91,15 +93,20 @@ class PacketTracer:
     def __init__(self) -> None:
         # fingerprint → PacketTrace
         self._traces: dict[str, PacketTrace] = {}
+        # Monotonic counter: incremented once per TX event so all deliveries
+        # from the same broadcast share a tx_id.
+        self._tx_counter: int = 0
 
     # ------------------------------------------------------------------
     # Recording
     # ------------------------------------------------------------------
 
-    def record_tx(self, sender: str, hex_data: str, t: float) -> Optional[str]:
+    def record_tx(self, sender: str, hex_data: str, t: float) -> Optional[int]:
         """
         Register a TX event.  Creates a new PacketTrace if this fingerprint
-        is new.  Returns the fingerprint, or None if the packet cannot be decoded.
+        is new.  Returns a tx_id (monotonic int) that should be passed to every
+        record_rx() call that belongs to this broadcast, or None if the packet
+        cannot be decoded.
         """
         info = decode_packet(hex_data)
         if info is None:
@@ -112,15 +119,24 @@ class PacketTracer:
                 first_seen_at=t,
                 first_sender=sender,
             )
-        return fp
+        self._tx_counter += 1
+        return self._tx_counter
 
     def record_rx(
-        self, sender: str, receiver: str, hex_data: str, t: float
+        self,
+        sender: str,
+        receiver: str,
+        hex_data: str,
+        t: float,
+        tx_id: Optional[int] = None,
     ) -> None:
         """
         Register a successful delivery.  This is called *after* the link loss
         check and adversarial filter, so it reflects packets that actually reach
         the receiving node's radio queue.
+
+        tx_id should be the value returned by the corresponding record_tx() call;
+        all deliveries sharing a tx_id originated from the same broadcast event.
         """
         info = decode_packet(hex_data)
         if info is None:
@@ -142,6 +158,7 @@ class PacketTracer:
             receiver=receiver,
             route_type=info.route_type,
             path_count=info.path_count,
+            tx_id=tx_id,
         ))
 
     # ------------------------------------------------------------------
@@ -224,6 +241,7 @@ class PacketTracer:
                         "receiver":   h.receiver,
                         "route_type": h.route_type,
                         "path_count": h.path_count,
+                        "tx_id":      h.tx_id,
                     }
                     for h in tr.hops
                 ],

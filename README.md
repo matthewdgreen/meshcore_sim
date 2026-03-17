@@ -189,13 +189,13 @@ manually.
 python3 -m sim_tests
 ```
 
-This runs all 310 tests:
+This runs all 313 tests:
 
 | Group | Count | Binary needed |
 |-------|------:|---------------|
 | C++ crypto (SHA-256, HMAC, AES-128, Ed25519, ECDH, encrypt) | 9 groups† | `tests/build/meshcore_tests` |
 | Python unit — config, topology, adversarial, metrics | 118 | none |
-| Python unit — packet decoder, path tracer | 56 | none |
+| Python unit — packet decoder, path tracer | 59 | none |
 | Python integration — NodeAgent, simulation smoke tests | 72 | `node_agent/build/node_agent` |
 | Python integration — grid routing (flood→direct transition) | 12 | `node_agent/build/node_agent` |
 | Python integration — privacy baseline (flood exposure, collusion) | 20 | `node_agent/build/node_agent` |
@@ -871,8 +871,12 @@ forward it.  This matches exactly how MeshCore's own dedup table
 correlate every copy of the same logical packet that the orchestrator
 observes as it propagates through the network:
 
-- `record_tx(sender, hex_data, t)` — called from `PacketRouter._on_tx`
-- `record_rx(sender, receiver, hex_data, t)` — called from `PacketRouter._deliver_to` after all filters pass
+- `record_tx(sender, hex_data, t)` — called from `PacketRouter._on_tx`; returns
+  a monotonic `tx_id` integer that identifies this specific broadcast event.
+- `record_rx(sender, receiver, hex_data, t, tx_id)` — called from
+  `PacketRouter._deliver_to` after all filters pass; the `tx_id` from the
+  originating `record_tx` call is stored on the `HopRecord`, so all deliveries
+  that share a `tx_id` are known to have come from the same on-air broadcast.
 
 At simulation end, `PacketTracer.report()` emits the path trace section of
 the report.  The raw trace data is available programmatically via

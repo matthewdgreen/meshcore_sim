@@ -50,7 +50,7 @@ Success criteria:
 | `PacketTracer` — per-packet path & witness analysis | ✅ complete |
 | `packet.py` — pure-Python MeshCore wire-format decoder | ✅ complete |
 | C++ unit tests (crypto shims, packet serialisation) | ✅ complete |
-| Python unit / integration tests (310 tests, all passing) | ✅ complete |
+| Python unit / integration tests (313 tests, all passing) | ✅ complete |
 | Example topologies (linear, star, adversarial, asymmetric hill) | ✅ complete |
 | Grid topology generator (`topologies/gen_grid.py`) | ✅ complete |
 | Pre-generated 10×10 grid topology (`topologies/grid_10x10.json`) | ✅ complete |
@@ -72,6 +72,7 @@ Success criteria:
 | `viz/` — "animate hops" checkbox: Play/Pause drives hop slider for full hop-level playback | ✅ complete |
 | `viz/` — Trace validation: mismatch warning when trace topology/nodes don't match loaded topology | ✅ complete |
 | `tracer.to_dict()` — embeds `topology` (filename) and `nodes` list for cross-checking in viz | ✅ complete |
+| `HopRecord.tx_id` — monotonic counter groups all deliveries from the same broadcast; `to_dict()` emits it | ✅ complete |
 
 ### Key invariants
 
@@ -290,6 +291,22 @@ Side-by-side view of two trace files (baseline vs. modified routing).
 - Useful for quickly checking whether a candidate routing modification
   improves privacy without regressing delivery.
 
+#### Phase 4 — Broadcast-aware hop display  [FUTURE]
+
+Currently the trace stores one `HopRecord` per `(sender, receiver)` pair.
+A single LoRa broadcast from node A to neighbours B, C, D produces three
+separate hop entries, which the hop slider steps through sequentially — as
+if A transmitted three times in a row.  In reality it was one on-air event.
+
+Work items:
+- ~~Add a `tx_id` counter to `PacketTracer`; increment it in `record_tx` and
+  store it on every `HopRecord` created by the corresponding `record_rx` calls.~~  ✅ done
+- ~~Update `to_dict()` to include `tx_id` on each hop object.~~  ✅ done
+- In the viz hop slider, group hops by `tx_id`; each "step" advances one
+  `tx_id` group rather than one individual `(sender→receiver)` pair.
+  Highlight the sender in orange and **all receivers in that group** in green
+  simultaneously, giving an accurate picture of the broadcast event.
+
 ### 6. RF physical layer fidelity  [FUTURE — low priority]
 
 #### 6a. Airtime modelling
@@ -371,6 +388,7 @@ by `unique_receivers` to see which adversarial nodes saw which packets.
 | Date | Change |
 |------|--------|
 | 2026-03-16 | `tools/README.md` — full auth guide and CLI reference for scraper; FD-limit fix for large topologies |
+| 2026-03-17 | `tracer` — `HopRecord.tx_id`: monotonic counter groups all deliveries from the same broadcast event; emitted in trace JSON |
 | 2026-03-17 | `viz/` — hop-by-hop step-through slider; Play/Pause drives hop animation; "animate hops" checkbox; trace mismatch validation; trace JSON now embeds topology name + node list |
 | 2026-03-17 | `viz/` Phase 2 — witness-count heatmap, packet step-through slider, sender/receiver highlight; Play/Pause with speed control; `--trace-out` flag on orchestrator |
 | 2026-03-17 | `viz/` Phase 1 — static topology viewer with geo map (OpenStreetMap) and force-directed layouts; shortened node labels; hover detail panel |

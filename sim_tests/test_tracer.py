@@ -60,10 +60,16 @@ class TestPacketTracerBasic(unittest.TestCase):
     def setUp(self):
         self.tracer = PacketTracer()
 
-    def test_record_tx_returns_fingerprint(self):
-        fp = self.tracer.record_tx("alice", _MSG_HOP0, 0.0)
-        self.assertIsNotNone(fp)
-        self.assertIsInstance(fp, str)
+    def test_record_tx_returns_tx_id(self):
+        tx_id = self.tracer.record_tx("alice", _MSG_HOP0, 0.0)
+        self.assertIsNotNone(tx_id)
+        self.assertIsInstance(tx_id, int)
+
+    def test_record_tx_tx_ids_are_unique(self):
+        """Each TX event gets a distinct tx_id even for the same packet."""
+        tx_id1 = self.tracer.record_tx("alice", _MSG_HOP0, 0.0)
+        tx_id2 = self.tracer.record_tx("relay1", _MSG_HOP1, 0.1)
+        self.assertNotEqual(tx_id1, tx_id2)
 
     def test_record_tx_invalid_hex_returns_none(self):
         fp = self.tracer.record_tx("alice", "ZZZZ", 0.0)
@@ -131,11 +137,29 @@ class TestPacketTracerHops(unittest.TestCase):
 
     def test_flood_fan_out(self):
         """alice→relay1 and alice→bob both receive the same flood packet."""
-        self.tracer.record_tx("alice", _MSG_HOP0, 0.0)
-        self.tracer.record_rx("alice", "relay1", _MSG_HOP0, 0.02)
-        self.tracer.record_rx("alice", "bob",    _MSG_HOP0, 0.025)
+        tx_id = self.tracer.record_tx("alice", _MSG_HOP0, 0.0)
+        self.tracer.record_rx("alice", "relay1", _MSG_HOP0, 0.02,  tx_id)
+        self.tracer.record_rx("alice", "bob",    _MSG_HOP0, 0.025, tx_id)
         traces = list(self.tracer.traces.values())
         self.assertEqual(traces[0].witness_count, 2)
+
+    def test_flood_fan_out_hops_share_tx_id(self):
+        """All deliveries from one broadcast have identical tx_id."""
+        tx_id = self.tracer.record_tx("alice", _MSG_HOP0, 0.0)
+        self.tracer.record_rx("alice", "relay1", _MSG_HOP0, 0.02,  tx_id)
+        self.tracer.record_rx("alice", "bob",    _MSG_HOP0, 0.025, tx_id)
+        hops = list(self.tracer.traces.values())[0].hops
+        self.assertEqual(hops[0].tx_id, tx_id)
+        self.assertEqual(hops[1].tx_id, tx_id)
+
+    def test_different_tx_events_have_different_tx_ids(self):
+        """alice TX and relay1 TX produce distinct tx_ids on their respective hops."""
+        tx_id1 = self.tracer.record_tx("alice", _MSG_HOP0, 0.0)
+        self.tracer.record_rx("alice", "relay1", _MSG_HOP0, 0.02, tx_id1)
+        tx_id2 = self.tracer.record_tx("relay1", _MSG_HOP1, 0.03)
+        self.tracer.record_rx("relay1", "bob", _MSG_HOP1, 0.05, tx_id2)
+        hops = list(self.tracer.traces.values())[0].hops
+        self.assertNotEqual(hops[0].tx_id, hops[1].tx_id)
 
     def test_rx_before_tx_handled_defensively(self):
         """record_rx for an unknown fingerprint should not crash."""

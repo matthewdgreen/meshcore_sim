@@ -65,15 +65,17 @@ class PacketRouter:
         self._metrics.record_tx(sender_name)
         log.debug("[router] tx from %s  len=%d", sender_name, len(hex_data) // 2)
 
-        # Register the transmission with the path tracer
+        # Register the transmission with the path tracer; capture tx_id so all
+        # concurrent deliveries from this broadcast share the same identifier.
+        tx_id: Optional[int] = None
         if self._tracer is not None:
             t = asyncio.get_event_loop().time()
-            self._tracer.record_tx(sender_name, hex_data, t)
+            tx_id = self._tracer.record_tx(sender_name, hex_data, t)
 
         for link in self._topology.neighbours(sender_name):
             # Fire-and-forget: each delivery is independent
             asyncio.create_task(
-                self._deliver_to(sender_name, link, hex_data),
+                self._deliver_to(sender_name, link, hex_data, tx_id),
                 name=f"deliver-{sender_name}->{link.other}",
             )
 
@@ -82,7 +84,8 @@ class PacketRouter:
     # ------------------------------------------------------------------
 
     async def _deliver_to(
-        self, sender: str, link: EdgeLink, hex_data: str
+        self, sender: str, link: EdgeLink, hex_data: str,
+        tx_id: Optional[int] = None,
     ) -> None:
         receiver_name = link.other
 
@@ -119,7 +122,7 @@ class PacketRouter:
         # 4. Record successful delivery in the path tracer
         if self._tracer is not None:
             t = asyncio.get_event_loop().time()
-            self._tracer.record_rx(sender, receiver_name, hex_data, t)
+            self._tracer.record_rx(sender, receiver_name, hex_data, t, tx_id)
 
         # 5. Deliver
         receiver = self._agents.get(receiver_name)
