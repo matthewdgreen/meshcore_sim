@@ -60,6 +60,7 @@ Success criteria:
 | `RoomServerNode` — `SimNode` subclass that re-broadcasts TXT_MSG to all contacts | ✅ complete |
 | Per-node `binary` field — mixed topologies with different node binaries | ✅ complete |
 | `demo/room_server_demo.py` — interactive 10×10 grid room-server demo | ✅ complete |
+| `tools/fetch_topology.py` — scrape live meshcore-mqtt-live-map → topology JSON | ✅ complete |
 
 ### Key invariants
 
@@ -263,6 +264,7 @@ by `unique_receivers` to see which adversarial nodes saw which packets.
 
 | Date | Change |
 |------|--------|
+| 2026-03-16 | `tools/fetch_topology.py` — live network scraper for meshcore-mqtt-live-map |
 | 2026-03-16 | `RoomServerNode` + interactive 10×10 demo + integration tests; 310 tests |
 | 2026-03-16 | Privacy baseline tests: flood exposure, collusion attack, direct reduction |
 | 2026-03-16 | Per-node `binary` field; `default_binary` rename; protocol spec; arch decision recorded |

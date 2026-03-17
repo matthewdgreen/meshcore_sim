@@ -86,6 +86,9 @@ meshcore_sim/
 ├── demo/                   Interactive demos
 │   └── room_server_demo.py  10×10 grid with a live room server and three clients
 │
+├── tools/                  Utility scripts
+│   └── fetch_topology.py   Scrape a live meshcore-mqtt-live-map instance → topology JSON
+│
 └── topologies/             Example topology JSON files
     ├── linear_three.json
     ├── star_five.json
@@ -540,6 +543,74 @@ Example excerpt (3×3 grid for clarity):
 [TXT_MSG] 025e91d3… witnesses=4  route=DIRECT  ← second send: only 4 nodes see it
 [TXT_MSG] 026b73a1… witnesses=4  route=DIRECT  ← reply: also direct
 ```
+
+---
+
+## Importing a real network topology
+
+`tools/fetch_topology.py` downloads a live network map from any
+[meshcore-mqtt-live-map](https://github.com/yellowcooln/meshcore-mqtt-live-map)
+instance and converts it to simulator topology JSON — ready to run with
+`python3 -m orchestrator`.
+
+### Check network size (no credentials needed)
+
+```sh
+python3 tools/fetch_topology.py --stats --host live.bostonme.sh
+```
+```
+  Host:              https://live.bostonme.sh
+  Mapped devices:    215
+  Seen devices:      273
+  Active routes:     10
+  History edges:     820
+  MQTT online:       19 (16 feeding)
+  Last activity:     2026-03-17 13:50:43 UTC
+```
+
+### Fetch and convert (credentials required)
+
+The full map endpoints require authentication.  Obtain credentials one of two ways:
+
+- **Browser cookie** — visit `https://live.bostonme.sh`, pass the Cloudflare
+  Turnstile challenge, then copy the `meshmap_auth` cookie value from
+  DevTools → Application → Cookies.  Valid for 24 hours.
+- **Bearer token** — ask the network admin for a `PROD_TOKEN`.
+
+```sh
+# Relay backbone only, edges seen ≥ 5 times
+python3 tools/fetch_topology.py \
+    --token <TOKEN> \
+    --only-relays --min-edge-count 5 \
+    --output topologies/boston_relays.json --verbose
+
+# All node types (relays + companions + room servers), looser edge filter
+python3 tools/fetch_topology.py \
+    --cookie <meshmap_auth value> \
+    --min-edge-count 2 \
+    --output topologies/boston_full.json --verbose
+```
+
+Then simulate against the real topology:
+
+```sh
+python3 -m orchestrator topologies/boston_relays.json --duration 120
+```
+
+### What the scraper does
+
+1. **Fetches `/snapshot`** — returns all devices (name, lat/lon, role, RSSI, SNR)
+   and all `history_edges` (pairs of lat/lon coordinates with a packet-count
+   for each observed link).
+2. **Resolves coordinates → node IDs** — history edges record endpoints as
+   GPS coordinates; the scraper matches each to the nearest device within 100 m.
+3. **Applies filters** — `--min-edge-count` prunes low-confidence links;
+   `--max-distance-km` (default 50 km) drops implausibly long links;
+   `--only-relays` limits the topology to repeater nodes.
+4. **Maps roles** — `device_role=1` (repeater) → `relay: true`;
+   `device_role=3` (room server) → `room_server: true`.
+5. **Sets link quality** — SNR and RSSI are averaged from the two endpoint
+   devices' last-known values; loss defaults to 5 % (tune with topology edits).
 
 ---
 
