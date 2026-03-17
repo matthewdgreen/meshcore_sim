@@ -15,6 +15,7 @@ from .metrics import MetricsCollector
 from .node import NodeAgent
 from .router import PacketRouter
 from .topology import Topology
+from .tracer import PacketTracer
 from .traffic import TrafficGenerator
 
 log = logging.getLogger(__name__)
@@ -38,6 +39,7 @@ async def run(args: object) -> int:
 
     rng = random.Random(sim.seed)
     metrics = MetricsCollector()
+    tracer  = PacketTracer()
     topology = Topology(topo_cfg)
 
     # ------------------------------------------------------------------
@@ -66,7 +68,7 @@ async def run(args: object) -> int:
     # ------------------------------------------------------------------
     # Wire up router (registers callbacks on all agents)
     # ------------------------------------------------------------------
-    router = PacketRouter(topology, agents, metrics, rng)
+    router = PacketRouter(topology, agents, metrics, rng, tracer=tracer)
     traffic = TrafficGenerator(agents, topology, sim, metrics, rng)
 
     # ------------------------------------------------------------------
@@ -107,7 +109,7 @@ async def run(args: object) -> int:
     # ------------------------------------------------------------------
     # Report
     # ------------------------------------------------------------------
-    report = metrics.report()
+    report = metrics.report() + tracer.report()
     print(report)
 
     if args.report is not None:                                                        # type: ignore[attr-defined]

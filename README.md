@@ -57,6 +57,8 @@ meshcore_sim/
 │   ├── adversarial.py      AdversarialFilter: drop / corrupt / replay modes
 │   ├── traffic.py          TrafficGenerator: advert floods, random text sends
 │   ├── metrics.py          Counters, delivery rate, latency, report
+│   ├── packet.py           Wire-format decoder (pure Python, no binary needed)
+│   ├── tracer.py           PacketTracer: per-packet path and witness analysis
 │   └── cli.py              argparse CLI definition
 │
 ├── tests/                  C++ test suite (crypto shims + packet serialisation)
@@ -68,13 +70,15 @@ meshcore_sim/
 ├── sim_tests/              Python test suite (orchestrator + integration)
 │   ├── __main__.py         Entry point (python3 -m sim_tests)
 │   ├── helpers.py          Shared factories and skip decorators
-│   ├── test_config.py      Config loading, DirectionalOverrides
-│   ├── test_topology.py    Adjacency graph, asymmetric edges
-│   ├── test_adversarial.py Drop / corrupt / replay filter logic
-│   ├── test_metrics.py     Counters, delivery tracking, report formatting
-│   ├── test_node_agent.py  NodeAgent lifecycle and commands
+│   ├── test_config.py           Config loading, DirectionalOverrides
+│   ├── test_topology.py         Adjacency graph, asymmetric edges
+│   ├── test_adversarial.py      Drop / corrupt / replay filter logic
+│   ├── test_metrics.py          Counters, delivery tracking, report formatting
+│   ├── test_node_agent.py       NodeAgent lifecycle and commands
+│   ├── test_packet_decode.py    Wire-format decoder (30 tests, no binary needed)
+│   ├── test_tracer.py           PacketTracer path and witness tracking (26 tests)
 │   ├── test_integration_smoke.py  End-to-end simulation smoke tests
-│   └── test_cpp_suite.py   Runs the C++ binary as part of the Python suite
+│   └── test_cpp_suite.py        Runs the C++ binary as part of the Python suite
 │
 └── topologies/             Example topology JSON files
     ├── linear_three.json
@@ -157,12 +161,13 @@ manually.
 python3 -m sim_tests
 ```
 
-This runs all 195 tests:
+This runs all 251 tests:
 
 | Group | Count | Binary needed |
 |-------|------:|---------------|
 | C++ crypto (SHA-256, HMAC, AES-128, Ed25519, ECDH, encrypt) | 9 groups† | `tests/build/meshcore_tests` |
 | Python unit — config, topology, adversarial, metrics | 118 | none |
+| Python unit — packet decoder, path tracer | 56 | none |
 | Python integration — NodeAgent, simulation smoke tests | 68 | `node_agent/build/node_agent` |
 
 † Each group wrapper drives the C++ binary with a name filter; the 9 wrappers
@@ -269,6 +274,40 @@ TX and RX counts are orchestrator-level packet counts (not the node's internal
 counters).  Latency is wall-clock time from `send_text` command to the
 matching `recv_text` event, and includes routing delay and any configured
 link latency.
+
+The report also includes a **Packet Path Trace** section produced by the
+`PacketTracer` (see [Packet path tracing](#packet-path-tracing)):
+
+```
+============================================================
+  Packet Path Trace
+============================================================
+
+  Unique packets:   14
+  Total deliveries: 38
+  Flood-routed:     12
+  Direct-routed:    2
+
+  Type              Count  Avg witnesses  Max witnesses
+  ----------------  -----  -------------  -------------
+  ADVERT                6            4.2              6
+  TXT_MSG               4            5.5              8
+  PATH                  2            1.0              1
+  ACK                   2            2.0              2
+
+  Highest-exposure packets (witnesses = nodes that received a copy):
+
+    [TXT_MSG     ] 02deadbeef112233…  witnesses=8  route=FLOOD
+      senders:   alice, relay1, relay2
+      receivers: relay1, relay2, relay3, bob
+    …
+============================================================
+```
+
+The **witnesses** count for a packet is the number of (sender→receiver) radio
+transmissions involving that packet that the orchestrator observed.  This is
+the key privacy metric: a packet with many witnesses was seen by many nodes,
+making it easier for a network-level adversary to correlate it across the mesh.
 
 ---
 
@@ -520,6 +559,49 @@ carries the parameters for one direction of travel.  When an edge has
 the merged values (`override if override is not None else symmetric_base`).
 The router always looks up the link from the sender's adjacency list, so it
 automatically uses direction-appropriate loss, latency, SNR, and RSSI.
+
+### Packet path tracing
+
+`orchestrator/packet.py` provides a pure-Python wire-format decoder that
+parses the hex bytes from every `tx` event into structured fields:
+
+| Field | Description |
+|-------|-------------|
+| `route_type` | `FLOOD`, `DIRECT`, `TRANSPORT_FLOOD`, `TRANSPORT_DIRECT` |
+| `payload_type` | `TXT_MSG`, `ADVERT`, `ACK`, `PATH`, `TRACE`, … |
+| `path_count` | Number of relay-hash entries in `path[]` at this hop |
+| `path_bytes` | Raw path bytes (grow on flood, shrink on direct) |
+| `payload` | Encrypted payload — **hop-invariant**, same bytes at every relay |
+
+The **fingerprint** of a packet — `hex(payload_type_byte || payload_bytes)` —
+is stable across all hops because only the path field changes as relays
+forward it.  This matches exactly how MeshCore's own dedup table
+(`calculatePacketHash`) identifies packets.
+
+`orchestrator/tracer.py` — `PacketTracer` — uses this fingerprint to
+correlate every copy of the same logical packet that the orchestrator
+observes as it propagates through the network:
+
+- `record_tx(sender, hex_data, t)` — called from `PacketRouter._on_tx`
+- `record_rx(sender, receiver, hex_data, t)` — called from `PacketRouter._deliver_to` after all filters pass
+
+At simulation end, `PacketTracer.report()` emits the path trace section of
+the report.  The raw trace data is available programmatically via
+`tracer.traces` (dict of fingerprint → `PacketTrace`) for downstream
+analysis scripts.
+
+**Privacy-research use cases:**
+- **Flood multiplicity** — `trace.unique_senders` shows how many relays
+  forwarded a message, revealing the shape of the broadcast tree.
+- **Witness count** — `trace.witness_count` is the total number of nodes that
+  received at least one copy.  Lower is more private.
+- **Route mode** — `trace.is_flood()` distinguishes flood from direct routing.
+  A direct-routed message reaches only the next-hop relay, whereas a
+  flood-routed message may reach the entire network.
+- **Cross-hop correlation** — because every copy of the same packet has an
+  identical fingerprint, any two nodes that observed the same fingerprint can
+  confirm they saw the same message.  Eliminating this correlation (e.g., by
+  per-hop re-encryption) is the core challenge of privacy-preserving routing.
 
 ### Adversarial model
 

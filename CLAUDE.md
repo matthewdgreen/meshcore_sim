@@ -15,6 +15,18 @@
 | Change to `python3 -m sim_tests` test count or groups | `README.md` → Running the tests table |
 | New example topology file | `README.md` → Repository layout (topologies/) |
 
+## Research plan
+
+**`PLAN.md`** at the repo root records the privacy-preserving routing research
+goal, current simulator state, and the prioritised next-steps queue.  Update
+it when:
+- A milestone from the next-steps list is completed.
+- A new research direction or open question is identified.
+- The threat model or success criteria change.
+
+`PLAN.md` is the durable record that survives context compaction and machine
+loss; this `CLAUDE.md` file covers only developer rules.
+
 ## Before committing
 
 1. Run `python3 -m sim_tests` and confirm all non-skipped tests pass.

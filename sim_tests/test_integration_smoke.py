@@ -70,8 +70,11 @@ async def _run_sim(
             await traffic._send_random(endpoints)
             await asyncio.sleep(0.2)
 
-    # Allow deliveries to propagate
-    await asyncio.sleep(0.5)
+    # Allow deliveries to propagate.  Use a generous window: node_agent
+    # processes poll stdin with a 1 ms select() timeout, so under load
+    # (e.g. running the full test suite) delivery can take much longer
+    # than the nominal zero latency.
+    await asyncio.sleep(2.0)
 
     await asyncio.gather(*(a.quit() for a in agents.values()), return_exceptions=True)
     return agents, metrics

@@ -8,11 +8,13 @@ from __future__ import annotations
 import asyncio
 import logging
 import random
+from typing import Optional
 
 from .adversarial import AdversarialFilter
 from .metrics import MetricsCollector
 from .node import NodeAgent
 from .topology import EdgeLink, Topology
+from .tracer import PacketTracer
 
 log = logging.getLogger(__name__)
 
@@ -33,11 +35,13 @@ class PacketRouter:
         agents: dict[str, NodeAgent],
         metrics: MetricsCollector,
         rng: random.Random,
+        tracer: Optional[PacketTracer] = None,
     ) -> None:
         self._topology = topology
         self._agents = agents
         self._metrics = metrics
         self._rng = rng
+        self._tracer = tracer
 
         # Build adversarial filters for nodes that have an adversarial config
         self._filters: dict[str, AdversarialFilter] = {}
@@ -60,6 +64,11 @@ class PacketRouter:
         hex_data: str = event.get("hex", "")
         self._metrics.record_tx(sender_name)
         log.debug("[router] tx from %s  len=%d", sender_name, len(hex_data) // 2)
+
+        # Register the transmission with the path tracer
+        if self._tracer is not None:
+            t = asyncio.get_event_loop().time()
+            self._tracer.record_tx(sender_name, hex_data, t)
 
         for link in self._topology.neighbours(sender_name):
             # Fire-and-forget: each delivery is independent
@@ -107,7 +116,12 @@ class PacketRouter:
         if link.latency_ms > 0.0:
             await asyncio.sleep(link.latency_ms / 1000.0)
 
-        # 4. Deliver
+        # 4. Record successful delivery in the path tracer
+        if self._tracer is not None:
+            t = asyncio.get_event_loop().time()
+            self._tracer.record_rx(sender, receiver_name, hex_data, t)
+
+        # 5. Deliver
         receiver = self._agents.get(receiver_name)
         if receiver is None:
             return
