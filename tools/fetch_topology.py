@@ -7,10 +7,10 @@ Data source: https://live.bostonme.sh or any self-hosted instance of
 https://github.com/yellowcooln/meshcore-mqtt-live-map
 
 Authentication (one of):
-  --token TOKEN    PROD_TOKEN bearer token (ask network admin)
-  --cookie VALUE   Value of the meshmap_auth cookie — solve the Turnstile
-                   challenge in a browser, then copy from
-                   DevTools → Application → Cookies → meshmap_auth.
+  --token TOKEN       PROD_TOKEN bearer token (ask network admin)
+  --cookie VALUE      Value of the meshmap_auth cookie only
+  --raw-cookie STRING Full Cookie header value copied verbatim from DevTools
+                      (e.g. "cf_clearance=abc; meshmap_auth=xyz")
 
 No external dependencies — stdlib only.
 
@@ -81,24 +81,55 @@ def _coord_key(lat: float, lon: float) -> tuple:
 # HTTP helpers
 # ---------------------------------------------------------------------------
 
-def _fetch(url: str, token: Optional[str], cookie: Optional[str]) -> dict:
-    headers: dict[str, str] = {}
+def _fetch(
+    url: str,
+    token: Optional[str],
+    cookie: Optional[str],
+    raw_cookie: Optional[str] = None,
+    debug: bool = False,
+) -> dict:
+    import urllib.parse
+
+    headers: dict[str, str] = {
+        # Mirror what the browser sends so the server accepts the request
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:120.0) Gecko/20100101 Firefox/120.0",
+        "Accept": "*/*",
+        "Referer": url.rsplit("/", 1)[0] + "/map",
+    }
     if token:
-        headers["Authorization"] = f"Bearer {token}"
-    if cookie:
+        # The live-map server accepts the token as a query param AND x-access-token header
+        sep = "&" if "?" in url else "?"
+        url = f"{url}{sep}token={urllib.parse.quote(token)}"
+        headers["x-access-token"] = token
+    if raw_cookie:
+        headers["Cookie"] = raw_cookie          # verbatim — user pastes full header
+    elif cookie:
         headers["Cookie"] = f"meshmap_auth={cookie}"
+
     req = urllib.request.Request(url, headers=headers)
     try:
         with urllib.request.urlopen(req, timeout=30) as resp:
             return json.loads(resp.read().decode())
     except urllib.error.HTTPError as e:
+        body = ""
+        try:
+            body = e.read().decode(errors="replace")
+        except Exception:
+            pass
         if e.code == 401:
-            raise SystemExit(
-                f"401 Unauthorized at {url}\n"
-                "Provide --token TOKEN or --cookie VALUE.\n"
-                "Use --stats to query public endpoints without credentials."
+            hint = (
+                "\nHint: the site may require multiple cookies (e.g. cf_clearance + meshmap_auth).\n"
+                "Try --raw-cookie with the full Cookie header from DevTools:\n"
+                "  1. Open DevTools → Network tab, reload the page\n"
+                "  2. Find any request to /snapshot or /api/nodes\n"
+                "  3. Right-click → Copy → Copy as cURL\n"
+                "  4. Extract the -H 'cookie: ...' value and pass it to --raw-cookie"
             )
-        raise SystemExit(f"HTTP {e.code} fetching {url}: {e.reason}")
+            if debug and body:
+                hint += f"\n\nServer response body:\n{body[:500]}"
+            raise SystemExit(f"401 Unauthorized at {url}{hint}")
+        raise SystemExit(f"HTTP {e.code} fetching {url}: {e.reason}"
+                         + (f"\n{body[:300]}" if debug and body else ""))
     except urllib.error.URLError as e:
         raise SystemExit(f"Network error fetching {url}: {e.reason}")
 
@@ -108,9 +139,21 @@ def fetch_stats(host: str) -> dict:
     return _fetch(f"https://{host}/stats", token=None, cookie=None)
 
 
-def fetch_snapshot(host: str, token: Optional[str], cookie: Optional[str]) -> dict:
-    """GET /snapshot — requires bearer token or meshmap_auth cookie."""
-    return _fetch(f"https://{host}/snapshot", token=token, cookie=cookie)
+def fetch_snapshot(
+    host: str,
+    token: Optional[str],
+    cookie: Optional[str],
+    raw_cookie: Optional[str] = None,
+    debug: bool = False,
+) -> dict:
+    """GET /snapshot — requires bearer token or browser cookie(s)."""
+    return _fetch(
+        f"https://{host}/snapshot",
+        token=token,
+        cookie=cookie,
+        raw_cookie=raw_cookie,
+        debug=debug,
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -337,7 +380,12 @@ def main() -> None:
     )
     auth.add_argument(
         "--cookie", metavar="VALUE",
-        help="Value of the meshmap_auth cookie (from a Turnstile browser session)",
+        help="Value of the meshmap_auth cookie only (name=value pair added automatically)",
+    )
+    auth.add_argument(
+        "--raw-cookie", metavar="STRING",
+        help='Full Cookie header value verbatim, e.g. "cf_clearance=abc; meshmap_auth=xyz". '
+             "Copy from DevTools → Network → any /snapshot request → Request Headers → cookie.",
     )
 
     parser.add_argument(
@@ -382,6 +430,10 @@ def main() -> None:
         "--verbose", "-v", action="store_true",
         help="Print conversion statistics to stderr",
     )
+    parser.add_argument(
+        "--debug", action="store_true",
+        help="Print HTTP response body on errors (useful for diagnosing auth failures)",
+    )
 
     args = parser.parse_args()
 
@@ -389,9 +441,9 @@ def main() -> None:
         _print_stats(args.host)
         return
 
-    if not args.token and not args.cookie:
+    if not args.token and not args.cookie and not args.raw_cookie:
         parser.error(
-            "provide --token TOKEN or --cookie VALUE for authenticated access.\n"
+            "provide --token TOKEN, --cookie VALUE, or --raw-cookie STRING.\n"
             "       Use --stats to check network size without credentials."
         )
 
@@ -399,7 +451,11 @@ def main() -> None:
         print(f"Fetching snapshot from https://{args.host}/snapshot …",
               file=sys.stderr)
 
-    snapshot = fetch_snapshot(args.host, args.token, args.cookie)
+    snapshot = fetch_snapshot(
+        args.host, args.token, args.cookie,
+        raw_cookie=args.raw_cookie,
+        debug=args.debug,
+    )
     topology, nodes_raw, edges_raw = build_topology(
         snapshot,
         min_edge_count=args.min_edge_count,
