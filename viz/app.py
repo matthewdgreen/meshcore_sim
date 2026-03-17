@@ -397,6 +397,23 @@ def _broadcast_steps(pkt: dict) -> list[list[dict]]:
     return list(seen.values())
 
 
+def _accumulated_witnesses(
+    pkt: dict, step_idx: int, steps: list[list[dict]]
+) -> set:
+    """Return the set of nodes that have received this packet up to step_idx.
+
+    step_idx == -1  → full set (all hops already seen).
+    step_idx >= 0   → progressive reveal: only receivers from steps 0..step_idx.
+    """
+    if step_idx < 0 or not steps:
+        return set(pkt["unique_receivers"])
+    witnesses: set = set()
+    for i in range(min(step_idx + 1, len(steps))):
+        for h in steps[i]:
+            witnesses.add(h["receiver"])
+    return witnesses
+
+
 def _step_info_children(
     pkt: dict, step_idx: int, steps: list[list[dict]]
 ) -> list:
@@ -832,7 +849,8 @@ def create_app(
                     senders   = []
                     receivers = []
                 pkt_witnesses = (
-                    set(pkt["unique_receivers"]) if view_mode == "packet" else None
+                    _accumulated_witnesses(pkt, step_idx, steps)
+                    if view_mode == "packet" else None
                 )
                 fig = _geo_figure(
                     nodes, edges,
@@ -878,7 +896,7 @@ def create_app(
                 # Nodes that received this packet → muted green; others → grey.
                 # Sender/receiver overlays (added below) win via CSS ordering.
                 if view_mode == "packet":
-                    pkt_witnesses = set(pkt["unique_receivers"])
+                    pkt_witnesses = _accumulated_witnesses(pkt, step_idx, steps)
                     for n in nodes:
                         colour = (
                             _RECEIVED_COLOUR if n["name"] in pkt_witnesses
