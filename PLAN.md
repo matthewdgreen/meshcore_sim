@@ -65,6 +65,8 @@ Success criteria:
 | Large-topology FD fix — `_raise_fd_limit()` + batched subprocess spawning in orchestrator | ✅ complete |
 | Geo coordinates (`lat`/`lon`) on topology nodes — carried through from scraper for visualisation | ✅ complete |
 | `viz/` — Phase 1 static topology viewer (geo map + force-directed, node labels, hover info) | ✅ complete |
+| `viz/` — Phase 2 trace overlay: witness heatmap, packet slider, sender/receiver highlight | ✅ complete |
+| `--trace-out FILE` flag on orchestrator — exports `PacketTracer` data to JSON for viz | ✅ complete |
 
 ### Key invariants
 
@@ -236,7 +238,7 @@ Start with **path hiding** (lowest complexity, directly addresses the
 path_count=0 source-identification attack) to establish the modify → test →
 measure workflow, then move to per-hop re-encryption to break correlation.
 
-### 5. Topology & trace visualisation tool  (`viz/`)  [Phase 1 ✅ DONE]
+### 5. Topology & trace visualisation tool  (`viz/`)  [Phase 1 + 2 ✅ DONE]
 
 A standalone visualisation tool, entirely self-contained in a `viz/` subdirectory.
 It imports nothing from the orchestrator and does not affect the simulator in any way.
@@ -316,6 +318,7 @@ by `unique_receivers` to see which adversarial nodes saw which packets.
 | Date | Change |
 |------|--------|
 | 2026-03-16 | `tools/README.md` — full auth guide and CLI reference for scraper; FD-limit fix for large topologies |
+| 2026-03-17 | `viz/` Phase 2 — witness-count heatmap, packet step-through slider, sender/receiver highlight; `--trace-out` flag on orchestrator |
 | 2026-03-17 | `viz/` Phase 1 — static topology viewer with geo map (OpenStreetMap) and force-directed layouts; shortened node labels; hover detail panel |
 | 2026-03-16 | `viz/` subdirectory planned — static topology viewer + trace overlay (Dash + Plotly + dash-cytoscape) |
 | 2026-03-16 | `tools/fetch_topology.py` — live network scraper for meshcore-mqtt-live-map |

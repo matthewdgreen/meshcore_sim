@@ -27,6 +27,12 @@ def main() -> None:
         action="store_true",
         help="Don't open a browser tab automatically",
     )
+    parser.add_argument(
+        "--trace",
+        default=None,
+        metavar="FILE",
+        help="Packet trace JSON produced by --trace-out (enables Phase 2 overlay)",
+    )
     args = parser.parse_args()
 
     path = Path(args.topology)
@@ -34,7 +40,12 @@ def main() -> None:
         print(f"error: file not found: {path}", file=sys.stderr)
         sys.exit(1)
 
-    app = create_app(path)
+    trace_path = Path(args.trace) if args.trace else None
+    if trace_path is not None and not trace_path.exists():
+        print(f"error: trace file not found: {trace_path}", file=sys.stderr)
+        sys.exit(1)
+
+    app = create_app(path, trace_path=trace_path)
     url = f"http://127.0.0.1:{args.port}"
 
     if not args.no_browser:

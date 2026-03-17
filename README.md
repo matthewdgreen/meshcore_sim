@@ -91,8 +91,8 @@ meshcore_sim/
 │   └── fetch_topology.py   Scrape a live meshcore-mqtt-live-map instance → topology JSON
 │
 ├── viz/                    Topology visualiser (Dash + Plotly + dash-cytoscape)
-│   ├── __main__.py         Entry point: python3 -m viz <topology.json>
-│   ├── app.py              Dash app factory (geo map or force-directed layout)
+│   ├── __main__.py         Entry point: python3 -m viz <topology.json> [--trace trace.json]
+│   ├── app.py              Dash app factory (geo map or force-directed; Phase 1+2)
 │   └── requirements.txt    viz-only deps (dash, plotly, dash-cytoscape)
 │
 ├── requirements.txt        Optional viz dependencies (pip install -r requirements.txt)
