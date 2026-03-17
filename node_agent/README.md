@@ -47,12 +47,13 @@ cmake --build build
 ## Usage
 
 ```
-node_agent [--relay] [--name <str>] [--prv <128-hex-char private key>]
+node_agent [--relay | --room-server] [--name <str>] [--prv <128-hex-char private key>]
 ```
 
 | Flag | Description |
 |------|-------------|
-| `--relay` | Node forwards flood packets it hasn't seen before (repeater). Without this flag the node is a leaf/endpoint that does not forward. |
+| `--relay` | Node forwards flood packets it hasn't seen before (repeater). Mutually exclusive with `--room-server`. |
+| `--room-server` | Node acts as a room server: every received TXT_MSG is re-broadcast to all other known contacts. Emits a `room_post` event per forwarded message. Mutually exclusive with `--relay`. |
 | `--name <str>` | Human-readable node name included in the `ready` message and embedded in Advertisement packets. Defaults to `node`. |
 | `--prv <hex>` | 128-hex-character (64-byte) Ed25519 private key. The matching public key is derived automatically. If omitted, a fresh random identity is generated on each run. |
 
@@ -88,9 +89,10 @@ payloads are hex-encoded.
 
 | `type` | Additional fields | Description |
 |--------|-------------------|-------------|
-| `ready` | `pub` (hex), `is_relay` (bool), `name` (str) | Emitted once on startup |
+| `ready` | `pub` (hex), `is_relay` (bool), `role` (str), `name` (str) | Emitted once on startup; `role` is one of `"endpoint"`, `"relay"`, or `"room-server"` |
 | `tx` | `hex` | Raw packet the node wants to transmit over the air |
 | `recv_text` | `from` (hex pub key), `name` (str), `text` (UTF-8) | Decrypted text message received from a known contact |
+| `room_post` | `from` (hex pub key), `name` (str), `text` (UTF-8) | Room-server only: a TXT_MSG was received and has been forwarded to all other contacts |
 | `recv_data` | `from` (hex), `payload_type` (int), `hex` | Generic decrypted data packet |
 | `advert` | `pub` (hex), `name` (str) | A new peer's Advertisement was received |
 | `ack` | `crc` (uint32) | An ACK packet was received |
@@ -101,11 +103,15 @@ payloads are hex-encoded.
 ```sh
 # Terminal 1 — start a relay
 ./build/node_agent --relay --name relay1
-# {"type":"ready","pub":"43BD...","is_relay":true,"name":"relay1"}
+# {"type":"ready","pub":"43BD...","is_relay":true,"role":"relay","name":"relay1"}
 
-# Terminal 2 — pipe commands
+# Terminal 2 — start a room server
+./build/node_agent --room-server --name hub
+# {"type":"ready","pub":"A1B2...","is_relay":false,"role":"room-server","name":"hub"}
+
+# Terminal 3 — pipe commands to test advert emission
 echo '{"type":"advert","name":"relay1"}' | ./build/node_agent --relay --name relay1
-# {"type":"ready","pub":"...","is_relay":true,"name":"relay1"}
+# {"type":"ready","pub":"...","is_relay":true,"role":"relay","name":"relay1"}
 # {"type":"tx","hex":"1100..."}          <- real MeshCore Advertisement packet
 # {"type":"log","msg":"TX len=111 type=4 route=F"}
 ```

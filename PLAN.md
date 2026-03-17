@@ -50,7 +50,7 @@ Success criteria:
 | `PacketTracer` — per-packet path & witness analysis | ✅ complete |
 | `packet.py` — pure-Python MeshCore wire-format decoder | ✅ complete |
 | C++ unit tests (crypto shims, packet serialisation) | ✅ complete |
-| Python unit / integration tests (298 tests, all passing) | ✅ complete |
+| Python unit / integration tests (310 tests, all passing) | ✅ complete |
 | Example topologies (linear, star, adversarial, asymmetric hill) | ✅ complete |
 | Grid topology generator (`topologies/gen_grid.py`) | ✅ complete |
 | Pre-generated 10×10 grid topology (`topologies/grid_10x10.json`) | ✅ complete |
@@ -263,7 +263,7 @@ by `unique_receivers` to see which adversarial nodes saw which packets.
 
 | Date | Change |
 |------|--------|
-| 2026-03-16 | `RoomServerNode` + interactive 10×10 demo; 298 tests |
+| 2026-03-16 | `RoomServerNode` + interactive 10×10 demo + integration tests; 310 tests |
 | 2026-03-16 | Privacy baseline tests: flood exposure, collusion attack, direct reduction |
 | 2026-03-16 | Per-node `binary` field; `default_binary` rename; protocol spec; arch decision recorded |
 | 2026-03-16 | Grid topology generator, path exchange in SimNode, grid routing tests |

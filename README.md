@@ -80,6 +80,7 @@ meshcore_sim/
 │   ├── test_integration_smoke.py  End-to-end simulation smoke tests
 │   ├── test_grid_routing.py     Flood → direct routing transition (3×3, 5×5 grids)
 │   ├── test_privacy_baseline.py Privacy exposure metrics (20 tests)
+│   ├── test_room_server.py      Room server forwarding end-to-end (12 tests)
 │   └── test_cpp_suite.py        Runs the C++ binary as part of the Python suite
 │
 ├── demo/                   Interactive demos
@@ -168,7 +169,7 @@ manually.
 python3 -m sim_tests
 ```
 
-This runs all 298 tests:
+This runs all 310 tests:
 
 | Group | Count | Binary needed |
 |-------|------:|---------------|
@@ -178,6 +179,7 @@ This runs all 298 tests:
 | Python integration — NodeAgent, simulation smoke tests | 72 | `node_agent/build/node_agent` |
 | Python integration — grid routing (flood→direct transition) | 12 | `node_agent/build/node_agent` |
 | Python integration — privacy baseline (flood exposure, collusion) | 20 | `node_agent/build/node_agent` |
+| Python integration — room server forwarding (end-to-end) | 12 | `node_agent/build/node_agent` |
 
 † Each group wrapper drives the C++ binary with a name filter; the 9 wrappers
 cover 45 internal C++ test cases and 107 checks.
