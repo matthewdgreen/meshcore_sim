@@ -216,7 +216,7 @@ def _geo_figure(
             lat=hl_lats,
             lon=hl_lons,
             mode="markers",
-            marker=dict(size=15, color=colour, opacity=0.7),
+            marker=dict(size=20, color=colour, opacity=0.85),
             hoverinfo="none",
             showlegend=False,
             name=label,
@@ -350,6 +350,7 @@ def _sidebar(
     edges: list[dict],
     geo: bool,
     trace: Optional[dict] = None,
+    w_counts: Optional[dict[str, int]] = None,
 ) -> html.Div:
     role_counts: dict[str, int] = {}
     for n in nodes:
@@ -429,6 +430,43 @@ def _sidebar(
         )
 
         if n_pkts > 0:
+            play_row: Any = html.Div(
+                [
+                    html.Button(
+                        "▶",
+                        id="play-btn",
+                        n_clicks=0,
+                        title="Play / Pause",
+                        style={
+                            "padding": "2px 10px",
+                            "fontSize": "14px",
+                            "cursor": "pointer",
+                            "border": "1px solid #ced4da",
+                            "borderRadius": "4px",
+                            "background": "#fff",
+                            "lineHeight": "1.6",
+                        },
+                    ),
+                    dcc.Dropdown(
+                        id="play-speed",
+                        options=[
+                            {"label": "0.5×", "value": 1000},
+                            {"label": "1×",   "value": 500},
+                            {"label": "2×",   "value": 250},
+                            {"label": "5×",   "value": 100},
+                        ],
+                        value=500,
+                        clearable=False,
+                        style={"flex": "1", "fontSize": "12px", "minWidth": "0"},
+                    ),
+                ],
+                style={
+                    "display": "flex",
+                    "gap": "6px",
+                    "alignItems": "center",
+                    "marginBottom": "6px",
+                },
+            )
             slider: Any = dcc.Slider(
                 id="packet-slider",
                 min=0,
@@ -439,6 +477,7 @@ def _sidebar(
                 tooltip={"placement": "bottom", "always_visible": False},
             )
         else:
+            play_row = html.Span()   # empty placeholder
             slider = html.P(
                 "No packets in trace.",
                 style={"fontSize": "12px", "color": "#6c757d"},
@@ -455,6 +494,13 @@ def _sidebar(
             html.P(f"Packets: {n_pkts}", style={"margin": "2px 0", "fontSize": "13px"}),
             html.P(f"Flood:   {flood_pct:.0f}%", style={"margin": "2px 0", "fontSize": "13px"}),
             html.P(f"Avg witnesses: {mean_w:.1f}", style={"margin": "2px 0", "fontSize": "13px"}),
+            *(
+                [html.P(
+                    f"Node exposure: {min(w_counts.values())}–{max(w_counts.values())} pkts",
+                    style={"margin": "2px 0", "fontSize": "12px", "color": "#6c757d"},
+                )]
+                if w_counts else []
+            ),
             html.Hr(style={"margin": "10px 0", "borderColor": "#dee2e6"}),
             html.Div(
                 "Step through packets:",
@@ -467,6 +513,7 @@ def _sidebar(
                 ],
                 style={"marginBottom": "6px"},
             ),
+            play_row,
             slider,
             html.Div(
                 id="packet-info",
@@ -538,7 +585,7 @@ def create_app(
 
     app = dash.Dash(__name__, title=f"{topology_path.stem} — MeshCore viz")
 
-    sidebar = _sidebar(topology_path, nodes, edges, geo, trace=trace)
+    sidebar = _sidebar(topology_path, nodes, edges, geo, trace=trace, w_counts=w_counts)
 
     if geo:
         main_panel = dcc.Graph(
@@ -558,8 +605,12 @@ def create_app(
             userPanningEnabled=True,
         )
 
+    extra = (
+        [dcc.Interval(id="play-interval", interval=500, disabled=True, n_intervals=0)]
+        if trace and packets else []
+    )
     app.layout = html.Div(
-        [sidebar, main_panel],
+        [sidebar, main_panel] + extra,
         style={
             "display": "flex",
             "height": "100vh",
@@ -600,15 +651,45 @@ def create_app(
                 stylesheet = list(_CYTO_STYLESHEET)
                 for s in pkt["unique_senders"]:
                     stylesheet.append({
-                        "selector": f'[id = "{s}"]',
-                        "style": {"border-width": "3px", "border-color": _SENDER_COLOUR},
+                        "selector": f'node[id = "{s}"]',
+                        "style": {"background-color": _SENDER_COLOUR},
                     })
                 for r in pkt["unique_receivers"]:
                     stylesheet.append({
-                        "selector": f'[id = "{r}"]',
-                        "style": {"border-width": "3px", "border-color": _RECEIVER_COLOUR},
+                        "selector": f'node[id = "{r}"]',
+                        "style": {"background-color": _RECEIVER_COLOUR},
                     })
                 return stylesheet, _packet_info_children(pkt, idx, len(packets))
+
+        # Advance slider on each interval tick (loops back to 0 at end)
+        @app.callback(
+            Output("packet-slider", "value"),
+            Input("play-interval", "n_intervals"),
+            State("packet-slider", "value"),
+            prevent_initial_call=True,
+        )
+        def _advance_packet(_, current: int) -> int:
+            return ((current or 0) + 1) % len(packets)
+
+        # Play/pause button toggles interval
+        @app.callback(
+            Output("play-interval", "disabled"),
+            Output("play-btn", "children"),
+            Input("play-btn", "n_clicks"),
+            State("play-interval", "disabled"),
+            prevent_initial_call=True,
+        )
+        def _toggle_play(_, is_disabled: bool) -> tuple:
+            playing = is_disabled   # about to start playing
+            return not is_disabled, "⏸" if playing else "▶"
+
+        # Speed dropdown changes interval period
+        @app.callback(
+            Output("play-interval", "interval"),
+            Input("play-speed", "value"),
+        )
+        def _set_speed(ms: int) -> int:
+            return ms or 500
 
     # Phase 1: hover detail for cytoscape
     if not geo:
