@@ -290,7 +290,55 @@ Side-by-side view of two trace files (baseline vs. modified routing).
 - Useful for quickly checking whether a candidate routing modification
   improves privacy without regressing delivery.
 
-### 6. Adversarial test framework
+### 6. RF physical layer fidelity  [FUTURE — low priority]
+
+#### 6a. Airtime modelling
+
+The simulator currently records delivery timestamps as `TX_start + latency_ms`,
+omitting the over-the-air transmission duration (airtime).  For typical MeshCore
+packets at SF9/BW125, airtime is roughly 200–500 ms — comparable to or larger
+than the configured propagation delay.
+
+Work items:
+- Add an optional `airtime_ms` field to topology edges (or derive it from a
+  `spreading_factor` / `bandwidth_khz` / `coding_rate` / `packet_bytes` model).
+- Record `tx_start` and `tx_end = tx_start + airtime_ms` on `HopRecord` in the
+  tracer; expose both in the trace JSON.
+- Update the visualiser hop-info panel to show `tx_start`→`tx_end` timing
+  rather than a single delivery timestamp.
+- Adjust the privacy baseline tests that inspect `h["t"]` if the schema changes.
+
+Privacy-research relevance: a timing-correlation adversary that observes
+multiple nodes' receive timestamps can distinguish "one broadcast overheard by N
+nodes" (all arrive within `airtime_ms` of each other) from "N independent
+transmissions" (spread over many seconds).  Without airtime, the simulator
+cannot model this attack class.
+
+#### 6b. RF contention / channel occupancy
+
+Real LoRa operates on a shared channel.  When two nodes transmit simultaneously
+on the same channel, both packets are lost at any receiver that hears both
+(capture effect aside).  The simulator currently fires all delivery tasks
+concurrently with no contention model.
+
+Work items:
+- Add a per-channel (frequency + SF) occupancy tracker to the router.
+- When a new `tx` event begins while the channel is already occupied by an
+  overlapping transmission heard by the same receiver, mark the delivery as a
+  collision loss (separate from link-level `loss` probability).
+- Expose `collision_count` in the metrics report alongside `link_loss_count`.
+- Consider the capture effect: the stronger signal wins if the power difference
+  exceeds a threshold (e.g., 6 dB); parameterise this as a topology-level
+  `capture_threshold_db` field.
+
+Privacy-research relevance: channel contention creates correlated loss bursts
+that a passive adversary can exploit.  A flood from node A that silences the
+channel for 400 ms gives a timing fingerprint that can identify A even if the
+payload is opaque.  Conversely, a privacy protocol that intentionally fragments
+transmissions to reduce airtime per burst improves both throughput and
+traffic-analysis resistance.
+
+### 7. Adversarial test framework
 
 Extend the adversarial node model to support:
 - **Passive observer**: records all packets and makes them available for
