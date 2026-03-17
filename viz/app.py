@@ -46,7 +46,7 @@ _EDGE_COLOUR     = "#adb5bd"
 _EDGE_COLOUR_GEO = "rgba(173,181,189,0.6)"
 _SENDER_COLOUR   = "#f77f00"   # orange — active packet senders
 _RECEIVER_COLOUR = "#2dc653"   # green  — active packet receivers (current step)
-_RECEIVED_COLOUR = "#74c69d"   # muted green — received this packet (other steps)
+_RECEIVED_COLOUR = "#74b3ce"   # soft blue  — received this packet (other steps)
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -176,7 +176,7 @@ def _geo_figure(
             showlegend=False,
         )]
     elif packet_witnesses is not None:
-        # Per-packet mode: muted green = received this packet, grey = did not
+        # Per-packet mode: soft blue = received this packet, grey = did not
         lats   = [float(n["lat"]) for n in nodes]
         lons   = [float(n["lon"]) for n in nodes]
         colors = [
