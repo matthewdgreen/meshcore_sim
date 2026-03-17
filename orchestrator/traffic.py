@@ -8,6 +8,7 @@ import asyncio
 import logging
 import random
 import time
+from typing import Optional
 
 from .config import SimulationConfig
 from .metrics import MetricsCollector
@@ -31,6 +32,7 @@ class TrafficGenerator:
         self._sim = sim_config
         self._metrics = metrics
         self._rng = rng
+        self._endpoint_pubs: Optional[set[str]] = None
 
     # ------------------------------------------------------------------
     # Advertisement flooding
@@ -83,8 +85,24 @@ class TrafficGenerator:
         sender_name = self._rng.choice(endpoints)
         sender = self._agents[sender_name]
 
-        # Only send to peers whose advertisement the sender has already received
-        known = list(sender.state.known_peers)
+        # Build the set of endpoint pub_keys once (agents are all ready by now)
+        if self._endpoint_pubs is None:
+            self._endpoint_pubs = {
+                self._agents[n].state.pub_key
+                for n in endpoints
+                if self._agents[n].state.pub_key
+            }
+
+        # Prefer other endpoints as destination: endpoint-to-endpoint sends are
+        # the ones that trigger path exchange and produce DIRECT-routed packets.
+        # Fall back to any known peer if no other endpoint has been heard yet
+        # (can happen early in the warmup when adverts haven't propagated).
+        known_endpoint_peers = list(
+            sender.state.known_peers & self._endpoint_pubs - {sender.state.pub_key}
+        )
+        known_any = list(sender.state.known_peers)
+        known = known_endpoint_peers if known_endpoint_peers else known_any
+
         if not known:
             log.debug("[traffic] %s has no known peers yet — skipping send", sender_name)
             return
