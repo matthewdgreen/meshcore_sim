@@ -5,6 +5,7 @@ __main__.py — Entry point: python -m orchestrator <topology.json> [options]
 from __future__ import annotations
 
 import asyncio
+import json
 import logging
 import random
 import resource
@@ -122,6 +123,11 @@ async def run(args: object) -> int:
         with open(args.report, "w") as fh:                                             # type: ignore[attr-defined]
             fh.write(report)
         log.info("Report written to %s", args.report)                                 # type: ignore[attr-defined]
+
+    if args.trace_out is not None:                                                     # type: ignore[attr-defined]
+        with open(args.trace_out, "w") as fh:                                          # type: ignore[attr-defined]
+            json.dump(tracer.to_dict(), fh, indent=2)
+        log.info("Trace written to %s", args.trace_out)                               # type: ignore[attr-defined]
 
     return 0
 

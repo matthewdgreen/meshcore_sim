@@ -252,6 +252,7 @@ python3 -m orchestrator <topology.json> [options]
 | `--seed N` | from JSON | RNG seed for reproducible loss/traffic decisions |
 | `--log-level` | `info` | `debug` / `info` / `warning` / `error` |
 | `--report FILE` | — | Write final metrics report to a file (always printed to stdout) |
+| `--trace-out FILE` | — | Write packet trace data to a JSON file (load with `python3 -m viz`) |
 
 ### Examples
 
@@ -266,6 +267,11 @@ python3 -m orchestrator topologies/star_five.json \
 # Adversarial relay, save report
 python3 -m orchestrator topologies/adversarial.json \
     --duration 60 --seed 7 --report results/adversarial_run.txt
+
+# Run and export trace for visualisation
+python3 -m orchestrator topologies/grid_10x10.json \
+    --duration 30 --seed 42 --trace-out trace.json
+python3 -m viz topologies/grid_10x10.json --trace trace.json
 
 # Asymmetric RF links
 python3 -m orchestrator topologies/asymmetric_hill.json --duration 120

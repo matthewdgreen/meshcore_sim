@@ -29,7 +29,9 @@ loss; this `CLAUDE.md` file covers only developer rules.
 
 ## Before committing
 
-1. Run `python3 -m sim_tests` and confirm all non-skipped tests pass.
+1. Run `python3 -m sim_tests 2>&1 | tee /tmp/sim_test_results.txt` and confirm
+   all non-skipped tests pass.  The output is saved to `/tmp/sim_test_results.txt`
+   so failures can be diagnosed without re-running the full suite.
 2. If the node_agent was rebuilt, also verify `./tests/build/meshcore_tests`
    reports 45 passed, 0 failed.
 
@@ -39,7 +41,8 @@ loss; this `CLAUDE.md` file covers only developer rules.
   Run: `cd tests && cmake -S . -B build && cmake --build build && ./build/meshcore_tests`
 
 - **Python tests** (orchestrator unit + integration + C++ wrapper): `sim_tests/`
-  Run: `python3 -m sim_tests`
+  Run: `python3 -m sim_tests 2>&1 | tee /tmp/sim_test_results.txt`
+  Inspect failures: `grep -E "^FAIL|^ERROR|^=+" /tmp/sim_test_results.txt`
 
 Integration tests in `sim_tests/` are automatically skipped when the
 `node_agent/build/node_agent` binary is absent — they are not failures.

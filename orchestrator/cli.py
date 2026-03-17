@@ -77,5 +77,12 @@ Examples:
         metavar="FILE",
         help="Write final metrics report to this file (default: stdout only)",
     )
+    p.add_argument(
+        "--trace-out",
+        default=None,
+        metavar="FILE",
+        dest="trace_out",
+        help="Write packet trace data to this JSON file for use with python3 -m viz",
+    )
 
     return p

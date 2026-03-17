@@ -160,6 +160,65 @@ class PacketTracer:
         return dict(groups)
 
     # ------------------------------------------------------------------
+    # Serialisation
+    # ------------------------------------------------------------------
+
+    def to_dict(self) -> dict:
+        """
+        Return a JSON-serialisable dict of all trace data.
+
+        Schema (version 1):
+          {
+            "schema_version": 1,
+            "packets": [
+              {
+                "fingerprint":      str,
+                "payload_type":     int,
+                "payload_type_name": str,
+                "first_seen_at":    float,
+                "first_sender":     str,
+                "is_flood":         bool,
+                "witness_count":    int,
+                "unique_senders":   [str, ...],
+                "unique_receivers": [str, ...],
+                "hops": [
+                  {"t": float, "sender": str, "receiver": str,
+                   "route_type": int, "path_count": int},
+                  ...
+                ]
+              },
+              ...
+            ]
+          }
+        """
+        packets = []
+        for tr in self._traces.values():
+            packets.append({
+                "fingerprint":       tr.fingerprint,
+                "payload_type":      tr.payload_type,
+                "payload_type_name": payload_type_name(tr.payload_type),
+                "first_seen_at":     tr.first_seen_at,
+                "first_sender":      tr.first_sender,
+                "is_flood":          tr.is_flood(),
+                "witness_count":     tr.witness_count,
+                "unique_senders":    sorted(tr.unique_senders),
+                "unique_receivers":  sorted(tr.unique_receivers),
+                "hops": [
+                    {
+                        "t":          h.t,
+                        "sender":     h.sender,
+                        "receiver":   h.receiver,
+                        "route_type": h.route_type,
+                        "path_count": h.path_count,
+                    }
+                    for h in tr.hops
+                ],
+            })
+        # Sort by first_seen_at so the file reads chronologically
+        packets.sort(key=lambda p: p["first_seen_at"])
+        return {"schema_version": 1, "packets": packets}
+
+    # ------------------------------------------------------------------
     # Report
     # ------------------------------------------------------------------
 
