@@ -79,7 +79,11 @@ meshcore_sim/
 │   ├── test_tracer.py           PacketTracer path and witness tracking (26 tests)
 │   ├── test_integration_smoke.py  End-to-end simulation smoke tests
 │   ├── test_grid_routing.py     Flood → direct routing transition (3×3, 5×5 grids)
+│   ├── test_privacy_baseline.py Privacy exposure metrics (20 tests)
 │   └── test_cpp_suite.py        Runs the C++ binary as part of the Python suite
+│
+├── demo/                   Interactive demos
+│   └── room_server_demo.py  10×10 grid with a live room server and three clients
 │
 └── topologies/             Example topology JSON files
     ├── linear_three.json
@@ -164,15 +168,16 @@ manually.
 python3 -m sim_tests
 ```
 
-This runs all 263 tests:
+This runs all 298 tests:
 
 | Group | Count | Binary needed |
 |-------|------:|---------------|
 | C++ crypto (SHA-256, HMAC, AES-128, Ed25519, ECDH, encrypt) | 9 groups† | `tests/build/meshcore_tests` |
 | Python unit — config, topology, adversarial, metrics | 118 | none |
 | Python unit — packet decoder, path tracer | 56 | none |
-| Python integration — NodeAgent, simulation smoke tests | 68 | `node_agent/build/node_agent` |
+| Python integration — NodeAgent, simulation smoke tests | 72 | `node_agent/build/node_agent` |
 | Python integration — grid routing (flood→direct transition) | 12 | `node_agent/build/node_agent` |
+| Python integration — privacy baseline (flood exposure, collusion) | 20 | `node_agent/build/node_agent` |
 
 † Each group wrapper drives the C++ binary with a name filter; the 9 wrappers
 cover 45 internal C++ test cases and 107 checks.
@@ -330,6 +335,8 @@ An array of node objects.
 |-------|------|---------|-------------|
 | `name` | string | **required** | Unique identifier used in edges, logging, and metrics |
 | `relay` | bool | `false` | Relay nodes forward flood packets to all radio neighbours; endpoints do not |
+| `room_server` | bool | `false` | Spawn as a `RoomServerNode`: re-broadcasts every received TXT_MSG to all other contacts (mutually exclusive with `relay`) |
+| `binary` | string | — | Override the node binary for this node only (falls back to `simulation.default_binary`) |
 | `prv_key` | string | — | Fixed 128-hex-char (64-byte) Ed25519 private key. Omit for a fresh random identity on each run |
 | `adversarial` | object | — | Omit for an honest node; see [Adversarial nodes](#adversarial-nodes) |
 
@@ -534,6 +541,52 @@ Example excerpt (3×3 grid for clarity):
 
 ---
 
+## Room server demo
+
+`demo/room_server_demo.py` spins up a full 10×10 relay grid with a live
+**room server** at one corner and three **client nodes** (alice, bob, carol)
+at the other three corners.  Messages sent to the room server are
+re-broadcast to everyone else in real time.
+
+```sh
+python3 -m demo.room_server_demo
+```
+
+After an 8-second warmup you get an interactive prompt:
+
+```
+  Commands:
+    alice: <message>   — send as alice
+    bob:   <message>   — send as bob
+    carol: <message>   — send as carol
+    /quit              — stop the demo
+    /help              — this help
+
+  > alice: hello everyone
+
+  📡 room  relaying from  n_0_9: hello everyone
+
+  ▶ bob    received  n_0_0: [n_0_9]: hello everyone
+  ▶ carol  received  n_0_0: [n_0_9]: hello everyone
+  >
+```
+
+**What is actually happening:**
+
+1. Alice (`n_0_9`) sends an encrypted TXT_MSG to the room server (`n_0_0`).
+   The first message floods through all 96 relay nodes.
+2. The room server's `RoomServerNode::onPeerDataRecv` emits a `room_post`
+   event, then calls `sendTextTo` for bob and carol — each encrypted
+   separately to its recipient.
+3. Bob (`n_9_0`) and carol (`n_9_9`) receive their copies and emit `recv_text`.
+4. After the first exchange, path-learning kicks in and subsequent messages
+   travel directly without flooding the whole grid.
+
+Pass `--binary` to point at a custom build, or `--log-level INFO` to see
+per-hop routing events.
+
+---
+
 ## Architecture
 
 ### Overview
@@ -599,6 +652,7 @@ a deliberate choice for the privacy research goal:
 | Reciprocal PATH on `onPeerPathRecv` returning true | ✅ | ✗ | omitted for simplicity |
 | `sendFloodScoped` (directional flood filter) | ✅ | ✗ | plain `sendFlood` used instead |
 | Zero retransmit jitter | ✗ | ✅ | `getRetransmitDelay` overridden to 0 |
+| Room-server forwarding | ✗ | ✅ | `RoomServerNode` subclass re-broadcasts TXT_MSG to all contacts |
 
 **Path exchange** (the mechanism that turns a flood-routed first message into
 a direct-routed subsequent message) is the same call sequence as
@@ -638,8 +692,9 @@ In brief:
 
 - **Orchestrator → node**: `rx` (deliver a raw packet), `time` (set RTC),
   `send_text`, `advert`, `quit`.
-- **Node → orchestrator**: `ready` (pub key, relay flag), `tx` (raw packet
-  to broadcast), `recv_text`, `advert` (new peer seen), `ack`, `log`.
+- **Node → orchestrator**: `ready` (pub key, relay flag, role), `tx` (raw
+  packet to broadcast), `recv_text`, `room_post` (room-server only: message
+  received and forwarded), `advert` (new peer seen), `ack`, `log`.
 
 ### Packet routing
 

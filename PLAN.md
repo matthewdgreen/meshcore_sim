@@ -50,13 +50,16 @@ Success criteria:
 | `PacketTracer` — per-packet path & witness analysis | ✅ complete |
 | `packet.py` — pure-Python MeshCore wire-format decoder | ✅ complete |
 | C++ unit tests (crypto shims, packet serialisation) | ✅ complete |
-| Python unit tests (263 tests, all passing) | ✅ complete |
+| Python unit / integration tests (298 tests, all passing) | ✅ complete |
 | Example topologies (linear, star, adversarial, asymmetric hill) | ✅ complete |
 | Grid topology generator (`topologies/gen_grid.py`) | ✅ complete |
 | Pre-generated 10×10 grid topology (`topologies/grid_10x10.json`) | ✅ complete |
 | Path exchange in `SimNode` — flood out, direct return | ✅ complete |
 | Grid routing integration tests (3×3 flood→direct, 5×5 smoke) | ✅ complete |
 | Privacy baseline tests (`test_privacy_baseline.py`, 20 tests) | ✅ complete |
+| `RoomServerNode` — `SimNode` subclass that re-broadcasts TXT_MSG to all contacts | ✅ complete |
+| Per-node `binary` field — mixed topologies with different node binaries | ✅ complete |
+| `demo/room_server_demo.py` — interactive 10×10 grid room-server demo | ✅ complete |
 
 ### Key invariants
 
@@ -74,11 +77,23 @@ routing hooks (`onPeerDataRecv`, `onPeerPathRecv`, `allowPacketForward`,
 application-level channel logic.  Adding `BaseChatMesh` would make instrumentation
 and routing experiments significantly harder.
 
-**A future `app_node_agent` binary will handle real-application use cases.**
+**`RoomServerNode` is implemented as a `SimNode` subclass — not a separate binary.**
 
-When it becomes necessary to simulate room servers, Companion clients, or other
-MeshCore applications, a *separate* `app_node_agent/` directory will contain a
-second executable that inherits from `BaseChatMesh` (or higher).  It will:
+For use cases that need application-layer behaviour (room servers, bot nodes),
+we subclass `SimNode` directly rather than introducing `BaseChatMesh`.
+`RoomServerNode` (`node_agent/SimNode.h/.cpp`) overrides `onPeerDataRecv` to:
+1. Call the base handler (emits `recv_text`, handles path exchange).
+2. Emit a `room_post` JSON event so the orchestrator can surface the message.
+3. Forward `"[sender]: text"` to every other known contact via `sendTextTo`.
+
+Activated at runtime with the `--room-server` flag; topology JSON uses
+`"room_server": true` on a node entry.
+
+**A future `app_node_agent` binary remains planned for heavier application stacks.**
+
+When it becomes necessary to simulate Companion clients or other firmware that
+requires `BaseChatMesh` / FILESYSTEM / RTClib.h, a *separate* `app_node_agent/`
+directory will contain a second executable.  It will:
 - Speak the same stdin/stdout JSON protocol as `node_agent` (see Protocol Spec below).
 - Be invoked by specifying `"binary": "./app_node_agent/build/app_node_agent"` on
   individual nodes in the topology JSON.
@@ -108,10 +123,12 @@ from orchestrator) and **stdout** (events from node).  Stderr is ignored.
 
 | `type` | Other fields | Description |
 |--------|-------------|-------------|
-| `ready` | `pub: str`, `is_relay: bool` | Node is initialised; `pub` is the 64-hex public key. |
+| `ready` | `pub: str`, `is_relay: bool`, `role: str`, `name: str` | Node is initialised; `pub` is the 64-hex public key; `role` is `"endpoint"`, `"relay"`, or `"room-server"`. |
 | `tx` | `hex: str`, `len: int` | Node is transmitting a packet; orchestrator routes it to neighbours. |
 | `recv_text` | `from: str`, `name: str`, `text: str` | A decrypted text message was received. |
+| `room_post` | `from: str`, `name: str`, `text: str` | Room-server only: a TXT_MSG arrived and has been forwarded to all other contacts. |
 | `advert` | `pub: str`, `name: str` | A peer advertisement was received and processed. |
+| `ack` | `crc: int` | An ACK was received for a previously sent packet. |
 | `log` | `msg: str` | Informational log line (debug use). |
 
 Any future node binary (`app_node_agent` or otherwise) **must** implement all
@@ -162,7 +179,23 @@ The development loop is established:
   Asserts direct has fewer witnesses, ≥2× reduction ratio, residual relay
   exposure on direct path, witness_count bounded by grid edge count.
 
-### 3. Privacy protocol experiments  [NEXT]
+### 3. Room server + interactive demo  [✅ DONE]
+
+`RoomServerNode` (C++) and `demo/room_server_demo.py` (Python):
+
+- `RoomServerNode` subclasses `SimNode`; on receiving `TXT_MSG` it calls the
+  base handler (path exchange, `recv_text` event), emits `room_post`, then
+  calls `sendTextTo` for every other contact with `"[sender]: text"`.
+- Protected members (`_contacts`, `_search_results`, `emitLog`, `emitJson`)
+  moved from private to protected in `SimNode` to support subclassing.
+- `--room-server` CLI flag; `NodeConfig.room_server` field in topology JSON.
+- `NodeState.role` populated from `ready` event (`"endpoint"/"relay"/"room-server"`).
+- `demo/room_server_demo.py`: 10×10 relay grid, room server at `n_0_0`,
+  alice/bob/carol at the other three corners; interactive REPL.
+
+Run with:  `python3 -m demo.room_server_demo`
+
+### 4. Privacy protocol experiments  [NEXT]
 
 #### Baseline metrics to beat  (3×3 zero-loss grid, seed=42)
 
@@ -198,7 +231,7 @@ Start with **path hiding** (lowest complexity, directly addresses the
 path_count=0 source-identification attack) to establish the modify → test →
 measure workflow, then move to per-hop re-encryption to break correlation.
 
-### 4. Adversarial test framework
+### 5. Adversarial test framework
 
 Extend the adversarial node model to support:
 - **Passive observer**: records all packets and makes them available for
@@ -230,9 +263,10 @@ by `unique_receivers` to see which adversarial nodes saw which packets.
 
 | Date | Change |
 |------|--------|
-| 2026-03-16 | Privacy baseline tests: flood exposure, collusion attack, direct reduction; 289 tests |
+| 2026-03-16 | `RoomServerNode` + interactive 10×10 demo; 298 tests |
+| 2026-03-16 | Privacy baseline tests: flood exposure, collusion attack, direct reduction |
 | 2026-03-16 | Per-node `binary` field; `default_binary` rename; protocol spec; arch decision recorded |
-| 2026-03-16 | Grid topology generator, path exchange in SimNode, grid routing tests; 263 tests |
+| 2026-03-16 | Grid topology generator, path exchange in SimNode, grid routing tests |
 | 2026-03-16 | Added `PacketTracer` + wire-format decoder; 251 tests |
 | 2026-03-16 | Added asymmetric link support to topology |
 | 2026-03-16 | Added adversarial node model (drop/corrupt/replay) |
