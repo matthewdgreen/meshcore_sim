@@ -229,6 +229,14 @@ class TestLoadTopologyFromInlineJSON(unittest.TestCase):
         ]})
         self.assertEqual(topo.nodes[0].binary, "./app_node_agent/build/app_node_agent")
 
+    def test_room_server_false_by_default(self):
+        topo = self._load({"nodes": [{"name": "hub"}]})
+        self.assertFalse(topo.nodes[0].room_server)
+
+    def test_room_server_true_parsed(self):
+        topo = self._load({"nodes": [{"name": "hub", "room_server": True}]})
+        self.assertTrue(topo.nodes[0].room_server)
+
     def test_default_binary_json_key_parsed(self):
         topo = self._load({"simulation": {"default_binary": "./custom_agent"}})
         self.assertEqual(topo.simulation.default_binary, "./custom_agent")

@@ -267,6 +267,81 @@ bool SimNode::sendTextTo(const std::string& dest_pub_hex,
     return true;
 }
 
+// ---------------------------------------------------------------------------
+// RoomServerNode implementation
+// ---------------------------------------------------------------------------
+
+// JSON-escape a raw string into a fixed-size buffer.  Returns false if the
+// buffer was too small (output is still null-terminated and safe to use).
+static bool json_escape(char* out, size_t out_size,
+                        const char* in, size_t in_len) {
+    size_t wi = 0;
+    for (size_t ri = 0; ri < in_len; ri++) {
+        unsigned char ch = (unsigned char)in[ri];
+        if (wi + 3 >= out_size) { out[wi] = '\0'; return false; }
+        if (ch == '"' || ch == '\\') { out[wi++] = '\\'; }
+        out[wi++] = (char)ch;
+    }
+    out[wi] = '\0';
+    return true;
+}
+
+RoomServerNode::RoomServerNode(mesh::Radio& radio, mesh::MillisecondClock& ms,
+                               mesh::RNG& rng, mesh::RTCClock& rtc,
+                               mesh::PacketManager& mgr,
+                               mesh::MeshTables& tables)
+    : SimNode(radio, ms, rng, rtc, mgr, tables, /*is_relay=*/false)
+{}
+
+void RoomServerNode::onPeerDataRecv(mesh::Packet* packet, uint8_t type,
+                                    int sender_idx, const uint8_t* secret,
+                                    uint8_t* data, size_t len) {
+    // Let the base class handle recv_text emission and path exchange first.
+    SimNode::onPeerDataRecv(packet, type, sender_idx, secret, data, len);
+
+    if (type != PAYLOAD_TYPE_TXT_MSG || len <= 4) return;
+
+    // Identify sender from the search-results table populated during
+    // searchPeersByHash (which runs before onPeerDataRecv is called).
+    if (sender_idx < 0 || sender_idx >= (int)_search_results.size()) return;
+    int idx = _search_results[sender_idx];
+    Contact& sender = _contacts[idx];
+
+    // Extract the text (skip 4-byte timestamp prefix).
+    const char* raw_text = (const char*)(data + 4);
+    size_t      raw_len  = len - 4;
+
+    // Build escaped versions for JSON and for the forwarded body.
+    char esc_name[128], esc_text[256];
+    json_escape(esc_name, sizeof(esc_name),
+                sender.name.c_str(), sender.name.size());
+    json_escape(esc_text, sizeof(esc_text), raw_text, raw_len);
+
+    // Emit room_post event so the orchestrator can surface it.
+    char pub_hex[PUB_KEY_SIZE * 2 + 1];
+    bytes_to_hex(pub_hex, sender.id.pub_key, PUB_KEY_SIZE);
+    char event_json[640];
+    snprintf(event_json, sizeof(event_json),
+             "{\"type\":\"room_post\",\"from\":\"%s\","
+             "\"name\":\"%s\",\"text\":\"%s\"}",
+             pub_hex, esc_name, esc_text);
+    emitJson(event_json);
+
+    // Forward "[sender_name]: text" to every OTHER contact.
+    // Build the forwarded body once; sendTextTo re-encrypts per recipient.
+    char fwd[320];
+    snprintf(fwd, sizeof(fwd), "[%s]: %.*s",
+             sender.name.c_str(), (int)raw_len, raw_text);
+    std::string fwd_str(fwd);
+
+    for (int ci = 0; ci < (int)_contacts.size(); ci++) {
+        if (ci == idx) continue;   // don't echo back to sender
+        char dest_hex[PUB_KEY_SIZE * 2 + 1];
+        bytes_to_hex(dest_hex, _contacts[ci].id.pub_key, PUB_KEY_SIZE);
+        sendTextTo(std::string(dest_hex), fwd_str);
+    }
+}
+
 void SimNode::broadcastAdvert(const std::string& name) {
     uint8_t app_data[MAX_ADVERT_DATA_SIZE];
     size_t  app_len = 0;

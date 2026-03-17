@@ -22,7 +22,7 @@
 //   {"type":"log",   "msg":"<str>"}
 //
 // Usage:
-//   node_agent [--relay] [--prv <64-byte-hex>] [--name <str>]
+//   node_agent [--relay] [--room-server] [--prv <64-byte-hex>] [--name <str>]
 
 #include "SimRadio.h"
 #include "SimClock.h"
@@ -32,6 +32,7 @@
 #include <helpers/SimpleMeshTables.h>
 #include <helpers/StaticPoolPacketManager.h>
 
+#include <memory>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -151,13 +152,16 @@ static void dispatch(const char* line, SimRadio& radio, SimClock& clock,
 // main
 // ---------------------------------------------------------------------------
 int main(int argc, char* argv[]) {
-    bool        is_relay = false;
-    const char* prv_hex  = nullptr;
-    const char* node_name = "node";
+    bool        is_relay     = false;
+    bool        is_room_svr  = false;
+    const char* prv_hex      = nullptr;
+    const char* node_name    = "node";
 
     for (int i = 1; i < argc; i++) {
         if (strcmp(argv[i], "--relay") == 0) {
             is_relay = true;
+        } else if (strcmp(argv[i], "--room-server") == 0) {
+            is_room_svr = true;
         } else if (strcmp(argv[i], "--prv") == 0 && i + 1 < argc) {
             prv_hex = argv[++i];
         } else if (strcmp(argv[i], "--name") == 0 && i + 1 < argc) {
@@ -174,28 +178,41 @@ int main(int argc, char* argv[]) {
     StaticPoolPacketManager mgr(POOL_SIZE);
     SimpleMeshTables         tables;
 
-    SimNode node(radio, clock, rng, clock, mgr, tables, is_relay);
+    // Select the correct node type at runtime.
+    std::unique_ptr<SimNode> node_ptr;
+    if (is_room_svr) {
+        node_ptr = std::make_unique<RoomServerNode>(
+            radio, clock, rng, clock, mgr, tables);
+    } else {
+        node_ptr = std::make_unique<SimNode>(
+            radio, clock, rng, clock, mgr, tables, is_relay);
+    }
+    SimNode& node = *node_ptr;
 
     // -- Initialise node identity --
     if (prv_hex && strlen(prv_hex) == PRV_KEY_SIZE * 2) {
-        // Load from supplied private key (public key is derived automatically).
         uint8_t prv[PRV_KEY_SIZE];
         hex_to_bytes(prv, prv_hex, PRV_KEY_SIZE * 2);
         node.self_id.readFrom(prv, PRV_KEY_SIZE);
     } else {
-        // Generate a fresh random identity.
         node.self_id = mesh::LocalIdentity(&rng);
     }
 
     node.begin();
 
     // Emit ready signal with our public key.
+    // "role" is one of "endpoint", "relay", or "room-server".
+    const char* role = is_room_svr ? "room-server"
+                     : is_relay    ? "relay"
+                                   : "endpoint";
     char pub_hex[PUB_KEY_SIZE * 2 + 1];
     bytes_to_hex_main(pub_hex, node.self_id.pub_key, PUB_KEY_SIZE);
     fprintf(stdout,
-            "{\"type\":\"ready\",\"pub\":\"%s\",\"is_relay\":%s,\"name\":\"%s\"}\n",
+            "{\"type\":\"ready\",\"pub\":\"%s\",\"is_relay\":%s,"
+            "\"role\":\"%s\",\"name\":\"%s\"}\n",
             pub_hex,
             is_relay ? "true" : "false",
+            role,
             node_name);
     fflush(stdout);
 
@@ -206,7 +223,6 @@ int main(int argc, char* argv[]) {
     int  line_pos = 0;
 
     while (true) {
-        // Wait up to 1 ms for stdin to have data.
         fd_set rfds;
         FD_ZERO(&rfds);
         FD_SET(STDIN_FILENO, &rfds);
@@ -219,7 +235,6 @@ int main(int argc, char* argv[]) {
         }
 
         if (ret > 0 && FD_ISSET(STDIN_FILENO, &rfds)) {
-            // Read available bytes character-by-character to assemble lines.
             char c;
             while (read(STDIN_FILENO, &c, 1) == 1) {
                 if (c == '\n') {
@@ -231,7 +246,6 @@ int main(int argc, char* argv[]) {
                 } else if (line_pos < (int)sizeof(line_buf) - 1) {
                     line_buf[line_pos++] = c;
                 }
-                // If no more data is available without blocking, break.
                 fd_set probe;
                 FD_ZERO(&probe);
                 FD_SET(STDIN_FILENO, &probe);
@@ -241,7 +255,6 @@ int main(int argc, char* argv[]) {
             }
         }
 
-        // Drive the mesh engine.
         node.loop();
     }
 

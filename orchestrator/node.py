@@ -26,6 +26,7 @@ class NodeState:
     name: str
     pub_key: str = ""        # 64-char hex, set after "ready" event
     is_relay: bool = False
+    role: str = "endpoint"   # "endpoint" | "relay" | "room-server"
     # pub keys of peers whose adverts this node has received
     known_peers: set[str] = field(default_factory=set)
     tx_count: int = 0
@@ -140,8 +141,10 @@ class NodeAgent:
         if etype == "ready":
             self.state.pub_key = event.get("pub", "")
             self.state.is_relay = event.get("is_relay", False)
+            self.state.role = event.get("role", "relay" if self.state.is_relay else "endpoint")
             self._ready_event.set()
-            log.debug("[%s] ready  pub=%s...", self.config.name, self.state.pub_key[:16])
+            log.debug("[%s] ready  pub=%s... role=%s",
+                      self.config.name, self.state.pub_key[:16], self.state.role)
 
         elif etype == "tx":
             self.state.tx_count += 1
@@ -159,6 +162,11 @@ class NodeAgent:
             log.info("[%s] recv_text from %s: %r",
                      self.config.name, event.get("name", "?"), event.get("text", ""))
 
+        elif etype == "room_post":
+            log.info("[%s] room_post from %s (%s): %r",
+                     self.config.name, event.get("name", "?"),
+                     event.get("from", "")[:8], event.get("text", ""))
+
         elif etype == "log":
             log.debug("[%s] node-log: %s", self.config.name, event.get("msg", ""))
 
@@ -173,7 +181,9 @@ class NodeAgent:
     def _build_cmd(self) -> list[str]:
         binary = self.config.binary or self.sim_config.default_binary
         cmd = [binary]
-        if self.config.relay:
+        if self.config.room_server:
+            cmd.append("--room-server")
+        elif self.config.relay:
             cmd.append("--relay")
         cmd += ["--name", self.config.name]
         if self.config.prv_key:

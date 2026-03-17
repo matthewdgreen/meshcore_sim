@@ -26,6 +26,7 @@ class AdversarialConfig:
 class NodeConfig:
     name: str
     relay: bool = False
+    room_server: bool = False              # spawn with --room-server flag
     prv_key: Optional[str] = None          # 128 hex chars or None
     adversarial: Optional[AdversarialConfig] = None
     binary: Optional[str] = None           # per-node binary override (None → use SimulationConfig.default_binary)
@@ -108,6 +109,7 @@ def load_topology(path: str) -> TopologyConfig:
         nodes.append(NodeConfig(
             name=n["name"],
             relay=bool(n.get("relay", False)),
+            room_server=bool(n.get("room_server", False)),
             prv_key=n.get("prv_key"),
             adversarial=adv,
             binary=n.get("binary"),

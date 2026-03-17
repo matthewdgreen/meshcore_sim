@@ -70,6 +70,22 @@ class TestBuildCmd(unittest.TestCase):
         cmd = NodeAgent(cfg, _SIM)._build_cmd()
         self.assertEqual(cmd[0], BINARY_PATH)
 
+    def test_room_server_flag_added(self):
+        cfg = NodeConfig(name="hub", room_server=True)
+        cmd = NodeAgent(cfg, _SIM)._build_cmd()
+        self.assertIn("--room-server", cmd)
+
+    def test_room_server_excludes_relay_flag(self):
+        """--room-server and --relay are mutually exclusive; room_server wins."""
+        cfg = NodeConfig(name="hub", room_server=True, relay=True)
+        cmd = NodeAgent(cfg, _SIM)._build_cmd()
+        self.assertIn("--room-server", cmd)
+        self.assertNotIn("--relay", cmd)
+
+    def test_no_room_server_flag_by_default(self):
+        cmd = self._agent()._build_cmd()
+        self.assertNotIn("--room-server", cmd)
+
 
 # ---------------------------------------------------------------------------
 # NodeAgent lifecycle
@@ -267,6 +283,60 @@ class TestNodeAgentCommands(unittest.TestCase):
             return count
 
         self.assertGreater(asyncio.run(_run()), 0)
+
+
+# ---------------------------------------------------------------------------
+# RoomServerNode — subprocess integration
+# ---------------------------------------------------------------------------
+
+@SKIP_IF_NO_BINARY
+class TestRoomServerNode(unittest.TestCase):
+    """
+    Verify that a node started with room_server=True:
+      • starts and reaches ready state
+      • reports role="room-server" in state
+      • does NOT report is_relay=True
+    """
+
+    def test_room_server_starts_and_ready(self):
+        async def _run():
+            agent = NodeAgent(NodeConfig(name="room_srv", room_server=True), _SIM)
+            await agent.start()
+            try:
+                await agent.wait_ready(timeout=5.0)
+            finally:
+                await agent.quit()
+        asyncio.run(_run())   # must not raise
+
+    def test_room_server_role_in_state(self):
+        async def _run():
+            agent = NodeAgent(NodeConfig(name="rs_role", room_server=True), _SIM)
+            await agent.start()
+            await agent.wait_ready(timeout=5.0)
+            role = agent.state.role
+            await agent.quit()
+            return role
+        self.assertEqual(asyncio.run(_run()), "room-server")
+
+    def test_room_server_is_not_relay(self):
+        async def _run():
+            agent = NodeAgent(NodeConfig(name="rs_relay", room_server=True), _SIM)
+            await agent.start()
+            await agent.wait_ready(timeout=5.0)
+            flag = agent.state.is_relay
+            await agent.quit()
+            return flag
+        self.assertFalse(asyncio.run(_run()))
+
+    def test_room_server_pub_key_is_64_hex(self):
+        async def _run():
+            agent = NodeAgent(NodeConfig(name="rs_pub", room_server=True), _SIM)
+            await agent.start()
+            await agent.wait_ready(timeout=5.0)
+            pub = agent.state.pub_key
+            await agent.quit()
+            return pub
+        self.assertRegex(asyncio.run(_run()), _HEX64)
 
 
 if __name__ == "__main__":
