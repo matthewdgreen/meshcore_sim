@@ -37,7 +37,7 @@ Success criteria:
 
 ---
 
-## Simulator state  (as of 2026-03-17)
+## Simulator state  (as of 2026-03-18)
 
 ### What exists
 
@@ -50,13 +50,17 @@ Success criteria:
 | `PacketTracer` — per-packet path & witness analysis | ✅ complete |
 | `packet.py` — pure-Python MeshCore wire-format decoder | ✅ complete |
 | C++ unit tests (crypto shims, packet serialisation) | ✅ complete |
-| Python unit / integration tests (345 tests, all passing) | ✅ complete |
+| Python unit / integration tests (354 tests, all passing) | ✅ complete |
 | Example topologies (linear, star, adversarial, asymmetric hill) | ✅ complete |
 | Grid topology generator (`topologies/gen_grid.py`) | ✅ complete |
 | Pre-generated 10×10 grid topology (`topologies/grid_10x10.json`) | ✅ complete |
 | Path exchange in `SimNode` — flood out, direct return | ✅ complete |
 | Grid routing integration tests (3×3 flood→direct, 5×5 smoke) | ✅ complete |
 | Privacy baseline tests (`test_privacy_baseline.py`, 20 tests) | ✅ complete |
+| `privatemesh/` research sandbox — multi-experiment layout, per-experiment binary | ✅ complete |
+| `privatemesh/nexthop/` — proactive next-hop routing table experiment | ✅ complete |
+| `experiments/` framework — `Scenario`, `SimResult`, `ComparisonTable`, CLI | ✅ complete |
+| `HopRecord.size_bytes` + `PacketTrace.avg_size_bytes` — wire-format packet size tracking | ✅ complete |
 | `RoomServerNode` — `SimNode` subclass that re-broadcasts TXT_MSG to all contacts | ✅ complete |
 | Per-node `binary` field — mixed topologies with different node binaries | ✅ complete |
 | `demo/room_server_demo.py` — interactive 10×10 grid room-server demo | ✅ complete |
@@ -216,7 +220,36 @@ The development loop is established:
 
 Run with:  `python3 -m demo.room_server_demo`
 
-### 4. Privacy protocol experiments  [NEXT]
+### 4. Privacy protocol experiments  [IN PROGRESS]
+
+#### nexthop experiment results  (10×10 grid, seed=42, 3 rounds, 2% link loss)
+
+`privatemesh/nexthop/nexthop_agent` vs `node_agent/node_agent`:
+
+| Metric | node_agent | nexthop_agent | Change |
+|--------|-----------|---------------|--------|
+| Delivery rate | 66.7% | 66.7% | 0% (same) |
+| Avg witness count (TXT_MSG) | 139.3 | 43.0 | **−69%  (3.24× reduction)** |
+| First-message witness count | 351 (flood) | 64 (table-direct) | **−82%  (5.48× reduction)** |
+| Second-message witness count | 63 (path-exchange) | 1 | **−98%** |
+| Avg latency | 419 ms | 413 ms | −1% |
+| Avg packet size | 46.9 B | 46.3 B | −0.6 B |
+
+**Interpretation:** the routing table allows the sender to use direct routing from the
+*first* message (bypassing the flood→path-exchange round-trip), giving a 5.48× witness
+count reduction on the first message.  By the second message, path exchange has
+completed and both variants route directly — but nexthop's first-message direct route
+leaves far fewer witnesses because it never floods.
+
+**Known limitations observed:**
+- `RT_MAX_ROUTES=128` covers a 100-node network; degrades gracefully (to baseline flood)
+  for networks larger than `RT_MAX_ROUTES` peers.  No catastrophic delivery failure
+  because Strategy C (flood suppression) is disabled.
+- 67% delivery rate is a baseline characteristic of the 10×10 scenario (link loss +
+  timing) — not introduced by nexthop.  Both variants fail the same fraction of messages.
+- Strategy C (metric-horizon flood suppression) was designed but disabled due to a
+  geometric design defect: horizon distances are relay-relative, not source-relative.
+  See `privatemesh/nexthop/README.md` for three correct alternative designs.
 
 #### Baseline metrics to beat  (3×3 zero-loss grid, seed=42)
 
@@ -412,6 +445,17 @@ by `unique_receivers` to see which adversarial nodes saw which packets.
    social graph even without decrypting payloads.)
 3. What is the right threat model — local passive adversary (one colluding
    relay) vs. global passive adversary (all relays collude)?
+4. **Strategy C geometry**: how to make metric-horizon flood suppression
+   work without access to the source's position?  Three candidate approaches
+   documented in `privatemesh/nexthop/README.md`.
+5. **Routing-table scaling**: for networks larger than `RT_MAX_ROUTES`, the
+   privacy benefit degrades to baseline (flood).  Two long-term options:
+   (a) network partitioning — assign nodes a partition ID so each node
+   only needs a routing table for its local partition (~50–100 nodes), with
+   inter-partition routing handled by designated border relays; (b) dynamic
+   table sizing based on observed advert count.  Option (a) may also address
+   the 1-byte relay hash collision problem since hashes only need to be unique
+   within a partition.
 
 ---
 
@@ -421,6 +465,7 @@ by `unique_receivers` to see which adversarial nodes saw which packets.
 |------|--------|
 | 2026-03-16 | `tools/README.md` — full auth guide and CLI reference for scraper; FD-limit fix for large topologies |
 | 2026-03-17 | RF physical-layer model: `--rf-model airtime\|contention`; `airtime.py` (Semtech AN1200.13); `channel.py` (hard collision + capture effect); `RadioConfig` defaults corrected to SF10/BW250/CR4-5; `grid_10x10.json` updated; `fetch_topology.py` gains `--sf/--bw-hz/--cr` and always emits `radio` section; 19 new tests |
+| 2026-03-18 | `privatemesh/nexthop/` — proactive next-hop routing table experiment; 3.24× witness reduction on 10×10 grid at equal delivery rate; `experiments/` comparison framework; packet size tracking (`HopRecord.size_bytes`); 354 tests |
 | 2026-03-17 | `EXAMPLES.md` — 14 worked simulation scenarios covering all topology types, RF models, collision viz, live network import, room server demo, and report comparison |
 | 2026-03-17 | `viz/` — per-packet witness map toggle; progressive witness reveal in hop-animate mode; fixed global heatmap overlay; default to per-packet + animate-hops |
 | 2026-03-17 | `viz/` — Phase 4: hop slider now steps through broadcast events (one sender → N receivers); uses `tx_id` grouping |
