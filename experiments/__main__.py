@@ -36,6 +36,7 @@ import json
 from experiments.compare import compare
 from experiments.runner import run_scenario
 from experiments.scenarios import (
+    ADAPTIVE_DELAY_BINARY,
     ALL_BINARIES,
     ALL_SCENARIOS,
     BASELINE_BINARY,
@@ -46,10 +47,13 @@ from experiments.scenarios import (
 from orchestrator.config import topology_to_dict
 
 _BINARY_ALIASES: dict[str, str] = {
-    "baseline":       BASELINE_BINARY,
-    "node_agent":     BASELINE_BINARY,
-    "nexthop":        NEXTHOP_BINARY,
-    "nexthop_agent":  NEXTHOP_BINARY,
+    "baseline":        BASELINE_BINARY,
+    "node_agent":      BASELINE_BINARY,
+    "nexthop":         NEXTHOP_BINARY,
+    "nexthop_agent":   NEXTHOP_BINARY,
+    "adaptive":        ADAPTIVE_DELAY_BINARY,
+    "adaptive_delay":  ADAPTIVE_DELAY_BINARY,
+    "adaptive_agent":  ADAPTIVE_DELAY_BINARY,
 }
 
 

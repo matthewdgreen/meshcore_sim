@@ -15,6 +15,7 @@ import time
 from dataclasses import dataclass, field
 from typing import Callable, Optional
 
+from orchestrator.channel import ChannelModel
 from orchestrator.config import TopologyConfig
 from orchestrator.metrics import MetricsCollector
 from orchestrator.node import NodeAgent
@@ -52,6 +53,11 @@ class Scenario:
         Number of text messages to send from source to destination.
     seed:
         RNG seed passed to PacketRouter and TrafficGenerator for reproducibility.
+    rf_model:
+        RF physical-layer model to use.  One of ``"none"`` (default),
+        ``"airtime"`` (gate deliveries by on-air time), or ``"contention"``
+        (airtime + hard-collision detection).  Requires the topology's
+        ``radio`` section to be populated; ignored silently if absent.
     """
     name: str
     topo_factory: Callable[[], TopologyConfig]
@@ -59,6 +65,7 @@ class Scenario:
     settle_secs: float = 3.0
     rounds: int = 2
     seed: int = 42
+    rf_model: str = "none"   # "none" | "airtime" | "contention"
 
 
 # ---------------------------------------------------------------------------
@@ -182,8 +189,26 @@ async def _run_async(
         await asyncio.gather(*(agents[n].start() for n in batch))
     await asyncio.gather(*(a.wait_ready(timeout=15.0) for a in agents.values()))
 
+    # Build RF model objects (mirrors orchestrator/__main__.py logic).
+    radio = topo_cfg.radio if scenario.rf_model != "none" else None
+    channel: Optional[ChannelModel] = None
+    if scenario.rf_model == "contention" and radio is not None:
+        neighbors_map = {
+            name: {link.other for link in topology.neighbours(name)}
+            for name in topology.all_names()
+        }
+        # Synthetic topologies have no lat/lon → hard collision detection.
+        positions = None
+        nodes_with_pos = [n for n in topo_cfg.nodes
+                          if n.lat is not None and n.lon is not None]
+        if len(nodes_with_pos) == len(topo_cfg.nodes):
+            positions = {n.name: (n.lat, n.lon)   # type: ignore[arg-type]
+                         for n in topo_cfg.nodes}
+        channel = ChannelModel(neighbors=neighbors_map, positions=positions)
+
     # Wire routing and traffic.
-    PacketRouter(topology, agents, metrics, rng, tracer=tracer)
+    PacketRouter(topology, agents, metrics, rng, tracer=tracer,
+                 radio=radio, channel=channel)
     traffic = TrafficGenerator(agents, topology, topo_cfg.simulation, metrics, rng)
 
     await traffic.run_initial_adverts()

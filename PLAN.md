@@ -50,7 +50,7 @@ Success criteria:
 | `PacketTracer` — per-packet path & witness analysis | ✅ complete |
 | `packet.py` — pure-Python MeshCore wire-format decoder | ✅ complete |
 | C++ unit tests (crypto shims, packet serialisation) | ✅ complete |
-| Python unit / integration tests (354 tests, all passing) | ✅ complete |
+| Python unit / integration tests (379 tests, all passing) | ✅ complete |
 | Example topologies (linear, star, adversarial, asymmetric hill) | ✅ complete |
 | Grid topology generator (`topologies/gen_grid.py`) | ✅ complete |
 | Pre-generated 10×10 grid topology (`topologies/grid_10x10.json`) | ✅ complete |
@@ -61,6 +61,9 @@ Success criteria:
 | `privatemesh/nexthop/` — proactive next-hop routing table experiment | ✅ complete |
 | `experiments/` framework — `Scenario`, `SimResult`, `ComparisonTable`, CLI | ✅ complete |
 | `HopRecord.size_bytes` + `PacketTrace.avg_size_bytes` — wire-format packet size tracking | ✅ complete |
+| `privatemesh/adaptive_delay/` — density-adaptive txdelay collision-mitigation experiment | ✅ complete |
+| `experiments/` RF contention scenarios — `grid/3x3/contention`, `grid/10x10/contention` | ✅ complete |
+| `Scenario.rf_model` — experiments framework supports `"none"`, `"airtime"`, `"contention"` | ✅ complete |
 | `RoomServerNode` — `SimNode` subclass that re-broadcasts TXT_MSG to all contacts | ✅ complete |
 | Per-node `binary` field — mixed topologies with different node binaries | ✅ complete |
 | `demo/room_server_demo.py` — interactive 10×10 grid room-server demo | ✅ complete |
@@ -465,6 +468,7 @@ by `unique_receivers` to see which adversarial nodes saw which packets.
 |------|--------|
 | 2026-03-16 | `tools/README.md` — full auth guide and CLI reference for scraper; FD-limit fix for large topologies |
 | 2026-03-17 | RF physical-layer model: `--rf-model airtime\|contention`; `airtime.py` (Semtech AN1200.13); `channel.py` (hard collision + capture effect); `RadioConfig` defaults corrected to SF10/BW250/CR4-5; `grid_10x10.json` updated; `fetch_topology.py` gains `--sf/--bw-hz/--cr` and always emits `radio` section; 19 new tests |
+| 2026-03-18 | `privatemesh/adaptive_delay/` — density-adaptive txdelay collision mitigation (Privitt et al. proposal); `Scenario.rf_model`; `grid/3x3\|10x10/contention` scenarios; 379 tests |
 | 2026-03-18 | `privatemesh/nexthop/` — proactive next-hop routing table experiment; 3.24× witness reduction on 10×10 grid at equal delivery rate; `experiments/` comparison framework; packet size tracking (`HopRecord.size_bytes`); 354 tests |
 | 2026-03-17 | `EXAMPLES.md` — 14 worked simulation scenarios covering all topology types, RF models, collision viz, live network import, room server demo, and report comparison |
 | 2026-03-17 | `viz/` — per-packet witness map toggle; progressive witness reveal in hop-animate mode; fixed global heatmap overlay; default to per-packet + animate-hops |
