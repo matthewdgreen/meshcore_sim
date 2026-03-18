@@ -113,6 +113,92 @@ def _parse_directional(raw: dict) -> Optional[DirectionalOverrides]:
     )
 
 
+def topology_to_dict(topo: "TopologyConfig") -> dict:
+    """
+    Serialise a TopologyConfig back to the standard topology JSON dict.
+
+    The returned dict is JSON-serialisable and can be passed to json.dump().
+    It round-trips through load_topology() without loss (optional fields are
+    omitted when they hold their default / None value).
+    """
+    nodes_out = []
+    for n in topo.nodes:
+        d: dict = {"name": n.name}
+        if n.relay:
+            d["relay"] = True
+        if n.room_server:
+            d["room_server"] = True
+        if n.prv_key is not None:
+            d["prv_key"] = n.prv_key
+        if n.binary is not None:
+            d["binary"] = n.binary
+        if n.max_heap_kb is not None:
+            d["max_heap_kb"] = n.max_heap_kb
+        if n.lat is not None:
+            d["lat"] = n.lat
+        if n.lon is not None:
+            d["lon"] = n.lon
+        if n.adversarial is not None:
+            a = n.adversarial
+            ad: dict = {"mode": a.mode}
+            if a.probability != 1.0:
+                ad["probability"] = a.probability
+            if a.replay_delay_ms != 5000.0:
+                ad["replay_delay_ms"] = a.replay_delay_ms
+            if a.corrupt_byte_count != 1:
+                ad["corrupt_byte_count"] = a.corrupt_byte_count
+            d["adversarial"] = ad
+        nodes_out.append(d)
+
+    def _dir_overrides(o: Optional["DirectionalOverrides"]) -> Optional[dict]:
+        if o is None:
+            return None
+        d = {}
+        if o.loss       is not None: d["loss"]       = o.loss
+        if o.latency_ms is not None: d["latency_ms"] = o.latency_ms
+        if o.snr        is not None: d["snr"]        = o.snr
+        if o.rssi       is not None: d["rssi"]       = o.rssi
+        return d or None
+
+    edges_out = []
+    for e in topo.edges:
+        ed: dict = {"a": e.a, "b": e.b}
+        if e.loss       != 0.0:  ed["loss"]       = e.loss
+        if e.latency_ms != 0.0:  ed["latency_ms"] = e.latency_ms
+        if e.snr        != 6.0:  ed["snr"]        = e.snr
+        if e.rssi       != -90.0: ed["rssi"]      = e.rssi
+        atob = _dir_overrides(e.a_to_b)
+        btoa = _dir_overrides(e.b_to_a)
+        if atob: ed["a_to_b"] = atob
+        if btoa: ed["b_to_a"] = btoa
+        edges_out.append(ed)
+
+    s = topo.simulation
+    sim_out: dict = {
+        "warmup_secs":           s.warmup_secs,
+        "duration_secs":         s.duration_secs,
+        "traffic_interval_secs": s.traffic_interval_secs,
+        "advert_interval_secs":  s.advert_interval_secs,
+        "epoch":                 s.epoch,
+        "default_binary":        s.default_binary,
+    }
+    if s.default_max_heap_kb is not None:
+        sim_out["default_max_heap_kb"] = s.default_max_heap_kb
+    if s.seed is not None:
+        sim_out["seed"] = s.seed
+
+    result: dict = {"nodes": nodes_out, "edges": edges_out, "simulation": sim_out}
+    if topo.radio is not None:
+        r = topo.radio
+        result["radio"] = {
+            "sf":              r.sf,
+            "bw_hz":           r.bw_hz,
+            "cr":              r.cr,
+            "preamble_symbols": r.preamble_symbols,
+        }
+    return result
+
+
 def load_topology(path: str) -> TopologyConfig:
     with open(path) as f:
         raw = json.load(f)

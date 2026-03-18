@@ -8,6 +8,7 @@ run_scenario() (the synchronous entry point that wraps the async machinery).
 from __future__ import annotations
 
 import asyncio
+import json
 import os
 import random
 import time
@@ -155,6 +156,7 @@ class SimResult:
 async def _run_async(
     scenario: Scenario,
     binary: str,
+    trace_out: Optional[str] = None,
 ) -> tuple[MetricsCollector, PacketTracer]:
     """
     Bring up all agents for one (scenario, binary) pair, run traffic, shut down.
@@ -204,6 +206,13 @@ async def _run_async(
 
     await asyncio.gather(*(a.quit() for a in agents.values()),
                          return_exceptions=True)
+
+    if trace_out is not None:
+        trace_dict = tracer.to_dict(node_names=list(agents.keys()))
+        os.makedirs(os.path.dirname(os.path.abspath(trace_out)), exist_ok=True)
+        with open(trace_out, "w") as _f:
+            json.dump(trace_dict, _f, indent=2)
+
     return metrics, tracer
 
 
@@ -215,6 +224,7 @@ def run_scenario(
     scenario: Scenario,
     binary: str,
     label: Optional[str] = None,
+    trace_out: Optional[str] = None,
 ) -> SimResult:
     """
     Run *scenario* using *binary* and return a SimResult.
@@ -233,12 +243,17 @@ def run_scenario(
     label:
         Optional human-readable label for this result row.  Defaults to
         ``"<binary_basename> / <scenario.name>"``.
+    trace_out:
+        If provided, write the PacketTracer JSON export to this path after the
+        run completes.  The file can be opened with
+        ``python3 -m viz <topology.json> --trace <trace_out>`` for interactive
+        packet-path visualisation.
     """
     if label is None:
         label = f"{os.path.basename(binary)} / {scenario.name}"
 
     t0 = time.monotonic()
-    metrics, tracer = asyncio.run(_run_async(scenario, binary))
+    metrics, tracer = asyncio.run(_run_async(scenario, binary, trace_out=trace_out))
     elapsed = time.monotonic() - t0
 
     return SimResult(

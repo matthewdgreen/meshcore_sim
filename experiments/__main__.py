@@ -14,6 +14,13 @@ Examples
 # One scenario, one binary:
     python3 -m experiments --scenario grid/3x3 --binary nexthop
 
+# Save trace files for visualisation:
+    python3 -m experiments --scenario grid/10x10 --trace-out-dir /tmp/traces
+    python3 -m viz /tmp/traces/grid_10x10_topology.json \\
+                  --trace /tmp/traces/grid_10x10_node_agent_trace.json
+    python3 -m viz /tmp/traces/grid_10x10_topology.json \\
+                  --trace /tmp/traces/grid_10x10_nexthop_agent_trace.json
+
 # List available scenarios:
     python3 -m experiments --list
 """
@@ -23,6 +30,8 @@ from __future__ import annotations
 import argparse
 import os
 import sys
+
+import json
 
 from experiments.compare import compare
 from experiments.runner import run_scenario
@@ -34,6 +43,7 @@ from experiments.scenarios import (
     SCENARIO_BY_NAME,
     available_binaries,
 )
+from orchestrator.config import topology_to_dict
 
 _BINARY_ALIASES: dict[str, str] = {
     "baseline":       BASELINE_BINARY,
@@ -68,6 +78,17 @@ def main(argv: list[str] | None = None) -> int:
         help=(
             "Binary to include.  May be a short alias (baseline, nexthop) or "
             "a file path.  May be repeated.  Default: all available binaries."
+        ),
+    )
+    parser.add_argument(
+        "--trace-out-dir", "-t",
+        metavar="DIR",
+        help=(
+            "Write PacketTracer JSON and topology JSON to DIR after each run. "
+            "Files are named <scenario_slug>_<binary>_trace.json and "
+            "<scenario_slug>_topology.json.  Load them with: "
+            "python3 -m viz <DIR>/<slug>_topology.json "
+            "--trace <DIR>/<slug>_<binary>_trace.json"
         ),
     )
     parser.add_argument(
@@ -115,17 +136,46 @@ def main(argv: list[str] | None = None) -> int:
             print(f"error: binary not found or not executable: {b}", file=sys.stderr)
         return 1
 
+    trace_dir: Optional[str] = args.trace_out_dir
+
     # Run.
     for scenario in scenarios:
+        # Slug for file names: replace path separators and spaces with underscores.
+        slug = scenario.name.replace("/", "_").replace(" ", "_")
+
+        # Write topology JSON once per scenario (before any run so the file
+        # exists even if a run is interrupted).
+        if trace_dir is not None:
+            os.makedirs(trace_dir, exist_ok=True)
+            topo_path = os.path.join(trace_dir, f"{slug}_topology.json")
+            topo_dict = topology_to_dict(scenario.topo_factory())
+            with open(topo_path, "w") as _f:
+                json.dump(topo_dict, _f, indent=2)
+            print(f"Topology written to: {topo_path}")
+
         results = []
         for binary in binaries:
-            print(f"\nRunning: {scenario.name}  binary={os.path.basename(binary)} …",
-                  flush=True)
-            result = run_scenario(scenario, binary)
+            binary_slug = os.path.basename(binary)
+            trace_out: Optional[str] = None
+            if trace_dir is not None:
+                trace_out = os.path.join(trace_dir, f"{slug}_{binary_slug}_trace.json")
+
+            print(f"\nRunning: {scenario.name}  binary={binary_slug} …", flush=True)
+            result = run_scenario(scenario, binary, trace_out=trace_out)
             results.append(result)
             print(f"  done in {result.elapsed_s:.1f}s  "
                   f"delivery={result.delivery_rate*100:.0f}%  "
                   f"avg_witness={result.avg_witness_count:.1f}")
+            if trace_out is not None:
+                print(f"  trace:    {trace_out}")
+
+        if trace_dir is not None and results:
+            print(f"\nTo visualise:")
+            for r in results:
+                binary_slug = os.path.basename(r.binary)
+                topo_path = os.path.join(trace_dir, f"{slug}_topology.json")
+                trace_path = os.path.join(trace_dir, f"{slug}_{binary_slug}_trace.json")
+                print(f"  python3 -m viz {topo_path} --trace {trace_path}")
 
         if len(results) >= 2:
             compare(results, scenario_name=scenario.name).print()
