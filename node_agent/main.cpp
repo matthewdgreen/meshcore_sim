@@ -27,7 +27,7 @@
 #include "SimRadio.h"
 #include "SimClock.h"
 #include "SimRNG.h"
-#include "SimNode.h"
+#include <SimNode.h>
 
 #include <helpers/SimpleMeshTables.h>
 #include <helpers/StaticPoolPacketManager.h>
