@@ -484,3 +484,93 @@ Expected pattern:
 - `RF collisions dropped: 0` for baseline and airtime; > 0 for contention.
 - Average latency much higher with airtime / contention (each hop ≈ 330 ms
   at SF10/BW250 vs. near-zero for baseline).
+
+---
+
+## 15. Boston real-world mesh — privacy comparison
+
+**Goal:** Run the PNI (Permuted Neighbor Identifier) privacy experiment on the
+157-node Boston mesh topology scraped from `live.bostonme.sh`, then compare
+baseline vs. PNI routing using the privacy analyser and the visualiser.
+
+The Boston topology has 155 relays with degree variance from 1 to 52, making it
+a realistic stress test for privacy-preserving routing at real-world scale.
+
+**Run with the experiments framework (easiest):**
+
+```sh
+# Run all available binaries on the Boston scenario, saving traces
+python3 -m experiments --scenario boston --trace-out-dir /tmp/boston_traces
+
+# Visualise the baseline trace on the geo map
+python3 -m viz /tmp/boston_traces/boston_topology.json \
+    --trace /tmp/boston_traces/boston_node_agent_trace.json
+
+# Visualise the PNI trace
+python3 -m viz /tmp/boston_traces/boston_topology.json \
+    --trace /tmp/boston_traces/boston_privaterouting1_agent_trace.json
+```
+
+**Run individual variants with privacy analysis:**
+
+```sh
+# Baseline
+python3 -c "
+from experiments.scenarios import BOSTON, BASELINE_BINARY
+from experiments.runner import run_scenario
+r = run_scenario(BOSTON, BASELINE_BINARY, trace_out='/tmp/boston_baseline.json')
+print(f'Delivery: {r.delivery_rate:.0%}  Hops: {r.total_hops}')
+"
+
+# PNI (privaterouting1)
+python3 -c "
+from experiments.scenarios import BOSTON, PRIVATEROUTING1_BINARY
+from experiments.runner import run_scenario
+r = run_scenario(BOSTON, PRIVATEROUTING1_BINARY, trace_out='/tmp/boston_pni.json')
+print(f'Delivery: {r.delivery_rate:.0%}  Hops: {r.total_hops}')
+"
+```
+
+**Analyse privacy metrics (no re-run needed if traces exist):**
+
+```sh
+python3 -c "
+import json
+from experiments.privacy import analyze_privacy, format_privacy_report
+for label, path in [('baseline', '/tmp/boston_baseline.json'),
+                    ('PNI',      '/tmp/boston_pni.json')]:
+    with open(path) as f:
+        trace = json.load(f)
+    print(format_privacy_report(analyze_privacy(trace), f'{label} / boston'))
+"
+```
+
+**Visualise a trace on the geo map:**
+
+```sh
+python3 -m viz topologies/boston_relays.json --trace /tmp/boston_pni.json
+```
+
+Expected results:
+- **Path Hash Entropy** jumps from near-zero (baseline: each relay uses the
+  same 1-byte hash every time) to ~1.0 (PNI: fresh random hash per packet).
+- **Cross-Path Linkability** drops from ~0.60 (baseline: same hashes across
+  packets are trivially correlated) to 0.00 (PNI: no shared hash values).
+- **Delivery rate** should be 100 % for both baseline and PNI on this topology.
+- The heatmap in the visualiser highlights high-degree relays (e.g. the
+  downtown Boston cluster) that witness the most traffic — the privacy
+  hot-spots that PNI is designed to protect.
+
+**Variations:**
+
+```sh
+# Compare all five binary variants side by side
+python3 -m experiments --scenario boston --trace-out-dir /tmp/boston_traces
+
+# Run just baseline vs PNI
+python3 -m experiments --scenario boston -b baseline -b pni \
+    --trace-out-dir /tmp/boston_traces
+
+# List all available scenarios and binaries
+python3 -m experiments --list
+```

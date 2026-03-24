@@ -7,6 +7,7 @@ from __future__ import annotations
 import asyncio
 import json
 import logging
+import os
 import sys
 from dataclasses import dataclass, field
 from typing import Awaitable, Callable, Optional
@@ -66,6 +67,11 @@ class NodeAgent:
         self._proc: Optional[asyncio.subprocess.Process] = None
         # Lazy-initialised inside start() so construction works outside a running loop.
         self._ready_event: Optional[asyncio.Event] = None
+        # Serialises writes to the subprocess stdin pipe.  Python 3.9's
+        # StreamWriter.drain() asserts that only one coroutine awaits at a time;
+        # high-degree nodes (e.g. Boston hub with 52 neighbours) receive many
+        # concurrent deliveries that would otherwise race on drain().
+        self._write_lock: Optional[asyncio.Lock] = None
         # Set to True by quit() so in-flight deliver tasks don't write to a
         # closing pipe and generate "Future exception was never retrieved" noise.
         self._stopping: bool = False
@@ -81,6 +87,7 @@ class NodeAgent:
     async def start(self) -> None:
         """Spawn the subprocess and begin reading its stdout."""
         self._ready_event = asyncio.Event()
+        self._write_lock = asyncio.Lock()
         cmd = self._build_cmd()
         log.debug("[%s] spawning: %s", self.config.name, " ".join(cmd))
 
@@ -145,8 +152,13 @@ class NodeAgent:
             return
         data = (json.dumps(cmd) + "\n").encode()
         try:
-            self._proc.stdin.write(data)
-            await self._proc.stdin.drain()
+            if self._write_lock is not None:
+                async with self._write_lock:
+                    self._proc.stdin.write(data)
+                    await self._proc.stdin.drain()
+            else:
+                self._proc.stdin.write(data)
+                await self._proc.stdin.drain()
         except (BrokenPipeError, ConnectionResetError):
             log.warning("[%s] pipe closed before command could be sent", self.config.name)
 
@@ -181,6 +193,20 @@ class NodeAgent:
             pass
         except Exception as exc:
             log.error("[%s] reader loop error: %s", self.config.name, exc)
+        # Log abnormal exit
+        if self._proc.returncode is not None and self._proc.returncode != 0:
+            import signal as _sig
+            rc = self._proc.returncode
+            if rc < 0:
+                try:
+                    sig_name = _sig.Signals(-rc).name
+                except (ValueError, AttributeError):
+                    sig_name = f"signal {-rc}"
+                log.warning("[%s] CRASHED with %s (rc=%d)", self.config.name, sig_name, rc)
+            else:
+                log.warning("[%s] exited with rc=%d", self.config.name, rc)
+        elif self._proc.returncode is None and not self._stopping:
+            log.warning("[%s] stdout closed but process still running", self.config.name)
 
     async def _dispatch_event(self, event: dict) -> None:
         etype = event.get("type")

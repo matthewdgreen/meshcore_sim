@@ -1,6 +1,4 @@
 #pragma once
-#ifndef SIMNODE_H_GUARD
-#define SIMNODE_H_GUARD
 #include <Mesh.h>
 #include <vector>
 #include <string>
@@ -105,5 +103,3 @@ public:
                    mesh::RNG& rng, mesh::RTCClock& rtc,
                    mesh::PacketManager& mgr, mesh::MeshTables& tables);
 };
-
-#endif // SIMNODE_H_GUARD

@@ -30,9 +30,12 @@ _REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASELINE_BINARY       = os.path.join(_REPO_ROOT, "node_agent", "build", "node_agent")
 NEXTHOP_BINARY        = os.path.join(_REPO_ROOT, "privatemesh", "nexthop", "build", "nexthop_agent")
 ADAPTIVE_DELAY_BINARY = os.path.join(_REPO_ROOT, "privatemesh", "adaptive_delay", "build", "adaptive_agent")
+PATH2_BINARY          = os.path.join(_REPO_ROOT, "privatemesh", "path2", "build", "path2_agent")
+PRIVATEROUTING1_BINARY = os.path.join(_REPO_ROOT, "privatemesh", "privaterouting1", "build", "privaterouting1_agent")
 
 # All experiment binaries in registration order (used by the CLI).
-ALL_BINARIES: list[str] = [BASELINE_BINARY, NEXTHOP_BINARY, ADAPTIVE_DELAY_BINARY]
+ALL_BINARIES: list[str] = [BASELINE_BINARY, NEXTHOP_BINARY, ADAPTIVE_DELAY_BINARY,
+                           PATH2_BINARY, PRIVATEROUTING1_BINARY]
 
 
 def available_binaries() -> list[str]:
@@ -49,6 +52,8 @@ def available_binaries() -> list[str]:
 from sim_tests.helpers import (  # noqa: E402 (import after path setup)
     grid_topo_config,
     linear_three_config,
+    funnel_topo_config,
+    boston_topo_config,
 )
 
 # MeshCore default LoRa parameters (from simple_repeater/MyMesh.cpp).
@@ -98,9 +103,41 @@ GRID_3X3 = Scenario(
     seed=42,
 )
 
+#: 3×3 grid — path privacy experiment (2-byte hashes + PNI).
+#: Compare baseline (1-byte), path2 (2-byte), and privaterouting1 (2-byte+PNI).
+#: Delivery rates should be identical across all three variants.
+GRID_3X3_PNI = Scenario(
+    name="grid/3x3/pni",
+    topo_factory=lambda: grid_topo_config(
+        3, 3,
+        warmup_secs=3.0,
+        duration_secs=30.0,
+        seed=42,
+    ),
+    warmup_secs=3.0,
+    settle_secs=3.0,
+    rounds=2,
+    seed=42,
+)
+
 #: 10×10 grid — stress test; 100 nodes, routing-table eviction exercised.
 GRID_10X10 = Scenario(
     name="grid/10x10",
+    topo_factory=lambda: grid_topo_config(
+        10, 10,
+        warmup_secs=10.0,
+        duration_secs=60.0,
+        seed=42,
+    ),
+    warmup_secs=10.0,
+    settle_secs=5.0,
+    rounds=3,
+    seed=42,
+)
+
+#: 10×10 grid — path privacy experiment (2-byte hashes + PNI at scale).
+GRID_10X10_PNI = Scenario(
+    name="grid/10x10/pni",
     topo_factory=lambda: grid_topo_config(
         10, 10,
         warmup_secs=10.0,
@@ -196,11 +233,68 @@ GRID_10X10_CONTENTION = Scenario(
     # 3 recovery rounds within 30 s warmup (last at t≈20 s, 10 s remaining).
 )
 
+#: Funnel / hourglass — PNI table stress test (within capacity).
+#: 10 left + 10 right endpoints = 23 total nodes.  The bottleneck relay B
+#: sees ~23 advert floods + a handful of text floods, well within 128.
+FUNNEL_SMALL = Scenario(
+    name="funnel/small",
+    topo_factory=lambda: funnel_topo_config(
+        left_count=10, right_count=10,
+        warmup_secs=10.0,
+        duration_secs=60.0,
+        seed=42,
+    ),
+    warmup_secs=10.0,
+    settle_secs=5.0,
+    rounds=5,
+    seed=42,
+)
+
+#: Funnel — PNI table stress test (exceeds 128 capacity).
+#: 70 left + 70 right endpoints = 143 total nodes.  The bottleneck relay B
+#: must forward ~143 adverts alone, exceeding the 128-entry PNI ring buffer.
+#: Expect PNI eviction → some direct-route failures for privaterouting1.
+FUNNEL_STRESS = Scenario(
+    name="funnel/stress",
+    topo_factory=lambda: funnel_topo_config(
+        left_count=70, right_count=70,
+        warmup_secs=20.0,
+        duration_secs=120.0,
+        seed=42,
+    ),
+    warmup_secs=20.0,
+    settle_secs=10.0,
+    rounds=5,
+    seed=42,
+)
+
+#: Boston real-world mesh — 157-node main component from live.bostonme.sh.
+#: Two well-separated leaf nodes are auto-selected as source/destination
+#: (double-BFS diameter endpoints, ~7 hops apart).
+#: 155 relays + high degree variance (1–52) make this a realistic stress test.
+BOSTON = Scenario(
+    name="boston",
+    topo_factory=lambda: boston_topo_config(
+        warmup_secs=15.0,
+        duration_secs=120.0,
+        seed=42,
+    ),
+    warmup_secs=15.0,
+    settle_secs=10.0,
+    rounds=5,
+    seed=42,
+)
+
 #: All scenarios in the default run order (fastest first).
 ALL_SCENARIOS: list[Scenario] = [
     LINEAR,
     GRID_3X3,
+    GRID_3X3_PNI,
     GRID_10X10,
+    GRID_10X10_PNI,
+    FUNNEL_SMALL,
+    FUNNEL_STRESS,
+    BOSTON,
     GRID_3X3_CONTENTION,
     GRID_10X10_CONTENTION,
 ]

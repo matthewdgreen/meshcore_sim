@@ -33,8 +33,14 @@ int SimRadio::recvRaw(uint8_t* bytes, int sz) {
 }
 
 uint32_t SimRadio::getEstAirtimeFor(int len_bytes) {
-    // LoRa SF7 BW125 approximation: ~8 bytes/ms at the air.
-    return (uint32_t)(len_bytes * 1000 / 8);
+    // On-air time (ms) for MeshCore default radio: SF10 / BW250 kHz / CR4-5.
+    // Linear fit to Semtech AN1200.13 values:
+    //   30 B → 226 ms,  50 B → 308 ms,  70 B → 390 ms
+    //   formula: 103 ms overhead + 4.1 ms per payload byte
+    // This feeds Mesh::getRetransmitDelay(), which computes
+    //   t = (airtime × 52/50) / 2  and returns nextInt(0,5) × t.
+    // At 50 bytes: t ≈ 160 ms → baseline delay range ≈ 0–800 ms.
+    return (uint32_t)(103 + len_bytes * 4.1f);
 }
 
 float SimRadio::packetScore(float snr, int /*packet_len*/) {

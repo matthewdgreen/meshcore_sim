@@ -49,6 +49,8 @@ build_agent() {
 build_agent "node_agent (baseline)"              "node_agent"
 build_agent "nexthop_agent"                       "privatemesh/nexthop"
 build_agent "adaptive_agent (adaptive delay)"     "privatemesh/adaptive_delay"
+build_agent "path2_agent (2-byte paths)"          "privatemesh/path2"
+build_agent "privaterouting1_agent (PNI)"         "privatemesh/privaterouting1"
 
 # ---------------------------------------------------------------------------
 # Summary
@@ -57,9 +59,11 @@ echo "============================================================"
 echo "  All binaries built successfully."
 echo "============================================================"
 echo
-echo "  node_agent:     node_agent/build/node_agent"
-echo "  nexthop_agent:  privatemesh/nexthop/build/nexthop_agent"
-echo "  adaptive_agent: privatemesh/adaptive_delay/build/adaptive_agent"
+echo "  node_agent:              node_agent/build/node_agent"
+echo "  nexthop_agent:           privatemesh/nexthop/build/nexthop_agent"
+echo "  adaptive_agent:          privatemesh/adaptive_delay/build/adaptive_agent"
+echo "  path2_agent:             privatemesh/path2/build/path2_agent"
+echo "  privaterouting1_agent:   privatemesh/privaterouting1/build/privaterouting1_agent"
 echo
 echo "Run the experiment:"
 echo

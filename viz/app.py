@@ -43,7 +43,7 @@ _ROLE_COLOUR: dict[str, str] = {
     "endpoint":    "#8d99ae",   # grey
 }
 _EDGE_COLOUR     = "#adb5bd"
-_EDGE_COLOUR_GEO = "rgba(173,181,189,0.6)"
+_EDGE_COLOUR_GEO = "rgba(80,90,100,0.55)"
 _SENDER_COLOUR    = "#f77f00"   # orange — active packet senders
 _RECEIVER_COLOUR  = "#2dc653"   # green  — active packet receivers (current step)
 _RECEIVED_COLOUR  = "#74b3ce"   # soft blue  — received this packet (other steps)
@@ -119,6 +119,7 @@ def _geo_figure(
     highlight_senders: Optional[list[str]] = None,
     highlight_receivers: Optional[list[str]] = None,
     collision_edges: Optional[list[tuple[str, str]]] = None,
+    show_map: bool = True,
 ) -> go.Figure:
     node_by_name = {n["name"]: n for n in nodes}
 
@@ -137,7 +138,7 @@ def _geo_figure(
         lat=edge_lats,
         lon=edge_lons,
         mode="lines",
-        line=dict(width=1, color=_EDGE_COLOUR_GEO),
+        line=dict(width=1.5, color=_EDGE_COLOUR_GEO),
         hoverinfo="none",
         showlegend=False,
     )
@@ -181,7 +182,7 @@ def _geo_figure(
             lon=lons,
             mode="markers",
             marker=dict(
-                size=8,
+                size=11,
                 color=colors,
                 colorscale="Reds",
                 cmin=0,
@@ -217,7 +218,7 @@ def _geo_figure(
             lat=lats,
             lon=lons,
             mode="markers",
-            marker=dict(size=8, color=colors),
+            marker=dict(size=11, color=colors),
             text=texts,
             hoverinfo="text",
             showlegend=False,
@@ -243,7 +244,7 @@ def _geo_figure(
                 lat=b["lats"],
                 lon=b["lons"],
                 mode="markers",
-                marker=dict(size=8, color=_ROLE_COLOUR.get(role, "#8d99ae")),
+                marker=dict(size=11, color=_ROLE_COLOUR.get(role, "#8d99ae")),
                 text=b["texts"],
                 hoverinfo="text",
                 name=role,
@@ -277,7 +278,7 @@ def _geo_figure(
     fig = go.Figure(data=[edge_trace, collision_trace] + node_traces + highlight_traces)
     fig.update_layout(
         mapbox=dict(
-            style="open-street-map",
+            style="open-street-map" if show_map else "white-bg",
             center=dict(lat=centre_lat, lon=centre_lon),
             zoom=10,
         ),
@@ -540,6 +541,15 @@ def _sidebar(
             style={"margin": "2px 0", "fontSize": "12px", "color": "#6c757d"},
         ),
     ]
+    if geo:
+        stats.append(
+            dcc.Checklist(
+                id="show-map-toggle",
+                options=[{"label": " Show map", "value": "map"}],
+                value=["map"],
+                style={"fontSize": "12px", "color": "#495057", "marginTop": "4px"},
+            ),
+        )
 
     # Role legend — only shown when no trace is loaded (heatmap replaces it)
     role_section: list = []
@@ -896,11 +906,13 @@ def create_app(
                 Input("packet-slider", "value"),
                 Input("hop-slider", "value"),
                 Input("view-mode", "value"),
+                Input("show-map-toggle", "value"),
             )
-            def _on_packet_geo(idx: int, hop_idx: int, view_mode: str) -> tuple:
+            def _on_packet_geo(idx: int, hop_idx: int, view_mode: str, map_toggle: list) -> tuple:
                 idx       = idx or 0
                 view_mode = view_mode or "global"
                 step_idx  = hop_idx if hop_idx is not None else -1
+                show_map  = bool(map_toggle and "map" in map_toggle)
                 pkt   = packets[idx]
                 steps = all_steps[idx]
                 # Sender/receiver overlays only fire for a specific broadcast step.
@@ -925,6 +937,7 @@ def create_app(
                     highlight_senders=senders,
                     highlight_receivers=receivers,
                     collision_edges=_collision_edges_for_step(pkt, step_idx, steps),
+                    show_map=show_map,
                 )
                 return (
                     fig,
@@ -1068,6 +1081,16 @@ def create_app(
         )
         def _set_speed(ms: int) -> int:
             return ms or 500
+
+    # Phase 1 geo: map toggle (no trace loaded)
+    if geo and not (trace and packets):
+        @app.callback(
+            Output("geo-graph", "figure"),
+            Input("show-map-toggle", "value"),
+        )
+        def _toggle_map(map_toggle: list) -> go.Figure:
+            show_map = bool(map_toggle and "map" in map_toggle)
+            return _geo_figure(nodes, edges, w_counts, max_w, show_map=show_map)
 
     # Phase 1: hover detail for cytoscape
     if not geo:

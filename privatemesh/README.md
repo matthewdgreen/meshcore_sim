@@ -13,14 +13,34 @@ from `../node_agent/`.
 
 ```
 privatemesh/
-├── README.md          ← this file
-├── nexthop/           ← Experiment 1: proactive next-hop routing table
+├── README.md              ← this file
+├── nexthop/               ← Experiment 1: proactive next-hop routing table
 │   ├── CMakeLists.txt
 │   ├── SimNode.h
-│   ├── SimNode.cpp    ← THE PATCH (diff vs node_agent/SimNode.cpp)
+│   ├── SimNode.cpp        ← THE PATCH (diff vs node_agent/SimNode.cpp)
 │   └── build/
 │       └── nexthop_agent
-└── <future>/          ← e.g. pathblind/, onion/, …
+├── adaptive_delay/        ← Experiment 2: density-adaptive txdelay
+│   ├── CMakeLists.txt
+│   ├── main.cpp           ← ODR-safe wrapper (includes local SimNode.h first)
+│   ├── SimNode.h
+│   ├── SimNode.cpp
+│   └── build/
+│       └── adaptive_agent
+├── path2/                 ← Experiment 3: 2-byte path hashes (no PNI)
+│   ├── CMakeLists.txt
+│   ├── SimNode.h
+│   ├── SimNode.cpp
+│   └── build/
+│       └── path2_agent
+├── privaterouting1/       ← Experiment 4: PNI (Permuted Neighbor Identifiers)
+│   ├── CMakeLists.txt
+│   ├── main.cpp           ← ODR-safe wrapper (includes local SimNode.h first)
+│   ├── SimNode.h          ← PNI ring buffer (128 entries × 2-byte hashes)
+│   ├── SimNode.cpp        ← writeSelfPathHash override: fresh random PNI per packet
+│   └── build/
+│       └── privaterouting1_agent
+└── <future>/              ← e.g. onion/, reencrypt/, …
     ├── CMakeLists.txt
     ├── SimNode.cpp
     └── build/
@@ -164,3 +184,59 @@ round trip), reducing the number of relay nodes that observe each message.
 **Binary**: `privatemesh/nexthop/build/nexthop_agent`
 
 **Experiment runner**: `python3 -m experiments --scenario grid/3x3`
+
+### adaptive_delay — density-adaptive txdelay collision mitigation
+
+**Hypothesis**: adapting retransmit delay to local relay density reduces RF
+collisions in the data-flood phase, improving delivery under contention.
+
+**Mechanism**:
+- `getRetransmitDelay`: for DATA packets, use `5 × airtime × txdelay` based on
+  the node's observed neighbour count.  ADVERT packets use the baseline formula
+  (zero delay) so network discovery is unaffected.
+
+**Binary**: `privatemesh/adaptive_delay/build/adaptive_agent`
+
+**Experiment runner**: `python3 -m experiments --scenario grid/3x3/contention`
+
+### path2 — 2-byte path hashes (baseline for PNI comparison)
+
+**Hypothesis**: increasing the path hash from 1 byte to 2 bytes reduces false
+positives in `isSelfPathHash` at bottleneck relays (1/65536 vs 1/256).
+
+**Mechanism**:
+- `SimNode.h`: overrides `getPathHashSize()` to return 2 instead of 1.
+
+**Binary**: `privatemesh/path2/build/path2_agent`
+
+### privaterouting1 — PNI (Permuted Neighbor Identifiers)
+
+**Hypothesis**: replacing static relay hashes with fresh random PNI values per
+packet breaks cross-packet correlation and makes key-grinding attacks worthless,
+at the cost of a 128-entry ring buffer per node.
+
+**Mechanism**:
+- `writeSelfPathHash(dest, sz)`: instead of copying the node's real identity
+  hash, generates a fresh random 2-byte PNI, checks it against the ring buffer
+  for uniqueness, stores it, and writes it to the path field.
+- `isSelfPathHash(hash, sz)`: checks the 128-entry PNI ring buffer instead of
+  the static identity hash.  False positive rate = 128/65536 ≈ 1/512 per
+  non-intended neighbour (better than stock 1-byte at 1/256).
+- `SimNode.h`: adds `pni_table[128][3]`, `pni_count`, `pni_head` ring buffer
+  fields and `storePNI`/`pniExists` helpers.
+
+**Memory budget**: 128 × 3 + 2 = 386 bytes per node.
+
+**Privacy properties**:
+- Path hash entropy ratio: 1.000 (fully unlinkable — each packet carries a
+  unique PNI at every relay).
+- Cross-path linkability: 0.000 (no shared hash values across packets).
+- PNI table stress: 128-entry capacity handles topologies up to ~120 forwarded
+  adverts before eviction.
+
+**Binary**: `privatemesh/privaterouting1/build/privaterouting1_agent`
+
+**Experiment runner**:
+```sh
+python3 -m experiments --scenario boston -b baseline -b pni --trace-out-dir /tmp/boston_traces
+```

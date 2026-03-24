@@ -20,7 +20,9 @@ from typing import Optional
 from .packet import (
     PacketInfo,
     decode_packet,
+    extract_payload_ids,
     packet_fingerprint,
+    path_hash_list,
     payload_type_name,
     route_type_name,
     ROUTE_TYPE_FLOOD,
@@ -45,6 +47,11 @@ class HopRecord:
     airtime_ms: float = 0.0  # on-air time of the TX event (0 when not modelled)
     size_bytes: int = 0    # wire-format byte length of the packet at this hop
                            # (flood packets grow as relays append their hashes)
+    path_hashes: Optional[list] = None
+                           # list of hex-encoded relay hashes observed at this hop,
+                           # e.g. ["0a1b", "c3d4"] for 2-byte hashes.
+                           # Each entry is path_size*2 hex chars.
+    path_hash_size: int = 1  # bytes per path hash entry (1, 2, or 3)
 
 
 @dataclass
@@ -65,6 +72,10 @@ class PacketTrace:
     first_sender:   str          # node that first transmitted this packet
     hops:           list[HopRecord]       = field(default_factory=list)
     collisions:     list[CollisionRecord] = field(default_factory=list)
+    # Payload-level observable fields (populated from the first TX)
+    dest_hash_hex:  Optional[str] = None   # 1-byte dest hash (hex) for data pkts
+    src_hash_hex:   Optional[str] = None   # 1-byte src hash (hex) for data pkts
+    advert_pub_hex: Optional[str] = None   # 32-byte pub key (hex) for ADVERT pkts
 
     @property
     def witness_count(self) -> int:
@@ -143,11 +154,15 @@ class PacketTracer:
             return None
         fp = packet_fingerprint(info)
         if fp not in self._traces:
+            ids = extract_payload_ids(info)
             self._traces[fp] = PacketTrace(
                 fingerprint=fp,
                 payload_type=info.payload_type,
                 first_seen_at=t,
                 first_sender=sender,
+                dest_hash_hex=ids.get("dest_hash_hex"),
+                src_hash_hex=ids.get("src_hash_hex"),
+                advert_pub_hex=ids.get("advert_pub_hex"),
             )
         self._tx_counter += 1
         self._tx_airtime[self._tx_counter] = airtime_ms
@@ -229,6 +244,8 @@ class PacketTracer:
             tx_id=tx_id,
             airtime_ms=airtime_ms,
             size_bytes=len(hex_data) // 2,
+            path_hashes=path_hash_list(info),
+            path_hash_size=info.path_size,
         ))
 
     # ------------------------------------------------------------------
@@ -266,9 +283,9 @@ class PacketTracer:
           node_names    — list of node names in the simulation; stored so the
                           visualiser can cross-check node identity.
 
-        Schema (version 2):
+        Schema (version 3):
           {
-            "schema_version": 2,
+            "schema_version": 3,
             "topology": "<basename>.json",   # if topology_path provided
             "nodes": ["name", ...],           # if node_names provided
             "packets": [
@@ -282,10 +299,14 @@ class PacketTracer:
                 "witness_count":    int,
                 "unique_senders":   [str, ...],
                 "unique_receivers": [str, ...],
+                "dest_hash_hex":    str|null,     # 1-byte dest hash (data pkts)
+                "src_hash_hex":     str|null,     # 1-byte src hash (data pkts)
+                "advert_pub_hex":   str|null,     # 32-byte pub key (ADVERT pkts)
                 "hops": [
                   {"t": float, "sender": str, "receiver": str,
                    "route_type": int, "path_count": int,
-                   "tx_id": int|null, "airtime_ms": float},
+                   "tx_id": int|null, "airtime_ms": float,
+                   "path_hashes": [str, ...], "path_hash_size": int},
                   ...
                 ],
                 "collisions": [
@@ -299,7 +320,7 @@ class PacketTracer:
         """
         packets = []
         for tr in self._traces.values():
-            packets.append({
+            pkt_dict: dict = {
                 "fingerprint":       tr.fingerprint,
                 "payload_type":      tr.payload_type,
                 "payload_type_name": payload_type_name(tr.payload_type),
@@ -310,20 +331,30 @@ class PacketTracer:
                 "unique_senders":    sorted(tr.unique_senders),
                 "unique_receivers":  sorted(tr.unique_receivers),
                 "avg_size_bytes":     tr.avg_size_bytes,
-                "hops": [
+            }
+            # Privacy-observable fields (only present when non-None)
+            if tr.dest_hash_hex is not None:
+                pkt_dict["dest_hash_hex"] = tr.dest_hash_hex
+            if tr.src_hash_hex is not None:
+                pkt_dict["src_hash_hex"] = tr.src_hash_hex
+            if tr.advert_pub_hex is not None:
+                pkt_dict["advert_pub_hex"] = tr.advert_pub_hex
+            pkt_dict["hops"] = [
                     {
-                        "t":           h.t,
-                        "sender":      h.sender,
-                        "receiver":    h.receiver,
-                        "route_type":  h.route_type,
-                        "path_count":  h.path_count,
-                        "tx_id":       h.tx_id,
-                        "airtime_ms":  h.airtime_ms,
-                        "size_bytes":  h.size_bytes,
+                        "t":              h.t,
+                        "sender":         h.sender,
+                        "receiver":       h.receiver,
+                        "route_type":     h.route_type,
+                        "path_count":     h.path_count,
+                        "tx_id":          h.tx_id,
+                        "airtime_ms":     h.airtime_ms,
+                        "size_bytes":     h.size_bytes,
+                        "path_hashes":    h.path_hashes,
+                        "path_hash_size": h.path_hash_size,
                     }
                     for h in tr.hops
-                ],
-                "collisions": [
+                ]
+            pkt_dict["collisions"] = [
                     {
                         "t":        c.t,
                         "sender":   c.sender,
@@ -331,11 +362,11 @@ class PacketTracer:
                         "tx_id":    c.tx_id,
                     }
                     for c in tr.collisions
-                ],
-            })
+                ]
+            packets.append(pkt_dict)
         # Sort by first_seen_at so the file reads chronologically
         packets.sort(key=lambda p: p["first_seen_at"])
-        result: dict = {"schema_version": 2}
+        result: dict = {"schema_version": 3}
         if topology_path is not None:
             result["topology"] = Path(topology_path).name
         if node_names is not None:

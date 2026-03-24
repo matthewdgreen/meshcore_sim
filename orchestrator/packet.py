@@ -153,6 +153,44 @@ def decode_packet(hex_data: str) -> Optional[PacketInfo]:
     )
 
 
+def extract_payload_ids(info: PacketInfo) -> dict:
+    """
+    Extract observable identity fields from the payload.
+
+    For data packets (REQ, RESPONSE, TXT_MSG, PATH):
+      payload[0] = dest_hash (1 byte), payload[1] = src_hash (1 byte)
+    For ADVERT packets:
+      payload[0:32] = full 32-byte pub_key (cleartext)
+
+    Returns a dict with optional keys: dest_hash_hex, src_hash_hex, advert_pub_hex.
+    """
+    result: dict = {}
+    if info.payload_type in (PAYLOAD_TYPE_REQ, PAYLOAD_TYPE_RESPONSE,
+                              PAYLOAD_TYPE_TXT_MSG, PAYLOAD_TYPE_PATH):
+        if len(info.payload) >= 2:
+            result["dest_hash_hex"] = info.payload[0:1].hex()
+            result["src_hash_hex"] = info.payload[1:2].hex()
+    elif info.payload_type == PAYLOAD_TYPE_ADVERT:
+        if len(info.payload) >= 32:
+            result["advert_pub_hex"] = info.payload[0:32].hex()
+    return result
+
+
+def path_hash_list(info: PacketInfo) -> list:
+    """
+    Split the path bytes into a list of individual relay hashes (hex strings).
+
+    E.g. for 2-byte hashes with path_bytes = b'\\x0a\\x1b\\xc3\\xd4':
+      returns ['0a1b', 'c3d4']
+    """
+    hashes = []
+    sz = info.path_size
+    for i in range(info.path_count):
+        h = info.path_bytes[i * sz : (i + 1) * sz]
+        hashes.append(h.hex())
+    return hashes
+
+
 def packet_fingerprint(info: PacketInfo) -> str:
     """
     Return a stable string that identifies this logical packet regardless of

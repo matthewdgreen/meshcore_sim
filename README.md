@@ -93,6 +93,13 @@ meshcore_sim/
 │   ├── test_airtime.py          LoRa airtime formula + RF contention model (19 tests)
 │   └── test_cpp_suite.py        Runs the C++ binary as part of the Python suite
 │
+├── experiments/            Automated experiment framework
+│   ├── __main__.py         Entry point: python3 -m experiments [--scenario NAME] [--binary NAME]
+│   ├── scenarios.py        Pre-defined Scenario objects and binary path constants
+│   ├── runner.py           Scenario / SimResult dataclasses, run_scenario() entry point
+│   ├── compare.py          Side-by-side comparison tables (delivery, latency, witnesses)
+│   └── privacy.py          Privacy analysis (5 attacker models, per-relay metrics)
+│
 ├── demo/                   Interactive demos
 │   └── room_server_demo.py  10×10 grid with a live room server and three clients
 │
@@ -113,6 +120,7 @@ meshcore_sim/
     ├── star_five.json
     ├── adversarial.json
     ├── asymmetric_hill.json
+    ├── boston_relays.json   Real-world 157-node mesh from live.bostonme.sh
     ├── gen_grid.py         Generator: python3 topologies/gen_grid.py ROWS COLS -o out.json
     └── grid_10x10.json     Pre-generated 10×10 grid (100 nodes)
 ```

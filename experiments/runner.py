@@ -11,6 +11,8 @@ import asyncio
 import json
 import os
 import random
+import resource
+import sys
 import time
 from dataclasses import dataclass, field
 from typing import Callable, Optional
@@ -277,6 +279,24 @@ async def _run_async(
 # Public entry point
 # ---------------------------------------------------------------------------
 
+def _raise_fd_limit(needed: int = 2048) -> None:
+    """Raise the open-file-descriptor soft limit for large topologies.
+
+    Each subprocess consumes ~5 FDs; macOS defaults to 256, which is
+    insufficient for funnel/stress (143 nodes).  Silently clamped to the
+    hard limit if the OS refuses.
+    """
+    if sys.platform == "win32":
+        return
+    try:
+        soft, hard = resource.getrlimit(resource.RLIMIT_NOFILE)
+        if soft < needed:
+            target = min(needed, hard) if hard > 0 else needed
+            resource.setrlimit(resource.RLIMIT_NOFILE, (target, hard))
+    except (ValueError, OSError):
+        pass
+
+
 def run_scenario(
     scenario: Scenario,
     binary: str,
@@ -306,6 +326,8 @@ def run_scenario(
         ``python3 -m viz <topology.json> --trace <trace_out>`` for interactive
         packet-path visualisation.
     """
+    _raise_fd_limit()
+
     if label is None:
         label = f"{os.path.basename(binary)} / {scenario.name}"
 

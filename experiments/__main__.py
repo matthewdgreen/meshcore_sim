@@ -41,6 +41,8 @@ from experiments.scenarios import (
     ALL_SCENARIOS,
     BASELINE_BINARY,
     NEXTHOP_BINARY,
+    PATH2_BINARY,
+    PRIVATEROUTING1_BINARY,
     SCENARIO_BY_NAME,
     available_binaries,
 )
@@ -54,6 +56,11 @@ _BINARY_ALIASES: dict[str, str] = {
     "adaptive":        ADAPTIVE_DELAY_BINARY,
     "adaptive_delay":  ADAPTIVE_DELAY_BINARY,
     "adaptive_agent":  ADAPTIVE_DELAY_BINARY,
+    "path2":           PATH2_BINARY,
+    "path2_agent":     PATH2_BINARY,
+    "pni":             PRIVATEROUTING1_BINARY,
+    "privaterouting1": PRIVATEROUTING1_BINARY,
+    "privaterouting1_agent": PRIVATEROUTING1_BINARY,
 }
 
 

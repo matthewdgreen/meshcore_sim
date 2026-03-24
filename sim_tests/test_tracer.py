@@ -361,9 +361,9 @@ class TestPacketTracerCollisions(unittest.TestCase):
         self.assertEqual(c["tx_id"],    tx_id)
         self.assertAlmostEqual(c["t"],  0.05)
 
-    def test_to_dict_schema_version_2(self):
+    def test_to_dict_schema_version_3(self):
         d = self.tracer.to_dict()
-        self.assertEqual(d["schema_version"], 2)
+        self.assertEqual(d["schema_version"], 3)
 
     def test_to_dict_empty_collisions_list_when_none(self):
         self.tracer.record_tx("alice", _MSG_HOP0, 0.0)
