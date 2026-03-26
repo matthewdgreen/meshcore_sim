@@ -1,14 +1,25 @@
 # meshcore_sim
 
+Fork from wonderfull job of Matthew - [Original Reop](https://github.com/matthewdgreen/meshcore_sim) 
+focused on **realistic timing and collision modelling** 
+
+I put attention to make radio as much realistic as possible - through - 
+- SF-aware simulation
+- Half-duplex corrections - collision detection
+- Band-width aware
+- Missing ACK and PATH
+- More realistic timing and collision detection
+- Node binary connected to simulated radio in missing touch points (e.g. missing retry, duty cycle, tx airtime..)
+More details in attached documentation.
+
+---
+
 A simulator for [MeshCore](https://github.com/meshcore-dev/MeshCore) mesh
 networks.  Each simulated node runs the **real MeshCore C++ routing and
 cryptography code** as a standalone subprocess; a Python orchestrator connects
 them over simulated radio links with configurable loss, latency, SNR, RSSI,
 RF collisions, and adversarial behaviour.
 
-This is a fork of
-[matthewdgreen/meshcore_sim](https://github.com/matthewdgreen/meshcore_sim)
-focused on **realistic timing and collision modelling** — see
 [What changed vs upstream](#what-changed-vs-upstream) below.
 
 ```
