@@ -14,6 +14,7 @@ from orchestrator.config import (
     AdversarialConfig,
     EdgeConfig,
     NodeConfig,
+    RadioConfig,
     SimulationConfig,
     TopologyConfig,
 )
@@ -36,6 +37,11 @@ SKIP_IF_NO_BINARY = unittest.skipUnless(
     binary_available(),
     "node_agent binary not found at %s — skipping integration tests" % BINARY_PATH,
 )
+
+# Matches C++ node_agent built-in defaults (SF8, BW 62.5 kHz, CR4/8).
+# Providing this explicitly ensures Python-side airtime/stagger calculations
+# are correct even when the topology JSON doesn't specify radio params.
+_DEFAULT_RADIO = RadioConfig(sf=8, bw_hz=62_500, cr=4)
 
 # ---------------------------------------------------------------------------
 # Topology factories
@@ -68,6 +74,7 @@ def linear_three_config(**sim_overrides) -> TopologyConfig:
             EdgeConfig(a="relay1", b="bob",    loss=0.05, latency_ms=20.0, snr=8.0, rssi=-85.0),
         ],
         simulation=sim,
+        radio=_DEFAULT_RADIO,
     )
 
 
@@ -95,6 +102,7 @@ def two_node_direct_config(**sim_overrides) -> TopologyConfig:
             EdgeConfig(a="alice", b="bob", loss=0.0, latency_ms=0.0, snr=10.0, rssi=-80.0),
         ],
         simulation=sim,
+        radio=_DEFAULT_RADIO,
     )
 
 
@@ -145,7 +153,7 @@ def grid_topo_config(rows: int, cols: int, **sim_overrides) -> TopologyConfig:
     for k, v in sim_overrides.items():
         setattr(sim, k, v)
 
-    return TopologyConfig(nodes=nodes, edges=edges, simulation=sim)
+    return TopologyConfig(nodes=nodes, edges=edges, simulation=sim, radio=_DEFAULT_RADIO)
 
 
 def adversarial_config(mode: str, probability: float = 1.0, **adv_extras) -> TopologyConfig:
@@ -173,4 +181,5 @@ def adversarial_config(mode: str, probability: float = 1.0, **adv_extras) -> Top
             EdgeConfig(a="evil_relay", b="receiver",  loss=0.0, latency_ms=0.0, snr=9.0, rssi=-82.0),
         ],
         simulation=sim,
+        radio=_DEFAULT_RADIO,
     )

@@ -40,6 +40,10 @@ class MetricsCollector:
         self._pending: dict[str, SendRecord] = {}
         self._completed: list[SendRecord] = []
 
+        # Channel (group) message tracking
+        self._channel_sent: int = 0
+        self._channel_recv: int = 0
+
         # ACK outcome counters (parsed from C++ node "log" events)
         self._ack_confirmed: int = 0
         self._ack_retries: int = 0
@@ -96,6 +100,9 @@ class MetricsCollector:
             sent_at=time.monotonic(),
         )
 
+    def record_channel_send(self, sender: str, text: str) -> None:
+        self._channel_sent += 1
+
     # ------------------------------------------------------------------
     # Event callback (registered on all NodeAgents)
     # ------------------------------------------------------------------
@@ -109,6 +116,8 @@ class MetricsCollector:
                 rec.received_at = time.monotonic()
                 rec.received_by = node_name
                 self._completed.append(rec)
+        elif etype == "recv_channel":
+            self._channel_recv += 1
         elif etype == "log":
             msg = event.get("msg", "")
             if msg.startswith("ACK confirmed"):
@@ -149,6 +158,14 @@ class MetricsCollector:
             if r.received_at is not None
         ]
         return sum(latencies) / len(latencies) if latencies else 0.0
+
+    @property
+    def channel_sent(self) -> int:
+        return self._channel_sent
+
+    @property
+    def channel_recv(self) -> int:
+        return self._channel_recv
 
     @property
     def collision_count(self) -> int:
@@ -197,6 +214,13 @@ class MetricsCollector:
             lines.append(
                 f"  ACK outcomes:     confirmed={self._ack_confirmed}  "
                 f"retries={self._ack_retries}  failed={self._ack_failed}"
+            )
+
+        # Channel (group) message stats
+        if self._channel_sent or self._channel_recv:
+            lines.append(
+                f"  Channel messages: sent={self._channel_sent}  "
+                f"recv={self._channel_recv}"
             )
 
         # Latency with percentiles

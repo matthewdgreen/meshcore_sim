@@ -148,6 +148,22 @@ class PacketRouter:
                 log.debug("[router] adv-corrupt %s→%s", sender, receiver_name)
                 hex_data = result
 
+        # 2b. Listen-Before-Talk: notify receiver that a preamble has arrived.
+        # On real hardware the radio detects the preamble at rx_start
+        # (= tx_start + propagation delay), before the full packet is decoded.
+        # This must fire even for packets that will later fail half-duplex or
+        # collision checks — the radio would still sense the energy.
+        if tx_start is not None and tx_end is not None:
+            preamble_arrival = tx_start + link.latency_ms / 1000.0
+            now = asyncio.get_event_loop().time()
+            preamble_wait = max(preamble_arrival - now, 0.0)
+            if preamble_wait > 0.0:
+                await asyncio.sleep(preamble_wait)
+            airtime_ms = (tx_end - tx_start) * 1000.0
+            receiver = self._agents.get(receiver_name)
+            if receiver is not None:
+                await receiver.notify_rx_start(airtime_ms)
+
         # 3. Propagation delay.
         # When airtime is modelled (tx_end is set), we wait until the full
         # transmission completes at the sender plus the link propagation delay.

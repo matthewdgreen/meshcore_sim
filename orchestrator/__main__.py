@@ -149,8 +149,12 @@ async def run(args: object) -> int:
         sim.traffic_interval_secs,
     )
 
-    # Initial advertisement flood is one-shot; run it before the main loop so
-    # it doesn't race against the duration timer.
+    # Initial advertisement floods.  Two rounds are needed so multi-hop
+    # topologies converge: round 1 propagates adverts to direct neighbours,
+    # and relay Dispatchers (with LBT) forward them; round 2 fills in any
+    # endpoints that were missed due to hidden-terminal collisions.
+    await traffic.run_initial_adverts()
+    await asyncio.sleep(stagger_secs + 2.0)   # let relays re-flood round 1
     await traffic.run_initial_adverts()
 
     # Long-running tasks: traffic stops sending after duration_secs, then the

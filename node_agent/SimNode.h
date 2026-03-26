@@ -16,6 +16,7 @@
 //   room-server – endpoint that re-broadcasts received TXT_MSG to all contacts
 class SimNode : public BaseChatMesh {
     bool _is_relay;
+    std::string _node_name;  // stored for sendGroupMessage sender_name
 
     // Pending message for ACK tracking and retry.
     struct PendingMsg {
@@ -86,6 +87,12 @@ public:
 
     // Flood-broadcast an Advertisement from this node.
     void broadcastAdvert(const std::string& name = "");
+
+    // Register the default public group channel ("Public") and store the node name.
+    void setupPublicChannel(const std::string& name);
+
+    // Send a text message on the public group channel (flood broadcast to all nodes).
+    bool sendChannelText(const std::string& text);
 
     // Non-virtual loop that drives BaseChatMesh + ACK timeout.
     void loop();

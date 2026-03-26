@@ -226,8 +226,21 @@ void SimNode::onSendTimeout() {
 void SimNode::onChannelMessageRecv(const mesh::GroupChannel& /*channel*/,
                                     mesh::Packet* /*pkt*/,
                                     uint32_t /*timestamp*/,
-                                    const char* /*text*/) {
-    // Group channels not used in simulation yet.
+                                    const char* text) {
+    // Escape text for JSON safety.
+    char escaped[512];
+    size_t ei = 0;
+    for (const char* p = text; *p && ei < sizeof(escaped) - 2; p++) {
+        if (*p == '"' || *p == '\\') escaped[ei++] = '\\';
+        escaped[ei++] = *p;
+    }
+    escaped[ei] = '\0';
+
+    char json[640];
+    snprintf(json, sizeof(json),
+             "{\"type\":\"recv_channel\",\"channel\":\"Public\",\"text\":\"%s\"}",
+             escaped);
+    emitJson(json);
 }
 
 uint8_t SimNode::onContactRequest(const ContactInfo& /*contact*/,
@@ -301,6 +314,23 @@ bool SimNode::sendTextTo(const std::string& dest_pub_hex,
 void SimNode::broadcastAdvert(const std::string& name) {
     mesh::Packet* pkt = createSelfAdvert(name.empty() ? "" : name.c_str());
     if (pkt) sendFlood(pkt);
+}
+
+void SimNode::setupPublicChannel(const std::string& name) {
+    _node_name = name;
+    addChannel("Public", "izOH6cXN6mrJ5e26oRXNcg==");
+}
+
+bool SimNode::sendChannelText(const std::string& text) {
+    // Channel 0 is always the Public channel set up by setupPublicChannel().
+    ChannelDetails ch;
+    if (!getChannel(0, ch)) {
+        emitLog("sendChannelText: no channel at index 0");
+        return false;
+    }
+    uint32_t ts = getRTCClock()->getCurrentTimeUnique();
+    return sendGroupMessage(ts, ch.channel, _node_name.c_str(),
+                            text.c_str(), (int)text.size());
 }
 
 // ---------------------------------------------------------------------------

@@ -84,8 +84,10 @@ payloads are hex-encoded.
 | `type` | Additional fields | Description |
 |--------|-------------------|-------------|
 | `rx` | `hex`, `snr` (float dB), `rssi` (float dBm) | Deliver a raw over-the-air packet to this node's radio queue |
+| `rx_start` | `duration_ms` (uint32) | Notify the radio that a preamble has been detected; marks `isReceiving()` true for `duration_ms`, enabling Listen-Before-Talk (Dispatcher defers TX while the channel is busy) |
 | `time` | `epoch` (uint32 Unix seconds) | Set / correct the node's RTC clock |
 | `send_text` | `dest` (pub-key hex prefix), `text` (UTF-8) | Send an encrypted text message to a known contact |
+| `send_channel` | `text` (UTF-8) | Send a public group channel message (flood broadcast to all nodes sharing the channel PSK) |
 | `advert` | `name` (UTF-8, optional) | Flood-broadcast an Advertisement from this node |
 | `quit` | — | Shut down cleanly |
 
@@ -96,6 +98,7 @@ payloads are hex-encoded.
 | `ready` | `pub` (hex), `is_relay` (bool), `role` (str), `name` (str) | Emitted once on startup; `role` is one of `"endpoint"`, `"relay"`, or `"room-server"` |
 | `tx` | `hex` | Raw packet the node wants to transmit over the air |
 | `recv_text` | `from` (hex pub key), `name` (str), `text` (UTF-8) | Decrypted text message received from a known contact |
+| `recv_channel` | `channel` (str), `text` (UTF-8) | A group channel message was received; text is formatted as `"sender_name: message"` by MeshCore |
 | `room_post` | `from` (hex pub key), `name` (str), `text` (UTF-8) | Room-server only: a TXT_MSG was received and has been forwarded to all other contacts |
 | `recv_data` | `from` (hex), `payload_type` (int), `hex` | Generic decrypted data packet |
 | `advert` | `pub` (hex), `name` (str) | A new peer's Advertisement was received |

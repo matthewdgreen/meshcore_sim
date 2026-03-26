@@ -61,8 +61,10 @@ def lora_airtime_ms(
     return t_preamble_ms + t_payload_ms
 
 
-# Typical MeshCore self-advert size (32-byte identity + framing).
-_TYPICAL_ADVERT_BYTES = 40
+# Typical MeshCore self-advert size.  Observed from node_agent TX logs:
+# ~106–109 bytes (pub key 32B + advert data/name + Ed25519 signature +
+# Packet header/path framing).  Use 110 as a representative upper bound.
+_TYPICAL_ADVERT_BYTES = 110
 
 
 def advert_stagger_secs(
@@ -76,8 +78,11 @@ def advert_stagger_secs(
     """Compute a safe stagger window for initial advert floods.
 
     In a hard-collision RF model, two transmissions that overlap at a shared
-    receiver destroy each other.  Spreading the adverts over a window of
-    ``node_count × airtime × margin`` ensures every node gets a clear slot.
+    receiver destroy each other.  The stagger window must be wide enough for
+    every node to transmit its advert AND for relays to forward received
+    adverts without half-duplex collisions.  A margin of 2× accounts for the
+    relay forwarding overhead; Listen-Before-Talk (LBT) in the node's
+    Dispatcher provides additional collision avoidance at the MAC layer.
 
     This mimics reality: nodes in the field don't all power on at the same
     instant — they boot over seconds to minutes, naturally avoiding collisions.
@@ -90,6 +95,8 @@ def advert_stagger_secs(
 
 
 # Typical MeshCore text message size (encrypted payload + framing).
+# Overhead is ~11 bytes (packet header + encryption).  A typical 50-char
+# real-world message produces ~60 bytes on the wire.
 _TYPICAL_MSG_BYTES = 60
 
 

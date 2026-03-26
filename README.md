@@ -9,7 +9,9 @@ I put attention to make radio as much realistic as possible - through -
 - Band-width aware
 - Missing ACK and PATH
 - More realistic timing and collision detection
-- Node binary connected to simulated radio in missing touch points (e.g. missing retry, duty cycle, tx airtime..)
+- Node binary connected to simulated radio in missing touch points (e.g. missing retry, duty cycle, tx airtime.
+- Listen before TX
+- Realistic Advert
 More details in attached documentation.
 
 ---
@@ -96,7 +98,7 @@ The Python orchestrator acts as the physical world:
 4. Detects RF collisions (overlapping TX windows at shared receivers).
 5. Enforces half-duplex (drops packets arriving at a transmitting node).
 6. Applies the LoRa capture effect when lat/lon positions are available.
-7. Generates traffic (advertisement floods + Poisson random text messages).
+7. Generates traffic (advertisement floods + Poisson random text messages + public group channel messages).
 8. Collects metrics: delivery rate, latency, collisions, ACK outcomes,
    per-packet path traces, and privacy exposure (witness counts).
 

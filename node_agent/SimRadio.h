@@ -25,6 +25,10 @@ class SimRadio : public mesh::Radio {
     float _last_rssi  = -100.0f;
     bool  _tx_pending = false;   // set by startSendRaw, cleared by isSendComplete
 
+    // Listen-Before-Talk: set by notifyRxStart(), cleared when millis passes
+    // the end time.  Simulates preamble detection on the LoRa demodulator.
+    unsigned long _rx_active_until = 0;
+
     // LoRa radio parameters for airtime calculation (Semtech AN1200.13).
     int _sf;      // spreading factor (7–12)
     int _bw_hz;   // bandwidth in Hz
@@ -44,6 +48,10 @@ public:
     // Called by main.cpp to deliver a packet from the orchestrator.
     void enqueue(const uint8_t* data, int len, float snr, float rssi);
 
+    // Called by main.cpp on rx_start: marks the radio as receiving for
+    // duration_ms, so Dispatcher::checkSend() defers TX (Listen-Before-Talk).
+    void notifyRxStart(uint32_t duration_ms);
+
     // ---- mesh::Radio interface ----
     int      recvRaw(uint8_t* bytes, int sz)         override;
     uint32_t getEstAirtimeFor(int len_bytes)          override;
@@ -52,7 +60,7 @@ public:
     bool     isSendComplete()                         override;
     void     onSendFinished()                         override {}
     bool     isInRecvMode() const                     override { return !_tx_pending; }
-    bool     isReceiving()                            override { return false; }
+    bool     isReceiving()                            override;
     float    getLastSNR()  const                      override { return _last_snr;  }
     float    getLastRSSI() const                      override { return _last_rssi; }
 };

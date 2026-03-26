@@ -162,6 +162,13 @@ class NodeAgent:
     async def broadcast_advert(self, name: str = "") -> None:
         await self.send_command({"type": "advert", "name": name or self.config.name})
 
+    async def send_channel(self, text: str) -> None:
+        await self.send_command({"type": "send_channel", "text": text})
+
+    async def notify_rx_start(self, duration_ms: float) -> None:
+        """Notify the node that a preamble has been detected (LBT)."""
+        await self.send_command({"type": "rx_start", "duration_ms": int(duration_ms)})
+
     # ------------------------------------------------------------------
     # Reader loop
     # ------------------------------------------------------------------
@@ -210,6 +217,10 @@ class NodeAgent:
         elif etype == "recv_text":
             log.info("[%s] recv_text from %s: %r",
                      self.config.name, event.get("name", "?"), event.get("text", ""))
+
+        elif etype == "recv_channel":
+            log.info("[%s] recv_channel [%s]: %r",
+                     self.config.name, event.get("channel", "?"), event.get("text", ""))
 
         elif etype == "room_post":
             log.info("[%s] room_post from %s (%s): %r",

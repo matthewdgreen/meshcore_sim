@@ -17,6 +17,19 @@ static void bytes_to_hex(char* out, const uint8_t* in, int len) {
     out[len*2] = '\0';
 }
 
+void SimRadio::notifyRxStart(uint32_t duration_ms) {
+    _rx_active_until = _ms.getMillis() + duration_ms;
+}
+
+bool SimRadio::isReceiving() {
+    if (_tx_pending) return false;  // can't RX while TXing
+    // Simulate preamble detection: active during the on-air window
+    if (_ms.getMillis() < _rx_active_until) return true;
+    // Packet fully received but not yet consumed — on real hardware the modem
+    // status would still show "packet received" until the MCU reads the FIFO.
+    return !_rx_queue.empty();
+}
+
 void SimRadio::enqueue(const uint8_t* data, int len, float snr, float rssi) {
     IncomingPacket pkt;
     pkt.data.assign(data, data + len);

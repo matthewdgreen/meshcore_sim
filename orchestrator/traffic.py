@@ -10,7 +10,7 @@ import random
 import time
 from typing import Optional
 
-from .airtime import advert_stagger_secs
+from .airtime import _TYPICAL_ADVERT_BYTES, advert_stagger_secs, lora_airtime_ms
 from .config import RadioConfig, SimulationConfig
 from .metrics import MetricsCollector
 from .node import NodeAgent
@@ -42,8 +42,13 @@ class TrafficGenerator:
             self._stagger_secs = advert_stagger_secs(
                 radio.sf, radio.bw_hz, radio.cr, len(agents),
                 radio.preamble_symbols)
+            # Single-advert airtime for per-node jitter calculation.
+            self._advert_airtime_secs = lora_airtime_ms(
+                radio.sf, radio.bw_hz, radio.cr, _TYPICAL_ADVERT_BYTES,
+                radio.preamble_symbols) / 1000.0
         else:
             self._stagger_secs = 1.0
+            self._advert_airtime_secs = 0.1
 
     # ------------------------------------------------------------------
     # Advertisement flooding
@@ -52,26 +57,43 @@ class TrafficGenerator:
     async def run_initial_adverts(self, stagger_secs: float | None = None) -> None:
         """Flood advertisements from all nodes once, staggered over a time window.
 
+        Uses a slot-based stagger: the window is divided into N equal slots
+        (one per node), nodes are randomly assigned to slots, and a small
+        random jitter is added within each slot.  This guarantees a minimum
+        separation of ~0.7 × slot_width between any two adjacent transmissions
+        — enough to prevent hidden-terminal collisions at shared receivers
+        while still providing realistic randomness.
+
         Parameters
         ----------
         stagger_secs:
-            Width of the uniform-random stagger window in seconds.  When
-            ``None`` (default), the auto-computed value based on radio config
-            and node count is used — this ensures adverts don't collide in the
-            hard-collision RF model.  Pass an explicit value to override.
+            Width of the stagger window in seconds.  When ``None`` (default),
+            the auto-computed value based on radio config and node count is
+            used.  Pass an explicit value to override.
         """
         stagger = stagger_secs if stagger_secs is not None else self._stagger_secs
-        tasks = [
-            self._delayed_advert(agent, self._rng.uniform(0.0, stagger))
-            for agent in self._agents.values()
-        ]
+        agents_list = list(self._agents.values())
+        self._rng.shuffle(agents_list)
+        slot = stagger / max(len(agents_list), 1)
+        tasks = []
+        for i, agent in enumerate(agents_list):
+            # Place each node in a separate time slot.  Jitter within ±30 %
+            # of the slot width adds realistic variation while preserving the
+            # minimum guard interval (≥ 1 airtime) between adjacent slots.
+            delay = i * slot + self._rng.uniform(0.0, slot * 0.3)
+            tasks.append(self._delayed_advert(agent, delay))
         await asyncio.gather(*tasks)
 
     async def run_periodic_adverts(self) -> None:
-        """Re-flood advertisements at the configured interval."""
+        """Re-flood advertisements at the configured interval with jitter.
+
+        A ±20 % jitter on the interval models real-world clock drift and
+        prevents periodic collision patterns from repeating indefinitely.
+        """
         interval = self._sim.advert_interval_secs
         while True:
-            await asyncio.sleep(interval)
+            jitter = self._rng.uniform(-0.2 * interval, 0.2 * interval)
+            await asyncio.sleep(interval + jitter)
             await self.run_initial_adverts()
 
     async def _delayed_advert(self, agent: NodeAgent, delay: float) -> None:
@@ -114,6 +136,14 @@ class TrafficGenerator:
         sender_name = self._rng.choice(endpoints)
         sender = self._agents[sender_name]
 
+        # ~15% chance of sending a channel (group) message instead of direct
+        if self._rng.random() < 0.15:
+            text = f"ch from {sender_name} t={int(time.time() * 1000) % 1_000_000}"
+            log.info("[traffic] send_channel  %s  %r", sender_name, text)
+            self._metrics.record_channel_send(sender_name, text)
+            await sender.send_channel(text)
+            return
+
         # Build the set of endpoint pub_keys once (agents are all ready by now)
         if self._endpoint_pubs is None:
             self._endpoint_pubs = {
@@ -122,18 +152,13 @@ class TrafficGenerator:
                 if self._agents[n].state.pub_key
             }
 
-        # Prefer other endpoints as destination: endpoint-to-endpoint sends are
-        # the ones that trigger path exchange and produce DIRECT-routed packets.
-        # Fall back to any known peer if no other endpoint has been heard yet
-        # (can happen early in the warmup when adverts haven't propagated).
-        known_endpoint_peers = list(
+        # Only send to other endpoints (companions) — never to relays.
+        known = list(
             sender.state.known_peers & self._endpoint_pubs - {sender.state.pub_key}
         )
-        known_any = list(sender.state.known_peers)
-        known = known_endpoint_peers if known_endpoint_peers else known_any
 
         if not known:
-            log.debug("[traffic] %s has no known peers yet — skipping send", sender_name)
+            log.debug("[traffic] %s has no known endpoints yet — skipping send", sender_name)
             return
 
         dest_pub = self._rng.choice(known)

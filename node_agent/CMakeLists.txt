@@ -70,6 +70,7 @@ target_include_directories(node_agent PRIVATE
 
 target_compile_definitions(node_agent PRIVATE
     ED25519_NO_SEED=1       # We don't need the ed25519 platform seed function
+    MAX_GROUP_CHANNELS=4    # Enable group channel support in BaseChatMesh
     # MESH_DEBUG=0          # Uncomment to silence all MESH_DEBUG_PRINT calls
 )
 

@@ -61,14 +61,20 @@ async def _run_sim(
     traffic = TrafficGenerator(agents, topology, topo_cfg.simulation, metrics, rng)
 
     await traffic.run_initial_adverts()
-    await asyncio.sleep(topo_cfg.simulation.warmup_secs + extra_warmup)
+    await asyncio.sleep(topo_cfg.simulation.warmup_secs)
 
-    # Generate a small burst of traffic
+    # Second advert round ensures multi-hop discovery completes
+    # (e.g. alice→relay1→bob requires two rounds for both directions).
+    await traffic.run_initial_adverts()
+    await asyncio.sleep(extra_warmup)
+
+    # Generate a small burst of traffic (6 attempts to account for some
+    # being channel messages that don't count toward direct delivery).
     endpoints = topology.endpoint_names()
     if len(endpoints) >= 2:
-        for _ in range(4):
+        for _ in range(6):
             await traffic._send_random(endpoints)
-            await asyncio.sleep(0.2)
+            await asyncio.sleep(0.3)
 
     # Allow deliveries to propagate.  With non-zero retransmit delays a
     # 2-hop message may take 3+ seconds to traverse the network.

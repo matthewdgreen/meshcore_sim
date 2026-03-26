@@ -7,8 +7,10 @@
 //
 // STDIN  (orchestrator → node):
 //   {"type":"rx",    "hex":"<hex>", "snr":<float>, "rssi":<float>}
+//   {"type":"rx_start", "duration_ms":<uint32>}
 //   {"type":"time",  "epoch":<uint32>}
 //   {"type":"send_text", "dest":"<pub-key-hex-prefix>", "text":"<utf8>"}
+//   {"type":"send_channel", "text":"<utf8>"}
 //   {"type":"advert","name":"<utf8>"}
 //   {"type":"quit"}
 //
@@ -16,6 +18,7 @@
 //   {"type":"ready", "pub":"<hex>", "is_relay":<bool>}
 //   {"type":"tx",    "hex":"<hex>"}
 //   {"type":"recv_text","from":"<hex>","name":"<str>","text":"<str>"}
+//   {"type":"recv_channel","channel":"<str>","text":"<str>"}
 //   {"type":"recv_data","from":"<hex>","payload_type":<int>,"hex":"<hex>"}
 //   {"type":"advert","pub":"<hex>","name":"<str>"}
 //   {"type":"ack",   "crc":<uint>}
@@ -126,6 +129,12 @@ static void dispatch(const char* line, SimRadio& radio, SimClock& clock,
         float rssi = (float)json_num_field(line, "rssi", -90.0);
         radio.enqueue(buf, n, snr, rssi);
 
+    } else if (type_len == 8 && strncmp(type_val, "rx_start", 8) == 0) {
+        // Listen-Before-Talk: mark the radio as receiving for the given
+        // duration so Dispatcher::checkSend() defers outgoing TX.
+        uint32_t dur = (uint32_t)json_num_field(line, "duration_ms");
+        radio.notifyRxStart(dur);
+
     } else if (type_len == 4 && strncmp(type_val, "time", 4) == 0) {
         uint32_t epoch = (uint32_t)json_num_field(line, "epoch");
         if (epoch > 0) clock.setCurrentTime(epoch);
@@ -137,6 +146,12 @@ static void dispatch(const char* line, SimRadio& radio, SimClock& clock,
         if (!dest || !text) return;
         node.sendTextTo(std::string(dest, dest_len),
                         std::string(text, text_len));
+
+    } else if (type_len == 12 && strncmp(type_val, "send_channel", 12) == 0) {
+        size_t text_len = 0;
+        const char* text = json_str_field(line, "text", &text_len);
+        if (!text) return;
+        node.sendChannelText(std::string(text, text_len));
 
     } else if (type_len == 6 && strncmp(type_val, "advert", 6) == 0) {
         size_t name_len = 0;
@@ -212,6 +227,7 @@ int main(int argc, char* argv[]) {
     }
 
     node.begin();
+    node.setupPublicChannel(node_name);
 
     // Emit ready signal with our public key.
     // "role" is one of "endpoint", "relay", or "room-server".
