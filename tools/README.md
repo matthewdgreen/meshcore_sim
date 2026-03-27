@@ -297,3 +297,112 @@ python3 -m orchestrator topologies/boston_relays.json --duration 60
   invoking the orchestrator.
 - **Cookie lifetime.** Browser cookies (`meshmap_auth`) expire in approximately
   24 hours.  Bearer tokens (`--token`) do not expire unless revoked.
+
+---
+
+# tools/import_topology.py
+
+Converts a [meshcore-optimizer](https://github.com/matthewdgreen/meshcore-optimizer)
+topology JSON into simulator topology JSON.  The optimizer output typically has
+incomplete edge coverage (e.g. 17.5% of possible node pairs in a 16-node network).
+This tool fills the gaps with a statistics-driven propagation model.
+
+No external dependencies; stdlib only.
+
+---
+
+## Quick start
+
+```sh
+# Basic conversion with verbose output
+python3 tools/import_topology.py ../meshcore-optimizer/topology.json \
+    --output topologies/gdansk.json --verbose
+
+# Disable gap-filling, custom radio params
+python3 tools/import_topology.py topology.json \
+    --no-fill-gaps --sf 12 --bw-hz 125000 -o output.json -v
+
+# Tighter gap-fill: max 3 inferred edges per node, custom sigma
+python3 tools/import_topology.py topology.json \
+    --max-inferred-per-node 3 --gap-sigma 6.0 -o output.json -v
+```
+
+---
+
+## How it works
+
+### Conversion pipeline
+
+1. **Filter stub nodes** — drop nodes with short prefixes (< 8 chars) or
+   missing coordinates (lat = lon = 0).
+2. **Sanitise names** — strip emoji and non-ASCII characters, truncate to
+   20 chars, ensure uniqueness.
+3. **Merge directed edges** — combine A->B and B->A measurements into
+   undirected edges with directional overrides when SNR differs.
+4. **Smart gap-fill** — estimate missing edges using a fitted propagation model:
+   - Fit `SNR = a + b * log10(dist_km)` via linear regression on measured edges
+   - Compute shadow fading sigma from regression residuals
+   - For each node, find closest unmeasured candidates (sorted by distance)
+   - Generate SNR with log-normal shadow fading: `SNR_est = a + b*log10(d) + N(0, sigma^2)`
+   - Cap inferred edges per node (default: 5) to prevent star explosion
+   - Auto-derive max range from max measured distance * 1.5
+   - Fall back to hardcoded textbook constants when < 5 measured edges
+5. **Map SNR to loss** — lookup table from SNR (dB) to packet loss probability.
+6. **Add companion endpoints** — phone nodes co-located with random relays.
+7. **Assemble topology** — add radio and simulation sections.
+
+### Propagation model
+
+When enough measured edges exist (>= 5), the tool fits a log-distance model:
+
+```
+SNR(d) = a + b * log10(d_km) + N(0, sigma^2)
+```
+
+where `a` (intercept) and `b` (slope) are fitted via linear regression and
+`sigma` is the standard deviation of residuals (shadow fading).
+
+| Parameter | Fitted (example: Gdansk) | Fallback (< 5 edges) |
+|-----------|--------------------------|----------------------|
+| Intercept (a) | 1.5 dB | 10.0 dB |
+| Slope (b) | -1.9 | -30.0 |
+| Sigma | 8.4 dB | 8.0 dB |
+| Max range | 29.5 km (auto) | 30.0 km |
+
+---
+
+## CLI reference
+
+```
+python3 tools/import_topology.py [OPTIONS] INPUT
+```
+
+### Gap-fill control
+
+| Flag | Default | Description |
+|------|---------|-------------|
+| `--no-fill-gaps` | off | Skip gap-fill entirely |
+| `--max-gap-km KM` | `30.0` | Hard cap on gap-fill edge distance |
+| `--max-inferred-per-node N` | `5` | Max inferred edges per node (prevents star explosion) |
+| `--gap-sigma DB` | auto | Override fitted shadow fading sigma (dB) |
+
+### Output and companions
+
+| Flag | Default | Description |
+|------|---------|-------------|
+| `-o FILE` / `--output FILE` | stdout | Output path |
+| `--companions N` | `5` | Number of companion endpoint nodes to add |
+
+### Radio parameters
+
+| Flag | Default | Description |
+|------|---------|-------------|
+| `--sf N` | `8` | LoRa spreading factor (7-12) |
+| `--bw-hz N` | `62500` | Bandwidth in Hz |
+| `--cr N` | `4` | Coding-rate offset: 1=CR4/5 ... 4=CR4/8 |
+
+### Diagnostics
+
+| Flag | Description |
+|------|-------------|
+| `-v` / `--verbose` | Print conversion statistics and fitted model to stderr |

@@ -37,8 +37,6 @@ protected:
 
     // ---- Mesh routing overrides ----
     bool allowPacketForward(const mesh::Packet* packet) override;
-    uint32_t getRetransmitDelay(const mesh::Packet* packet) override;
-    uint32_t getDirectRetransmitDelay(const mesh::Packet* packet) override;
 
     // ---- BaseChatMesh "UI" pure virtuals ----
     void onDiscoveredContact(ContactInfo& contact, bool is_new,

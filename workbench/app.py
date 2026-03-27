@@ -72,7 +72,7 @@ def _build_topology_tab(tab: ui.tab, state: AppState) -> None:
         with ui.row().classes("w-full h-full no-wrap gap-0"):
             # -- Sidebar (fixed 300px) --
             with ui.scroll_area().style(
-                "width: 380px; min-width: 380px"
+                "width: 480px; min-width: 480px"
             ).classes("h-full p-2 border-r"):
                 topology_editor.render_sidebar(state)
 
@@ -106,7 +106,7 @@ def _build_simulation_tab(tab: ui.tab, state: AppState) -> None:
     with ui.tab_panel(tab).classes("p-0 w-full h-full"):
         with ui.row().classes("w-full h-full no-wrap gap-0"):
             with ui.scroll_area().style(
-                "width: 380px; min-width: 380px"
+                "width: 480px; min-width: 480px"
             ).classes("h-full p-2 border-r"):
                 sim_panel.render_sidebar(state)
             with ui.element("div").classes("h-full").style(
@@ -119,7 +119,7 @@ def _build_trace_tab(tab: ui.tab, state: AppState) -> None:
     with ui.tab_panel(tab).classes("p-0 w-full h-full"):
         with ui.row().classes("w-full h-full no-wrap gap-0"):
             with ui.scroll_area().style(
-                "width: 380px; min-width: 380px"
+                "width: 480px; min-width: 480px"
             ).classes("h-full p-2 border-r"):
                 trace_viewer.render_sidebar(state)
             # position:relative lets trace_viewer use absolute positioning

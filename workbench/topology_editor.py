@@ -183,6 +183,10 @@ def render_sidebar(state: AppState) -> None:
         ui.label("No topology loaded.").classes("text-grey")
         return
 
+    # -- Shared mutable state for filter and placement mode --
+    filter_state = {'text': ''}
+    place_mode = {'active': False, 'btn': None}
+
     # -- Summary --
     geo = has_geo(topo.nodes)
     with ui.row().classes("items-center w-full"):
@@ -215,6 +219,11 @@ def render_sidebar(state: AppState) -> None:
             "Add Node", icon="add_circle", color="primary",
             on_click=lambda: _handle_add_node(state, node_list, edge_list),
         ).props("dense flat size=sm")
+        place_btn = ui.button(
+            "Place on Map", icon="add_location", color="secondary",
+            on_click=lambda: _toggle_place_mode(state, place_mode, node_list, edge_list),
+        ).props("dense flat size=sm")
+        place_mode['btn'] = place_btn
         ui.button(
             "Add Edge", icon="link", color="primary",
             on_click=lambda: _handle_add_edge(state, node_list, edge_list),
@@ -227,18 +236,46 @@ def render_sidebar(state: AppState) -> None:
 
     ui.separator()
 
+    # -- Filter input --
+    def on_filter_change(e):
+        val = e.value if hasattr(e, 'value') else (e.args if hasattr(e, 'args') else '')
+        filter_state['text'] = val.strip().lower() if val else ''
+        node_list.refresh()
+        edge_list.refresh()
+
+    ui.input(
+        placeholder="Filter nodes/edges...",
+        on_change=on_filter_change,
+    ).props('dense outlined clearable').classes("w-full").style("font-size:0.85em")
+
     # -- Node list (refreshable) --
     @ui.refreshable
     def node_list():
-        ui.label("Nodes").classes("text-subtitle2")
-        for node in topo.nodes:
-            _node_row(state, node, node_list, edge_list)
+        # Pre-compute edge counts
+        edge_counts: dict[str, int] = {}
+        for edge in topo.edges:
+            edge_counts[edge.a] = edge_counts.get(edge.a, 0) + 1
+            edge_counts[edge.b] = edge_counts.get(edge.b, 0) + 1
+
+        ft = filter_state['text']
+        filtered = [n for n in topo.nodes if ft in n.name.lower()] if ft else topo.nodes
+        ui.label(f"Nodes ({len(filtered)})").classes("text-subtitle2")
+        for node in filtered:
+            _node_row(state, node, node_list, edge_list,
+                      edge_count=edge_counts.get(node.name, 0),
+                      geo=geo, filter_state=filter_state)
 
     # -- Edge list (refreshable) --
     @ui.refreshable
     def edge_list():
-        ui.label("Edges").classes("text-subtitle2")
-        for edge in topo.edges:
+        ft = filter_state['text']
+        if ft:
+            filtered = [e for e in topo.edges
+                        if ft in e.a.lower() or ft in e.b.lower()]
+        else:
+            filtered = topo.edges
+        ui.label(f"Edges ({len(filtered)})").classes("text-subtitle2")
+        for edge in filtered:
             _edge_row(state, edge, node_list, edge_list)
 
     node_list()
@@ -246,13 +283,14 @@ def render_sidebar(state: AppState) -> None:
     edge_list()
 
 
-def _node_row(state, node, node_list_refresh, edge_list_refresh):
+def _node_row(state, node, node_list_refresh, edge_list_refresh,
+              edge_count=0, geo=False, filter_state=None):
     """Render a single clickable node row in the sidebar."""
     role = node_role(node)
     colour = ROLE_COLOUR.get(role, ROLE_COLOUR["endpoint"])
 
-    with ui.row().classes(
-        "items-center gap-1 py-0.5 cursor-pointer w-full rounded hover:bg-grey-2"
+    with ui.column().classes(
+        "gap-0 py-0.5 cursor-pointer w-full rounded hover:bg-grey-2 px-1"
     ).on(
         "click",
         lambda n=node: _node_edit_dialog(
@@ -261,18 +299,38 @@ def _node_row(state, node, node_list_refresh, edge_list_refresh):
             on_delete=lambda nd: _on_node_deleted(state, nd, node_list_refresh, edge_list_refresh),
         ),
     ):
-        ui.icon("circle").style(f"color:{colour};font-size:10px")
-        ui.label(short_name(node.name)).classes("text-body2")
-        if role != "endpoint":
-            ui.badge(role, color="primary").props("dense outline")
+        with ui.row().classes("items-center gap-1 w-full"):
+            ui.icon("circle").style(f"color:{colour};font-size:10px")
+            ui.label(short_name(node.name)).classes("text-body2")
+            if role != "endpoint":
+                ui.badge(role, color="primary").props("dense outline")
+            if edge_count > 0:
+                ui.badge(str(edge_count), color="grey").props("dense outline").classes("text-xs")
+        # Second line: coordinates for geo topologies
+        if geo and node.lat is not None and node.lon is not None:
+            ui.label(
+                f"({node.lat:.4f}, {node.lon:.4f})"
+            ).classes("text-caption text-grey").style(
+                "margin-top:-2px; padding-left:18px"
+            )
 
 
 def _edge_row(state, edge, node_list_refresh, edge_list_refresh):
     """Render a single clickable edge row in the sidebar."""
-    loss_pct = f"{edge.loss * 100:.0f}%" if edge.loss > 0 else "0%"
+    # Build compact parameter summary — only show non-default values
+    params = []
+    if edge.loss > 0:
+        params.append(f"L:{edge.loss * 100:.0f}%")
+    if edge.latency_ms > 0:
+        params.append(f"{edge.latency_ms:.0f}ms")
+    if edge.snr != 6.0:
+        params.append(f"SNR:{edge.snr:.1f}")
+    if edge.rssi != -90.0:
+        params.append(f"RSSI:{edge.rssi:.0f}")
+    has_dir = edge.a_to_b is not None or edge.b_to_a is not None
 
-    with ui.row().classes(
-        "items-center gap-1 py-0.5 cursor-pointer w-full rounded hover:bg-grey-2"
+    with ui.column().classes(
+        "gap-0 py-0.5 cursor-pointer w-full rounded hover:bg-grey-2 px-1"
     ).on(
         "click",
         lambda e=edge: _edge_edit_dialog(
@@ -281,10 +339,16 @@ def _edge_row(state, edge, node_list_refresh, edge_list_refresh):
             on_delete=lambda ed: _on_edge_deleted(state, ed, edge_list_refresh),
         ),
     ):
-        ui.label(
-            f"{short_name(edge.a)} \u2194 {short_name(edge.b)}"
-        ).classes("text-body2")
-        ui.label(f"loss={loss_pct}").classes("text-caption text-grey")
+        with ui.row().classes("items-center gap-1 w-full"):
+            ui.label(
+                f"{short_name(edge.a)} \u2194 {short_name(edge.b)}"
+            ).classes("text-body2")
+            if has_dir:
+                ui.badge("\u2195", color="info").props("dense outline").classes("text-xs")
+        if params:
+            ui.label("  ".join(params)).classes(
+                "text-caption text-grey"
+            ).style("margin-top:-2px; padding-left:4px")
 
 
 # ---------------------------------------------------------------------------
@@ -354,6 +418,67 @@ def _on_edge_deleted(state, edge, edge_list_refresh):
 
     _mark_dirty(state)
     edge_list_refresh.refresh()
+
+
+def _toggle_place_mode(state, place_mode, node_list_refresh, edge_list_refresh):
+    """Toggle click-to-place-node mode on the map."""
+    if not state.leaflet_map:
+        ui.notify("No map available", type="warning")
+        return
+
+    if place_mode['active']:
+        # Deactivate
+        place_mode['active'] = False
+        if place_mode['btn']:
+            place_mode['btn'].props(remove="color=negative")
+            place_mode['btn'].props(add="color=secondary")
+        ui.notify("Placement mode off")
+        return
+
+    # Activate
+    place_mode['active'] = True
+    if place_mode['btn']:
+        place_mode['btn'].props(remove="color=secondary")
+        place_mode['btn'].props(add="color=negative")
+    ui.notify("Click on the map to place a new node")
+
+    def on_map_click(e):
+        if not place_mode['active']:
+            return
+        # Deactivate after one placement
+        place_mode['active'] = False
+        if place_mode['btn']:
+            place_mode['btn'].props(remove="color=negative")
+            place_mode['btn'].props(add="color=secondary")
+
+        latlng = e.args.get('latlng', {})
+        lat = latlng.get('lat', 0.0)
+        lng = latlng.get('lng', 0.0)
+
+        new_node = NodeConfig(name="", lat=lat, lon=lng)
+
+        def on_save(node, is_new):
+            if not node.name:
+                ui.notify("Node name is required", type="warning")
+                return
+            if any(n.name == node.name for n in state.topology.nodes):
+                ui.notify(f"Node '{node.name}' already exists", type="warning")
+                return
+
+            state.topology.nodes.append(node)
+            pos = (node.lat or 0.0, node.lon or 0.0)
+            state.positions[node.name] = pos
+
+            if state.leaflet_map:
+                marker = add_marker(state.leaflet_map, node.name, pos)
+                state.markers[node.name] = marker
+
+            _mark_dirty(state)
+            node_list_refresh.refresh()
+
+        _node_edit_dialog(state, new_node, is_new=True, on_save=on_save)
+
+    state.leaflet_map.on('map-click', on_map_click)
 
 
 def _handle_add_node(state, node_list_refresh, edge_list_refresh):

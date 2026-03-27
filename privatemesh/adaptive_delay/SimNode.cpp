@@ -373,6 +373,20 @@ void SimNode::broadcastAdvert(const std::string& name) {
     if (pkt) sendFlood(pkt);
 }
 
+void SimNode::setupPublicChannel(const std::string& /*name*/) {
+    // Stub: adaptive_delay experiment uses mesh::Mesh (not BaseChatMesh).
+    // Group channels require BaseChatMesh — a future upgrade.
+}
+
+bool SimNode::sendChannelText(const std::string& /*text*/) {
+    emitLog("sendChannelText: not supported (experiment agent)");
+    return false;
+}
+
+void SimNode::loop() {
+    mesh::Mesh::loop();
+}
+
 // ---------------------------------------------------------------------------
 // RoomServerNode — included for binary compatibility only.
 // ---------------------------------------------------------------------------

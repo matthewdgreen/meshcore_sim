@@ -288,6 +288,8 @@ class PacketTracer:
         self,
         topology_path: Optional[str] = None,
         node_names: Optional[list] = None,
+        metrics: Optional[dict] = None,
+        total_sim_secs: float = 0.0,
     ) -> dict:
         """
         Return a JSON-serialisable dict of all trace data.
@@ -374,6 +376,54 @@ class PacketTracer:
         if node_names is not None:
             result["nodes"] = sorted(node_names)
         result["packets"] = packets
+
+        # Embed timing analysis computed from trace data
+        timing: dict = {}
+        all_airtimes = [h.airtime_ms for tr in self._traces.values()
+                        for h in tr.hops if h.airtime_ms > 0]
+        if all_airtimes:
+            timing["avg_airtime_ms"] = sum(all_airtimes) / len(all_airtimes)
+            timing["n_hops"] = len(all_airtimes)
+
+        relay_delays = self.compute_relay_delays()
+        if relay_delays:
+            timing["relay_delay_min_ms"] = min(relay_delays)
+            timing["relay_delay_avg_ms"] = sum(relay_delays) / len(relay_delays)
+            timing["relay_delay_max_ms"] = max(relay_delays)
+            timing["n_relays"] = len(relay_delays)
+
+        flood_props: list[float] = []
+        for tr in self._traces.values():
+            if tr.is_flood() and tr.hops:
+                span = (max(h.t for h in tr.hops) - tr.first_seen_at) * 1000.0
+                if span > 0:
+                    flood_props.append(span)
+        if flood_props:
+            timing["flood_prop_min_ms"] = min(flood_props)
+            timing["flood_prop_avg_ms"] = sum(flood_props) / len(flood_props)
+            timing["flood_prop_max_ms"] = max(flood_props)
+            timing["n_floods"] = len(flood_props)
+
+        if total_sim_secs > 0:
+            unique_tx_airtime: dict[int, float] = {}
+            for tr in self._traces.values():
+                for h in tr.hops:
+                    if h.tx_id is not None and h.airtime_ms > 0:
+                        unique_tx_airtime[h.tx_id] = h.airtime_ms
+            if unique_tx_airtime:
+                total_airtime_s = sum(unique_tx_airtime.values()) / 1000.0
+                timing["channel_utilization_pct"] = total_airtime_s / total_sim_secs * 100.0
+                timing["total_airtime_s"] = total_airtime_s
+                timing["n_unique_tx"] = len(unique_tx_airtime)
+                timing["total_sim_secs"] = total_sim_secs
+
+        if timing:
+            result["timing"] = timing
+
+        # Embed MetricsCollector data (delivery, latency, drops, etc.)
+        if metrics is not None:
+            result["metrics"] = metrics
+
         return result
 
     # ------------------------------------------------------------------

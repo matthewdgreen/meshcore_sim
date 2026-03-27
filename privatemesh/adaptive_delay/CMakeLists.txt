@@ -37,6 +37,9 @@ set(MESHCORE_CORE_SOURCES
     ${MESHCORE_SRC}/Utils.cpp
     ${MESHCORE_SRC}/Identity.cpp
     ${MESHCORE_SRC}/helpers/StaticPoolPacketManager.cpp
+    ${MESHCORE_SRC}/helpers/BaseChatMesh.cpp
+    ${MESHCORE_SRC}/helpers/TxtDataHelpers.cpp
+    ${MESHCORE_SRC}/helpers/AdvertDataHelpers.cpp
 )
 
 file(GLOB ED25519_SOURCES ${MESHCORE_LIB}/ed25519/*.c)
@@ -67,6 +70,8 @@ target_include_directories(adaptive_agent PRIVATE
 
 target_compile_definitions(adaptive_agent PRIVATE
     ED25519_NO_SEED=1
+    MAX_GROUP_CHANNELS=4
+    MAX_NEIGHBOURS=50
 )
 
 target_compile_options(adaptive_agent PRIVATE

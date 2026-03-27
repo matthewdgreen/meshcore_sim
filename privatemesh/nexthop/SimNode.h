@@ -81,6 +81,13 @@ public:
     // Flood-broadcast an Advertisement from this node.
     // name is embedded as the app_data (max 31 bytes, null terminated).
     void broadcastAdvert(const std::string& name = "");
+
+    // Group channel support (stub — experiment agents use mesh::Mesh, not BaseChatMesh)
+    void setupPublicChannel(const std::string& name);
+    bool sendChannelText(const std::string& text);
+
+    // Drive Dispatcher timing (BaseChatMesh loop equivalent).
+    void loop();
 };
 
 // ---------------------------------------------------------------------------

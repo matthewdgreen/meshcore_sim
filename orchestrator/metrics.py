@@ -175,6 +175,74 @@ class MetricsCollector:
     def halfduplex_drop_count(self) -> int:
         return self._halfduplex_drop_count
 
+    def to_dict(self) -> dict:
+        """Export all metrics as a JSON-serialisable dict.
+
+        This dict is embedded in the trace JSON so that the workbench can
+        display comprehensive simulation statistics without re-running.
+        """
+        # Delivery
+        total = len(self._completed) + len(self._pending)
+        delivered = len(self._completed)
+        rate = delivered / total if total else 0.0
+
+        # Latency percentiles
+        latencies = sorted(
+            (r.received_at - r.sent_at) * 1000.0
+            for r in self._completed
+            if r.received_at is not None
+        )
+        latency: dict = {}
+        if latencies:
+            latency = {
+                "min_ms": latencies[0],
+                "p50_ms": latencies[len(latencies) // 2],
+                "avg_ms": sum(latencies) / len(latencies),
+                "p95_ms": latencies[min(int(len(latencies) * 0.95), len(latencies) - 1)],
+                "max_ms": latencies[-1],
+            }
+
+        # Per-node TX/RX
+        all_nodes = sorted(set(self._tx) | set(self._rx))
+        per_node = {
+            n: {"tx": self._tx[n], "rx": self._rx[n]}
+            for n in all_nodes
+        }
+
+        # Contacts
+        contacts = {
+            name: {"discovered": disc, "total": tot}
+            for name, (disc, tot) in self._contacts.items()
+        }
+
+        return {
+            "delivery": {
+                "attempted": total,
+                "delivered": delivered,
+                "rate": rate,
+            },
+            "latency": latency,
+            "ack_outcomes": {
+                "confirmed": self._ack_confirmed,
+                "retries": self._ack_retries,
+                "failed": self._ack_failed,
+            },
+            "channel_messages": {
+                "sent": self._channel_sent,
+                "recv": self._channel_recv,
+            },
+            "drops": {
+                "link_loss": self._link_loss_count,
+                "collisions": self._collision_count,
+                "halfduplex": self._halfduplex_drop_count,
+                "adversarial_drop": self._adv_drop_count,
+                "adversarial_corrupt": self._adv_corrupt_count,
+                "adversarial_replay": self._adv_replay_count,
+            },
+            "contacts": contacts,
+            "per_node": per_node,
+        }
+
     def report(self) -> str:
         # Per-node TX / RX — column width adapts to the longest node name
         all_nodes = sorted(set(self._tx) | set(self._rx))

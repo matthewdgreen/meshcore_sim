@@ -13,7 +13,10 @@ This tool fills those gaps:
   1. Filters stub nodes (no coordinates, short prefixes)
   2. Sanitises names (strips emoji / non-ASCII, truncates)
   3. Merges directed edges into undirected with directional overrides
-  4. Estimates missing edges via log-distance path loss
+  4. Estimates missing edges via statistics-driven gap-fill:
+     - Fits propagation model (SNR vs distance) from measured edges
+     - Generates inferred edges with log-normal shadow fading
+     - Caps inferred edges per node to prevent star explosion
   5. Maps SNR to packet loss probability
   6. Adds companion endpoint nodes
   7. Adds radio + simulation sections
@@ -60,11 +63,19 @@ _SNR_LOSS_TABLE = [
 _SNR_LOSS_FLOOR = 0.50  # SNR < -12 dB
 
 # Log-distance path loss model parameters (suburban outdoor)
+# These are fallbacks when < 5 measured edges are available for fitting.
 _SNR_REF = 10.0     # dB at reference distance
 _D_REF_KM = 1.0     # reference distance in km
 _PATH_LOSS_N = 3.0   # path loss exponent
 _SNR_FLOOR = -12.0   # LoRa SF10 demodulation floor (dB)
 _MAX_GAP_KM = 30.0   # max practical LoRa range (km)
+
+# Shadow fading defaults
+_DEFAULT_SIGMA = 8.0     # dB — typical outdoor log-normal shadow fading
+_MIN_EDGES_FOR_FIT = 5   # need at least this many measured edges to fit model
+_MAX_GOOD_LINKS = 3  # cap SNR > 0 edges per node (measured + inferred); typical 2-4
+_MAX_EDGES_PER_NODE = 30  # hard cap on total edges per node
+_MAX_RANGE_FACTOR = 1.5  # auto max range = max measured distance * this
 
 # Reverse-direction SNR penalty when only one direction is measured
 _REVERSE_SNR_PENALTY = 5.0  # dB
@@ -139,7 +150,7 @@ def snr_to_loss(snr: float) -> float:
 
 
 # ---------------------------------------------------------------------------
-# Gap-fill: estimate SNR from distance
+# Gap-fill: propagation model fitting and estimation
 # ---------------------------------------------------------------------------
 
 def estimate_snr(distance_km: float) -> float:
@@ -147,6 +158,100 @@ def estimate_snr(distance_km: float) -> float:
     if distance_km <= 0:
         return _SNR_REF
     return _SNR_REF - 10.0 * _PATH_LOSS_N * math.log10(distance_km / _D_REF_KM)
+
+
+def fit_propagation_model(
+    measured_edges: list[dict],
+    nodes: dict[str, dict],
+    sigma_override: Optional[float] = None,
+    verbose: bool = False,
+) -> tuple:
+    """Fit SNR = a + b * log10(dist_km) from measured edges.
+
+    Returns (a, b, sigma, max_dist_km, mean_rssi).
+    Falls back to hardcoded constants when < 5 measured edges with distance.
+    """
+    # Collect (log10_dist, snr, rssi) for edges with source=neighbors|trace
+    points = []  # (log10_dist, snr)
+    rssi_vals = []
+    max_dist = 0.0
+
+    # Build prefix→node lookup by name
+    name_to_prefix = {n["name"]: p for p, n in nodes.items()}
+
+    for e in measured_edges:
+        a_name = e.get("a", "")
+        b_name = e.get("b", "")
+        a_pfx = name_to_prefix.get(a_name)
+        b_pfx = name_to_prefix.get(b_name)
+        if a_pfx is None or b_pfx is None:
+            continue
+
+        n1, n2 = nodes[a_pfx], nodes[b_pfx]
+        dist = haversine_km(n1["lat"], n1["lon"], n2["lat"], n2["lon"])
+        if dist <= 0.01:  # skip co-located nodes
+            continue
+
+        snr = float(e.get("snr", 0.0))
+        points.append((math.log10(dist), snr))
+        max_dist = max(max_dist, dist)
+
+        rssi = e.get("rssi")
+        if rssi is not None:
+            rssi_vals.append(float(rssi))
+
+    mean_rssi = sum(rssi_vals) / len(rssi_vals) if rssi_vals else -90.0
+
+    if len(points) < _MIN_EDGES_FOR_FIT:
+        # Not enough data — fall back to hardcoded model
+        a = _SNR_REF
+        b = -10.0 * _PATH_LOSS_N  # = -30.0
+        sigma = _DEFAULT_SIGMA
+        if max_dist == 0.0:
+            max_dist = _MAX_GAP_KM / _MAX_RANGE_FACTOR
+        if verbose:
+            print(f"  Propagation model: FALLBACK (only {len(points)} measured "
+                  f"edges with distance, need {_MIN_EDGES_FOR_FIT})",
+                  file=sys.stderr)
+            print(f"    SNR = {a:.1f} + {b:.1f}*log10(d), sigma={sigma:.1f} dB",
+                  file=sys.stderr)
+        return (a, b, sigma, max_dist, mean_rssi)
+
+    # Linear regression: SNR = a + b * log10(dist)
+    n = len(points)
+    sum_x = sum(p[0] for p in points)
+    sum_y = sum(p[1] for p in points)
+    sum_xx = sum(p[0] ** 2 for p in points)
+    sum_xy = sum(p[0] * p[1] for p in points)
+
+    denom = n * sum_xx - sum_x ** 2
+    if abs(denom) < 1e-12:
+        # Degenerate case — all edges at same distance
+        a = sum_y / n
+        b = 0.0
+    else:
+        b = (n * sum_xy - sum_x * sum_y) / denom
+        a = (sum_y - b * sum_x) / n
+
+    # Sigma = stddev of residuals
+    residuals = [p[1] - (a + b * p[0]) for p in points]
+    variance = sum(r ** 2 for r in residuals) / n
+    fitted_sigma = math.sqrt(variance)
+
+    sigma = sigma_override if sigma_override is not None else fitted_sigma
+    # Ensure sigma is at least 1 dB (prevents degenerate zero-variation)
+    if sigma < 1.0:
+        sigma = 1.0
+
+    if verbose:
+        print(f"  Propagation model: SNR = {a:.1f} + {b:.1f}*log10(d), "
+              f"sigma={sigma:.1f} dB (fitted from {n} edges)",
+              file=sys.stderr)
+        print(f"    Max measured distance: {max_dist:.1f} km, "
+              f"mean RSSI: {mean_rssi:.1f} dBm",
+              file=sys.stderr)
+
+    return (a, b, sigma, max_dist, mean_rssi)
 
 
 # ---------------------------------------------------------------------------
@@ -159,6 +264,8 @@ def import_topology(
     companions: int = 5,
     fill_gaps: bool = True,
     max_gap_km: float = _MAX_GAP_KM,
+    max_good_links: int = _MAX_GOOD_LINKS,
+    gap_sigma: Optional[float] = None,
     sf: int = _DEFAULT_SF,
     bw_hz: int = _DEFAULT_BW_HZ,
     cr: int = _DEFAULT_CR,
@@ -309,45 +416,110 @@ def import_topology(
               file=sys.stderr)
 
     # ------------------------------------------------------------------
-    # 3. Estimate missing edges (gap-filling)
+    # 3. Estimate missing edges (smart gap-filling)
     # ------------------------------------------------------------------
     gap_filled = 0
 
     if fill_gaps:
+        # Fit propagation model from measured edges
+        model_a, model_b, sigma, max_measured_dist, mean_rssi = \
+            fit_propagation_model(
+                merged_edges, nodes,
+                sigma_override=gap_sigma,
+                verbose=verbose,
+            )
+
+        # Auto-derive max range from measured data (or use explicit CLI value)
+        auto_max_km = max_measured_dist * _MAX_RANGE_FACTOR
+        effective_max_km = min(max_gap_km, auto_max_km) if auto_max_km > 0 else max_gap_km
+
+        # Seeded RNG for reproducible shadow fading
+        rng = random.Random(42)
+
+        # Count edges per node from measured data.
+        # good_count: SNR > 0 edges (capped at max_good_links; typical 2-4)
+        # total_count: all edges (hard cap at _MAX_EDGES_PER_NODE)
+        good_count = {}   # prefix → count of SNR > 0 edges
+        total_count = {}  # prefix → count of all edges
+        name_to_prefix = {n["name"]: p for p, n in nodes.items()}
+        for e in merged_edges:
+            for name_key in ("a", "b"):
+                pfx = name_to_prefix.get(e.get(name_key))
+                if pfx:
+                    total_count[pfx] = total_count.get(pfx, 0) + 1
+                    if float(e.get("snr", 0.0)) > 0.0:
+                        good_count[pfx] = good_count.get(pfx, 0) + 1
+
         prefix_list = sorted(nodes.keys())
-        for i, p1 in enumerate(prefix_list):
-            for p2 in prefix_list[i + 1:]:
+
+        # For each node, find closest unmeasured candidates
+        for p1 in prefix_list:
+            n1 = nodes[p1]
+
+            # Compute distances to all other nodes, sorted closest-first
+            candidates = []
+            for p2 in prefix_list:
+                if p2 <= p1:  # avoid duplicates and self-edges
+                    continue
                 pair = frozenset([p1, p2])
                 if pair in edge_set:
                     continue
-
-                n1 = nodes[p1]
                 n2 = nodes[p2]
-                dist = haversine_km(n1["lat"], n1["lon"], n2["lat"], n2["lon"])
+                dist = haversine_km(n1["lat"], n1["lon"],
+                                    n2["lat"], n2["lon"])
+                if dist > effective_max_km or dist <= 0.01:
+                    continue
+                candidates.append((dist, p2))
 
-                if dist > max_gap_km:
+            candidates.sort()  # closest first
+
+            for dist, p2 in candidates:
+                # Hard cap on total edges per node
+                t1 = total_count.get(p1, 0)
+                t2 = total_count.get(p2, 0)
+                if t1 >= _MAX_EDGES_PER_NODE or t2 >= _MAX_EDGES_PER_NODE:
                     continue
 
-                snr_est = estimate_snr(dist)
+                # Estimate SNR with shadow fading
+                snr_est = model_a + model_b * math.log10(dist) \
+                    + rng.gauss(0.0, sigma)
+
                 if snr_est <= _SNR_FLOOR:
                     continue
 
+                # If this would be a "good" link (SNR > 0), check the cap
+                if snr_est > 0.0:
+                    g1 = good_count.get(p1, 0)
+                    g2 = good_count.get(p2, 0)
+                    if g1 >= max_good_links or g2 >= max_good_links:
+                        continue
+
                 loss = snr_to_loss(snr_est)
 
+                # RSSI: use mean measured RSSI with proportional noise
+                rssi_est = mean_rssi + rng.gauss(0.0, sigma / 2.0)
+
                 merged_edges.append({
-                    "a": n1["name"],
-                    "b": n2["name"],
+                    "a": nodes[p1]["name"],
+                    "b": nodes[p2]["name"],
                     "loss": loss,
                     "latency_ms": 20.0,
                     "snr": round(snr_est, 2),
-                    "rssi": -90.0,
+                    "rssi": round(rssi_est, 1),
                 })
-                edge_set.add(pair)
+                edge_set.add(frozenset([p1, p2]))
+                total_count[p1] = t1 + 1
+                total_count[p2] = t2 + 1
+                if snr_est > 0.0:
+                    good_count[p1] = good_count.get(p1, 0) + 1
+                    good_count[p2] = good_count.get(p2, 0) + 1
                 gap_filled += 1
 
         if verbose:
             print(f"  Gap-fill: {gap_filled} estimated edges added "
-                  f"(max {max_gap_km} km, SNR floor {_SNR_FLOOR} dB)",
+                  f"(max {max_good_links} good links/node, "
+                  f"max {effective_max_km:.1f} km, "
+                  f"SNR floor {_SNR_FLOOR} dB)",
                   file=sys.stderr)
 
     # ------------------------------------------------------------------
@@ -475,6 +647,16 @@ def main() -> None:
         "--max-gap-km", type=float, default=_MAX_GAP_KM, metavar="KM",
         help=f"Max distance for gap-fill edges (default: {_MAX_GAP_KM})",
     )
+    parser.add_argument(
+        "--max-good-links", type=int,
+        default=_MAX_GOOD_LINKS, metavar="N",
+        help=f"Max SNR>0 edges per node, measured+inferred (default: {_MAX_GOOD_LINKS})",
+    )
+    parser.add_argument(
+        "--gap-sigma", type=float, default=None, metavar="DB",
+        help="Override fitted shadow fading sigma (dB); "
+             "by default, sigma is fitted from measured edges",
+    )
 
     radio = parser.add_argument_group(
         "radio parameters",
@@ -509,6 +691,8 @@ def main() -> None:
         companions=args.companions,
         fill_gaps=not args.no_fill_gaps,
         max_gap_km=args.max_gap_km,
+        max_good_links=args.max_good_links,
+        gap_sigma=args.gap_sigma,
         sf=args.sf,
         bw_hz=args.bw_hz,
         cr=args.cr,

@@ -599,3 +599,17 @@ void SimNode::broadcastAdvert(const std::string& name) {
                                      app_len);
     if (pkt) sendFlood(pkt);
 }
+
+void SimNode::setupPublicChannel(const std::string& /*name*/) {
+    // Stub: nexthop experiment uses mesh::Mesh (not BaseChatMesh).
+    // Group channels require BaseChatMesh — a future upgrade.
+}
+
+bool SimNode::sendChannelText(const std::string& /*text*/) {
+    emitLog("sendChannelText: not supported (experiment agent)");
+    return false;
+}
+
+void SimNode::loop() {
+    mesh::Mesh::loop();
+}

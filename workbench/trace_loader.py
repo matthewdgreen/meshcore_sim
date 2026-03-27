@@ -142,7 +142,11 @@ def compute_edge_trace_stats(trace: dict) -> dict[tuple[str, str], dict]:
 
 
 def compute_trace_stats(trace: dict) -> dict:
-    """Compute summary statistics from trace data."""
+    """Compute comprehensive statistics from trace data.
+
+    Returns a dict with sections: summary, timing, metrics (if embedded),
+    and per-type breakdown.
+    """
     packets = trace.get("packets", [])
     n = len(packets)
     if n == 0:
@@ -150,12 +154,52 @@ def compute_trace_stats(trace: dict) -> dict:
             "n_packets": 0, "flood_pct": 0.0,
             "avg_witnesses": 0.0, "n_collisions": 0,
         }
+
     n_flood = sum(1 for p in packets if p.get("is_flood"))
-    avg_w = sum(p.get("witness_count", 0) for p in packets) / n
+    total_hops = sum(p.get("witness_count", 0) for p in packets)
+    avg_w = total_hops / n
     n_col = sum(len(p.get("collisions", [])) for p in packets)
-    return {
+    n_direct = n - n_flood
+
+    result: dict = {
         "n_packets": n,
         "flood_pct": 100.0 * n_flood / n,
         "avg_witnesses": avg_w,
         "n_collisions": n_col,
+        "total_hops": total_hops,
+        "n_flood": n_flood,
+        "n_direct": n_direct,
+        "flood_amplification": total_hops / n if n else 0.0,
     }
+
+    # Per payload-type breakdown
+    by_type: dict[str, dict] = {}
+    for p in packets:
+        tname = p.get("payload_type_name", "?")
+        if tname not in by_type:
+            by_type[tname] = {"count": 0, "witnesses": [], "collisions": 0}
+        by_type[tname]["count"] += 1
+        by_type[tname]["witnesses"].append(p.get("witness_count", 0))
+        by_type[tname]["collisions"] += len(p.get("collisions", []))
+    type_breakdown = {}
+    for tname, info in sorted(by_type.items()):
+        ws = info["witnesses"]
+        type_breakdown[tname] = {
+            "count": info["count"],
+            "avg_witnesses": sum(ws) / len(ws) if ws else 0.0,
+            "max_witnesses": max(ws) if ws else 0,
+            "collisions": info["collisions"],
+        }
+    result["by_type"] = type_breakdown
+
+    # Timing stats (embedded by tracer.to_dict)
+    timing = trace.get("timing")
+    if timing:
+        result["timing"] = timing
+
+    # Metrics (embedded by metrics.to_dict via tracer.to_dict)
+    metrics = trace.get("metrics")
+    if metrics:
+        result["metrics"] = metrics
+
+    return result

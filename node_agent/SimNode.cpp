@@ -71,19 +71,9 @@ bool SimNode::allowPacketForward(const mesh::Packet* /*packet*/) {
     return _is_relay;
 }
 
-uint32_t SimNode::getRetransmitDelay(const mesh::Packet* packet) {
-    // Match companion_radio/MyMesh.cpp getRetransmitDelay()
-    uint32_t t = (uint32_t)(_radio->getEstAirtimeFor(
-        packet->getPathByteLen() + packet->payload_len + 2) * 0.5f);
-    return getRNG()->nextInt(0, 5 * t + 1);
-}
-
-uint32_t SimNode::getDirectRetransmitDelay(const mesh::Packet* packet) {
-    // Match companion_radio/MyMesh.cpp getDirectRetransmitDelay()
-    uint32_t t = (uint32_t)(_radio->getEstAirtimeFor(
-        packet->getPathByteLen() + packet->payload_len + 2) * 0.2f);
-    return getRNG()->nextInt(0, 5 * t + 1);
-}
+// Use base Mesh::getRetransmitDelay() / getDirectRetransmitDelay() which
+// respect _tx_delay_factor and _direct_tx_delay_factor — these are set
+// by autoTuneByNeighborCount() in onDiscoveredContact() below.
 
 // ---------------------------------------------------------------------------
 // BaseChatMesh pure-virtual implementations
@@ -265,9 +255,10 @@ void SimNode::logRx(mesh::Packet* packet, int len, float score) {
 }
 
 void SimNode::logTx(mesh::Packet* packet, int len) {
-    emitLog("TX len=%d type=%d route=%s",
+    emitLog("TX len=%d type=%d route=%s rxd(%.2f) txd(%.2f) dtxd(%.2f)",
             len, (int)packet->getPayloadType(),
-            packet->isRouteDirect() ? "D" : "F");
+            packet->isRouteDirect() ? "D" : "F",
+            _rx_delay_base, _tx_delay_factor, _direct_tx_delay_factor);
 }
 
 // ---------------------------------------------------------------------------

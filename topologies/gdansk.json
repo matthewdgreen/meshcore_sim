@@ -13,28 +13,64 @@
       "lon": 18.78138
     },
     {
+      "name": "GTC_Rokicka_RPT",
+      "relay": true,
+      "lat": 54.085641,
+      "lon": 18.760366
+    },
+    {
       "name": "Dobrzewino_RPT",
       "relay": true,
       "lat": 54.45564,
       "lon": 18.39438
     },
     {
-      "name": "GKA_Kamienica_Szlach",
+      "name": "GD_Hallera_Xiao_Test",
       "relay": true,
-      "lat": 54.27074,
-      "lon": 17.95442
+      "lat": 54.38882,
+      "lon": 18.622489
     },
     {
-      "name": "GKS_Wiele_Las",
+      "name": "RPT_JANK_01",
       "relay": true,
-      "lat": 53.94576,
-      "lon": 17.85673
+      "lat": 54.29404,
+      "lon": 18.56937
+    },
+    {
+      "name": "RPT_PRG_04",
+      "relay": true,
+      "lat": 54.25455,
+      "lon": 18.63099
+    },
+    {
+      "name": "SQ2PPJ_Repeater",
+      "relay": true,
+      "lat": 54.53976,
+      "lon": 18.47792
     },
     {
       "name": "Bojano_Lesoki_RPT",
       "relay": true,
       "lat": 54.466246,
       "lon": 18.40418
+    },
+    {
+      "name": "SP2ZIE_Repeater_Xiao",
+      "relay": true,
+      "lat": 54.52338,
+      "lon": 18.51386
+    },
+    {
+      "name": "Wzgrza_Dylewskie-RPT",
+      "relay": true,
+      "lat": 53.538463,
+      "lon": 19.942647
+    },
+    {
+      "name": "GDA_CEDRYM_RPT",
+      "relay": true,
+      "lat": 54.27391,
+      "lon": 18.868729
     },
     {
       "name": "GDA1R",
@@ -55,10 +91,22 @@
       "lon": 18.40483
     },
     {
+      "name": "GW1",
+      "relay": true,
+      "lat": 54.49881,
+      "lon": 18.50592
+    },
+    {
       "name": "GDA-Jasien",
       "relay": true,
       "lat": 54.3421,
       "lon": 18.5671
+    },
+    {
+      "name": "RPT_KOZIA_GORA",
+      "relay": true,
+      "lat": 54.21209,
+      "lon": 18.40602
     },
     {
       "name": "RPT_SKOWARCZ",
@@ -79,10 +127,22 @@
       "lon": 18.551459
     },
     {
+      "name": "GDYNIA_Wielkokacka_R",
+      "relay": true,
+      "lat": 54.494377,
+      "lon": 18.507206
+    },
+    {
       "name": "GDYNIA_Dbrowa_RPT",
       "relay": true,
       "lat": 54.46763,
       "lon": 18.46426
+    },
+    {
+      "name": "GDA_DW_KielpinoG_RPT",
+      "relay": true,
+      "lat": 54.334499,
+      "lon": 18.520639
     },
     {
       "name": "GD_Swibno_rpt",
@@ -91,10 +151,22 @@
       "lon": 18.9335
     },
     {
+      "name": "GKW_BAJKOWE_NW_RPT",
+      "relay": true,
+      "lat": 53.74575,
+      "lon": 18.94908
+    },
+    {
+      "name": "GDA-ROKITNICA-RPT-2b",
+      "relay": true,
+      "lat": 54.275974,
+      "lon": 18.6835
+    },
+    {
       "name": "GDAOlszynka",
       "relay": true,
-      "lat": 54.31842,
-      "lon": 18.68356
+      "lat": 54.318661,
+      "lon": 18.684371
     },
     {
       "name": "MIK_DW_RPT",
@@ -103,10 +175,22 @@
       "lon": 18.964513
     },
     {
+      "name": "RPT_LOST_01",
+      "relay": true,
+      "lat": 54.33823,
+      "lon": 18.60042
+    },
+    {
       "name": "GDARubinowa",
       "relay": true,
       "lat": 54.32621,
       "lon": 18.62979
+    },
+    {
+      "name": "GA_WICZ_RPT_02",
+      "relay": true,
+      "lat": 54.48393,
+      "lon": 18.40783
     },
     {
       "name": "GDY_Fikakowo_RPT",
@@ -121,22 +205,16 @@
       "lon": 18.519364
     },
     {
-      "name": "GKA_PRZ_KCZ_RPT",
-      "relay": true,
-      "lat": 54.383613,
-      "lon": 18.318133
-    },
-    {
-      "name": "GD-Osiek-RPT",
-      "relay": true,
-      "lat": 54.355409,
-      "lon": 18.653982
-    },
-    {
       "name": "GWE_Bojano_RPT",
       "relay": true,
       "lat": 54.464681,
       "lon": 18.406025
+    },
+    {
+      "name": "GDYNIA_Dziaki_Lene",
+      "relay": true,
+      "lat": 54.512409,
+      "lon": 18.534389
     },
     {
       "name": "RPT_BORKOWO",
@@ -157,10 +235,16 @@
       "lon": 18.667772
     },
     {
-      "name": "Eagles_Nest",
+      "name": "GDA_DW_RPT",
       "relay": true,
-      "lat": 54.223533,
-      "lon": 18.123489
+      "lat": 54.31729,
+      "lon": 18.57931
+    },
+    {
+      "name": "GTC_ROKITKI_RPT",
+      "relay": true,
+      "lat": 54.078251,
+      "lon": 18.734635
     },
     {
       "name": "TUCHOM_RPT",
@@ -173,6 +257,12 @@
       "relay": true,
       "lat": 53.729452,
       "lon": 18.930718
+    },
+    {
+      "name": "GD_REP_K",
+      "relay": true,
+      "lat": 54.319486,
+      "lon": 18.603727
     },
     {
       "name": "GDA_Heweliusza",
@@ -241,16 +331,52 @@
       "lon": 18.4305
     },
     {
-      "name": "RPT_PRZYJAZN",
+      "name": "GWE_Dobrzewino2_RPT",
+      "relay": true,
+      "lat": 54.455871,
+      "lon": 18.374254
+    },
+    {
+      "name": "Xiao_nrf52_Repeater_",
+      "relay": true,
+      "lat": 54.494956,
+      "lon": 18.51447
+    },
+    {
+      "name": "GKA_PRZYJAZN_RPT",
       "relay": true,
       "lat": 54.31447,
       "lon": 18.37685
+    },
+    {
+      "name": "RPT_KLESZCZ",
+      "relay": true,
+      "lat": 54.200761,
+      "lon": 18.503425
+    },
+    {
+      "name": "GDA_SW_WOJCIECH",
+      "relay": true,
+      "lat": 54.28689,
+      "lon": 18.630743
+    },
+    {
+      "name": "GDA_Karczemki",
+      "relay": true,
+      "lat": 54.351975,
+      "lon": 18.507557
     },
     {
       "name": "GKA_PEPOWO_RPT",
       "relay": true,
       "lat": 54.374279,
       "lon": 18.379329
+    },
+    {
+      "name": "GWE_Koleczkowo_RPT",
+      "relay": true,
+      "lat": 54.483299,
+      "lon": 18.34979
     },
     {
       "name": "GKA_Borcz",
@@ -265,28 +391,10 @@
       "lon": 18.420045
     },
     {
-      "name": "GD_Swibno_rpt_2",
-      "relay": true,
-      "lat": 54.3298,
-      "lon": 18.9334
-    },
-    {
-      "name": "GDA_MORENA",
-      "relay": true,
-      "lat": 54.35127,
-      "lon": 18.58751
-    },
-    {
       "name": "RPT_REKCIN",
       "relay": true,
       "lat": 54.23754,
       "lon": 18.55533
-    },
-    {
-      "name": "GKW_MORAWY_RPT",
-      "relay": true,
-      "lat": 53.69176,
-      "lon": 19.09801
     },
     {
       "name": "RPT_PRG_03",
@@ -297,20 +405,20 @@
     {
       "name": "alice",
       "relay": false,
-      "lat": 54.374279,
-      "lon": 18.379329
+      "lat": 54.49881,
+      "lon": 18.50592
     },
     {
       "name": "bob",
       "relay": false,
-      "lat": 54.48538,
-      "lon": 18.40483
+      "lat": 54.38882,
+      "lon": 18.622489
     },
     {
       "name": "charlie",
       "relay": false,
-      "lat": 54.45564,
-      "lon": 18.39438
+      "lat": 54.295617,
+      "lon": 18.589803
     },
     {
       "name": "dave",
@@ -321,108 +429,14 @@
     {
       "name": "eve",
       "relay": false,
-      "lat": 54.335916,
-      "lon": 18.964513
-    },
-    {
-      "name": "frank",
-      "relay": false,
-      "lat": 54.31842,
-      "lon": 18.68356
-    },
-    {
-      "name": "grace",
-      "relay": false,
-      "lat": 54.3421,
-      "lon": 18.5671
-    },
-    {
-      "name": "heidi",
-      "relay": false,
-      "lat": 54.256933,
-      "lon": 18.23338
-    },
-    {
-      "name": "ivan",
-      "relay": false,
-      "lat": 54.35448,
-      "lon": 18.691949
-    },
-    {
-      "name": "judy",
-      "relay": false,
-      "lat": 54.322689,
-      "lon": 18.57509
+      "lat": 54.33823,
+      "lon": 18.60042
     }
   ],
   "edges": [
     {
-      "a": "GDA1R",
-      "b": "GD_Swibno_rpt",
-      "loss": 0.1,
-      "latency_ms": 20.0,
-      "snr": -5.5,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": -5.5,
-        "loss": 0.1
-      },
-      "b_to_a": {
-        "snr": -10.5,
-        "loss": 0.35
-      }
-    },
-    {
       "a": "GD_Swibno_rpt",
-      "b": "RPT_Skowarcz_V3HPV",
-      "loss": 0.02,
-      "latency_ms": 20.0,
-      "snr": 7.25,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": 7.25,
-        "loss": 0.02
-      },
-      "b_to_a": {
-        "snr": 4.75,
-        "loss": 0.05
-      }
-    },
-    {
-      "a": "GD_Swibno_rpt",
-      "b": "RPT_REKCIN",
-      "loss": 0.02,
-      "latency_ms": 20.0,
-      "snr": 10.0,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": 10.0,
-        "loss": 0.02
-      },
-      "b_to_a": {
-        "snr": 7.5,
-        "loss": 0.02
-      }
-    },
-    {
-      "a": "GDAMichalin",
-      "b": "GD_Swibno_rpt",
-      "loss": 0.1,
-      "latency_ms": 20.0,
-      "snr": -0.5,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": -0.5,
-        "loss": 0.1
-      },
-      "b_to_a": {
-        "snr": -5.75,
-        "loss": 0.1
-      }
-    },
-    {
-      "a": "GD_Swibno_rpt",
-      "b": "GDA_Heweliusza",
+      "b": "RPT_PRG_02",
       "loss": 0.2,
       "latency_ms": 20.0,
       "snr": -7.5,
@@ -432,9 +446,97 @@
         "loss": 0.2
       },
       "b_to_a": {
-        "snr": -5.75,
+        "snr": -6.25,
+        "loss": 0.2
+      }
+    },
+    {
+      "a": "GD_Swibno_rpt",
+      "b": "RPT_REKCIN",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 11.5,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 11.5,
+        "loss": 0.02
+      },
+      "b_to_a": {
+        "snr": 10.0,
+        "loss": 0.02
+      }
+    },
+    {
+      "a": "GDA1R",
+      "b": "GD_Swibno_rpt",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -6.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -6.0,
+        "loss": 0.1
+      },
+      "b_to_a": {
+        "snr": -10.5,
+        "loss": 0.35
+      }
+    },
+    {
+      "a": "RPT_KOZIA_GORA",
+      "b": "GD_Swibno_rpt",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.25,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -6.25,
+        "loss": 0.2
+      },
+      "b_to_a": {
+        "snr": -3.5,
         "loss": 0.1
       }
+    },
+    {
+      "a": "GD_Swibno_rpt",
+      "b": "RPT_Skowarcz_V3HPV",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 2.25,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 2.25,
+        "loss": 0.05
+      },
+      "b_to_a": {
+        "snr": -0.25,
+        "loss": 0.1
+      }
+    },
+    {
+      "a": "GD_Swibno_rpt",
+      "b": "RPT_KLESZCZ",
+      "loss": 0.5,
+      "latency_ms": 20.0,
+      "snr": -16.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -16.0,
+        "loss": 0.5
+      },
+      "b_to_a": {
+        "snr": -12.5,
+        "loss": 0.5
+      }
+    },
+    {
+      "a": "GDAMichalin",
+      "b": "GD_Swibno_rpt",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 0.0,
+      "rssi": -90.0
     },
     {
       "a": "GD_Swibno_rpt",
@@ -448,7 +550,7 @@
         "loss": 0.02
       },
       "b_to_a": {
-        "snr": 12.5,
+        "snr": 13.25,
         "loss": 0.02
       }
     },
@@ -457,188 +559,36 @@
       "b": "GDYNIA_Witomino_RPT",
       "loss": 0.1,
       "latency_ms": 20.0,
-      "snr": -2.25,
+      "snr": -2.5,
       "rssi": -90.0,
       "a_to_b": {
-        "snr": -2.25,
+        "snr": -2.5,
         "loss": 0.1
       },
       "b_to_a": {
-        "snr": -9.5,
-        "loss": 0.2
+        "snr": -12.0,
+        "loss": 0.35
       }
     },
     {
       "a": "GDA-Jasien",
       "b": "GD_Swibno_rpt",
-      "loss": 0.05,
+      "loss": 0.02,
       "latency_ms": 20.0,
-      "snr": 2.5,
-      "rssi": -90.0
+      "snr": 7.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 7.75,
+        "loss": 0.02
+      },
+      "b_to_a": {
+        "snr": 1.75,
+        "loss": 0.05
+      }
     },
     {
       "a": "GD_Swibno_rpt",
       "b": "GDANSK-SUCHANINO_SM",
-      "loss": 0.2,
-      "latency_ms": 20.0,
-      "snr": -8.0,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": -8.0,
-        "loss": 0.2
-      },
-      "b_to_a": {
-        "snr": -9.25,
-        "loss": 0.2
-      }
-    },
-    {
-      "a": "GD_Swibno_rpt",
-      "b": "GDA_MORENA",
-      "loss": 0.35,
-      "latency_ms": 20.0,
-      "snr": -11.5,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": -11.5,
-        "loss": 0.35
-      },
-      "b_to_a": {
-        "snr": -11.25,
-        "loss": 0.35
-      }
-    },
-    {
-      "a": "SOP_DW_RPT",
-      "b": "GD_Swibno_rpt",
-      "loss": 0.1,
-      "latency_ms": 20.0,
-      "snr": -4.5,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": -4.5,
-        "loss": 0.1
-      },
-      "b_to_a": {
-        "snr": -2.75,
-        "loss": 0.1
-      }
-    },
-    {
-      "a": "GD_Swibno_rpt",
-      "b": "RPT_PRZYJAZN",
-      "loss": 0.1,
-      "latency_ms": 20.0,
-      "snr": -2.25,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": -2.25,
-        "loss": 0.1
-      },
-      "b_to_a": {
-        "snr": -5.25,
-        "loss": 0.1
-      }
-    },
-    {
-      "a": "GD_Swibno_rpt",
-      "b": "RPT_GD_Suchanino",
-      "loss": 0.2,
-      "latency_ms": 20.0,
-      "snr": -6.25,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": -6.25,
-        "loss": 0.2
-      },
-      "b_to_a": {
-        "snr": -3.0,
-        "loss": 0.1
-      }
-    },
-    {
-      "a": "GD_Swibno_rpt",
-      "b": "RPT_PRG_02",
-      "loss": 0.5,
-      "latency_ms": 20.0,
-      "snr": -12.75,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": -12.75,
-        "loss": 0.5
-      },
-      "b_to_a": {
-        "snr": -9.75,
-        "loss": 0.2
-      }
-    },
-    {
-      "a": "GD_Swibno_rpt",
-      "b": "Ga_Dziaki_l_rpt",
-      "loss": 0.5,
-      "latency_ms": 20.0,
-      "snr": -12.5,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": -12.5,
-        "loss": 0.5
-      },
-      "b_to_a": {
-        "snr": -8.75,
-        "loss": 0.2
-      }
-    },
-    {
-      "a": "GDA1R",
-      "b": "GDA_MORENA",
-      "loss": 0.05,
-      "latency_ms": 20.0,
-      "snr": 0.5,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": 0.5,
-        "loss": 0.05
-      },
-      "b_to_a": {
-        "snr": -2.75,
-        "loss": 0.1
-      }
-    },
-    {
-      "a": "GDAMichalin",
-      "b": "RPT_Skowarcz_V3HPV",
-      "loss": 0.2,
-      "latency_ms": 20.0,
-      "snr": -9.0,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": -9.0,
-        "loss": 0.2
-      },
-      "b_to_a": {
-        "snr": -4.0,
-        "loss": 0.1
-      }
-    },
-    {
-      "a": "RPT_Skowarcz_V3HPV",
-      "b": "GDA_Heweliusza",
-      "loss": 0.35,
-      "latency_ms": 20.0,
-      "snr": -12.0,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": -12.0,
-        "loss": 0.35
-      },
-      "b_to_a": {
-        "snr": -17.0,
-        "loss": 0.5
-      }
-    },
-    {
-      "a": "RPT_Skowarcz_V3HPV",
-      "b": "GKW_MORAWY_RPT",
       "loss": 0.1,
       "latency_ms": 20.0,
       "snr": -6.0,
@@ -648,24 +598,328 @@
         "loss": 0.1
       },
       "b_to_a": {
-        "snr": -3.5,
+        "snr": -1.25,
         "loss": 0.1
       }
     },
     {
-      "a": "MIK_DW_RPT",
-      "b": "RPT_Skowarcz_V3HPV",
-      "loss": 0.05,
+      "a": "GD_Swibno_rpt",
+      "b": "GDARubinowa",
+      "loss": 0.2,
       "latency_ms": 20.0,
-      "snr": 2.5,
+      "snr": -9.5,
       "rssi": -90.0,
       "a_to_b": {
-        "snr": 2.5,
+        "snr": -9.5,
+        "loss": 0.2
+      },
+      "b_to_a": {
+        "snr": -5.0,
+        "loss": 0.1
+      }
+    },
+    {
+      "a": "SOP_DW_RPT",
+      "b": "GD_Swibno_rpt",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -0.75,
+        "loss": 0.1
+      },
+      "b_to_a": {
+        "snr": -4.0,
+        "loss": 0.1
+      }
+    },
+    {
+      "a": "GD_Swibno_rpt",
+      "b": "GDA_SW_WOJCIECH",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 4.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 4.75,
         "loss": 0.05
       },
       "b_to_a": {
-        "snr": 7.0,
+        "snr": -3.0,
+        "loss": 0.1
+      }
+    },
+    {
+      "a": "GD_Swibno_rpt",
+      "b": "Ga_Dziaki_l_rpt",
+      "loss": 0.5,
+      "latency_ms": 20.0,
+      "snr": -13.25,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -13.25,
+        "loss": 0.5
+      },
+      "b_to_a": {
+        "snr": -4.75,
+        "loss": 0.1
+      }
+    },
+    {
+      "a": "GD_Swibno_rpt",
+      "b": "RPT_GD_Suchanino",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.5,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -5.5,
+        "loss": 0.1
+      },
+      "b_to_a": {
+        "snr": -2.75,
+        "loss": 0.1
+      }
+    },
+    {
+      "a": "GD_Swibno_rpt",
+      "b": "GDA_Heweliusza",
+      "loss": 0.5,
+      "latency_ms": 20.0,
+      "snr": -17.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -17.0,
+        "loss": 0.5
+      },
+      "b_to_a": {
+        "snr": -8.5,
+        "loss": 0.2
+      }
+    },
+    {
+      "a": "GD_Swibno_rpt",
+      "b": "GKA_PRZYJAZN_RPT",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 1.5,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 1.5,
+        "loss": 0.05
+      },
+      "b_to_a": {
+        "snr": 0.0,
+        "loss": 0.05
+      }
+    },
+    {
+      "a": "GD_Swibno_rpt",
+      "b": "RPT_PRG_01",
+      "loss": 0.5,
+      "latency_ms": 20.0,
+      "snr": -12.25,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -12.25,
+        "loss": 0.5
+      },
+      "b_to_a": {
+        "snr": -18.0,
+        "loss": 0.5
+      }
+    },
+    {
+      "a": "GD_Swibno_rpt",
+      "b": "GDAOlszynka",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -6.75,
+        "loss": 0.2
+      },
+      "b_to_a": {
+        "snr": -1.75,
+        "loss": 0.1
+      }
+    },
+    {
+      "a": "GD_Swibno_rpt",
+      "b": "GDA_Karczemki",
+      "loss": 0.5,
+      "latency_ms": 20.0,
+      "snr": -12.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -12.75,
+        "loss": 0.5
+      },
+      "b_to_a": {
+        "snr": -7.75,
+        "loss": 0.2
+      }
+    },
+    {
+      "a": "GDA_CEDRYM_RPT",
+      "b": "GD_Swibno_rpt",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -8.0,
+        "loss": 0.2
+      },
+      "b_to_a": {
+        "snr": -13.0,
+        "loss": 0.5
+      }
+    },
+    {
+      "a": "GD_Swibno_rpt",
+      "b": "RPT_LOST_01",
+      "loss": 0.5,
+      "latency_ms": 20.0,
+      "snr": -14.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -14.0,
+        "loss": 0.5
+      },
+      "b_to_a": {
+        "snr": -9.0,
+        "loss": 0.2
+      }
+    },
+    {
+      "a": "GD_Swibno_rpt",
+      "b": "BAN06M-Test-XiaoRPT",
+      "loss": 0.5,
+      "latency_ms": 20.0,
+      "snr": -17.25,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -17.25,
+        "loss": 0.5
+      },
+      "b_to_a": {
+        "snr": -12.25,
+        "loss": 0.5
+      }
+    },
+    {
+      "a": "GDA_DW_KielpinoG_RPT",
+      "b": "GD_Swibno_rpt",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -7.75,
+        "loss": 0.2
+      },
+      "b_to_a": {
+        "snr": -12.75,
+        "loss": 0.5
+      }
+    },
+    {
+      "a": "RPT_PRG_02",
+      "b": "RPT_REKCIN",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 5.5,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 5.5,
+        "loss": 0.05
+      },
+      "b_to_a": {
+        "snr": 9.0,
         "loss": 0.02
+      }
+    },
+    {
+      "a": "RPT_PRG_02",
+      "b": "RPT_PRG_01",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.5,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -4.5,
+        "loss": 0.1
+      },
+      "b_to_a": {
+        "snr": -4.0,
+        "loss": 0.1
+      }
+    },
+    {
+      "a": "RPT_PRG_04",
+      "b": "RPT_PRG_02",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 4.25,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 4.25,
+        "loss": 0.05
+      },
+      "b_to_a": {
+        "snr": 7.5,
+        "loss": 0.02
+      }
+    },
+    {
+      "a": "GTC_JednosciNarodu_R",
+      "b": "RPT_PRG_02",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -3.75,
+        "loss": 0.1
+      },
+      "b_to_a": {
+        "snr": -10.5,
+        "loss": 0.35
+      }
+    },
+    {
+      "a": "RPT_PRG_02",
+      "b": "GDA_SW_WOJCIECH",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 8.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 8.75,
+        "loss": 0.02
+      },
+      "b_to_a": {
+        "snr": 2.5,
+        "loss": 0.05
+      }
+    },
+    {
+      "a": "RPT_KOZIA_GORA",
+      "b": "RPT_PRG_02",
+      "loss": 0.5,
+      "latency_ms": 20.0,
+      "snr": -14.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -14.0,
+        "loss": 0.5
+      },
+      "b_to_a": {
+        "snr": -9.75,
+        "loss": 0.2
       }
     },
     {
@@ -673,20 +927,68 @@
       "b": "RPT_PRG_02",
       "loss": 0.02,
       "latency_ms": 20.0,
-      "snr": 13.0,
+      "snr": 11.5,
       "rssi": -90.0,
       "a_to_b": {
-        "snr": 13.0,
+        "snr": 11.5,
         "loss": 0.02
       },
       "b_to_a": {
-        "snr": 10.5,
+        "snr": 6.5,
         "loss": 0.02
       }
     },
     {
-      "a": "RPT_Skowarcz_V3HPV",
-      "b": "RPT_REKCIN",
+      "a": "MIK_DW_RPT",
+      "b": "RPT_PRG_02",
+      "loss": 0.5,
+      "latency_ms": 20.0,
+      "snr": -12.25,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -12.25,
+        "loss": 0.5
+      },
+      "b_to_a": {
+        "snr": -17.25,
+        "loss": 0.5
+      }
+    },
+    {
+      "a": "RPT_PRG_02",
+      "b": "GDANSK-SUCHANINO_SM",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -0.75,
+        "loss": 0.1
+      },
+      "b_to_a": {
+        "snr": 4.25,
+        "loss": 0.05
+      }
+    },
+    {
+      "a": "RPT_SKOWARCZ",
+      "b": "RPT_PRG_02",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.25,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -5.25,
+        "loss": 0.1
+      },
+      "b_to_a": {
+        "snr": -10.25,
+        "loss": 0.35
+      }
+    },
+    {
+      "a": "GDAOlszynka",
+      "b": "RPT_PRG_02",
       "loss": 0.05,
       "latency_ms": 20.0,
       "snr": 1.25,
@@ -701,87 +1003,87 @@
       }
     },
     {
-      "a": "RPT_BORKOWO",
-      "b": "RPT_REKCIN",
-      "loss": 0.2,
+      "a": "RPT_PRG_02",
+      "b": "RPT_PRG_03",
+      "loss": 0.05,
       "latency_ms": 20.0,
-      "snr": -8.0,
+      "snr": 1.0,
       "rssi": -90.0,
       "a_to_b": {
-        "snr": -8.0,
-        "loss": 0.2
+        "snr": 1.0,
+        "loss": 0.05
       },
       "b_to_a": {
-        "snr": 0.0,
+        "snr": 1.75,
         "loss": 0.05
       }
     },
     {
-      "a": "GDA_MORENA",
+      "a": "RPT_KOZIA_GORA",
       "b": "RPT_REKCIN",
-      "loss": 0.2,
+      "loss": 0.05,
       "latency_ms": 20.0,
-      "snr": -7.25,
+      "snr": 2.0,
       "rssi": -90.0,
       "a_to_b": {
-        "snr": -7.25,
-        "loss": 0.2
+        "snr": 2.0,
+        "loss": 0.05
       },
       "b_to_a": {
-        "snr": -3.25,
+        "snr": 5.25,
+        "loss": 0.05
+      }
+    },
+    {
+      "a": "RPT_Skowarcz_V3HPV",
+      "b": "RPT_REKCIN",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 2.25,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 2.25,
+        "loss": 0.05
+      },
+      "b_to_a": {
+        "snr": 1.0,
+        "loss": 0.05
+      }
+    },
+    {
+      "a": "RPT_KLESZCZ",
+      "b": "RPT_REKCIN",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 0.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 0.0,
+        "loss": 0.05
+      },
+      "b_to_a": {
+        "snr": -5.5,
         "loss": 0.1
       }
     },
     {
       "a": "GDAMichalin",
       "b": "RPT_REKCIN",
-      "loss": 0.35,
+      "loss": 0.2,
       "latency_ms": 20.0,
-      "snr": -11.25,
+      "snr": -9.25,
       "rssi": -90.0,
       "a_to_b": {
-        "snr": -11.25,
-        "loss": 0.35
+        "snr": -9.25,
+        "loss": 0.2
       },
       "b_to_a": {
-        "snr": -7.5,
-        "loss": 0.2
+        "snr": -10.75,
+        "loss": 0.35
       }
     },
     {
       "a": "MIK_DW_RPT",
-      "b": "RPT_REKCIN",
-      "loss": 0.05,
-      "latency_ms": 20.0,
-      "snr": 2.75,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": 2.75,
-        "loss": 0.05
-      },
-      "b_to_a": {
-        "snr": 8.0,
-        "loss": 0.02
-      }
-    },
-    {
-      "a": "RPT_PRG_02",
-      "b": "RPT_REKCIN",
-      "loss": 0.05,
-      "latency_ms": 20.0,
-      "snr": 5.75,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": 5.75,
-        "loss": 0.05
-      },
-      "b_to_a": {
-        "snr": 11.0,
-        "loss": 0.02
-      }
-    },
-    {
-      "a": "GDANSK-SUCHANINO_SM",
       "b": "RPT_REKCIN",
       "loss": 0.05,
       "latency_ms": 20.0,
@@ -792,24 +1094,152 @@
         "loss": 0.05
       },
       "b_to_a": {
+        "snr": 6.5,
+        "loss": 0.02
+      }
+    },
+    {
+      "a": "GDANSK-SUCHANINO_SM",
+      "b": "RPT_REKCIN",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 1.5,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 1.5,
+        "loss": 0.05
+      },
+      "b_to_a": {
+        "snr": -0.75,
+        "loss": 0.1
+      }
+    },
+    {
+      "a": "GDA_SW_WOJCIECH",
+      "b": "RPT_REKCIN",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 1.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 1.0,
+        "loss": 0.05
+      },
+      "b_to_a": {
+        "snr": 5.25,
+        "loss": 0.05
+      }
+    },
+    {
+      "a": "RPT_BORKOWO",
+      "b": "RPT_REKCIN",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.5,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -9.5,
+        "loss": 0.2
+      },
+      "b_to_a": {
+        "snr": -9.25,
+        "loss": 0.2
+      }
+    },
+    {
+      "a": "RPT_SKOWARCZ",
+      "b": "RPT_REKCIN",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.5,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -0.5,
+        "loss": 0.1
+      },
+      "b_to_a": {
+        "snr": -2.75,
+        "loss": 0.1
+      }
+    },
+    {
+      "a": "RPT_PRG_01",
+      "b": "RPT_REKCIN",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.25,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -7.25,
+        "loss": 0.2
+      },
+      "b_to_a": {
+        "snr": 0.0,
+        "loss": 0.05
+      }
+    },
+    {
+      "a": "RPT_tx20_sol_bat4000",
+      "b": "RPT_REKCIN",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 5.25,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 5.25,
+        "loss": 0.05
+      },
+      "b_to_a": {
+        "snr": 8.25,
+        "loss": 0.02
+      }
+    },
+    {
+      "a": "RPT_PRG_04",
+      "b": "RPT_REKCIN",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.75,
+      "rssi": -90.0,
+      "a_to_b": {
         "snr": -9.75,
         "loss": 0.2
+      },
+      "b_to_a": {
+        "snr": 4.0,
+        "loss": 0.05
       }
     },
     {
       "a": "GDAOlszynka",
       "b": "RPT_REKCIN",
-      "loss": 0.1,
+      "loss": 0.2,
       "latency_ms": 20.0,
-      "snr": -5.25,
+      "snr": -6.5,
       "rssi": -90.0,
       "a_to_b": {
-        "snr": -5.25,
-        "loss": 0.1
+        "snr": -6.5,
+        "loss": 0.2
       },
       "b_to_a": {
-        "snr": -10.25,
-        "loss": 0.35
+        "snr": -9.5,
+        "loss": 0.2
+      }
+    },
+    {
+      "a": "RPT_REKCIN",
+      "b": "RPT_PRG_03",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 3.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 3.0,
+        "loss": 0.05
+      },
+      "b_to_a": {
+        "snr": -12.5,
+        "loss": 0.5
       }
     },
     {
@@ -829,24 +1259,200 @@
       }
     },
     {
-      "a": "RPT_SKOWARCZ",
-      "b": "RPT_REKCIN",
-      "loss": 0.1,
+      "a": "GTC_JednosciNarodu_R",
+      "b": "GDA1R",
+      "loss": 0.5,
       "latency_ms": 20.0,
-      "snr": -1.25,
+      "snr": -14.5,
       "rssi": -90.0,
       "a_to_b": {
-        "snr": -1.25,
-        "loss": 0.1
+        "snr": -14.5,
+        "loss": 0.5
       },
       "b_to_a": {
-        "snr": -6.25,
+        "snr": -9.5,
         "loss": 0.2
       }
     },
     {
-      "a": "RPT_PRG_01",
-      "b": "RPT_REKCIN",
+      "a": "GDA1R",
+      "b": "GDA_SW_WOJCIECH",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.25,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -5.25,
+        "loss": 0.1
+      },
+      "b_to_a": {
+        "snr": -10.25,
+        "loss": 0.35
+      }
+    },
+    {
+      "a": "GDA1R",
+      "b": "RPT_KOZIA_GORA",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -6.75,
+        "loss": 0.2
+      },
+      "b_to_a": {
+        "snr": -16.25,
+        "loss": 0.5
+      }
+    },
+    {
+      "a": "GTC_JednosciNarodu_R",
+      "b": "RPT_KOZIA_GORA",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -2.75,
+        "loss": 0.1
+      },
+      "b_to_a": {
+        "snr": -10.0,
+        "loss": 0.2
+      }
+    },
+    {
+      "a": "RPT_KOZIA_GORA",
+      "b": "GDA_SW_WOJCIECH",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -6.75,
+        "loss": 0.2
+      },
+      "b_to_a": {
+        "snr": 5.75,
+        "loss": 0.05
+      }
+    },
+    {
+      "a": "RPT_KOZIA_GORA",
+      "b": "RPT_Skowarcz_V3HPV",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.25,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -10.25,
+        "loss": 0.35
+      },
+      "b_to_a": {
+        "snr": -10.0,
+        "loss": 0.2
+      }
+    },
+    {
+      "a": "RPT_KOZIA_GORA",
+      "b": "RPT_KLESZCZ",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -12.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -12.0,
+        "loss": 0.35
+      },
+      "b_to_a": {
+        "snr": -10.75,
+        "loss": 0.35
+      }
+    },
+    {
+      "a": "RPT_KOZIA_GORA",
+      "b": "MIK_DW_RPT",
+      "loss": 0.5,
+      "latency_ms": 20.0,
+      "snr": -12.25,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -12.25,
+        "loss": 0.5
+      },
+      "b_to_a": {
+        "snr": -8.0,
+        "loss": 0.2
+      }
+    },
+    {
+      "a": "RPT_KOZIA_GORA",
+      "b": "GDANSK-SUCHANINO_SM",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 3.5,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 3.5,
+        "loss": 0.05
+      },
+      "b_to_a": {
+        "snr": 8.5,
+        "loss": 0.02
+      }
+    },
+    {
+      "a": "RPT_KOZIA_GORA",
+      "b": "RPT_BORKOWO",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -11.0,
+        "loss": 0.35
+      },
+      "b_to_a": {
+        "snr": -6.0,
+        "loss": 0.1
+      }
+    },
+    {
+      "a": "RPT_KOZIA_GORA",
+      "b": "GDAOlszynka",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -1.75,
+        "loss": 0.1
+      },
+      "b_to_a": {
+        "snr": 3.25,
+        "loss": 0.05
+      }
+    },
+    {
+      "a": "RPT_KOZIA_GORA",
+      "b": "GDA_Karczemki",
+      "loss": 0.5,
+      "latency_ms": 20.0,
+      "snr": -15.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -15.0,
+        "loss": 0.5
+      },
+      "b_to_a": {
+        "snr": -10.0,
+        "loss": 0.2
+      }
+    },
+    {
+      "a": "RPT_KOZIA_GORA",
+      "b": "BAN06M-Test-XiaoRPT",
       "loss": 0.2,
       "latency_ms": 20.0,
       "snr": -6.25,
@@ -856,13 +1462,109 @@
         "loss": 0.2
       },
       "b_to_a": {
-        "snr": -5.0,
+        "snr": -1.75,
         "loss": 0.1
       }
     },
     {
-      "a": "RPT_REKCIN",
-      "b": "RPT_PRG_03",
+      "a": "RPT_KOZIA_GORA",
+      "b": "GKA_PEPOWO_RPT",
+      "loss": 0.5,
+      "latency_ms": 20.0,
+      "snr": -17.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -17.0,
+        "loss": 0.5
+      },
+      "b_to_a": {
+        "snr": -12.0,
+        "loss": 0.35
+      }
+    },
+    {
+      "a": "RPT_KOZIA_GORA",
+      "b": "GDAMichalin",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 5.25,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 5.25,
+        "loss": 0.05
+      },
+      "b_to_a": {
+        "snr": 10.25,
+        "loss": 0.02
+      }
+    },
+    {
+      "a": "RPT_KOZIA_GORA",
+      "b": "GKA_PRZYJAZN_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.5,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -9.5,
+        "loss": 0.2
+      },
+      "b_to_a": {
+        "snr": -4.0,
+        "loss": 0.1
+      }
+    },
+    {
+      "a": "RPT_KOZIA_GORA",
+      "b": "GKW_KOPERNIKA_RPT",
+      "loss": 0.5,
+      "latency_ms": 20.0,
+      "snr": -15.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -15.75,
+        "loss": 0.5
+      },
+      "b_to_a": {
+        "snr": -10.75,
+        "loss": 0.35
+      }
+    },
+    {
+      "a": "RPT_KOZIA_GORA",
+      "b": "GKW_KOPERNIKA_II_RPT",
+      "loss": 0.5,
+      "latency_ms": 20.0,
+      "snr": -15.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -15.0,
+        "loss": 0.5
+      },
+      "b_to_a": {
+        "snr": -10.0,
+        "loss": 0.2
+      }
+    },
+    {
+      "a": "RPT_KOZIA_GORA",
+      "b": "GWE_Bojano_RPT",
+      "loss": 0.5,
+      "latency_ms": 20.0,
+      "snr": -18.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -18.0,
+        "loss": 0.5
+      },
+      "b_to_a": {
+        "snr": -13.0,
+        "loss": 0.5
+      }
+    },
+    {
+      "a": "RPT_KOZIA_GORA",
+      "b": "GKW_BAJKOWE_NW_RPT",
       "loss": 0.5,
       "latency_ms": 20.0,
       "snr": -17.5,
@@ -877,40 +1579,120 @@
       }
     },
     {
-      "a": "RPT_tx20_sol_bat4000",
-      "b": "RPT_REKCIN",
-      "loss": 0.1,
+      "a": "RPT_KOZIA_GORA",
+      "b": "GKA_Borcz",
+      "loss": 0.5,
       "latency_ms": 20.0,
-      "snr": -2.5,
+      "snr": -14.5,
       "rssi": -90.0,
       "a_to_b": {
-        "snr": -2.5,
-        "loss": 0.1
+        "snr": -14.5,
+        "loss": 0.5
       },
       "b_to_a": {
-        "snr": -7.5,
+        "snr": -9.5,
         "loss": 0.2
       }
     },
     {
-      "a": "GDAMichalin",
-      "b": "GDANSK-SUCHANINO_SM",
-      "loss": 0.1,
+      "a": "GDARubinowa",
+      "b": "RPT_Skowarcz_V3HPV",
+      "loss": 0.35,
       "latency_ms": 20.0,
-      "snr": -3.0,
+      "snr": -12.0,
       "rssi": -90.0,
       "a_to_b": {
-        "snr": -3.0,
-        "loss": 0.1
+        "snr": -12.0,
+        "loss": 0.35
       },
       "b_to_a": {
-        "snr": 2.0,
-        "loss": 0.05
+        "snr": -10.75,
+        "loss": 0.35
       }
     },
     {
-      "a": "Dobrzewino_RPT",
-      "b": "GDAMichalin",
+      "a": "RPT_Skowarcz_V3HPV",
+      "b": "RPT_tx20_sol_bat4000",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 3.5,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 3.5,
+        "loss": 0.05
+      },
+      "b_to_a": {
+        "snr": -3.0,
+        "loss": 0.1
+      }
+    },
+    {
+      "a": "RPT_Skowarcz_V3HPV",
+      "b": "RPT_PRG_01",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.5,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -8.5,
+        "loss": 0.2
+      },
+      "b_to_a": {
+        "snr": -14.0,
+        "loss": 0.5
+      }
+    },
+    {
+      "a": "RPT_PRG_04",
+      "b": "RPT_Skowarcz_V3HPV",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -9.75,
+        "loss": 0.2
+      },
+      "b_to_a": {
+        "snr": -3.75,
+        "loss": 0.1
+      }
+    },
+    {
+      "a": "GTC_JednosciNarodu_R",
+      "b": "RPT_Skowarcz_V3HPV",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 9.25,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 9.25,
+        "loss": 0.02
+      },
+      "b_to_a": {
+        "snr": 9.0,
+        "loss": 0.02
+      }
+    },
+    {
+      "a": "RPT_Skowarcz_V3HPV",
+      "b": "GDA_SW_WOJCIECH",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 11.5,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 11.5,
+        "loss": 0.02
+      },
+      "b_to_a": {
+        "snr": 6.5,
+        "loss": 0.02
+      }
+    },
+    {
+      "a": "GDAMichalin",
+      "b": "RPT_Skowarcz_V3HPV",
       "loss": 0.1,
       "latency_ms": 20.0,
       "snr": -4.5,
@@ -925,8 +1707,120 @@
       }
     },
     {
+      "a": "GKW_BAJKOWE_NW_RPT",
+      "b": "RPT_Skowarcz_V3HPV",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.25,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -6.25,
+        "loss": 0.2
+      },
+      "b_to_a": {
+        "snr": -0.75,
+        "loss": 0.1
+      }
+    },
+    {
+      "a": "MIK_DW_RPT",
+      "b": "RPT_Skowarcz_V3HPV",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 4.5,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 4.5,
+        "loss": 0.05
+      },
+      "b_to_a": {
+        "snr": 7.0,
+        "loss": 0.02
+      }
+    },
+    {
+      "a": "RPT_Skowarcz_V3HPV",
+      "b": "GDANSK-SUCHANINO_SM",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.5,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -2.5,
+        "loss": 0.1
+      },
+      "b_to_a": {
+        "snr": 10.75,
+        "loss": 0.02
+      }
+    },
+    {
+      "a": "RPT_Skowarcz_V3HPV",
+      "b": "RPT_PRG_03",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -12.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -12.0,
+        "loss": 0.35
+      },
+      "b_to_a": {
+        "snr": -17.0,
+        "loss": 0.5
+      }
+    },
+    {
+      "a": "GTC_JednosciNarodu_R",
+      "b": "RPT_KLESZCZ",
+      "loss": 0.5,
+      "latency_ms": 20.0,
+      "snr": -14.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -14.75,
+        "loss": 0.5
+      },
+      "b_to_a": {
+        "snr": -9.75,
+        "loss": 0.2
+      }
+    },
+    {
+      "a": "RPT_KLESZCZ",
+      "b": "GDA_SW_WOJCIECH",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -7.0,
+        "loss": 0.2
+      },
+      "b_to_a": {
+        "snr": -12.0,
+        "loss": 0.35
+      }
+    },
+    {
       "a": "GDAMichalin",
-      "b": "GKW_KOPERNIKA_II_RPT",
+      "b": "GDA_SW_WOJCIECH",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.5,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -3.5,
+        "loss": 0.1
+      },
+      "b_to_a": {
+        "snr": -8.0,
+        "loss": 0.2
+      }
+    },
+    {
+      "a": "GDAMichalin",
+      "b": "GDAOlszynka",
       "loss": 0.35,
       "latency_ms": 20.0,
       "snr": -11.25,
@@ -942,215 +1836,7 @@
     },
     {
       "a": "GDAMichalin",
-      "b": "GKA_Borcz",
-      "loss": 0.02,
-      "latency_ms": 20.0,
-      "snr": 6.5,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": 6.5,
-        "loss": 0.02
-      },
-      "b_to_a": {
-        "snr": 11.5,
-        "loss": 0.02
-      }
-    },
-    {
-      "a": "Bojano_Lesoki_RPT",
-      "b": "GDAMichalin",
-      "loss": 0.2,
-      "latency_ms": 20.0,
-      "snr": -9.0,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": -9.0,
-        "loss": 0.2
-      },
-      "b_to_a": {
-        "snr": -14.0,
-        "loss": 0.5
-      }
-    },
-    {
-      "a": "GDAMichalin",
       "b": "BAN06M-Test-XiaoRPT",
-      "loss": 0.35,
-      "latency_ms": 20.0,
-      "snr": -10.5,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": -10.5,
-        "loss": 0.35
-      },
-      "b_to_a": {
-        "snr": -5.5,
-        "loss": 0.1
-      }
-    },
-    {
-      "a": "GDAMichalin",
-      "b": "GWE_Bojano_RPT",
-      "loss": 0.2,
-      "latency_ms": 20.0,
-      "snr": -8.25,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": -8.25,
-        "loss": 0.2
-      },
-      "b_to_a": {
-        "snr": -4.5,
-        "loss": 0.1
-      }
-    },
-    {
-      "a": "GDAMichalin",
-      "b": "GKA_PEPOWO_RPT",
-      "loss": 0.5,
-      "latency_ms": 20.0,
-      "snr": -14.0,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": -14.0,
-        "loss": 0.5
-      },
-      "b_to_a": {
-        "snr": -9.0,
-        "loss": 0.2
-      }
-    },
-    {
-      "a": "GA_WICZ_RPT_01",
-      "b": "GDAMichalin",
-      "loss": 0.1,
-      "latency_ms": 20.0,
-      "snr": -4.75,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": -4.75,
-        "loss": 0.1
-      },
-      "b_to_a": {
-        "snr": -9.75,
-        "loss": 0.2
-      }
-    },
-    {
-      "a": "GDAMichalin",
-      "b": "GDARubinowa",
-      "loss": 0.05,
-      "latency_ms": 20.0,
-      "snr": 5.75,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": 5.75,
-        "loss": 0.05
-      },
-      "b_to_a": {
-        "snr": 10.75,
-        "loss": 0.02
-      }
-    },
-    {
-      "a": "GDAMichalin",
-      "b": "Eagles_Nest",
-      "loss": 0.2,
-      "latency_ms": 20.0,
-      "snr": -9.5,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": -9.5,
-        "loss": 0.2
-      },
-      "b_to_a": {
-        "snr": -4.5,
-        "loss": 0.1
-      }
-    },
-    {
-      "a": "GDAMichalin",
-      "b": "Chwaszczyno_P01na_RP",
-      "loss": 0.2,
-      "latency_ms": 20.0,
-      "snr": -10.0,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": -10.0,
-        "loss": 0.2
-      },
-      "b_to_a": {
-        "snr": -4.5,
-        "loss": 0.1
-      }
-    },
-    {
-      "a": "GDAMichalin",
-      "b": "GKW_KOPERNIKA_RPT",
-      "loss": 0.5,
-      "latency_ms": 20.0,
-      "snr": -13.25,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": -13.25,
-        "loss": 0.5
-      },
-      "b_to_a": {
-        "snr": -8.25,
-        "loss": 0.2
-      }
-    },
-    {
-      "a": "GDAMichalin",
-      "b": "GKW_MORAWY_RPT",
-      "loss": 0.1,
-      "latency_ms": 20.0,
-      "snr": -0.5,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": -0.5,
-        "loss": 0.1
-      },
-      "b_to_a": {
-        "snr": -2.5,
-        "loss": 0.1
-      }
-    },
-    {
-      "a": "GDAMichalin",
-      "b": "GDYNIA_Wiczlino_RPT",
-      "loss": 0.5,
-      "latency_ms": 20.0,
-      "snr": -18.0,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": -18.0,
-        "loss": 0.5
-      },
-      "b_to_a": {
-        "snr": -13.0,
-        "loss": 0.5
-      }
-    },
-    {
-      "a": "GKA_Kamienica_Szlach",
-      "b": "GDAMichalin",
-      "loss": 0.05,
-      "latency_ms": 20.0,
-      "snr": 2.75,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": 2.75,
-        "loss": 0.05
-      },
-      "b_to_a": {
-        "snr": -2.25,
-        "loss": 0.1
-      }
-    },
-    {
-      "a": "GDAMichalin",
-      "b": "GKA_PRZ_KCZ_RPT",
       "loss": 0.5,
       "latency_ms": 20.0,
       "snr": -15.0,
@@ -1165,23 +1851,135 @@
       }
     },
     {
-      "a": "GKS_Wiele_Las",
-      "b": "GDAMichalin",
-      "loss": 0.02,
+      "a": "GDAMichalin",
+      "b": "GKW_KOPERNIKA_RPT",
+      "loss": 0.5,
       "latency_ms": 20.0,
-      "snr": 12.5,
+      "snr": -13.75,
       "rssi": -90.0,
       "a_to_b": {
-        "snr": 12.5,
-        "loss": 0.02
+        "snr": -13.75,
+        "loss": 0.5
       },
       "b_to_a": {
-        "snr": 12.25,
-        "loss": 0.02
+        "snr": -8.75,
+        "loss": 0.2
       }
     },
     {
       "a": "GDAMichalin",
+      "b": "GKW_KOPERNIKA_II_RPT",
+      "loss": 0.5,
+      "latency_ms": 20.0,
+      "snr": -15.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -15.75,
+        "loss": 0.5
+      },
+      "b_to_a": {
+        "snr": -10.75,
+        "loss": 0.35
+      }
+    },
+    {
+      "a": "Dobrzewino_RPT",
+      "b": "GDAMichalin",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.25,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -9.25,
+        "loss": 0.2
+      },
+      "b_to_a": {
+        "snr": -6.75,
+        "loss": 0.2
+      }
+    },
+    {
+      "a": "Bojano_Lesoki_RPT",
+      "b": "GDAMichalin",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.5,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -6.5,
+        "loss": 0.2
+      },
+      "b_to_a": {
+        "snr": -4.75,
+        "loss": 0.1
+      }
+    },
+    {
+      "a": "GDAMichalin",
+      "b": "GWE_Bojano_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.5,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -5.5,
+        "loss": 0.1
+      },
+      "b_to_a": {
+        "snr": -9.0,
+        "loss": 0.2
+      }
+    },
+    {
+      "a": "GDAMichalin",
+      "b": "GKA_PEPOWO_RPT",
+      "loss": 0.5,
+      "latency_ms": 20.0,
+      "snr": -15.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -15.75,
+        "loss": 0.5
+      },
+      "b_to_a": {
+        "snr": -10.75,
+        "loss": 0.35
+      }
+    },
+    {
+      "a": "GA_WICZ_RPT_01",
+      "b": "GDAMichalin",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -6.75,
+        "loss": 0.2
+      },
+      "b_to_a": {
+        "snr": -11.75,
+        "loss": 0.35
+      }
+    },
+    {
+      "a": "GTC_JednosciNarodu_R",
+      "b": "MIK_DW_RPT",
+      "loss": 0.5,
+      "latency_ms": 20.0,
+      "snr": -14.25,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -14.25,
+        "loss": 0.5
+      },
+      "b_to_a": {
+        "snr": -9.25,
+        "loss": 0.2
+      }
+    },
+    {
+      "a": "GDAOlszynka",
       "b": "MIK_DW_RPT",
       "loss": 0.2,
       "latency_ms": 20.0,
@@ -1192,13 +1990,29 @@
         "loss": 0.2
       },
       "b_to_a": {
-        "snr": -8.25,
-        "loss": 0.2
+        "snr": -12.5,
+        "loss": 0.5
       }
     },
     {
-      "a": "GDAMichalin",
-      "b": "GDYNIA_Dbrowa_RPT",
+      "a": "SOP_DW_RPT",
+      "b": "GDYNIA_Witomino_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.25,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -7.25,
+        "loss": 0.2
+      },
+      "b_to_a": {
+        "snr": -12.25,
+        "loss": 0.5
+      }
+    },
+    {
+      "a": "Ga_Dziaki_l_rpt",
+      "b": "GDYNIA_Witomino_RPT",
       "loss": 0.2,
       "latency_ms": 20.0,
       "snr": -9.25,
@@ -1213,72 +2027,56 @@
       }
     },
     {
-      "a": "GD-Osiek-RPT",
-      "b": "GDA_Heweliusza",
-      "loss": 0.05,
-      "latency_ms": 20.0,
-      "snr": 2.5,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": 2.5,
-        "loss": 0.05
-      },
-      "b_to_a": {
-        "snr": -2.5,
-        "loss": 0.1
-      }
-    },
-    {
-      "a": "GDA_Heweliusza",
-      "b": "GDA_Przerobka",
+      "a": "GDAOlszynka",
+      "b": "GDYNIA_Witomino_RPT",
       "loss": 0.1,
       "latency_ms": 20.0,
-      "snr": -1.0,
+      "snr": -1.75,
       "rssi": -90.0,
       "a_to_b": {
-        "snr": -1.0,
+        "snr": -1.75,
         "loss": 0.1
       },
       "b_to_a": {
-        "snr": 4.0,
-        "loss": 0.05
+        "snr": -6.75,
+        "loss": 0.2
       }
     },
     {
-      "a": "GDAOlszynka",
-      "b": "GDA_Heweliusza",
-      "loss": 0.05,
+      "a": "GDY_Spokojna",
+      "b": "GDYNIA_Witomino_RPT",
+      "loss": 0.02,
       "latency_ms": 20.0,
-      "snr": 5.0,
+      "snr": 10.5,
       "rssi": -90.0,
       "a_to_b": {
-        "snr": 5.0,
-        "loss": 0.05
+        "snr": 10.5,
+        "loss": 0.02
       },
       "b_to_a": {
-        "snr": 0.0,
+        "snr": 5.5,
         "loss": 0.05
       }
     },
     {
-      "a": "GTC_JednosciNarodu_R",
-      "b": "GDA_Heweliusza",
+      "a": "SQ2PPJ_Repeater",
+      "b": "GDYNIA_Witomino_RPT",
       "loss": 0.35,
       "latency_ms": 20.0,
-      "snr": -10.5,
+      "snr": -11.0,
       "rssi": -90.0,
       "a_to_b": {
-        "snr": -10.5,
+        "snr": -11.0,
         "loss": 0.35
       },
       "b_to_a": {
-        "snr": -15.5,
+        "snr": -16.0,
         "loss": 0.5
       }
     },
     {
-      "a": "GDA_Heweliusza",
-      "b": "GD_Swibno_rpt_2",
+      "a": "GDYNIA_Witomino_RPT",
+      "b": "GDYNIA_Wiczlino_RPT",
       "loss": 0.5,
       "latency_ms": 20.0,
       "snr": -16.5,
@@ -1293,104 +2091,40 @@
       }
     },
     {
-      "a": "GDY_Spokojna",
+      "a": "SP2ZIE_Repeater_Xiao",
+      "b": "GDYNIA_Witomino_RPT",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -11.75,
+        "loss": 0.35
+      },
+      "b_to_a": {
+        "snr": -16.75,
+        "loss": 0.5
+      }
+    },
+    {
+      "a": "GDYNIA_Wielkokacka_R",
       "b": "GDYNIA_Witomino_RPT",
       "loss": 0.02,
       "latency_ms": 20.0,
-      "snr": 10.75,
+      "snr": 12.0,
       "rssi": -90.0,
       "a_to_b": {
-        "snr": 10.75,
+        "snr": 12.0,
         "loss": 0.02
       },
       "b_to_a": {
-        "snr": -7.5,
-        "loss": 0.2
-      }
-    },
-    {
-      "a": "GDANSK-SUCHANINO_SM",
-      "b": "GDA_MORENA",
-      "loss": 0.1,
-      "latency_ms": 20.0,
-      "snr": -0.75,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": -0.75,
-        "loss": 0.1
-      },
-      "b_to_a": {
-        "snr": -4.0,
-        "loss": 0.1
-      }
-    },
-    {
-      "a": "Dobrzewino_RPT",
-      "b": "GDANSK-SUCHANINO_SM",
-      "loss": 0.5,
-      "latency_ms": 20.0,
-      "snr": -16.25,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": -16.25,
-        "loss": 0.5
-      },
-      "b_to_a": {
-        "snr": -11.25,
-        "loss": 0.35
-      }
-    },
-    {
-      "a": "RPT_BORKOWO",
-      "b": "GDA_MORENA",
-      "loss": 0.05,
-      "latency_ms": 20.0,
-      "snr": 4.0,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": 4.0,
-        "loss": 0.05
-      },
-      "b_to_a": {
-        "snr": 10.0,
+        "snr": 7.0,
         "loss": 0.02
       }
     },
     {
-      "a": "RPT_SKOWARCZ",
-      "b": "GDA_MORENA",
-      "loss": 0.02,
-      "latency_ms": 20.0,
-      "snr": 6.5,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": 6.5,
-        "loss": 0.02
-      },
-      "b_to_a": {
-        "snr": 11.5,
-        "loss": 0.02
-      }
-    },
-    {
-      "a": "Chwaszczyno_P01na_RP",
-      "b": "RPT_PRZYJAZN",
-      "loss": 0.5,
-      "latency_ms": 20.0,
-      "snr": -16.0,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": -16.0,
-        "loss": 0.5
-      },
-      "b_to_a": {
-        "snr": -11.0,
-        "loss": 0.35
-      }
-    },
-    {
-      "a": "Dobrzewino_RPT",
-      "b": "RPT_PRZYJAZN",
+      "a": "GDYNIA_Dziaki_Lene",
+      "b": "GDYNIA_Witomino_RPT",
       "loss": 0.1,
       "latency_ms": 20.0,
       "snr": -5.75,
@@ -1400,12 +2134,188 @@
         "loss": 0.1
       },
       "b_to_a": {
-        "snr": -5.0,
+        "snr": -2.75,
         "loss": 0.1
       }
     },
     {
-      "a": "RPT_PRG_02",
+      "a": "GD_Hallera_Xiao_Test",
+      "b": "GDYNIA_Witomino_RPT",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.25,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -10.25,
+        "loss": 0.35
+      },
+      "b_to_a": {
+        "snr": -15.25,
+        "loss": 0.5
+      }
+    },
+    {
+      "a": "GDYNIA_Witomino_RPT",
+      "b": "Xiao_nrf52_Repeater_",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -5.75,
+        "loss": 0.1
+      },
+      "b_to_a": {
+        "snr": -0.75,
+        "loss": 0.1
+      }
+    },
+    {
+      "a": "GW1",
+      "b": "GDYNIA_Witomino_RPT",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 10.25,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 10.25,
+        "loss": 0.02
+      },
+      "b_to_a": {
+        "snr": 5.25,
+        "loss": 0.05
+      }
+    },
+    {
+      "a": "Wzgrza_Dylewskie-RPT",
+      "b": "GDYNIA_Witomino_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.25,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -9.25,
+        "loss": 0.2
+      },
+      "b_to_a": {
+        "snr": -14.25,
+        "loss": 0.5
+      }
+    },
+    {
+      "a": "RPT_tx20_sol_bat4000",
+      "b": "GDANSK-SUCHANINO_SM",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -12.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -12.0,
+        "loss": 0.35
+      },
+      "b_to_a": {
+        "snr": -11.25,
+        "loss": 0.35
+      }
+    },
+    {
+      "a": "GDANSK-SUCHANINO_SM",
+      "b": "RPT_PRG_01",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -7.0,
+        "loss": 0.2
+      },
+      "b_to_a": {
+        "snr": -7.75,
+        "loss": 0.2
+      }
+    },
+    {
+      "a": "RPT_PRG_04",
+      "b": "GDANSK-SUCHANINO_SM",
+      "loss": 0.5,
+      "latency_ms": 20.0,
+      "snr": -13.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -13.0,
+        "loss": 0.5
+      },
+      "b_to_a": {
+        "snr": -4.75,
+        "loss": 0.1
+      }
+    },
+    {
+      "a": "GTC_JednosciNarodu_R",
+      "b": "GDANSK-SUCHANINO_SM",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.25,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -0.25,
+        "loss": 0.1
+      },
+      "b_to_a": {
+        "snr": 13.0,
+        "loss": 0.02
+      }
+    },
+    {
+      "a": "GDANSK-SUCHANINO_SM",
+      "b": "GDA_SW_WOJCIECH",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 8.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 8.75,
+        "loss": 0.02
+      },
+      "b_to_a": {
+        "snr": 3.75,
+        "loss": 0.05
+      }
+    },
+    {
+      "a": "GDARubinowa",
+      "b": "GDANSK-SUCHANINO_SM",
+      "loss": 0.5,
+      "latency_ms": 20.0,
+      "snr": -13.5,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -13.5,
+        "loss": 0.5
+      },
+      "b_to_a": {
+        "snr": -8.5,
+        "loss": 0.2
+      }
+    },
+    {
+      "a": "RPT_LOST_01",
+      "b": "GDANSK-SUCHANINO_SM",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 6.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 6.75,
+        "loss": 0.02
+      },
+      "b_to_a": {
+        "snr": 13.0,
+        "loss": 0.02
+      }
+    },
+    {
+      "a": "GDANSK-SUCHANINO_SM",
       "b": "RPT_PRG_03",
       "loss": 0.05,
       "latency_ms": 20.0,
@@ -1416,13 +2326,429 @@
         "loss": 0.05
       },
       "b_to_a": {
-        "snr": 3.5,
+        "snr": 0.75,
         "loss": 0.05
       }
     },
     {
-      "a": "RPT_PRG_02",
-      "b": "RPT_PRG_01",
+      "a": "Dobrzewino_RPT",
+      "b": "GDANSK-SUCHANINO_SM",
+      "loss": 0.5,
+      "latency_ms": 20.0,
+      "snr": -14.5,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -14.5,
+        "loss": 0.5
+      },
+      "b_to_a": {
+        "snr": -9.5,
+        "loss": 0.2
+      }
+    },
+    {
+      "a": "GTC_JednosciNarodu_R",
+      "b": "GDARubinowa",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -4.75,
+        "loss": 0.1
+      },
+      "b_to_a": {
+        "snr": -9.75,
+        "loss": 0.2
+      }
+    },
+    {
+      "a": "GDARubinowa",
+      "b": "GDA_Przerobka",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -10.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -10.0,
+        "loss": 0.2
+      },
+      "b_to_a": {
+        "snr": -5.5,
+        "loss": 0.1
+      }
+    },
+    {
+      "a": "GDARubinowa",
+      "b": "RPT_tx20_sol_bat4000",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -9.0,
+        "loss": 0.2
+      },
+      "b_to_a": {
+        "snr": -16.75,
+        "loss": 0.5
+      }
+    },
+    {
+      "a": "GDARubinowa",
+      "b": "GDA_SW_WOJCIECH",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -10.75,
+        "loss": 0.35
+      },
+      "b_to_a": {
+        "snr": -7.0,
+        "loss": 0.2
+      }
+    },
+    {
+      "a": "GDAOlszynka",
+      "b": "GDARubinowa",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 11.25,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 11.25,
+        "loss": 0.02
+      },
+      "b_to_a": {
+        "snr": -4.0,
+        "loss": 0.1
+      }
+    },
+    {
+      "a": "GDARubinowa",
+      "b": "GDA_Heweliusza",
+      "loss": 0.5,
+      "latency_ms": 20.0,
+      "snr": -14.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -14.0,
+        "loss": 0.5
+      },
+      "b_to_a": {
+        "snr": -9.0,
+        "loss": 0.2
+      }
+    },
+    {
+      "a": "GTC_JednosciNarodu_R",
+      "b": "SOP_DW_RPT",
+      "loss": 0.5,
+      "latency_ms": 20.0,
+      "snr": -16.5,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -16.5,
+        "loss": 0.5
+      },
+      "b_to_a": {
+        "snr": -9.25,
+        "loss": 0.2
+      }
+    },
+    {
+      "a": "GDA_SW_WOJCIECH",
+      "b": "RPT_PRG_03",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 6.25,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 6.25,
+        "loss": 0.02
+      },
+      "b_to_a": {
+        "snr": 6.5,
+        "loss": 0.02
+      }
+    },
+    {
+      "a": "RPT_tx20_sol_bat4000",
+      "b": "GDA_SW_WOJCIECH",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 9.25,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 9.25,
+        "loss": 0.02
+      },
+      "b_to_a": {
+        "snr": 9.75,
+        "loss": 0.02
+      }
+    },
+    {
+      "a": "RPT_PRG_01",
+      "b": "GDA_SW_WOJCIECH",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 2.25,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 2.25,
+        "loss": 0.05
+      },
+      "b_to_a": {
+        "snr": 0.5,
+        "loss": 0.05
+      }
+    },
+    {
+      "a": "RPT_PRG_04",
+      "b": "GDA_SW_WOJCIECH",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.5,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -7.5,
+        "loss": 0.2
+      },
+      "b_to_a": {
+        "snr": -2.0,
+        "loss": 0.1
+      }
+    },
+    {
+      "a": "GTC_JednosciNarodu_R",
+      "b": "GDA_SW_WOJCIECH",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 10.5,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 10.5,
+        "loss": 0.02
+      },
+      "b_to_a": {
+        "snr": 6.75,
+        "loss": 0.02
+      }
+    },
+    {
+      "a": "GDA_Heweliusza",
+      "b": "GDA_SW_WOJCIECH",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 1.5,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 1.5,
+        "loss": 0.05
+      },
+      "b_to_a": {
+        "snr": -3.5,
+        "loss": 0.1
+      }
+    },
+    {
+      "a": "GKA_PRZYJAZN_RPT",
+      "b": "GDA_SW_WOJCIECH",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -12.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -12.0,
+        "loss": 0.35
+      },
+      "b_to_a": {
+        "snr": -17.0,
+        "loss": 0.5
+      }
+    },
+    {
+      "a": "RPT_BORKOWO",
+      "b": "GDA_SW_WOJCIECH",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.25,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -6.25,
+        "loss": 0.2
+      },
+      "b_to_a": {
+        "snr": -11.25,
+        "loss": 0.35
+      }
+    },
+    {
+      "a": "RPT_SKOWARCZ",
+      "b": "GDA_SW_WOJCIECH",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 4.25,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 4.25,
+        "loss": 0.05
+      },
+      "b_to_a": {
+        "snr": -0.75,
+        "loss": 0.1
+      }
+    },
+    {
+      "a": "GDAOlszynka",
+      "b": "GDA_SW_WOJCIECH",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 10.25,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 10.25,
+        "loss": 0.02
+      },
+      "b_to_a": {
+        "snr": 5.25,
+        "loss": 0.05
+      }
+    },
+    {
+      "a": "GDA_Przerobka",
+      "b": "GDA_SW_WOJCIECH",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -0.75,
+        "loss": 0.1
+      },
+      "b_to_a": {
+        "snr": -5.75,
+        "loss": 0.1
+      }
+    },
+    {
+      "a": "GDA-ROKITNICA-RPT-2b",
+      "b": "GDA_SW_WOJCIECH",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 10.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 10.75,
+        "loss": 0.02
+      },
+      "b_to_a": {
+        "snr": 5.75,
+        "loss": 0.05
+      }
+    },
+    {
+      "a": "GTC_Rokicka_RPT",
+      "b": "GDA_SW_WOJCIECH",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.5,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -6.5,
+        "loss": 0.2
+      },
+      "b_to_a": {
+        "snr": -11.5,
+        "loss": 0.35
+      }
+    },
+    {
+      "a": "GDA_DW_RPT",
+      "b": "GDA_SW_WOJCIECH",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 3.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 3.75,
+        "loss": 0.05
+      },
+      "b_to_a": {
+        "snr": -1.25,
+        "loss": 0.1
+      }
+    },
+    {
+      "a": "GD_REP_K",
+      "b": "GDA_SW_WOJCIECH",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -4.0,
+        "loss": 0.1
+      },
+      "b_to_a": {
+        "snr": -9.0,
+        "loss": 0.2
+      }
+    },
+    {
+      "a": "RPT_JANK_01",
+      "b": "GDA_SW_WOJCIECH",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.5,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -2.5,
+        "loss": 0.1
+      },
+      "b_to_a": {
+        "snr": 9.25,
+        "loss": 0.02
+      }
+    },
+    {
+      "a": "GKW_KOPERNIKA_RPT",
+      "b": "GDA_SW_WOJCIECH",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.5,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -8.5,
+        "loss": 0.2
+      },
+      "b_to_a": {
+        "snr": -13.5,
+        "loss": 0.5
+      }
+    },
+    {
+      "a": "GKW_KOPERNIKA_II_RPT",
+      "b": "GDA_SW_WOJCIECH",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.5,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -5.5,
+        "loss": 0.1
+      },
+      "b_to_a": {
+        "snr": -10.5,
+        "loss": 0.35
+      }
+    },
+    {
+      "a": "GKW_BAJKOWE_NW_RPT",
+      "b": "GDA_SW_WOJCIECH",
       "loss": 0.1,
       "latency_ms": 20.0,
       "snr": -6.0,
@@ -1432,32 +2758,472 @@
         "loss": 0.1
       },
       "b_to_a": {
+        "snr": -2.25,
+        "loss": 0.1
+      }
+    },
+    {
+      "a": "GDYNIA_Dziaki_Lene",
+      "b": "Ga_Dziaki_l_rpt",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 12.25,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 12.25,
+        "loss": 0.02
+      },
+      "b_to_a": {
+        "snr": 12.0,
+        "loss": 0.02
+      }
+    },
+    {
+      "a": "GTC_JednosciNarodu_R",
+      "b": "RPT_GD_Suchanino",
+      "loss": 0.5,
+      "latency_ms": 20.0,
+      "snr": -12.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -12.75,
+        "loss": 0.5
+      },
+      "b_to_a": {
+        "snr": -13.0,
+        "loss": 0.5
+      }
+    },
+    {
+      "a": "GTC_JednosciNarodu_R",
+      "b": "GDA_Heweliusza",
+      "loss": 0.5,
+      "latency_ms": 20.0,
+      "snr": -15.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -15.0,
+        "loss": 0.5
+      },
+      "b_to_a": {
+        "snr": -12.0,
+        "loss": 0.35
+      }
+    },
+    {
+      "a": "Dobrzewino_RPT",
+      "b": "GKA_PRZYJAZN_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -3.0,
+        "loss": 0.1
+      },
+      "b_to_a": {
+        "snr": -5.5,
+        "loss": 0.1
+      }
+    },
+    {
+      "a": "RPT_JANK_01",
+      "b": "RPT_BORKOWO",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.5,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -10.5,
+        "loss": 0.35
+      },
+      "b_to_a": {
+        "snr": 1.25,
+        "loss": 0.05
+      }
+    },
+    {
+      "a": "RPT_SKOWARCZ",
+      "b": "RPT_tx20_sol_bat4000",
+      "loss": 0.5,
+      "latency_ms": 20.0,
+      "snr": -12.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -12.75,
+        "loss": 0.5
+      },
+      "b_to_a": {
+        "snr": -17.5,
+        "loss": 0.5
+      }
+    },
+    {
+      "a": "RPT_SKOWARCZ",
+      "b": "RPT_PRG_01",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.5,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -4.5,
+        "loss": 0.1
+      },
+      "b_to_a": {
+        "snr": -9.25,
+        "loss": 0.2
+      }
+    },
+    {
+      "a": "RPT_PRG_04",
+      "b": "RPT_SKOWARCZ",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 6.5,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 6.5,
+        "loss": 0.02
+      },
+      "b_to_a": {
+        "snr": 12.0,
+        "loss": 0.02
+      }
+    },
+    {
+      "a": "RPT_SKOWARCZ",
+      "b": "RPT_PRG_03",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -0.75,
+        "loss": 0.1
+      },
+      "b_to_a": {
         "snr": -5.75,
         "loss": 0.1
       }
     },
     {
-      "a": "Dobrzewino_RPT",
-      "b": "GWE_Bojano_RPT",
-      "loss": 0.02,
+      "a": "RPT_PRG_04",
+      "b": "RPT_PRG_01",
+      "loss": 0.35,
       "latency_ms": 20.0,
-      "snr": 13.75,
-      "rssi": -90.0
-    },
-    {
-      "a": "Dobrzewino_RPT",
-      "b": "Bojano_Lesoki_RPT",
-      "loss": 0.02,
-      "latency_ms": 20.0,
-      "snr": 12.0,
+      "snr": -11.75,
       "rssi": -90.0,
       "a_to_b": {
-        "snr": 12.0,
+        "snr": -11.75,
+        "loss": 0.35
+      },
+      "b_to_a": {
+        "snr": -6.5,
+        "loss": 0.2
+      }
+    },
+    {
+      "a": "GDAOlszynka",
+      "b": "RPT_PRG_01",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -12.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -12.0,
+        "loss": 0.35
+      },
+      "b_to_a": {
+        "snr": -17.0,
+        "loss": 0.5
+      }
+    },
+    {
+      "a": "RPT_PRG_01",
+      "b": "RPT_PRG_03",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 11.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 11.0,
         "loss": 0.02
       },
       "b_to_a": {
-        "snr": 11.75,
+        "snr": 12.25,
         "loss": 0.02
+      }
+    },
+    {
+      "a": "GTC_JednosciNarodu_R",
+      "b": "RPT_PRG_01",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -10.75,
+        "loss": 0.35
+      },
+      "b_to_a": {
+        "snr": -15.75,
+        "loss": 0.5
+      }
+    },
+    {
+      "a": "GDAOlszynka",
+      "b": "RPT_tx20_sol_bat4000",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 2.25,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 2.25,
+        "loss": 0.05
+      },
+      "b_to_a": {
+        "snr": 5.0,
+        "loss": 0.05
+      }
+    },
+    {
+      "a": "RPT_tx20_sol_bat4000",
+      "b": "RPT_PRG_03",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -1.75,
+        "loss": 0.1
+      },
+      "b_to_a": {
+        "snr": -6.0,
+        "loss": 0.1
+      }
+    },
+    {
+      "a": "GTC_JednosciNarodu_R",
+      "b": "RPT_tx20_sol_bat4000",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.25,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -11.25,
+        "loss": 0.35
+      },
+      "b_to_a": {
+        "snr": -14.5,
+        "loss": 0.5
+      }
+    },
+    {
+      "a": "GDA-ROKITNICA-RPT-2b",
+      "b": "RPT_tx20_sol_bat4000",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 11.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 11.0,
+        "loss": 0.02
+      },
+      "b_to_a": {
+        "snr": 7.25,
+        "loss": 0.02
+      }
+    },
+    {
+      "a": "RPT_PRG_04",
+      "b": "GDAOlszynka",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -1.0,
+        "loss": 0.1
+      },
+      "b_to_a": {
+        "snr": 0.75,
+        "loss": 0.05
+      }
+    },
+    {
+      "a": "RPT_PRG_04",
+      "b": "RPT_PRG_03",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -11.75,
+        "loss": 0.35
+      },
+      "b_to_a": {
+        "snr": -6.75,
+        "loss": 0.2
+      }
+    },
+    {
+      "a": "GTC_JednosciNarodu_R",
+      "b": "RPT_PRG_04",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -6.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -6.0,
+        "loss": 0.1
+      },
+      "b_to_a": {
+        "snr": -11.25,
+        "loss": 0.35
+      }
+    },
+    {
+      "a": "GTC_JednosciNarodu_R",
+      "b": "GDAOlszynka",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -3.0,
+        "loss": 0.1
+      },
+      "b_to_a": {
+        "snr": 3.0,
+        "loss": 0.05
+      }
+    },
+    {
+      "a": "GDAOlszynka",
+      "b": "RPT_PRG_03",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 2.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 2.0,
+        "loss": 0.05
+      },
+      "b_to_a": {
+        "snr": -3.0,
+        "loss": 0.1
+      }
+    },
+    {
+      "a": "GTC_JednosciNarodu_R",
+      "b": "GDA_Karczemki",
+      "loss": 0.5,
+      "latency_ms": 20.0,
+      "snr": -16.25,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -16.25,
+        "loss": 0.5
+      },
+      "b_to_a": {
+        "snr": -10.0,
+        "loss": 0.2
+      }
+    },
+    {
+      "a": "GTC_JednosciNarodu_R",
+      "b": "GTC_Rokicka_RPT",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 4.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 4.0,
+        "loss": 0.05
+      },
+      "b_to_a": {
+        "snr": 2.5,
+        "loss": 0.05
+      }
+    },
+    {
+      "a": "GTC_JednosciNarodu_R",
+      "b": "GTC_ROKITKI_RPT",
+      "loss": 0.5,
+      "latency_ms": 20.0,
+      "snr": -14.5,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -14.5,
+        "loss": 0.5
+      },
+      "b_to_a": {
+        "snr": -9.75,
+        "loss": 0.2
+      }
+    },
+    {
+      "a": "GTC_JednosciNarodu_R",
+      "b": "GDY_Spokojna",
+      "loss": 0.5,
+      "latency_ms": 20.0,
+      "snr": -16.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -16.75,
+        "loss": 0.5
+      },
+      "b_to_a": {
+        "snr": -11.75,
+        "loss": 0.35
+      }
+    },
+    {
+      "a": "GTC_Rokicka_RPT",
+      "b": "GTC_ROKITKI_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.5,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -3.5,
+        "loss": 0.1
+      },
+      "b_to_a": {
+        "snr": -10.75,
+        "loss": 0.35
+      }
+    },
+    {
+      "a": "Dobrzewino_RPT",
+      "b": "GDY_Spokojna",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -12.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -12.0,
+        "loss": 0.35
+      },
+      "b_to_a": {
+        "snr": -7.0,
+        "loss": 0.2
+      }
+    },
+    {
+      "a": "Dobrzewino_RPT",
+      "b": "GDYNIA_Wiczlino_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.5,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -6.5,
+        "loss": 0.2
+      },
+      "b_to_a": {
+        "snr": -1.5,
+        "loss": 0.1
       }
     },
     {
@@ -1477,120 +3243,8 @@
       }
     },
     {
-      "a": "Dobrzewino_RPT",
-      "b": "GA_WICZ_RPT_01",
-      "loss": 0.05,
-      "latency_ms": 20.0,
-      "snr": 5.5,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": 5.5,
-        "loss": 0.05
-      },
-      "b_to_a": {
-        "snr": 10.5,
-        "loss": 0.02
-      }
-    },
-    {
-      "a": "Dobrzewino_RPT",
-      "b": "Chwaszczyno_P01na_RP",
-      "loss": 0.05,
-      "latency_ms": 20.0,
-      "snr": 1.0,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": 1.0,
-        "loss": 0.05
-      },
-      "b_to_a": {
-        "snr": 5.5,
-        "loss": 0.05
-      }
-    },
-    {
-      "a": "Dobrzewino_RPT",
-      "b": "GDYNIA_Wiczlino_RPT",
-      "loss": 0.1,
-      "latency_ms": 20.0,
-      "snr": -1.75,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": -1.75,
-        "loss": 0.1
-      },
-      "b_to_a": {
-        "snr": 3.25,
-        "loss": 0.05
-      }
-    },
-    {
-      "a": "Dobrzewino_RPT",
-      "b": "TUCHOM_RPT",
-      "loss": 0.1,
-      "latency_ms": 20.0,
-      "snr": -4.5,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": -4.5,
-        "loss": 0.1
-      },
-      "b_to_a": {
-        "snr": 0.5,
-        "loss": 0.05
-      }
-    },
-    {
-      "a": "Dobrzewino_RPT",
-      "b": "GDYNIA_Dbrowa_RPT",
-      "loss": 0.1,
-      "latency_ms": 20.0,
-      "snr": -6.0,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": -6.0,
-        "loss": 0.1
-      },
-      "b_to_a": {
-        "snr": -1.0,
-        "loss": 0.1
-      }
-    },
-    {
-      "a": "Dobrzewino_RPT",
-      "b": "Hopowo",
-      "loss": 0.5,
-      "latency_ms": 20.0,
-      "snr": -15.25,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": -15.25,
-        "loss": 0.5
-      },
-      "b_to_a": {
-        "snr": -10.25,
-        "loss": 0.35
-      }
-    },
-    {
-      "a": "Dobrzewino_RPT",
-      "b": "GDY_Fikakowo_RPT",
-      "loss": 0.1,
-      "latency_ms": 20.0,
-      "snr": -5.25,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": -5.25,
-        "loss": 0.1
-      },
-      "b_to_a": {
-        "snr": -0.25,
-        "loss": 0.1
-      }
-    },
-    {
       "a": "GKW_KOPERNIKA_II_RPT",
-      "b": "GKW_MORAWY_RPT",
+      "b": "GKW_KOPERNIKA_RPT",
       "loss": 0.02,
       "latency_ms": 20.0,
       "snr": 12.0,
@@ -1600,19 +3254,67 @@
         "loss": 0.02
       },
       "b_to_a": {
-        "snr": 3.75,
-        "loss": 0.05
+        "snr": 10.75,
+        "loss": 0.02
       }
     },
     {
-      "a": "GKW_KOPERNIKA_II_RPT",
-      "b": "GKW_KOPERNIKA_RPT",
-      "loss": 0.02,
+      "a": "GKW_BAJKOWE_NW_RPT",
+      "b": "GKW_KOPERNIKA_II_RPT",
+      "loss": 0.2,
       "latency_ms": 20.0,
-      "snr": 13.0,
+      "snr": -7.75,
       "rssi": -90.0,
       "a_to_b": {
-        "snr": 13.0,
+        "snr": -7.75,
+        "loss": 0.2
+      },
+      "b_to_a": {
+        "snr": 10.5,
+        "loss": 0.02
+      }
+    },
+    {
+      "a": "Dobrzewino_RPT",
+      "b": "Bojano_Lesoki_RPT",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 13.5,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 13.5,
+        "loss": 0.02
+      },
+      "b_to_a": {
+        "snr": 12.0,
+        "loss": 0.02
+      }
+    },
+    {
+      "a": "Dobrzewino_RPT",
+      "b": "GWE_Bojano_RPT",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 10.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 10.75,
+        "loss": 0.02
+      },
+      "b_to_a": {
+        "snr": 11.25,
+        "loss": 0.02
+      }
+    },
+    {
+      "a": "Dobrzewino_RPT",
+      "b": "GA_WICZ_RPT_01",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 6.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 6.75,
         "loss": 0.02
       },
       "b_to_a": {
@@ -1621,112 +3323,24 @@
       }
     },
     {
-      "a": "Chwaszczyno_P01na_RP",
-      "b": "GKA_Borcz",
-      "loss": 0.5,
-      "latency_ms": 20.0,
-      "snr": -18.0,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": -18.0,
-        "loss": 0.5
-      },
-      "b_to_a": {
-        "snr": -13.0,
-        "loss": 0.5
-      }
-    },
-    {
-      "a": "Bojano_Lesoki_RPT",
-      "b": "Chwaszczyno_P01na_RP",
+      "a": "Dobrzewino_RPT",
+      "b": "TUCHOM_RPT",
       "loss": 0.2,
       "latency_ms": 20.0,
-      "snr": -6.5,
+      "snr": -9.5,
       "rssi": -90.0,
       "a_to_b": {
-        "snr": -6.5,
+        "snr": -9.5,
         "loss": 0.2
       },
       "b_to_a": {
-        "snr": 4.5,
-        "loss": 0.05
-      }
-    },
-    {
-      "a": "Bojano_Lesoki_RPT",
-      "b": "GWE_Bojano_RPT",
-      "loss": 0.02,
-      "latency_ms": 20.0,
-      "snr": 12.25,
-      "rssi": -90.0
-    },
-    {
-      "a": "BAN06M-Test-XiaoRPT",
-      "b": "Chwaszczyno_P01na_RP",
-      "loss": 0.05,
-      "latency_ms": 20.0,
-      "snr": 3.0,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": 3.0,
-        "loss": 0.05
-      },
-      "b_to_a": {
-        "snr": -2.0,
+        "snr": -4.5,
         "loss": 0.1
       }
     },
     {
-      "a": "GWE_Bojano_RPT",
-      "b": "Chwaszczyno_P01na_RP",
-      "loss": 0.2,
-      "latency_ms": 20.0,
-      "snr": -8.75,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": -8.75,
-        "loss": 0.2
-      },
-      "b_to_a": {
-        "snr": -8.0,
-        "loss": 0.2
-      }
-    },
-    {
-      "a": "GKS_Wiele_Las",
-      "b": "GDARubinowa",
-      "loss": 0.05,
-      "latency_ms": 20.0,
-      "snr": 5.75,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": 5.75,
-        "loss": 0.05
-      },
-      "b_to_a": {
-        "snr": 10.75,
-        "loss": 0.02
-      }
-    },
-    {
-      "a": "GDYNIA_Dbrowa_RPT",
-      "b": "Chwaszczyno_P01na_RP",
-      "loss": 0.35,
-      "latency_ms": 20.0,
-      "snr": -12.0,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": -12.0,
-        "loss": 0.35
-      },
-      "b_to_a": {
-        "snr": -17.0,
-        "loss": 0.5
-      }
-    },
-    {
-      "a": "Hopowo",
-      "b": "Chwaszczyno_P01na_RP",
+      "a": "Dobrzewino_RPT",
+      "b": "GA_WICZ_RPT_02",
       "loss": 0.35,
       "latency_ms": 20.0,
       "snr": -10.75,
@@ -1736,77 +3350,13 @@
         "loss": 0.35
       },
       "b_to_a": {
-        "snr": -15.75,
-        "loss": 0.5
+        "snr": -5.75,
+        "loss": 0.1
       }
     },
     {
-      "a": "GDY_Fikakowo_RPT",
+      "a": "Dobrzewino_RPT",
       "b": "Chwaszczyno_P01na_RP",
-      "loss": 0.1,
-      "latency_ms": 20.0,
-      "snr": -4.0,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": -4.0,
-        "loss": 0.1
-      },
-      "b_to_a": {
-        "snr": -9.0,
-        "loss": 0.2
-      }
-    },
-    {
-      "a": "GDY_Spokojna",
-      "b": "Chwaszczyno_P01na_RP",
-      "loss": 0.1,
-      "latency_ms": 20.0,
-      "snr": -4.0,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": -4.0,
-        "loss": 0.1
-      },
-      "b_to_a": {
-        "snr": -9.0,
-        "loss": 0.2
-      }
-    },
-    {
-      "a": "GDYNIA_Dbrowa_RPT",
-      "b": "GDY_Fikakowo_RPT",
-      "loss": 0.02,
-      "latency_ms": 20.0,
-      "snr": 9.5,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": 9.5,
-        "loss": 0.02
-      },
-      "b_to_a": {
-        "snr": 4.5,
-        "loss": 0.05
-      }
-    },
-    {
-      "a": "GDYNIA_Dbrowa_RPT",
-      "b": "GDY_Spokojna",
-      "loss": 0.2,
-      "latency_ms": 20.0,
-      "snr": -8.5,
-      "rssi": -90.0,
-      "a_to_b": {
-        "snr": -8.5,
-        "loss": 0.2
-      },
-      "b_to_a": {
-        "snr": -3.5,
-        "loss": 0.1
-      }
-    },
-    {
-      "a": "GDY_Fikakowo_RPT",
-      "b": "GDY_Spokojna",
       "loss": 0.1,
       "latency_ms": 20.0,
       "snr": -0.5,
@@ -1816,29 +3366,5237 @@
         "loss": 0.1
       },
       "b_to_a": {
-        "snr": -5.5,
-        "loss": 0.1
+        "snr": 4.5,
+        "loss": 0.05
       }
     },
     {
-      "a": "RPT_PRG_01",
-      "b": "RPT_PRG_03",
-      "loss": 0.02,
+      "a": "Dobrzewino_RPT",
+      "b": "GDYNIA_Dbrowa_RPT",
+      "loss": 0.5,
       "latency_ms": 20.0,
-      "snr": 13.0,
+      "snr": -15.5,
       "rssi": -90.0,
       "a_to_b": {
-        "snr": 13.0,
+        "snr": -15.5,
+        "loss": 0.5
+      },
+      "b_to_a": {
+        "snr": -10.5,
+        "loss": 0.35
+      }
+    },
+    {
+      "a": "Dobrzewino_RPT",
+      "b": "Hopowo",
+      "loss": 0.5,
+      "latency_ms": 20.0,
+      "snr": -16.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -16.75,
+        "loss": 0.5
+      },
+      "b_to_a": {
+        "snr": -11.75,
+        "loss": 0.35
+      }
+    },
+    {
+      "a": "Dobrzewino_RPT",
+      "b": "GWE_Dobrzewino2_RPT",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 5.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 5.0,
+        "loss": 0.05
+      },
+      "b_to_a": {
+        "snr": 10.0,
+        "loss": 0.02
+      }
+    },
+    {
+      "a": "Dobrzewino_RPT",
+      "b": "GDY_Fikakowo_RPT",
+      "loss": 0.5,
+      "latency_ms": 20.0,
+      "snr": -15.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -15.75,
+        "loss": 0.5
+      },
+      "b_to_a": {
+        "snr": -10.75,
+        "loss": 0.35
+      }
+    },
+    {
+      "a": "Dobrzewino_RPT",
+      "b": "GWE_Koleczkowo_RPT",
+      "loss": 0.5,
+      "latency_ms": 20.0,
+      "snr": -15.75,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": -15.75,
+        "loss": 0.5
+      },
+      "b_to_a": {
+        "snr": -10.75,
+        "loss": 0.35
+      }
+    },
+    {
+      "a": "Bojano_Lesoki_RPT",
+      "b": "GWE_Bojano_RPT",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 11.0,
+      "rssi": -90.0,
+      "a_to_b": {
+        "snr": 11.0,
         "loss": 0.02
       },
       "b_to_a": {
-        "snr": 10.5,
+        "snr": 11.75,
         "loss": 0.02
       }
     },
     {
-      "a": "alice",
+      "a": "GTC_JednosciNarodu_R",
+      "b": "RPT_SKOWARCZ",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.32,
+      "rssi": -90.7
+    },
+    {
+      "a": "GTC_JednosciNarodu_R",
+      "b": "GDA_CEDRYM_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.76,
+      "rssi": -87.3
+    },
+    {
+      "a": "GTC_JednosciNarodu_R",
+      "b": "RPT_PRG_03",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.94,
+      "rssi": -95.7
+    },
+    {
+      "a": "GTC_JednosciNarodu_R",
+      "b": "GDA-ROKITNICA-RPT-2b",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.46,
+      "rssi": -91.0
+    },
+    {
+      "a": "GTC_JednosciNarodu_R",
+      "b": "RPT_BORKOWO",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.19,
+      "rssi": -89.6
+    },
+    {
+      "a": "GTC_JednosciNarodu_R",
+      "b": "RPT_JANK_01",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.85,
+      "rssi": -85.6
+    },
+    {
+      "a": "GTC_JednosciNarodu_R",
+      "b": "GD_REP_K",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.78,
+      "rssi": -89.6
+    },
+    {
+      "a": "GTC_JednosciNarodu_R",
+      "b": "GDA_Przerobka",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.09,
+      "rssi": -85.0
+    },
+    {
+      "a": "GTC_JednosciNarodu_R",
+      "b": "RPT_LOST_01",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.65,
+      "rssi": -90.4
+    },
+    {
+      "a": "GTC_Rokicka_RPT",
+      "b": "RPT_SKOWARCZ",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.26,
+      "rssi": -95.5
+    },
+    {
+      "a": "GTC_Rokicka_RPT",
+      "b": "RPT_Skowarcz_V3HPV",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.77,
+      "rssi": -88.1
+    },
+    {
+      "a": "GTC_Rokicka_RPT",
+      "b": "RPT_PRG_04",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.31,
+      "rssi": -90.9
+    },
+    {
+      "a": "GTC_Rokicka_RPT",
+      "b": "RPT_KLESZCZ",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.15,
+      "rssi": -89.1
+    },
+    {
+      "a": "GTC_Rokicka_RPT",
+      "b": "RPT_PRG_03",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.12,
+      "rssi": -94.2
+    },
+    {
+      "a": "GTC_Rokicka_RPT",
+      "b": "RPT_REKCIN",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.76,
+      "rssi": -95.7
+    },
+    {
+      "a": "GTC_Rokicka_RPT",
+      "b": "RPT_tx20_sol_bat4000",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.7,
+      "rssi": -93.5
+    },
+    {
+      "a": "GTC_Rokicka_RPT",
+      "b": "RPT_PRG_02",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.47,
+      "rssi": -87.5
+    },
+    {
+      "a": "GTC_Rokicka_RPT",
+      "b": "RPT_PRG_01",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.75,
+      "rssi": -93.8
+    },
+    {
+      "a": "GTC_Rokicka_RPT",
+      "b": "RPT_BORKOWO",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.26,
+      "rssi": -91.1
+    },
+    {
+      "a": "GTC_Rokicka_RPT",
+      "b": "RPT_JANK_01",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.79,
+      "rssi": -86.9
+    },
+    {
+      "a": "GTC_Rokicka_RPT",
+      "b": "GDAOlszynka",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.82,
+      "rssi": -88.7
+    },
+    {
+      "a": "GTC_Rokicka_RPT",
+      "b": "RPT_KOZIA_GORA",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.81,
+      "rssi": -88.2
+    },
+    {
+      "a": "GTC_Rokicka_RPT",
+      "b": "GDA_DW_RPT",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.44,
+      "rssi": -88.1
+    },
+    {
+      "a": "GTC_Rokicka_RPT",
+      "b": "GDA1R",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.84,
+      "rssi": -81.1
+    },
+    {
+      "a": "Dobrzewino_RPT",
+      "b": "GW1",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.56,
+      "rssi": -86.8
+    },
+    {
+      "a": "Dobrzewino_RPT",
       "b": "GKA_PEPOWO_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.25,
+      "rssi": -95.4
+    },
+    {
+      "a": "Dobrzewino_RPT",
+      "b": "SOP_DW_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.9,
+      "rssi": -86.4
+    },
+    {
+      "a": "Dobrzewino_RPT",
+      "b": "SP2ZIE_Repeater_Xiao",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.78,
+      "rssi": -89.0
+    },
+    {
+      "a": "Dobrzewino_RPT",
+      "b": "SQ2PPJ_Repeater",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.44,
+      "rssi": -87.3
+    },
+    {
+      "a": "Dobrzewino_RPT",
+      "b": "GDYNIA_Dziaki_Lene",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.7,
+      "rssi": -81.2
+    },
+    {
+      "a": "Dobrzewino_RPT",
+      "b": "GDA_Karczemki",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.03,
+      "rssi": -92.3
+    },
+    {
+      "a": "Dobrzewino_RPT",
+      "b": "GDA_DW_KielpinoG_RPT",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.41,
+      "rssi": -93.2
+    },
+    {
+      "a": "Dobrzewino_RPT",
+      "b": "GDA-Jasien",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.65,
+      "rssi": -90.3
+    },
+    {
+      "a": "Dobrzewino_RPT",
+      "b": "RPT_GD_Suchanino",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.85,
+      "rssi": -92.7
+    },
+    {
+      "a": "Dobrzewino_RPT",
+      "b": "RPT_LOST_01",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.88,
+      "rssi": -97.0
+    },
+    {
+      "a": "Dobrzewino_RPT",
+      "b": "GDA_DW_RPT",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.08,
+      "rssi": -88.4
+    },
+    {
+      "a": "Dobrzewino_RPT",
+      "b": "GD_REP_K",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.04,
+      "rssi": -89.0
+    },
+    {
+      "a": "GD_Hallera_Xiao_Test",
+      "b": "RPT_GD_Suchanino",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.71,
+      "rssi": -85.9
+    },
+    {
+      "a": "GD_Hallera_Xiao_Test",
+      "b": "GDA_Heweliusza",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.07,
+      "rssi": -93.8
+    },
+    {
+      "a": "GD_Hallera_Xiao_Test",
+      "b": "RPT_LOST_01",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 3.63,
+      "rssi": -88.6
+    },
+    {
+      "a": "GD_Hallera_Xiao_Test",
+      "b": "GDA_Przerobka",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 6.04,
+      "rssi": -90.1
+    },
+    {
+      "a": "GD_Hallera_Xiao_Test",
+      "b": "GDA-Jasien",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 11.35,
+      "rssi": -91.4
+    },
+    {
+      "a": "GD_Hallera_Xiao_Test",
+      "b": "GD_REP_K",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.22,
+      "rssi": -92.0
+    },
+    {
+      "a": "GD_Hallera_Xiao_Test",
+      "b": "SOP_DW_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.46,
+      "rssi": -84.6
+    },
+    {
+      "a": "GD_Hallera_Xiao_Test",
+      "b": "RPT_BORKOWO",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.77,
+      "rssi": -92.1
+    },
+    {
+      "a": "GD_Hallera_Xiao_Test",
+      "b": "RPT_JANK_01",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.88,
+      "rssi": -90.0
+    },
+    {
+      "a": "GD_Hallera_Xiao_Test",
+      "b": "GDY_Fikakowo_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.74,
+      "rssi": -84.8
+    },
+    {
+      "a": "GD_Hallera_Xiao_Test",
+      "b": "RPT_tx20_sol_bat4000",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.01,
+      "rssi": -91.4
+    },
+    {
+      "a": "GD_Hallera_Xiao_Test",
+      "b": "GDA-ROKITNICA-RPT-2b",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.88,
+      "rssi": -94.7
+    },
+    {
+      "a": "GD_Hallera_Xiao_Test",
+      "b": "RPT_PRG_01",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.96,
+      "rssi": -94.6
+    },
+    {
+      "a": "GD_Hallera_Xiao_Test",
+      "b": "Xiao_nrf52_Repeater_",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.72,
+      "rssi": -81.3
+    },
+    {
+      "a": "GD_Hallera_Xiao_Test",
+      "b": "GDYNIA_Wielkokacka_R",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.66,
+      "rssi": -84.8
+    },
+    {
+      "a": "GD_Hallera_Xiao_Test",
+      "b": "RPT_PRG_02",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.75,
+      "rssi": -88.8
+    },
+    {
+      "a": "GD_Hallera_Xiao_Test",
+      "b": "RPT_PRG_04",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.51,
+      "rssi": -84.2
+    },
+    {
+      "a": "GD_Hallera_Xiao_Test",
+      "b": "TUCHOM_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.67,
+      "rssi": -89.8
+    },
+    {
+      "a": "GD_Hallera_Xiao_Test",
+      "b": "BAN06M-Test-XiaoRPT",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.05,
+      "rssi": -94.7
+    },
+    {
+      "a": "GD_Hallera_Xiao_Test",
+      "b": "Ga_Dziaki_l_rpt",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.62,
+      "rssi": -90.7
+    },
+    {
+      "a": "GD_Hallera_Xiao_Test",
+      "b": "GWE_Bojano_RPT",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.9,
+      "rssi": -88.8
+    },
+    {
+      "a": "GD_Hallera_Xiao_Test",
+      "b": "Bojano_Lesoki_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.29,
+      "rssi": -89.0
+    },
+    {
+      "a": "GD_Hallera_Xiao_Test",
+      "b": "RPT_REKCIN",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.19,
+      "rssi": -84.5
+    },
+    {
+      "a": "GD_Hallera_Xiao_Test",
+      "b": "GA_WICZ_RPT_02",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.79,
+      "rssi": -94.2
+    },
+    {
+      "a": "GD_Hallera_Xiao_Test",
+      "b": "GA_WICZ_RPT_01",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.02,
+      "rssi": -88.0
+    },
+    {
+      "a": "GD_Hallera_Xiao_Test",
+      "b": "GWE_Dobrzewino2_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.77,
+      "rssi": -92.7
+    },
+    {
+      "a": "GD_Hallera_Xiao_Test",
+      "b": "GDYNIA_Wiczlino_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.91,
+      "rssi": -87.3
+    },
+    {
+      "a": "GD_Hallera_Xiao_Test",
+      "b": "GDA_CEDRYM_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.3,
+      "rssi": -88.9
+    },
+    {
+      "a": "GD_Hallera_Xiao_Test",
+      "b": "GD_Swibno_rpt",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.18,
+      "rssi": -91.1
+    },
+    {
+      "a": "RPT_JANK_01",
+      "b": "GDA_DW_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.08,
+      "rssi": -84.4
+    },
+    {
+      "a": "RPT_JANK_01",
+      "b": "GDA1R",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.58,
+      "rssi": -88.0
+    },
+    {
+      "a": "RPT_JANK_01",
+      "b": "GD_REP_K",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 7.25,
+      "rssi": -91.9
+    },
+    {
+      "a": "RPT_JANK_01",
+      "b": "RPT_PRG_01",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.23,
+      "rssi": -89.1
+    },
+    {
+      "a": "RPT_JANK_01",
+      "b": "RPT_PRG_03",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.55,
+      "rssi": -86.7
+    },
+    {
+      "a": "RPT_JANK_01",
+      "b": "GDARubinowa",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 1.65,
+      "rssi": -93.8
+    },
+    {
+      "a": "RPT_JANK_01",
+      "b": "RPT_LOST_01",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 0.97,
+      "rssi": -90.7
+    },
+    {
+      "a": "RPT_JANK_01",
+      "b": "RPT_PRG_04",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.63,
+      "rssi": -92.8
+    },
+    {
+      "a": "RPT_JANK_01",
+      "b": "GDANSK-SUCHANINO_SM",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.1,
+      "rssi": -92.2
+    },
+    {
+      "a": "RPT_JANK_01",
+      "b": "RPT_GD_Suchanino",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.87,
+      "rssi": -86.1
+    },
+    {
+      "a": "RPT_JANK_01",
+      "b": "GDA_Karczemki",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.41,
+      "rssi": -88.6
+    },
+    {
+      "a": "RPT_JANK_01",
+      "b": "RPT_tx20_sol_bat4000",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.01,
+      "rssi": -81.4
+    },
+    {
+      "a": "RPT_JANK_01",
+      "b": "GDA_Heweliusza",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.73,
+      "rssi": -90.4
+    },
+    {
+      "a": "RPT_JANK_01",
+      "b": "RPT_KLESZCZ",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.22,
+      "rssi": -81.5
+    },
+    {
+      "a": "RPT_JANK_01",
+      "b": "GKA_PRZYJAZN_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.87,
+      "rssi": -88.7
+    },
+    {
+      "a": "RPT_JANK_01",
+      "b": "RPT_KOZIA_GORA",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.53,
+      "rssi": -92.6
+    },
+    {
+      "a": "RPT_JANK_01",
+      "b": "RPT_Skowarcz_V3HPV",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.35,
+      "rssi": -91.1
+    },
+    {
+      "a": "RPT_JANK_01",
+      "b": "RPT_SKOWARCZ",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.38,
+      "rssi": -98.0
+    },
+    {
+      "a": "RPT_JANK_01",
+      "b": "BAN06M-Test-XiaoRPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.41,
+      "rssi": -83.4
+    },
+    {
+      "a": "RPT_JANK_01",
+      "b": "TUCHOM_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.51,
+      "rssi": -78.0
+    },
+    {
+      "a": "RPT_JANK_01",
+      "b": "GKA_Borcz",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.94,
+      "rssi": -88.2
+    },
+    {
+      "a": "RPT_JANK_01",
+      "b": "GDY_Fikakowo_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.62,
+      "rssi": -85.1
+    },
+    {
+      "a": "RPT_JANK_01",
+      "b": "GDY_Spokojna",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.85,
+      "rssi": -96.1
+    },
+    {
+      "a": "RPT_JANK_01",
+      "b": "Chwaszczyno_P01na_RP",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.2,
+      "rssi": -85.3
+    },
+    {
+      "a": "RPT_JANK_01",
+      "b": "GDYNIA_Dbrowa_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.39,
+      "rssi": -97.4
+    },
+    {
+      "a": "RPT_PRG_04",
+      "b": "RPT_tx20_sol_bat4000",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.5,
+      "rssi": -84.7
+    },
+    {
+      "a": "RPT_PRG_04",
+      "b": "GDA-ROKITNICA-RPT-2b",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 13.89,
+      "rssi": -87.9
+    },
+    {
+      "a": "RPT_PRG_04",
+      "b": "RPT_BORKOWO",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.6,
+      "rssi": -94.7
+    },
+    {
+      "a": "RPT_PRG_04",
+      "b": "GD_REP_K",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.34,
+      "rssi": -89.8
+    },
+    {
+      "a": "RPT_PRG_04",
+      "b": "GDA_DW_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.25,
+      "rssi": -87.8
+    },
+    {
+      "a": "RPT_PRG_04",
+      "b": "GDARubinowa",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.78,
+      "rssi": -94.4
+    },
+    {
+      "a": "RPT_PRG_04",
+      "b": "GDA1R",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.21,
+      "rssi": -94.4
+    },
+    {
+      "a": "RPT_PRG_04",
+      "b": "GDA-Jasien",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.51,
+      "rssi": -88.3
+    },
+    {
+      "a": "RPT_PRG_04",
+      "b": "GDA_Heweliusza",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.66,
+      "rssi": -86.2
+    },
+    {
+      "a": "RPT_PRG_04",
+      "b": "GDA_DW_KielpinoG_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.23,
+      "rssi": -92.8
+    },
+    {
+      "a": "RPT_PRG_04",
+      "b": "GDA_Przerobka",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.42,
+      "rssi": -84.2
+    },
+    {
+      "a": "RPT_PRG_04",
+      "b": "RPT_KOZIA_GORA",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.38,
+      "rssi": -77.4
+    },
+    {
+      "a": "RPT_PRG_04",
+      "b": "GDA_CEDRYM_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.37,
+      "rssi": -87.6
+    },
+    {
+      "a": "RPT_PRG_04",
+      "b": "GKA_PRZYJAZN_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.18,
+      "rssi": -90.8
+    },
+    {
+      "a": "RPT_PRG_04",
+      "b": "BAN06M-Test-XiaoRPT",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.11,
+      "rssi": -88.4
+    },
+    {
+      "a": "RPT_PRG_04",
+      "b": "GDAMichalin",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.23,
+      "rssi": -95.1
+    },
+    {
+      "a": "RPT_PRG_04",
+      "b": "MIK_DW_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.86,
+      "rssi": -90.4
+    },
+    {
+      "a": "SQ2PPJ_Repeater",
+      "b": "SP2ZIE_Repeater_Xiao",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 1.39,
+      "rssi": -92.9
+    },
+    {
+      "a": "SQ2PPJ_Repeater",
+      "b": "Ga_Dziaki_l_rpt",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.42,
+      "rssi": -97.7
+    },
+    {
+      "a": "SQ2PPJ_Repeater",
+      "b": "GDYNIA_Dziaki_Lene",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.13,
+      "rssi": -88.6
+    },
+    {
+      "a": "SQ2PPJ_Repeater",
+      "b": "GW1",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 4.81,
+      "rssi": -87.0
+    },
+    {
+      "a": "SQ2PPJ_Repeater",
+      "b": "GDYNIA_Wielkokacka_R",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.45,
+      "rssi": -84.9
+    },
+    {
+      "a": "SQ2PPJ_Repeater",
+      "b": "Xiao_nrf52_Repeater_",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.1,
+      "rssi": -92.5
+    },
+    {
+      "a": "SQ2PPJ_Repeater",
+      "b": "GDYNIA_Wiczlino_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.05,
+      "rssi": -92.2
+    },
+    {
+      "a": "SQ2PPJ_Repeater",
+      "b": "GA_WICZ_RPT_02",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.86,
+      "rssi": -89.1
+    },
+    {
+      "a": "SQ2PPJ_Repeater",
+      "b": "GDY_Spokojna",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.82,
+      "rssi": -92.7
+    },
+    {
+      "a": "SQ2PPJ_Repeater",
+      "b": "GDY_Fikakowo_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.3,
+      "rssi": -83.5
+    },
+    {
+      "a": "SQ2PPJ_Repeater",
+      "b": "GDYNIA_Dbrowa_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.9,
+      "rssi": -91.9
+    },
+    {
+      "a": "SQ2PPJ_Repeater",
+      "b": "Bojano_Lesoki_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.14,
+      "rssi": -90.3
+    },
+    {
+      "a": "SQ2PPJ_Repeater",
+      "b": "Chwaszczyno_P01na_RP",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.64,
+      "rssi": -89.8
+    },
+    {
+      "a": "SQ2PPJ_Repeater",
+      "b": "GWE_Koleczkowo_RPT",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 9.07,
+      "rssi": -86.4
+    },
+    {
+      "a": "SQ2PPJ_Repeater",
+      "b": "GWE_Dobrzewino2_RPT",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.63,
+      "rssi": -87.5
+    },
+    {
+      "a": "SQ2PPJ_Repeater",
+      "b": "BAN06M-Test-XiaoRPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.21,
+      "rssi": -88.4
+    },
+    {
+      "a": "SQ2PPJ_Repeater",
+      "b": "RPT_GD_Suchanino",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.86,
+      "rssi": -97.2
+    },
+    {
+      "a": "SQ2PPJ_Repeater",
+      "b": "GDANSK-SUCHANINO_SM",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.98,
+      "rssi": -91.5
+    },
+    {
+      "a": "SQ2PPJ_Repeater",
+      "b": "GDA-Jasien",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.22,
+      "rssi": -88.2
+    },
+    {
+      "a": "SQ2PPJ_Repeater",
+      "b": "GDA_DW_KielpinoG_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.3,
+      "rssi": -97.7
+    },
+    {
+      "a": "SQ2PPJ_Repeater",
+      "b": "RPT_LOST_01",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.5,
+      "rssi": -85.1
+    },
+    {
+      "a": "SQ2PPJ_Repeater",
+      "b": "GDARubinowa",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.75,
+      "rssi": -97.3
+    },
+    {
+      "a": "SQ2PPJ_Repeater",
+      "b": "GKA_PRZYJAZN_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.69,
+      "rssi": -94.3
+    },
+    {
+      "a": "SQ2PPJ_Repeater",
+      "b": "RPT_BORKOWO",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.97,
+      "rssi": -97.2
+    },
+    {
+      "a": "SQ2PPJ_Repeater",
+      "b": "GDA_SW_WOJCIECH",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.8,
+      "rssi": -92.8
+    },
+    {
+      "a": "Bojano_Lesoki_RPT",
+      "b": "Chwaszczyno_P01na_RP",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 0.87,
+      "rssi": -91.8
+    },
+    {
+      "a": "Bojano_Lesoki_RPT",
+      "b": "GA_WICZ_RPT_01",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.07,
+      "rssi": -88.8
+    },
+    {
+      "a": "Bojano_Lesoki_RPT",
+      "b": "TUCHOM_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.95,
+      "rssi": -89.2
+    },
+    {
+      "a": "Bojano_Lesoki_RPT",
+      "b": "GDYNIA_Dbrowa_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.51,
+      "rssi": -92.6
+    },
+    {
+      "a": "Bojano_Lesoki_RPT",
+      "b": "GDYNIA_Wiczlino_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.51,
+      "rssi": -93.6
+    },
+    {
+      "a": "Bojano_Lesoki_RPT",
+      "b": "GDYNIA_Wielkokacka_R",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.18,
+      "rssi": -92.4
+    },
+    {
+      "a": "Bojano_Lesoki_RPT",
+      "b": "GDY_Spokojna",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.92,
+      "rssi": -85.3
+    },
+    {
+      "a": "Bojano_Lesoki_RPT",
+      "b": "GW1",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.09,
+      "rssi": -88.3
+    },
+    {
+      "a": "Bojano_Lesoki_RPT",
+      "b": "Xiao_nrf52_Repeater_",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.49,
+      "rssi": -87.7
+    },
+    {
+      "a": "Bojano_Lesoki_RPT",
+      "b": "BAN06M-Test-XiaoRPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.41,
+      "rssi": -87.1
+    },
+    {
+      "a": "Bojano_Lesoki_RPT",
+      "b": "SP2ZIE_Repeater_Xiao",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.06,
+      "rssi": -86.9
+    },
+    {
+      "a": "Bojano_Lesoki_RPT",
+      "b": "SOP_DW_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.6,
+      "rssi": -93.3
+    },
+    {
+      "a": "Bojano_Lesoki_RPT",
+      "b": "GDYNIA_Dziaki_Lene",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.91,
+      "rssi": -92.8
+    },
+    {
+      "a": "Bojano_Lesoki_RPT",
+      "b": "GDA_DW_KielpinoG_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.64,
+      "rssi": -84.0
+    },
+    {
+      "a": "Bojano_Lesoki_RPT",
+      "b": "GDA-Jasien",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.26,
+      "rssi": -95.9
+    },
+    {
+      "a": "Bojano_Lesoki_RPT",
+      "b": "GDANSK-SUCHANINO_SM",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.46,
+      "rssi": -90.3
+    },
+    {
+      "a": "Bojano_Lesoki_RPT",
+      "b": "RPT_LOST_01",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.61,
+      "rssi": -88.9
+    },
+    {
+      "a": "Bojano_Lesoki_RPT",
+      "b": "GDA1R",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.25,
+      "rssi": -92.9
+    },
+    {
+      "a": "Bojano_Lesoki_RPT",
+      "b": "GD_REP_K",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.18,
+      "rssi": -93.1
+    },
+    {
+      "a": "Bojano_Lesoki_RPT",
+      "b": "GDARubinowa",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.87,
+      "rssi": -86.4
+    },
+    {
+      "a": "Bojano_Lesoki_RPT",
+      "b": "RPT_BORKOWO",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.54,
+      "rssi": -87.2
+    },
+    {
+      "a": "Bojano_Lesoki_RPT",
+      "b": "GKA_Borcz",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.75,
+      "rssi": -84.7
+    },
+    {
+      "a": "Bojano_Lesoki_RPT",
+      "b": "GDAOlszynka",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.62,
+      "rssi": -85.7
+    },
+    {
+      "a": "Bojano_Lesoki_RPT",
+      "b": "RPT_PRG_01",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.64,
+      "rssi": -85.5
+    },
+    {
+      "a": "Bojano_Lesoki_RPT",
+      "b": "RPT_PRG_02",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.43,
+      "rssi": -90.0
+    },
+    {
+      "a": "SP2ZIE_Repeater_Xiao",
+      "b": "Ga_Dziaki_l_rpt",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.32,
+      "rssi": -87.9
+    },
+    {
+      "a": "SP2ZIE_Repeater_Xiao",
+      "b": "GDYNIA_Dziaki_Lene",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.56,
+      "rssi": -93.5
+    },
+    {
+      "a": "SP2ZIE_Repeater_Xiao",
+      "b": "GW1",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.97,
+      "rssi": -89.1
+    },
+    {
+      "a": "SP2ZIE_Repeater_Xiao",
+      "b": "GDYNIA_Wielkokacka_R",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 1.22,
+      "rssi": -89.3
+    },
+    {
+      "a": "SP2ZIE_Repeater_Xiao",
+      "b": "GDY_Spokojna",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.48,
+      "rssi": -86.1
+    },
+    {
+      "a": "SP2ZIE_Repeater_Xiao",
+      "b": "GDY_Fikakowo_RPT",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 1.16,
+      "rssi": -92.3
+    },
+    {
+      "a": "SP2ZIE_Repeater_Xiao",
+      "b": "GDYNIA_Wiczlino_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.63,
+      "rssi": -87.4
+    },
+    {
+      "a": "SP2ZIE_Repeater_Xiao",
+      "b": "GA_WICZ_RPT_02",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.73,
+      "rssi": -92.4
+    },
+    {
+      "a": "SP2ZIE_Repeater_Xiao",
+      "b": "GA_WICZ_RPT_01",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.71,
+      "rssi": -89.2
+    },
+    {
+      "a": "SP2ZIE_Repeater_Xiao",
+      "b": "SOP_DW_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.98,
+      "rssi": -85.7
+    },
+    {
+      "a": "SP2ZIE_Repeater_Xiao",
+      "b": "Chwaszczyno_P01na_RP",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.79,
+      "rssi": -91.2
+    },
+    {
+      "a": "SP2ZIE_Repeater_Xiao",
+      "b": "GWE_Dobrzewino2_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.28,
+      "rssi": -84.5
+    },
+    {
+      "a": "SP2ZIE_Repeater_Xiao",
+      "b": "TUCHOM_RPT",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.08,
+      "rssi": -89.9
+    },
+    {
+      "a": "SP2ZIE_Repeater_Xiao",
+      "b": "BAN06M-Test-XiaoRPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.9,
+      "rssi": -90.3
+    },
+    {
+      "a": "SP2ZIE_Repeater_Xiao",
+      "b": "GKA_PEPOWO_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.58,
+      "rssi": -96.5
+    },
+    {
+      "a": "SP2ZIE_Repeater_Xiao",
+      "b": "GDA_Karczemki",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.45,
+      "rssi": -87.5
+    },
+    {
+      "a": "SP2ZIE_Repeater_Xiao",
+      "b": "GDA-Jasien",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.34,
+      "rssi": -90.1
+    },
+    {
+      "a": "SP2ZIE_Repeater_Xiao",
+      "b": "GDA_Heweliusza",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.86,
+      "rssi": -82.6
+    },
+    {
+      "a": "SP2ZIE_Repeater_Xiao",
+      "b": "RPT_LOST_01",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.36,
+      "rssi": -95.6
+    },
+    {
+      "a": "SP2ZIE_Repeater_Xiao",
+      "b": "GKA_PRZYJAZN_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.22,
+      "rssi": -94.4
+    },
+    {
+      "a": "SP2ZIE_Repeater_Xiao",
+      "b": "GDAOlszynka",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.91,
+      "rssi": -94.2
+    },
+    {
+      "a": "SP2ZIE_Repeater_Xiao",
+      "b": "GDA-ROKITNICA-RPT-2b",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.08,
+      "rssi": -89.9
+    },
+    {
+      "a": "SP2ZIE_Repeater_Xiao",
+      "b": "RPT_PRG_03",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.13,
+      "rssi": -94.6
+    },
+    {
+      "a": "GDA_CEDRYM_RPT",
+      "b": "MIK_DW_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.85,
+      "rssi": -92.2
+    },
+    {
+      "a": "GDA_CEDRYM_RPT",
+      "b": "RPT_tx20_sol_bat4000",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.45,
+      "rssi": -90.5
+    },
+    {
+      "a": "GDA_CEDRYM_RPT",
+      "b": "GDA_Przerobka",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.93,
+      "rssi": -90.5
+    },
+    {
+      "a": "GDA_CEDRYM_RPT",
+      "b": "RPT_PRG_03",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.74,
+      "rssi": -84.2
+    },
+    {
+      "a": "GDA_CEDRYM_RPT",
+      "b": "RPT_PRG_01",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.9,
+      "rssi": -91.3
+    },
+    {
+      "a": "GDA_CEDRYM_RPT",
+      "b": "RPT_PRG_02",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.11,
+      "rssi": -92.2
+    },
+    {
+      "a": "GDA_CEDRYM_RPT",
+      "b": "RPT_Skowarcz_V3HPV",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.71,
+      "rssi": -97.2
+    },
+    {
+      "a": "GDA_CEDRYM_RPT",
+      "b": "GDA_Heweliusza",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 1.56,
+      "rssi": -95.1
+    },
+    {
+      "a": "GDA_CEDRYM_RPT",
+      "b": "GD_REP_K",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 1.5,
+      "rssi": -95.1
+    },
+    {
+      "a": "GDA_CEDRYM_RPT",
+      "b": "RPT_BORKOWO",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.19,
+      "rssi": -89.7
+    },
+    {
+      "a": "GDA_CEDRYM_RPT",
+      "b": "RPT_GD_Suchanino",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 3.49,
+      "rssi": -84.3
+    },
+    {
+      "a": "GDA_CEDRYM_RPT",
+      "b": "GDA1R",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.69,
+      "rssi": -94.9
+    },
+    {
+      "a": "GDA_CEDRYM_RPT",
+      "b": "RPT_REKCIN",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.91,
+      "rssi": -89.5
+    },
+    {
+      "a": "GDA_CEDRYM_RPT",
+      "b": "GDA-Jasien",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.75,
+      "rssi": -90.8
+    },
+    {
+      "a": "GDA_CEDRYM_RPT",
+      "b": "GTC_ROKITKI_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.6,
+      "rssi": -92.9
+    },
+    {
+      "a": "GDA_CEDRYM_RPT",
+      "b": "GDA_Karczemki",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.26,
+      "rssi": -88.7
+    },
+    {
+      "a": "GDA_CEDRYM_RPT",
+      "b": "RPT_KLESZCZ",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.4,
+      "rssi": -89.6
+    },
+    {
+      "a": "GDA_CEDRYM_RPT",
+      "b": "SOP_DW_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.18,
+      "rssi": -90.6
+    },
+    {
+      "a": "GDA1R",
+      "b": "GDA_DW_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.52,
+      "rssi": -87.0
+    },
+    {
+      "a": "GDA1R",
+      "b": "GD_REP_K",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 10.8,
+      "rssi": -89.1
+    },
+    {
+      "a": "GDA1R",
+      "b": "GDA-Jasien",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 5.16,
+      "rssi": -86.8
+    },
+    {
+      "a": "GDA1R",
+      "b": "RPT_BORKOWO",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 0.87,
+      "rssi": -89.2
+    },
+    {
+      "a": "GDA1R",
+      "b": "GDA_DW_KielpinoG_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.43,
+      "rssi": -93.7
+    },
+    {
+      "a": "GDA1R",
+      "b": "GDANSK-SUCHANINO_SM",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.97,
+      "rssi": -97.2
+    },
+    {
+      "a": "GDA1R",
+      "b": "RPT_GD_Suchanino",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.39,
+      "rssi": -88.4
+    },
+    {
+      "a": "GDA1R",
+      "b": "GDA_Heweliusza",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.24,
+      "rssi": -86.5
+    },
+    {
+      "a": "GDA1R",
+      "b": "RPT_PRG_01",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.65,
+      "rssi": -93.9
+    },
+    {
+      "a": "GDA1R",
+      "b": "RPT_PRG_02",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.19,
+      "rssi": -95.2
+    },
+    {
+      "a": "GDA1R",
+      "b": "GDA_Przerobka",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.87,
+      "rssi": -87.8
+    },
+    {
+      "a": "GDA1R",
+      "b": "RPT_tx20_sol_bat4000",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.86,
+      "rssi": -86.0
+    },
+    {
+      "a": "GDA1R",
+      "b": "RPT_REKCIN",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.58,
+      "rssi": -91.0
+    },
+    {
+      "a": "GDA1R",
+      "b": "GKA_PRZYJAZN_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.6,
+      "rssi": -96.1
+    },
+    {
+      "a": "GDA1R",
+      "b": "GKA_PEPOWO_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.67,
+      "rssi": -85.5
+    },
+    {
+      "a": "GDA1R",
+      "b": "BAN06M-Test-XiaoRPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.89,
+      "rssi": -91.9
+    },
+    {
+      "a": "GDA1R",
+      "b": "RPT_Skowarcz_V3HPV",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.01,
+      "rssi": -89.5
+    },
+    {
+      "a": "GDA1R",
+      "b": "TUCHOM_RPT",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.69,
+      "rssi": -84.7
+    },
+    {
+      "a": "GDA1R",
+      "b": "GDY_Fikakowo_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.41,
+      "rssi": -90.3
+    },
+    {
+      "a": "GDA1R",
+      "b": "RPT_SKOWARCZ",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.37,
+      "rssi": -91.9
+    },
+    {
+      "a": "GDA1R",
+      "b": "Xiao_nrf52_Repeater_",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.73,
+      "rssi": -94.2
+    },
+    {
+      "a": "Hopowo",
+      "b": "GKA_Borcz",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 14.94,
+      "rssi": -82.5
+    },
+    {
+      "a": "Hopowo",
+      "b": "GDAMichalin",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.34,
+      "rssi": -93.4
+    },
+    {
+      "a": "Hopowo",
+      "b": "GKA_PRZYJAZN_RPT",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.75,
+      "rssi": -88.4
+    },
+    {
+      "a": "Hopowo",
+      "b": "GKA_PEPOWO_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.48,
+      "rssi": -85.9
+    },
+    {
+      "a": "Hopowo",
+      "b": "RPT_KLESZCZ",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 8.57,
+      "rssi": -84.1
+    },
+    {
+      "a": "Hopowo",
+      "b": "RPT_REKCIN",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.15,
+      "rssi": -93.9
+    },
+    {
+      "a": "Hopowo",
+      "b": "TUCHOM_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.21,
+      "rssi": -99.8
+    },
+    {
+      "a": "Hopowo",
+      "b": "GDA_DW_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.05,
+      "rssi": -83.2
+    },
+    {
+      "a": "Hopowo",
+      "b": "GDA-Jasien",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.41,
+      "rssi": -95.6
+    },
+    {
+      "a": "Hopowo",
+      "b": "GWE_Dobrzewino2_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.54,
+      "rssi": -90.9
+    },
+    {
+      "a": "Hopowo",
+      "b": "GD_REP_K",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.94,
+      "rssi": -91.4
+    },
+    {
+      "a": "Hopowo",
+      "b": "RPT_LOST_01",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.39,
+      "rssi": -91.9
+    },
+    {
+      "a": "Hopowo",
+      "b": "GWE_Bojano_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.3,
+      "rssi": -90.7
+    },
+    {
+      "a": "Hopowo",
+      "b": "Chwaszczyno_P01na_RP",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.34,
+      "rssi": -88.6
+    },
+    {
+      "a": "Hopowo",
+      "b": "RPT_PRG_03",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.47,
+      "rssi": -88.4
+    },
+    {
+      "a": "Hopowo",
+      "b": "GWE_Koleczkowo_RPT",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 5.53,
+      "rssi": -94.2
+    },
+    {
+      "a": "Hopowo",
+      "b": "RPT_GD_Suchanino",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.56,
+      "rssi": -92.9
+    },
+    {
+      "a": "Hopowo",
+      "b": "GA_WICZ_RPT_02",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.63,
+      "rssi": -84.8
+    },
+    {
+      "a": "Hopowo",
+      "b": "GA_WICZ_RPT_01",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.61,
+      "rssi": -96.4
+    },
+    {
+      "a": "Hopowo",
+      "b": "GDYNIA_Dbrowa_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.9,
+      "rssi": -92.0
+    },
+    {
+      "a": "Hopowo",
+      "b": "RPT_tx20_sol_bat4000",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.2,
+      "rssi": -87.8
+    },
+    {
+      "a": "Hopowo",
+      "b": "GDA-ROKITNICA-RPT-2b",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.01,
+      "rssi": -91.2
+    },
+    {
+      "a": "GA_WICZ_RPT_01",
+      "b": "GA_WICZ_RPT_02",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 4.45,
+      "rssi": -90.1
+    },
+    {
+      "a": "GA_WICZ_RPT_01",
+      "b": "GDYNIA_Wiczlino_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.1,
+      "rssi": -90.9
+    },
+    {
+      "a": "GA_WICZ_RPT_01",
+      "b": "GWE_Bojano_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.27,
+      "rssi": -90.0
+    },
+    {
+      "a": "GA_WICZ_RPT_01",
+      "b": "Chwaszczyno_P01na_RP",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 2.16,
+      "rssi": -89.3
+    },
+    {
+      "a": "GA_WICZ_RPT_01",
+      "b": "GDYNIA_Dbrowa_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.22,
+      "rssi": -89.0
+    },
+    {
+      "a": "GA_WICZ_RPT_01",
+      "b": "GDYNIA_Witomino_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.2,
+      "rssi": -85.4
+    },
+    {
+      "a": "GA_WICZ_RPT_01",
+      "b": "GDYNIA_Wielkokacka_R",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.99,
+      "rssi": -90.4
+    },
+    {
+      "a": "GA_WICZ_RPT_01",
+      "b": "GW1",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.22,
+      "rssi": -89.1
+    },
+    {
+      "a": "GA_WICZ_RPT_01",
+      "b": "GDY_Spokojna",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.42,
+      "rssi": -89.4
+    },
+    {
+      "a": "GA_WICZ_RPT_01",
+      "b": "Ga_Dziaki_l_rpt",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.26,
+      "rssi": -90.6
+    },
+    {
+      "a": "GA_WICZ_RPT_01",
+      "b": "SOP_DW_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.41,
+      "rssi": -90.6
+    },
+    {
+      "a": "GA_WICZ_RPT_01",
+      "b": "BAN06M-Test-XiaoRPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.88,
+      "rssi": -87.0
+    },
+    {
+      "a": "GA_WICZ_RPT_01",
+      "b": "GKA_PEPOWO_RPT",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.95,
+      "rssi": -86.5
+    },
+    {
+      "a": "GA_WICZ_RPT_01",
+      "b": "GDA-Jasien",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.15,
+      "rssi": -89.5
+    },
+    {
+      "a": "GA_WICZ_RPT_01",
+      "b": "GKA_PRZYJAZN_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.46,
+      "rssi": -86.0
+    },
+    {
+      "a": "GA_WICZ_RPT_01",
+      "b": "GDANSK-SUCHANINO_SM",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.92,
+      "rssi": -88.3
+    },
+    {
+      "a": "GA_WICZ_RPT_01",
+      "b": "GDA_Heweliusza",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.25,
+      "rssi": -88.0
+    },
+    {
+      "a": "GA_WICZ_RPT_01",
+      "b": "GDA_DW_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.69,
+      "rssi": -93.0
+    },
+    {
+      "a": "GA_WICZ_RPT_01",
+      "b": "GD_REP_K",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.68,
+      "rssi": -88.1
+    },
+    {
+      "a": "GA_WICZ_RPT_01",
+      "b": "GDARubinowa",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.4,
+      "rssi": -89.5
+    },
+    {
+      "a": "GA_WICZ_RPT_01",
+      "b": "RPT_BORKOWO",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.05,
+      "rssi": -92.6
+    },
+    {
+      "a": "GA_WICZ_RPT_01",
+      "b": "GKA_Borcz",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.84,
+      "rssi": -97.0
+    },
+    {
+      "a": "GA_WICZ_RPT_01",
+      "b": "RPT_PRG_01",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.53,
+      "rssi": -86.8
+    },
+    {
+      "a": "GA_WICZ_RPT_01",
+      "b": "RPT_PRG_02",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.27,
+      "rssi": -93.8
+    },
+    {
+      "a": "GW1",
+      "b": "GDYNIA_Wielkokacka_R",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.19,
+      "rssi": -90.6
+    },
+    {
+      "a": "GW1",
+      "b": "Ga_Dziaki_l_rpt",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 0.92,
+      "rssi": -87.5
+    },
+    {
+      "a": "GW1",
+      "b": "GDYNIA_Dziaki_Lene",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.97,
+      "rssi": -91.9
+    },
+    {
+      "a": "GW1",
+      "b": "GDYNIA_Wiczlino_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.95,
+      "rssi": -92.6
+    },
+    {
+      "a": "GW1",
+      "b": "SOP_DW_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.79,
+      "rssi": -89.3
+    },
+    {
+      "a": "GW1",
+      "b": "Chwaszczyno_P01na_RP",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.05,
+      "rssi": -94.0
+    },
+    {
+      "a": "GW1",
+      "b": "GWE_Bojano_RPT",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.57,
+      "rssi": -98.0
+    },
+    {
+      "a": "GW1",
+      "b": "GWE_Dobrzewino2_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.24,
+      "rssi": -95.2
+    },
+    {
+      "a": "GW1",
+      "b": "GKA_PEPOWO_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.9,
+      "rssi": -95.0
+    },
+    {
+      "a": "GW1",
+      "b": "RPT_GD_Suchanino",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.09,
+      "rssi": -91.3
+    },
+    {
+      "a": "GW1",
+      "b": "GDANSK-SUCHANINO_SM",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.16,
+      "rssi": -87.2
+    },
+    {
+      "a": "GW1",
+      "b": "GDA-Jasien",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.59,
+      "rssi": -94.9
+    },
+    {
+      "a": "GW1",
+      "b": "GDA_DW_KielpinoG_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.53,
+      "rssi": -88.1
+    },
+    {
+      "a": "GW1",
+      "b": "GDA_Heweliusza",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.03,
+      "rssi": -95.5
+    },
+    {
+      "a": "GW1",
+      "b": "GDA_Przerobka",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.01,
+      "rssi": -91.6
+    },
+    {
+      "a": "GW1",
+      "b": "GDA_DW_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.84,
+      "rssi": -86.1
+    },
+    {
+      "a": "GW1",
+      "b": "GDARubinowa",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.97,
+      "rssi": -91.3
+    },
+    {
+      "a": "GW1",
+      "b": "GD_REP_K",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.81,
+      "rssi": -81.9
+    },
+    {
+      "a": "GW1",
+      "b": "GDAOlszynka",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.17,
+      "rssi": -94.3
+    },
+    {
+      "a": "GW1",
+      "b": "RPT_PRG_02",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.58,
+      "rssi": -92.7
+    },
+    {
+      "a": "GW1",
+      "b": "GDA-ROKITNICA-RPT-2b",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.58,
+      "rssi": -95.4
+    },
+    {
+      "a": "GW1",
+      "b": "RPT_PRG_03",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.75,
+      "rssi": -87.9
+    },
+    {
+      "a": "GW1",
+      "b": "RPT_REKCIN",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.38,
+      "rssi": -94.6
+    },
+    {
+      "a": "GDA-Jasien",
+      "b": "RPT_LOST_01",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.87,
+      "rssi": -91.7
+    },
+    {
+      "a": "GDA-Jasien",
+      "b": "GDA_DW_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.98,
+      "rssi": -92.0
+    },
+    {
+      "a": "GDA-Jasien",
+      "b": "GDA_DW_KielpinoG_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.61,
+      "rssi": -96.6
+    },
+    {
+      "a": "GDA-Jasien",
+      "b": "RPT_GD_Suchanino",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.1,
+      "rssi": -84.9
+    },
+    {
+      "a": "GDA-Jasien",
+      "b": "GD_REP_K",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.05,
+      "rssi": -81.1
+    },
+    {
+      "a": "GDA-Jasien",
+      "b": "GDARubinowa",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.26,
+      "rssi": -93.2
+    },
+    {
+      "a": "GDA-Jasien",
+      "b": "RPT_BORKOWO",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.15,
+      "rssi": -94.5
+    },
+    {
+      "a": "GDA-Jasien",
+      "b": "GDAOlszynka",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.69,
+      "rssi": -87.4
+    },
+    {
+      "a": "GDA-Jasien",
+      "b": "RPT_PRG_01",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.29,
+      "rssi": -93.8
+    },
+    {
+      "a": "GDA-Jasien",
+      "b": "RPT_PRG_02",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.69,
+      "rssi": -88.6
+    },
+    {
+      "a": "GDA-Jasien",
+      "b": "RPT_tx20_sol_bat4000",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.54,
+      "rssi": -95.3
+    },
+    {
+      "a": "GDA-Jasien",
+      "b": "GDA-ROKITNICA-RPT-2b",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.65,
+      "rssi": -92.6
+    },
+    {
+      "a": "GDA-Jasien",
+      "b": "SOP_DW_RPT",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.72,
+      "rssi": -95.4
+    },
+    {
+      "a": "GDA-Jasien",
+      "b": "GKA_PEPOWO_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.06,
+      "rssi": -82.6
+    },
+    {
+      "a": "GDA-Jasien",
+      "b": "BAN06M-Test-XiaoRPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.89,
+      "rssi": -91.8
+    },
+    {
+      "a": "GDA-Jasien",
+      "b": "GDY_Spokojna",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.79,
+      "rssi": -86.0
+    },
+    {
+      "a": "GDA-Jasien",
+      "b": "TUCHOM_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.19,
+      "rssi": -90.5
+    },
+    {
+      "a": "GDA-Jasien",
+      "b": "GDYNIA_Dbrowa_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.91,
+      "rssi": -91.8
+    },
+    {
+      "a": "RPT_KOZIA_GORA",
+      "b": "GDA_DW_KielpinoG_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.2,
+      "rssi": -87.8
+    },
+    {
+      "a": "RPT_KOZIA_GORA",
+      "b": "RPT_PRG_01",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.03,
+      "rssi": -94.4
+    },
+    {
+      "a": "RPT_KOZIA_GORA",
+      "b": "GDA_DW_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.35,
+      "rssi": -82.9
+    },
+    {
+      "a": "RPT_KOZIA_GORA",
+      "b": "RPT_SKOWARCZ",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.84,
+      "rssi": -90.4
+    },
+    {
+      "a": "RPT_KOZIA_GORA",
+      "b": "RPT_LOST_01",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.04,
+      "rssi": -86.0
+    },
+    {
+      "a": "RPT_SKOWARCZ",
+      "b": "GTC_ROKITKI_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.5,
+      "rssi": -83.4
+    },
+    {
+      "a": "RPT_SKOWARCZ",
+      "b": "GDA_DW_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.0,
+      "rssi": -90.7
+    },
+    {
+      "a": "RPT_SKOWARCZ",
+      "b": "GDARubinowa",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.09,
+      "rssi": -102.0
+    },
+    {
+      "a": "RPT_SKOWARCZ",
+      "b": "GDA_Przerobka",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.12,
+      "rssi": -89.9
+    },
+    {
+      "a": "RPT_SKOWARCZ",
+      "b": "GDA_Heweliusza",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.53,
+      "rssi": -94.5
+    },
+    {
+      "a": "RPT_SKOWARCZ",
+      "b": "GDANSK-SUCHANINO_SM",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.91,
+      "rssi": -93.2
+    },
+    {
+      "a": "RPT_SKOWARCZ",
+      "b": "RPT_GD_Suchanino",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.03,
+      "rssi": -87.8
+    },
+    {
+      "a": "RPT_SKOWARCZ",
+      "b": "GDA_Karczemki",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 3.72,
+      "rssi": -92.5
+    },
+    {
+      "a": "RPT_SKOWARCZ",
+      "b": "GD_Swibno_rpt",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.82,
+      "rssi": -89.8
+    },
+    {
+      "a": "RPT_SKOWARCZ",
+      "b": "GKA_PRZYJAZN_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.67,
+      "rssi": -90.2
+    },
+    {
+      "a": "RPT_SKOWARCZ",
+      "b": "MIK_DW_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.82,
+      "rssi": -93.5
+    },
+    {
+      "a": "GDAMichalin",
+      "b": "GKA_Borcz",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.14,
+      "rssi": -85.6
+    },
+    {
+      "a": "GDAMichalin",
+      "b": "GKA_PRZYJAZN_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.07,
+      "rssi": -96.5
+    },
+    {
+      "a": "GDAMichalin",
+      "b": "GDA_DW_KielpinoG_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.96,
+      "rssi": -92.9
+    },
+    {
+      "a": "GDAMichalin",
+      "b": "RPT_BORKOWO",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.33,
+      "rssi": -90.7
+    },
+    {
+      "a": "GDAMichalin",
+      "b": "RPT_PRG_02",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.51,
+      "rssi": -91.8
+    },
+    {
+      "a": "GDAMichalin",
+      "b": "RPT_PRG_03",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.37,
+      "rssi": -93.1
+    },
+    {
+      "a": "GDAMichalin",
+      "b": "GDARubinowa",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 1.55,
+      "rssi": -96.0
+    },
+    {
+      "a": "GDAMichalin",
+      "b": "RPT_GD_Suchanino",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.99,
+      "rssi": -91.3
+    },
+    {
+      "a": "GDAMichalin",
+      "b": "RPT_tx20_sol_bat4000",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.2,
+      "rssi": -90.7
+    },
+    {
+      "a": "GDAMichalin",
+      "b": "Chwaszczyno_P01na_RP",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.29,
+      "rssi": -78.5
+    },
+    {
+      "a": "GDAMichalin",
+      "b": "GWE_Koleczkowo_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.08,
+      "rssi": -94.0
+    },
+    {
+      "a": "GDAMichalin",
+      "b": "GDYNIA_Dbrowa_RPT",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 0.82,
+      "rssi": -86.9
+    },
+    {
+      "a": "GDAMichalin",
+      "b": "GA_WICZ_RPT_02",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.27,
+      "rssi": -92.9
+    },
+    {
+      "a": "SOP_DW_RPT",
+      "b": "GDY_Spokojna",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 11.5,
+      "rssi": -88.1
+    },
+    {
+      "a": "SOP_DW_RPT",
+      "b": "GDY_Fikakowo_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.57,
+      "rssi": -86.5
+    },
+    {
+      "a": "SOP_DW_RPT",
+      "b": "Xiao_nrf52_Repeater_",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 2.74,
+      "rssi": -86.3
+    },
+    {
+      "a": "SOP_DW_RPT",
+      "b": "GDYNIA_Dbrowa_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.68,
+      "rssi": -89.3
+    },
+    {
+      "a": "SOP_DW_RPT",
+      "b": "GDYNIA_Dziaki_Lene",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.98,
+      "rssi": -86.4
+    },
+    {
+      "a": "SOP_DW_RPT",
+      "b": "Ga_Dziaki_l_rpt",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.54,
+      "rssi": -89.5
+    },
+    {
+      "a": "SOP_DW_RPT",
+      "b": "Chwaszczyno_P01na_RP",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 12.62,
+      "rssi": -87.4
+    },
+    {
+      "a": "SOP_DW_RPT",
+      "b": "GA_WICZ_RPT_02",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.94,
+      "rssi": -87.1
+    },
+    {
+      "a": "SOP_DW_RPT",
+      "b": "GDYNIA_Wiczlino_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.06,
+      "rssi": -85.4
+    },
+    {
+      "a": "SOP_DW_RPT",
+      "b": "GWE_Dobrzewino2_RPT",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.86,
+      "rssi": -87.8
+    },
+    {
+      "a": "SOP_DW_RPT",
+      "b": "GDA_Karczemki",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.94,
+      "rssi": -85.8
+    },
+    {
+      "a": "SOP_DW_RPT",
+      "b": "GDANSK-SUCHANINO_SM",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.35,
+      "rssi": -93.1
+    },
+    {
+      "a": "SOP_DW_RPT",
+      "b": "GDA_Heweliusza",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.47,
+      "rssi": -82.7
+    },
+    {
+      "a": "SOP_DW_RPT",
+      "b": "RPT_LOST_01",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.26,
+      "rssi": -86.5
+    },
+    {
+      "a": "SOP_DW_RPT",
+      "b": "BAN06M-Test-XiaoRPT",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.17,
+      "rssi": -89.7
+    },
+    {
+      "a": "SOP_DW_RPT",
+      "b": "GWE_Koleczkowo_RPT",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.03,
+      "rssi": -86.8
+    },
+    {
+      "a": "SOP_DW_RPT",
+      "b": "GKA_PEPOWO_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.12,
+      "rssi": -84.5
+    },
+    {
+      "a": "SOP_DW_RPT",
+      "b": "GDA_Przerobka",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.38,
+      "rssi": -90.8
+    },
+    {
+      "a": "SOP_DW_RPT",
+      "b": "GDA_DW_RPT",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.95,
+      "rssi": -95.8
+    },
+    {
+      "a": "GDYNIA_Wielkokacka_R",
+      "b": "Xiao_nrf52_Repeater_",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 14.01,
+      "rssi": -88.4
+    },
+    {
+      "a": "GDYNIA_Wielkokacka_R",
+      "b": "Ga_Dziaki_l_rpt",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.58,
+      "rssi": -91.5
+    },
+    {
+      "a": "GDYNIA_Wielkokacka_R",
+      "b": "GDY_Fikakowo_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.97,
+      "rssi": -92.2
+    },
+    {
+      "a": "GDYNIA_Wielkokacka_R",
+      "b": "GDYNIA_Dbrowa_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.08,
+      "rssi": -94.0
+    },
+    {
+      "a": "GDYNIA_Wielkokacka_R",
+      "b": "GDYNIA_Wiczlino_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.48,
+      "rssi": -95.4
+    },
+    {
+      "a": "GDYNIA_Wielkokacka_R",
+      "b": "Chwaszczyno_P01na_RP",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.32,
+      "rssi": -96.1
+    },
+    {
+      "a": "GDYNIA_Wielkokacka_R",
+      "b": "TUCHOM_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.64,
+      "rssi": -92.6
+    },
+    {
+      "a": "GDYNIA_Wielkokacka_R",
+      "b": "GWE_Koleczkowo_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.26,
+      "rssi": -90.2
+    },
+    {
+      "a": "GDYNIA_Wielkokacka_R",
+      "b": "BAN06M-Test-XiaoRPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.18,
+      "rssi": -91.8
+    },
+    {
+      "a": "GDYNIA_Wielkokacka_R",
+      "b": "GDA_Karczemki",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.35,
+      "rssi": -88.2
+    },
+    {
+      "a": "GDYNIA_Wielkokacka_R",
+      "b": "GDANSK-SUCHANINO_SM",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.32,
+      "rssi": -98.2
+    },
+    {
+      "a": "GDYNIA_Wielkokacka_R",
+      "b": "GDA_DW_KielpinoG_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.74,
+      "rssi": -88.6
+    },
+    {
+      "a": "GDYNIA_Wielkokacka_R",
+      "b": "GDA_Heweliusza",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.65,
+      "rssi": -88.0
+    },
+    {
+      "a": "GDYNIA_Wielkokacka_R",
+      "b": "GDA_Przerobka",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.43,
+      "rssi": -95.9
+    },
+    {
+      "a": "GDYNIA_Wielkokacka_R",
+      "b": "GDA_DW_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.87,
+      "rssi": -88.4
+    },
+    {
+      "a": "GDYNIA_Wielkokacka_R",
+      "b": "GDARubinowa",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.83,
+      "rssi": -90.5
+    },
+    {
+      "a": "GDYNIA_Wielkokacka_R",
+      "b": "GKA_PRZYJAZN_RPT",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.24,
+      "rssi": -91.7
+    },
+    {
+      "a": "GDYNIA_Wielkokacka_R",
+      "b": "RPT_PRG_01",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.43,
+      "rssi": -94.5
+    },
+    {
+      "a": "GDYNIA_Wielkokacka_R",
+      "b": "GDA-ROKITNICA-RPT-2b",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.89,
+      "rssi": -95.4
+    },
+    {
+      "a": "GDYNIA_Wielkokacka_R",
+      "b": "RPT_PRG_03",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.55,
+      "rssi": -92.4
+    },
+    {
+      "a": "GDYNIA_Dbrowa_RPT",
+      "b": "GDY_Fikakowo_RPT",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 8.99,
+      "rssi": -98.1
+    },
+    {
+      "a": "GDYNIA_Dbrowa_RPT",
+      "b": "GDY_Spokojna",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 1.64,
+      "rssi": -82.2
+    },
+    {
+      "a": "GDYNIA_Dbrowa_RPT",
+      "b": "GA_WICZ_RPT_02",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.52,
+      "rssi": -89.8
+    },
+    {
+      "a": "GDYNIA_Dbrowa_RPT",
+      "b": "GWE_Dobrzewino2_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.8,
+      "rssi": -86.3
+    },
+    {
+      "a": "GDYNIA_Dbrowa_RPT",
+      "b": "GWE_Koleczkowo_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.97,
+      "rssi": -85.8
+    },
+    {
+      "a": "GDYNIA_Dbrowa_RPT",
+      "b": "GDA_Karczemki",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.13,
+      "rssi": -86.9
+    },
+    {
+      "a": "GDYNIA_Dbrowa_RPT",
+      "b": "RPT_LOST_01",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.99,
+      "rssi": -90.1
+    },
+    {
+      "a": "GDYNIA_Dbrowa_RPT",
+      "b": "GDA_Heweliusza",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.81,
+      "rssi": -91.5
+    },
+    {
+      "a": "GDYNIA_Dbrowa_RPT",
+      "b": "GKA_PRZYJAZN_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.77,
+      "rssi": -93.9
+    },
+    {
+      "a": "GDYNIA_Dbrowa_RPT",
+      "b": "GDA_DW_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.07,
+      "rssi": -89.1
+    },
+    {
+      "a": "GDYNIA_Dbrowa_RPT",
+      "b": "GD_REP_K",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.26,
+      "rssi": -92.8
+    },
+    {
+      "a": "GDYNIA_Dbrowa_RPT",
+      "b": "GDARubinowa",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.74,
+      "rssi": -82.9
+    },
+    {
+      "a": "GDYNIA_Dbrowa_RPT",
+      "b": "GDA_Przerobka",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.32,
+      "rssi": -85.3
+    },
+    {
+      "a": "GDYNIA_Dbrowa_RPT",
+      "b": "RPT_BORKOWO",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.22,
+      "rssi": -100.1
+    },
+    {
+      "a": "GDYNIA_Dbrowa_RPT",
+      "b": "RPT_PRG_02",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.55,
+      "rssi": -89.3
+    },
+    {
+      "a": "GDYNIA_Dbrowa_RPT",
+      "b": "RPT_PRG_03",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.93,
+      "rssi": -87.6
+    },
+    {
+      "a": "GDYNIA_Dbrowa_RPT",
+      "b": "RPT_REKCIN",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.94,
+      "rssi": -90.5
+    },
+    {
+      "a": "GDYNIA_Dbrowa_RPT",
+      "b": "RPT_KLESZCZ",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.72,
+      "rssi": -92.8
+    },
+    {
+      "a": "GDA_DW_KielpinoG_RPT",
+      "b": "GDA_Karczemki",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 6.61,
+      "rssi": -86.5
+    },
+    {
+      "a": "GDA_DW_KielpinoG_RPT",
+      "b": "GDA_DW_RPT",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 9.42,
+      "rssi": -87.3
+    },
+    {
+      "a": "GDA_DW_KielpinoG_RPT",
+      "b": "RPT_LOST_01",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.48,
+      "rssi": -87.4
+    },
+    {
+      "a": "GDA_DW_KielpinoG_RPT",
+      "b": "GDANSK-SUCHANINO_SM",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.25,
+      "rssi": -85.1
+    },
+    {
+      "a": "GDA_DW_KielpinoG_RPT",
+      "b": "RPT_BORKOWO",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 9.61,
+      "rssi": -82.5
+    },
+    {
+      "a": "GDA_DW_KielpinoG_RPT",
+      "b": "RPT_GD_Suchanino",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.2,
+      "rssi": -88.8
+    },
+    {
+      "a": "GDA_DW_KielpinoG_RPT",
+      "b": "GDARubinowa",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.67,
+      "rssi": -90.0
+    },
+    {
+      "a": "GDA_DW_KielpinoG_RPT",
+      "b": "GKA_PRZYJAZN_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.61,
+      "rssi": -90.7
+    },
+    {
+      "a": "GDA_DW_KielpinoG_RPT",
+      "b": "RPT_PRG_02",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.57,
+      "rssi": -89.7
+    },
+    {
+      "a": "GDA_DW_KielpinoG_RPT",
+      "b": "BAN06M-Test-XiaoRPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.82,
+      "rssi": -88.9
+    },
+    {
+      "a": "GDA_DW_KielpinoG_RPT",
+      "b": "RPT_PRG_03",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.49,
+      "rssi": -94.6
+    },
+    {
+      "a": "GDA_DW_KielpinoG_RPT",
+      "b": "GDAOlszynka",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.27,
+      "rssi": -94.3
+    },
+    {
+      "a": "GDA_DW_KielpinoG_RPT",
+      "b": "RPT_REKCIN",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.51,
+      "rssi": -94.5
+    },
+    {
+      "a": "GDA_DW_KielpinoG_RPT",
+      "b": "GDA-ROKITNICA-RPT-2b",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.32,
+      "rssi": -90.4
+    },
+    {
+      "a": "GDA_DW_KielpinoG_RPT",
+      "b": "TUCHOM_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.58,
+      "rssi": -97.5
+    },
+    {
+      "a": "GDA_DW_KielpinoG_RPT",
+      "b": "Chwaszczyno_P01na_RP",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.12,
+      "rssi": -88.7
+    },
+    {
+      "a": "GDA_DW_KielpinoG_RPT",
+      "b": "GDY_Fikakowo_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.64,
+      "rssi": -93.8
+    },
+    {
+      "a": "GDA_DW_KielpinoG_RPT",
+      "b": "GDY_Spokojna",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.1,
+      "rssi": -91.7
+    },
+    {
+      "a": "GDA_DW_KielpinoG_RPT",
+      "b": "GWE_Dobrzewino2_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.79,
+      "rssi": -90.8
+    },
+    {
+      "a": "GD_Swibno_rpt",
+      "b": "GDA-ROKITNICA-RPT-2b",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.37,
+      "rssi": -87.2
+    },
+    {
+      "a": "GD_Swibno_rpt",
+      "b": "RPT_tx20_sol_bat4000",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.98,
+      "rssi": -93.2
+    },
+    {
+      "a": "GKW_BAJKOWE_NW_RPT",
+      "b": "GKW_KOPERNIKA_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.92,
+      "rssi": -91.4
+    },
+    {
+      "a": "GDA-ROKITNICA-RPT-2b",
+      "b": "RPT_PRG_01",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.07,
+      "rssi": -92.2
+    },
+    {
+      "a": "GDA-ROKITNICA-RPT-2b",
+      "b": "GDAOlszynka",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.2,
+      "rssi": -95.3
+    },
+    {
+      "a": "GDA-ROKITNICA-RPT-2b",
+      "b": "RPT_PRG_02",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.63,
+      "rssi": -92.6
+    },
+    {
+      "a": "GDA-ROKITNICA-RPT-2b",
+      "b": "RPT_BORKOWO",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.75,
+      "rssi": -89.2
+    },
+    {
+      "a": "GDA-ROKITNICA-RPT-2b",
+      "b": "GDARubinowa",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.01,
+      "rssi": -86.5
+    },
+    {
+      "a": "GDA-ROKITNICA-RPT-2b",
+      "b": "GD_REP_K",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.73,
+      "rssi": -89.1
+    },
+    {
+      "a": "GDA-ROKITNICA-RPT-2b",
+      "b": "RPT_LOST_01",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.51,
+      "rssi": -88.4
+    },
+    {
+      "a": "GDA-ROKITNICA-RPT-2b",
+      "b": "GDA_Heweliusza",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.07,
+      "rssi": -90.7
+    },
+    {
+      "a": "GDA-ROKITNICA-RPT-2b",
+      "b": "RPT_REKCIN",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.97,
+      "rssi": -91.5
+    },
+    {
+      "a": "GDA-ROKITNICA-RPT-2b",
+      "b": "RPT_Skowarcz_V3HPV",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.33,
+      "rssi": -94.5
+    },
+    {
+      "a": "GDA-ROKITNICA-RPT-2b",
+      "b": "RPT_KLESZCZ",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.92,
+      "rssi": -90.9
+    },
+    {
+      "a": "GDA-ROKITNICA-RPT-2b",
+      "b": "MIK_DW_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.37,
+      "rssi": -93.4
+    },
+    {
+      "a": "GDA-ROKITNICA-RPT-2b",
+      "b": "GTC_ROKITKI_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.14,
+      "rssi": -97.6
+    },
+    {
+      "a": "GDA-ROKITNICA-RPT-2b",
+      "b": "GKA_PEPOWO_RPT",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.81,
+      "rssi": -99.8
+    },
+    {
+      "a": "GDA-ROKITNICA-RPT-2b",
+      "b": "GDY_Spokojna",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.61,
+      "rssi": -92.3
+    },
+    {
+      "a": "GDA-ROKITNICA-RPT-2b",
+      "b": "GDY_Fikakowo_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.98,
+      "rssi": -91.5
+    },
+    {
+      "a": "GDA-ROKITNICA-RPT-2b",
+      "b": "GA_WICZ_RPT_02",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.61,
+      "rssi": -94.8
+    },
+    {
+      "a": "GDAOlszynka",
+      "b": "GDA_Przerobka",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.23,
+      "rssi": -90.7
+    },
+    {
+      "a": "GDAOlszynka",
+      "b": "GD_REP_K",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.06,
+      "rssi": -90.3
+    },
+    {
+      "a": "GDAOlszynka",
+      "b": "RPT_GD_Suchanino",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.34,
+      "rssi": -93.1
+    },
+    {
+      "a": "GDAOlszynka",
+      "b": "GDANSK-SUCHANINO_SM",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.94,
+      "rssi": -89.6
+    },
+    {
+      "a": "GDAOlszynka",
+      "b": "GDA_DW_RPT",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.85,
+      "rssi": -91.7
+    },
+    {
+      "a": "GDAOlszynka",
+      "b": "GDA_Karczemki",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.91,
+      "rssi": -90.6
+    },
+    {
+      "a": "GDAOlszynka",
+      "b": "RPT_Skowarcz_V3HPV",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.48,
+      "rssi": -90.1
+    },
+    {
+      "a": "GDAOlszynka",
+      "b": "RPT_KLESZCZ",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.76,
+      "rssi": -93.0
+    },
+    {
+      "a": "GDAOlszynka",
+      "b": "GKA_PRZYJAZN_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.5,
+      "rssi": -94.2
+    },
+    {
+      "a": "MIK_DW_RPT",
+      "b": "RPT_tx20_sol_bat4000",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.12,
+      "rssi": -94.8
+    },
+    {
+      "a": "MIK_DW_RPT",
+      "b": "GDA_Heweliusza",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.78,
+      "rssi": -89.4
+    },
+    {
+      "a": "MIK_DW_RPT",
+      "b": "GDARubinowa",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.32,
+      "rssi": -85.6
+    },
+    {
+      "a": "MIK_DW_RPT",
+      "b": "RPT_GD_Suchanino",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.04,
+      "rssi": -92.7
+    },
+    {
+      "a": "MIK_DW_RPT",
+      "b": "RPT_PRG_01",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.87,
+      "rssi": -93.7
+    },
+    {
+      "a": "MIK_DW_RPT",
+      "b": "GDANSK-SUCHANINO_SM",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.14,
+      "rssi": -89.9
+    },
+    {
+      "a": "MIK_DW_RPT",
+      "b": "GD_REP_K",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.05,
+      "rssi": -92.8
+    },
+    {
+      "a": "MIK_DW_RPT",
+      "b": "RPT_LOST_01",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.7,
+      "rssi": -91.9
+    },
+    {
+      "a": "MIK_DW_RPT",
+      "b": "GDA_DW_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.67,
+      "rssi": -91.0
+    },
+    {
+      "a": "RPT_LOST_01",
+      "b": "GDARubinowa",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.22,
+      "rssi": -89.5
+    },
+    {
+      "a": "RPT_LOST_01",
+      "b": "GDA_Heweliusza",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.21,
+      "rssi": -86.6
+    },
+    {
+      "a": "RPT_LOST_01",
+      "b": "GDA_Przerobka",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.8,
+      "rssi": -88.3
+    },
+    {
+      "a": "RPT_LOST_01",
+      "b": "RPT_PRG_01",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.63,
+      "rssi": -94.3
+    },
+    {
+      "a": "RPT_LOST_01",
+      "b": "GKA_PRZYJAZN_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.53,
+      "rssi": -89.8
+    },
+    {
+      "a": "RPT_LOST_01",
+      "b": "GDY_Fikakowo_RPT",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.8,
+      "rssi": -91.0
+    },
+    {
+      "a": "RPT_LOST_01",
+      "b": "TUCHOM_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.19,
+      "rssi": -89.5
+    },
+    {
+      "a": "RPT_LOST_01",
+      "b": "GDYNIA_Witomino_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.84,
+      "rssi": -90.8
+    },
+    {
+      "a": "RPT_LOST_01",
+      "b": "GWE_Dobrzewino2_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.63,
+      "rssi": -92.3
+    },
+    {
+      "a": "RPT_LOST_01",
+      "b": "Ga_Dziaki_l_rpt",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.8,
+      "rssi": -92.6
+    },
+    {
+      "a": "RPT_LOST_01",
+      "b": "GA_WICZ_RPT_02",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.93,
+      "rssi": -91.8
+    },
+    {
+      "a": "RPT_LOST_01",
+      "b": "GDYNIA_Wiczlino_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.31,
+      "rssi": -87.8
+    },
+    {
+      "a": "RPT_LOST_01",
+      "b": "GKA_Borcz",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.42,
+      "rssi": -87.0
+    },
+    {
+      "a": "GDARubinowa",
+      "b": "GDA_DW_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.59,
+      "rssi": -91.0
+    },
+    {
+      "a": "GDARubinowa",
+      "b": "RPT_BORKOWO",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.11,
+      "rssi": -92.6
+    },
+    {
+      "a": "GDARubinowa",
+      "b": "RPT_PRG_01",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.37,
+      "rssi": -88.0
+    },
+    {
+      "a": "GDARubinowa",
+      "b": "RPT_PRG_02",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.54,
+      "rssi": -91.3
+    },
+    {
+      "a": "GDARubinowa",
+      "b": "GDA_Karczemki",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.24,
+      "rssi": -89.4
+    },
+    {
+      "a": "GDARubinowa",
+      "b": "RPT_KLESZCZ",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.87,
+      "rssi": -96.4
+    },
+    {
+      "a": "GA_WICZ_RPT_02",
+      "b": "GDYNIA_Wiczlino_RPT",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 5.04,
+      "rssi": -95.0
+    },
+    {
+      "a": "GA_WICZ_RPT_02",
+      "b": "Chwaszczyno_P01na_RP",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.73,
+      "rssi": -95.4
+    },
+    {
+      "a": "GA_WICZ_RPT_02",
+      "b": "GWE_Dobrzewino2_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.0,
+      "rssi": -91.6
+    },
+    {
+      "a": "GA_WICZ_RPT_02",
+      "b": "GDY_Fikakowo_RPT",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 4.53,
+      "rssi": -88.3
+    },
+    {
+      "a": "GA_WICZ_RPT_02",
+      "b": "TUCHOM_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.0,
+      "rssi": -87.1
+    },
+    {
+      "a": "GA_WICZ_RPT_02",
+      "b": "Xiao_nrf52_Repeater_",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.65,
+      "rssi": -91.5
+    },
+    {
+      "a": "GA_WICZ_RPT_02",
+      "b": "RPT_GD_Suchanino",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.15,
+      "rssi": -96.3
+    },
+    {
+      "a": "GA_WICZ_RPT_02",
+      "b": "GDA_Heweliusza",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.51,
+      "rssi": -86.7
+    },
+    {
+      "a": "GA_WICZ_RPT_02",
+      "b": "GD_REP_K",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.12,
+      "rssi": -95.1
+    },
+    {
+      "a": "GA_WICZ_RPT_02",
+      "b": "GDA_Przerobka",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.05,
+      "rssi": -86.1
+    },
+    {
+      "a": "GA_WICZ_RPT_02",
+      "b": "RPT_BORKOWO",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.81,
+      "rssi": -88.9
+    },
+    {
+      "a": "GA_WICZ_RPT_02",
+      "b": "RPT_tx20_sol_bat4000",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.1,
+      "rssi": -89.9
+    },
+    {
+      "a": "GDY_Fikakowo_RPT",
+      "b": "GDYNIA_Witomino_RPT",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.16,
+      "rssi": -88.3
+    },
+    {
+      "a": "GDY_Fikakowo_RPT",
+      "b": "GWE_Bojano_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.45,
+      "rssi": -86.2
+    },
+    {
+      "a": "GDY_Fikakowo_RPT",
+      "b": "GDYNIA_Wiczlino_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.52,
+      "rssi": -85.6
+    },
+    {
+      "a": "GDY_Fikakowo_RPT",
+      "b": "GDYNIA_Dziaki_Lene",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.54,
+      "rssi": -95.3
+    },
+    {
+      "a": "GDY_Fikakowo_RPT",
+      "b": "Ga_Dziaki_l_rpt",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.13,
+      "rssi": -89.3
+    },
+    {
+      "a": "GDY_Fikakowo_RPT",
+      "b": "TUCHOM_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.32,
+      "rssi": -92.8
+    },
+    {
+      "a": "GDY_Fikakowo_RPT",
+      "b": "GWE_Dobrzewino2_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.72,
+      "rssi": -95.5
+    },
+    {
+      "a": "GDY_Fikakowo_RPT",
+      "b": "GKA_PEPOWO_RPT",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.5,
+      "rssi": -85.7
+    },
+    {
+      "a": "GDY_Fikakowo_RPT",
+      "b": "GDA_Karczemki",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.17,
+      "rssi": -87.3
+    },
+    {
+      "a": "GDY_Fikakowo_RPT",
+      "b": "RPT_GD_Suchanino",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.39,
+      "rssi": -94.0
+    },
+    {
+      "a": "GDY_Fikakowo_RPT",
+      "b": "GDA_DW_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.49,
+      "rssi": -91.2
+    },
+    {
+      "a": "GDY_Fikakowo_RPT",
+      "b": "GKA_PRZYJAZN_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.26,
+      "rssi": -95.2
+    },
+    {
+      "a": "GDY_Fikakowo_RPT",
+      "b": "RPT_BORKOWO",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.0,
+      "rssi": -95.5
+    },
+    {
+      "a": "GDY_Fikakowo_RPT",
+      "b": "RPT_PRG_01",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.04,
+      "rssi": -94.3
+    },
+    {
+      "a": "GDY_Fikakowo_RPT",
+      "b": "RPT_REKCIN",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.14,
+      "rssi": -88.9
+    },
+    {
+      "a": "GDY_Fikakowo_RPT",
+      "b": "GKA_Borcz",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.95,
+      "rssi": -85.9
+    },
+    {
+      "a": "GDY_Fikakowo_RPT",
+      "b": "RPT_KLESZCZ",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.86,
+      "rssi": -89.7
+    },
+    {
+      "a": "GDY_Spokojna",
+      "b": "GWE_Koleczkowo_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.48,
+      "rssi": -89.8
+    },
+    {
+      "a": "GDY_Spokojna",
+      "b": "BAN06M-Test-XiaoRPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.63,
+      "rssi": -91.6
+    },
+    {
+      "a": "GDY_Spokojna",
+      "b": "GDA_Karczemki",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.57,
+      "rssi": -86.8
+    },
+    {
+      "a": "GDY_Spokojna",
+      "b": "RPT_GD_Suchanino",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.26,
+      "rssi": -92.1
+    },
+    {
+      "a": "GDY_Spokojna",
+      "b": "GDA_Heweliusza",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.15,
+      "rssi": -91.2
+    },
+    {
+      "a": "GDY_Spokojna",
+      "b": "GDA_Przerobka",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.44,
+      "rssi": -92.9
+    },
+    {
+      "a": "GDY_Spokojna",
+      "b": "GDA_DW_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.39,
+      "rssi": -90.0
+    },
+    {
+      "a": "GDY_Spokojna",
+      "b": "RPT_BORKOWO",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.29,
+      "rssi": -88.5
+    },
+    {
+      "a": "GDY_Spokojna",
+      "b": "RPT_PRG_02",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.73,
+      "rssi": -93.1
+    },
+    {
+      "a": "GDY_Spokojna",
+      "b": "GKA_Borcz",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.43,
+      "rssi": -93.4
+    },
+    {
+      "a": "GWE_Bojano_RPT",
+      "b": "GWE_Dobrzewino2_RPT",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 13.2,
+      "rssi": -91.5
+    },
+    {
+      "a": "GWE_Bojano_RPT",
+      "b": "TUCHOM_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.23,
+      "rssi": -92.0
+    },
+    {
+      "a": "GWE_Bojano_RPT",
+      "b": "GWE_Koleczkowo_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.26,
+      "rssi": -84.6
+    },
+    {
+      "a": "GWE_Bojano_RPT",
+      "b": "GDYNIA_Witomino_RPT",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.63,
+      "rssi": -84.1
+    },
+    {
+      "a": "GWE_Bojano_RPT",
+      "b": "BAN06M-Test-XiaoRPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.8,
+      "rssi": -92.5
+    },
+    {
+      "a": "GWE_Bojano_RPT",
+      "b": "Ga_Dziaki_l_rpt",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.18,
+      "rssi": -93.0
+    },
+    {
+      "a": "GWE_Bojano_RPT",
+      "b": "GDYNIA_Dziaki_Lene",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.22,
+      "rssi": -91.2
+    },
+    {
+      "a": "GWE_Bojano_RPT",
+      "b": "GKA_PRZYJAZN_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.89,
+      "rssi": -85.9
+    },
+    {
+      "a": "GWE_Bojano_RPT",
+      "b": "GDANSK-SUCHANINO_SM",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.56,
+      "rssi": -89.3
+    },
+    {
+      "a": "GWE_Bojano_RPT",
+      "b": "GDA_DW_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.89,
+      "rssi": -88.9
+    },
+    {
+      "a": "GWE_Bojano_RPT",
+      "b": "GD_REP_K",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.22,
+      "rssi": -89.4
+    },
+    {
+      "a": "GWE_Bojano_RPT",
+      "b": "RPT_PRG_02",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.6,
+      "rssi": -87.6
+    },
+    {
+      "a": "GWE_Bojano_RPT",
+      "b": "RPT_PRG_03",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.08,
+      "rssi": -95.1
+    },
+    {
+      "a": "GWE_Bojano_RPT",
+      "b": "RPT_REKCIN",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.11,
+      "rssi": -85.5
+    },
+    {
+      "a": "GWE_Bojano_RPT",
+      "b": "RPT_tx20_sol_bat4000",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.54,
+      "rssi": -89.9
+    },
+    {
+      "a": "GDYNIA_Dziaki_Lene",
+      "b": "Xiao_nrf52_Repeater_",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 4.59,
+      "rssi": -88.6
+    },
+    {
+      "a": "GDYNIA_Dziaki_Lene",
+      "b": "GDYNIA_Wiczlino_RPT",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 0.91,
+      "rssi": -94.1
+    },
+    {
+      "a": "GDYNIA_Dziaki_Lene",
+      "b": "Chwaszczyno_P01na_RP",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.84,
+      "rssi": -94.6
+    },
+    {
+      "a": "GDYNIA_Dziaki_Lene",
+      "b": "GWE_Dobrzewino2_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.59,
+      "rssi": -88.0
+    },
+    {
+      "a": "GDYNIA_Dziaki_Lene",
+      "b": "TUCHOM_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.15,
+      "rssi": -88.9
+    },
+    {
+      "a": "GDYNIA_Dziaki_Lene",
+      "b": "GDA_Karczemki",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.08,
+      "rssi": -89.5
+    },
+    {
+      "a": "GDYNIA_Dziaki_Lene",
+      "b": "GDA_Heweliusza",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.75,
+      "rssi": -89.9
+    },
+    {
+      "a": "GDYNIA_Dziaki_Lene",
+      "b": "GDA_Przerobka",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.68,
+      "rssi": -94.7
+    },
+    {
+      "a": "GDYNIA_Dziaki_Lene",
+      "b": "GDA_DW_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.61,
+      "rssi": -89.8
+    },
+    {
+      "a": "GDYNIA_Dziaki_Lene",
+      "b": "GKA_PRZYJAZN_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.06,
+      "rssi": -91.4
+    },
+    {
+      "a": "GDYNIA_Dziaki_Lene",
+      "b": "RPT_BORKOWO",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.63,
+      "rssi": -90.2
+    },
+    {
+      "a": "GDYNIA_Dziaki_Lene",
+      "b": "RPT_tx20_sol_bat4000",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.31,
+      "rssi": -85.2
+    },
+    {
+      "a": "GDYNIA_Dziaki_Lene",
+      "b": "RPT_PRG_02",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.58,
+      "rssi": -93.3
+    },
+    {
+      "a": "GDYNIA_Dziaki_Lene",
+      "b": "RPT_PRG_03",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.46,
+      "rssi": -97.0
+    },
+    {
+      "a": "RPT_BORKOWO",
+      "b": "GD_REP_K",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.11,
+      "rssi": -89.3
+    },
+    {
+      "a": "RPT_BORKOWO",
+      "b": "RPT_PRG_01",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.21,
+      "rssi": -93.4
+    },
+    {
+      "a": "RPT_BORKOWO",
+      "b": "RPT_PRG_02",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.27,
+      "rssi": -95.3
+    },
+    {
+      "a": "RPT_BORKOWO",
+      "b": "RPT_PRG_03",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.81,
+      "rssi": -96.1
+    },
+    {
+      "a": "RPT_BORKOWO",
+      "b": "RPT_tx20_sol_bat4000",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.66,
+      "rssi": -89.0
+    },
+    {
+      "a": "RPT_BORKOWO",
+      "b": "RPT_GD_Suchanino",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.64,
+      "rssi": -87.0
+    },
+    {
+      "a": "RPT_BORKOWO",
+      "b": "GDA_Heweliusza",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 7.66,
+      "rssi": -95.7
+    },
+    {
+      "a": "RPT_GD_Suchanino",
+      "b": "GDA_Heweliusza",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.14,
+      "rssi": -95.1
+    },
+    {
+      "a": "RPT_GD_Suchanino",
+      "b": "GDA_DW_RPT",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 2.47,
+      "rssi": -93.1
+    },
+    {
+      "a": "RPT_GD_Suchanino",
+      "b": "GDA_Przerobka",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.25,
+      "rssi": -87.6
+    },
+    {
+      "a": "RPT_GD_Suchanino",
+      "b": "GDA_Karczemki",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.28,
+      "rssi": -81.5
+    },
+    {
+      "a": "RPT_GD_Suchanino",
+      "b": "RPT_PRG_01",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.07,
+      "rssi": -101.4
+    },
+    {
+      "a": "RPT_GD_Suchanino",
+      "b": "RPT_tx20_sol_bat4000",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.01,
+      "rssi": -92.8
+    },
+    {
+      "a": "RPT_GD_Suchanino",
+      "b": "RPT_PRG_03",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.47,
+      "rssi": -89.9
+    },
+    {
+      "a": "RPT_GD_Suchanino",
+      "b": "RPT_REKCIN",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.66,
+      "rssi": -94.1
+    },
+    {
+      "a": "RPT_GD_Suchanino",
+      "b": "BAN06M-Test-XiaoRPT",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 4.32,
+      "rssi": -87.7
+    },
+    {
+      "a": "RPT_GD_Suchanino",
+      "b": "GKA_PEPOWO_RPT",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.13,
+      "rssi": -87.4
+    },
+    {
+      "a": "RPT_Skowarcz_V3HPV",
+      "b": "GDA_DW_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.32,
+      "rssi": -92.3
+    },
+    {
+      "a": "RPT_Skowarcz_V3HPV",
+      "b": "GDA_Heweliusza",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.25,
+      "rssi": -98.6
+    },
+    {
+      "a": "RPT_Skowarcz_V3HPV",
+      "b": "GDA_Karczemki",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.82,
+      "rssi": -96.8
+    },
+    {
+      "a": "RPT_Skowarcz_V3HPV",
+      "b": "GKA_PRZYJAZN_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.04,
+      "rssi": -90.2
+    },
+    {
+      "a": "RPT_Skowarcz_V3HPV",
+      "b": "GKA_Borcz",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.8,
+      "rssi": -95.6
+    },
+    {
+      "a": "GDA_DW_RPT",
+      "b": "GD_REP_K",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.32,
+      "rssi": -85.1
+    },
+    {
+      "a": "GDA_DW_RPT",
+      "b": "GDA_Karczemki",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.92,
+      "rssi": -85.2
+    },
+    {
+      "a": "GDA_DW_RPT",
+      "b": "RPT_PRG_03",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.06,
+      "rssi": -89.1
+    },
+    {
+      "a": "GDA_DW_RPT",
+      "b": "GDA_Przerobka",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.46,
+      "rssi": -87.0
+    },
+    {
+      "a": "GDA_DW_RPT",
+      "b": "RPT_REKCIN",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.58,
+      "rssi": -80.9
+    },
+    {
+      "a": "GTC_ROKITKI_RPT",
+      "b": "RPT_KLESZCZ",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.21,
+      "rssi": -85.2
+    },
+    {
+      "a": "GTC_ROKITKI_RPT",
+      "b": "RPT_PRG_03",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.17,
+      "rssi": -94.5
+    },
+    {
+      "a": "TUCHOM_RPT",
+      "b": "GWE_Dobrzewino2_RPT",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 5.4,
+      "rssi": -85.9
+    },
+    {
+      "a": "TUCHOM_RPT",
+      "b": "Chwaszczyno_P01na_RP",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.1,
+      "rssi": -91.0
+    },
+    {
+      "a": "TUCHOM_RPT",
+      "b": "BAN06M-Test-XiaoRPT",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 8.87,
+      "rssi": -87.3
+    },
+    {
+      "a": "TUCHOM_RPT",
+      "b": "GWE_Koleczkowo_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.39,
+      "rssi": -87.2
+    },
+    {
+      "a": "TUCHOM_RPT",
+      "b": "GDYNIA_Wiczlino_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.24,
+      "rssi": -94.0
+    },
+    {
+      "a": "TUCHOM_RPT",
+      "b": "GDA_Karczemki",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 4.01,
+      "rssi": -94.2
+    },
+    {
+      "a": "TUCHOM_RPT",
+      "b": "Ga_Dziaki_l_rpt",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.54,
+      "rssi": -94.4
+    },
+    {
+      "a": "TUCHOM_RPT",
+      "b": "GDANSK-SUCHANINO_SM",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.22,
+      "rssi": -88.1
+    },
+    {
+      "a": "TUCHOM_RPT",
+      "b": "GDA_Heweliusza",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.42,
+      "rssi": -94.4
+    },
+    {
+      "a": "TUCHOM_RPT",
+      "b": "GDA_Przerobka",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.64,
+      "rssi": -90.2
+    },
+    {
+      "a": "TUCHOM_RPT",
+      "b": "GKA_Borcz",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.13,
+      "rssi": -102.0
+    },
+    {
+      "a": "TUCHOM_RPT",
+      "b": "RPT_PRG_03",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.18,
+      "rssi": -81.8
+    },
+    {
+      "a": "TUCHOM_RPT",
+      "b": "RPT_tx20_sol_bat4000",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.45,
+      "rssi": -89.9
+    },
+    {
+      "a": "TUCHOM_RPT",
+      "b": "RPT_KLESZCZ",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.72,
+      "rssi": -93.3
+    },
+    {
+      "a": "GD_REP_K",
+      "b": "GDA_Heweliusza",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.73,
+      "rssi": -85.1
+    },
+    {
+      "a": "GD_REP_K",
+      "b": "GDA_Przerobka",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.23,
+      "rssi": -90.8
+    },
+    {
+      "a": "GD_REP_K",
+      "b": "RPT_tx20_sol_bat4000",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.52,
+      "rssi": -97.7
+    },
+    {
+      "a": "GD_REP_K",
+      "b": "GDA_Karczemki",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.04,
+      "rssi": -86.4
+    },
+    {
+      "a": "GD_REP_K",
+      "b": "GKA_PEPOWO_RPT",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.92,
+      "rssi": -88.8
+    },
+    {
+      "a": "GD_REP_K",
+      "b": "Chwaszczyno_P01na_RP",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.04,
+      "rssi": -88.2
+    },
+    {
+      "a": "GD_REP_K",
+      "b": "Ga_Dziaki_l_rpt",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.61,
+      "rssi": -94.7
+    },
+    {
+      "a": "GD_REP_K",
+      "b": "GWE_Koleczkowo_RPT",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.78,
+      "rssi": -87.2
+    },
+    {
+      "a": "GDA_Heweliusza",
+      "b": "RPT_tx20_sol_bat4000",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.6,
+      "rssi": -96.4
+    },
+    {
+      "a": "GDA_Heweliusza",
+      "b": "GDA_Karczemki",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.68,
+      "rssi": -89.3
+    },
+    {
+      "a": "GDA_Heweliusza",
+      "b": "RPT_PRG_01",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.38,
+      "rssi": -84.6
+    },
+    {
+      "a": "BAN06M-Test-XiaoRPT",
+      "b": "GKA_PEPOWO_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.65,
+      "rssi": -95.4
+    },
+    {
+      "a": "BAN06M-Test-XiaoRPT",
+      "b": "GWE_Dobrzewino2_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.57,
+      "rssi": -94.4
+    },
+    {
+      "a": "BAN06M-Test-XiaoRPT",
+      "b": "Chwaszczyno_P01na_RP",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.34,
+      "rssi": -95.3
+    },
+    {
+      "a": "BAN06M-Test-XiaoRPT",
+      "b": "Xiao_nrf52_Repeater_",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.3,
+      "rssi": -89.3
+    },
+    {
+      "a": "BAN06M-Test-XiaoRPT",
+      "b": "GDANSK-SUCHANINO_SM",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.37,
+      "rssi": -88.1
+    },
+    {
+      "a": "BAN06M-Test-XiaoRPT",
+      "b": "GKA_Borcz",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.38,
+      "rssi": -84.6
+    },
+    {
+      "a": "BAN06M-Test-XiaoRPT",
+      "b": "RPT_KLESZCZ",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.17,
+      "rssi": -84.6
+    },
+    {
+      "a": "BAN06M-Test-XiaoRPT",
+      "b": "RPT_tx20_sol_bat4000",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.97,
+      "rssi": -90.6
+    },
+    {
+      "a": "GDANSK-SUCHANINO_SM",
+      "b": "GDA_Przerobka",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.12,
+      "rssi": -85.6
+    },
+    {
+      "a": "GDA_Przerobka",
+      "b": "RPT_PRG_01",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.5,
+      "rssi": -90.0
+    },
+    {
+      "a": "GDA_Przerobka",
+      "b": "RPT_PRG_03",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.99,
+      "rssi": -90.8
+    },
+    {
+      "a": "GDA_Przerobka",
+      "b": "GDA_Karczemki",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.91,
+      "rssi": -95.1
+    },
+    {
+      "a": "GDA_Przerobka",
+      "b": "GKA_PRZYJAZN_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.71,
+      "rssi": -89.8
+    },
+    {
+      "a": "GDA_Przerobka",
+      "b": "GKA_Borcz",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.54,
+      "rssi": -95.3
+    },
+    {
+      "a": "Ga_Dziaki_l_rpt",
+      "b": "Xiao_nrf52_Repeater_",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.53,
+      "rssi": -92.3
+    },
+    {
+      "a": "Ga_Dziaki_l_rpt",
+      "b": "GDYNIA_Wiczlino_RPT",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 14.68,
+      "rssi": -96.8
+    },
+    {
+      "a": "Ga_Dziaki_l_rpt",
+      "b": "Chwaszczyno_P01na_RP",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.99,
+      "rssi": -91.3
+    },
+    {
+      "a": "Ga_Dziaki_l_rpt",
+      "b": "GWE_Dobrzewino2_RPT",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.15,
+      "rssi": -88.8
+    },
+    {
+      "a": "Ga_Dziaki_l_rpt",
+      "b": "GWE_Koleczkowo_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.14,
+      "rssi": -94.1
+    },
+    {
+      "a": "Ga_Dziaki_l_rpt",
+      "b": "GDA_Karczemki",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -3.35,
+      "rssi": -88.5
+    },
+    {
+      "a": "GDYNIA_Witomino_RPT",
+      "b": "Chwaszczyno_P01na_RP",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.91,
+      "rssi": -97.5
+    },
+    {
+      "a": "GDYNIA_Witomino_RPT",
+      "b": "GWE_Dobrzewino2_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -0.63,
+      "rssi": -90.3
+    },
+    {
+      "a": "GDYNIA_Witomino_RPT",
+      "b": "GWE_Koleczkowo_RPT",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.43,
+      "rssi": -86.5
+    },
+    {
+      "a": "GDYNIA_Witomino_RPT",
+      "b": "GKA_PEPOWO_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.73,
+      "rssi": -86.1
+    },
+    {
+      "a": "GDYNIA_Witomino_RPT",
+      "b": "GDA_Karczemki",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.87,
+      "rssi": -87.2
+    },
+    {
+      "a": "GDYNIA_Witomino_RPT",
+      "b": "GKA_PRZYJAZN_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.96,
+      "rssi": -88.2
+    },
+    {
+      "a": "Chwaszczyno_P01na_RP",
+      "b": "GDYNIA_Wiczlino_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.6,
+      "rssi": -82.4
+    },
+    {
+      "a": "Chwaszczyno_P01na_RP",
+      "b": "GKA_PEPOWO_RPT",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.59,
+      "rssi": -91.5
+    },
+    {
+      "a": "Chwaszczyno_P01na_RP",
+      "b": "GDA_Karczemki",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.81,
+      "rssi": -94.4
+    },
+    {
+      "a": "Chwaszczyno_P01na_RP",
+      "b": "GKA_Borcz",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.23,
+      "rssi": -90.3
+    },
+    {
+      "a": "Chwaszczyno_P01na_RP",
+      "b": "RPT_PRG_03",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -6.01,
+      "rssi": -85.8
+    },
+    {
+      "a": "Chwaszczyno_P01na_RP",
+      "b": "RPT_KLESZCZ",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -10.98,
+      "rssi": -87.4
+    },
+    {
+      "a": "GWE_Dobrzewino2_RPT",
+      "b": "GWE_Koleczkowo_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.78,
+      "rssi": -90.7
+    },
+    {
+      "a": "GWE_Dobrzewino2_RPT",
+      "b": "GDYNIA_Wiczlino_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -1.36,
+      "rssi": -97.8
+    },
+    {
+      "a": "GWE_Dobrzewino2_RPT",
+      "b": "GKA_PEPOWO_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.03,
+      "rssi": -92.4
+    },
+    {
+      "a": "GWE_Dobrzewino2_RPT",
+      "b": "Xiao_nrf52_Repeater_",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.88,
+      "rssi": -97.2
+    },
+    {
+      "a": "GWE_Dobrzewino2_RPT",
+      "b": "GDA_Karczemki",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.25,
+      "rssi": -97.1
+    },
+    {
+      "a": "GWE_Dobrzewino2_RPT",
+      "b": "GKA_Borcz",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.03,
+      "rssi": -96.4
+    },
+    {
+      "a": "Xiao_nrf52_Repeater_",
+      "b": "GWE_Koleczkowo_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -9.53,
+      "rssi": -91.1
+    },
+    {
+      "a": "Xiao_nrf52_Repeater_",
+      "b": "GDA_Karczemki",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.98,
+      "rssi": -90.5
+    },
+    {
+      "a": "Xiao_nrf52_Repeater_",
+      "b": "GKA_PRZYJAZN_RPT",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.47,
+      "rssi": -92.1
+    },
+    {
+      "a": "GKA_PRZYJAZN_RPT",
+      "b": "GKA_PEPOWO_RPT",
+      "loss": 0.02,
+      "latency_ms": 20.0,
+      "snr": 18.79,
+      "rssi": -90.8
+    },
+    {
+      "a": "GKA_PRZYJAZN_RPT",
+      "b": "GKA_Borcz",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -7.96,
+      "rssi": -86.3
+    },
+    {
+      "a": "GKA_PRZYJAZN_RPT",
+      "b": "GDA_Karczemki",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -5.83,
+      "rssi": -89.0
+    },
+    {
+      "a": "GKA_PRZYJAZN_RPT",
+      "b": "GWE_Koleczkowo_RPT",
+      "loss": 0.05,
+      "latency_ms": 20.0,
+      "snr": 5.12,
+      "rssi": -92.4
+    },
+    {
+      "a": "GKA_PRZYJAZN_RPT",
+      "b": "GDYNIA_Wiczlino_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.16,
+      "rssi": -85.7
+    },
+    {
+      "a": "RPT_KLESZCZ",
+      "b": "GKA_Borcz",
+      "loss": 0.2,
+      "latency_ms": 20.0,
+      "snr": -8.59,
+      "rssi": -90.0
+    },
+    {
+      "a": "RPT_KLESZCZ",
+      "b": "GKA_PEPOWO_RPT",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -2.53,
+      "rssi": -87.4
+    },
+    {
+      "a": "GKA_PEPOWO_RPT",
+      "b": "GKA_Borcz",
+      "loss": 0.1,
+      "latency_ms": 20.0,
+      "snr": -4.5,
+      "rssi": -93.6
+    },
+    {
+      "a": "GKA_PEPOWO_RPT",
+      "b": "GDYNIA_Wiczlino_RPT",
+      "loss": 0.35,
+      "latency_ms": 20.0,
+      "snr": -11.56,
+      "rssi": -92.5
+    },
+    {
+      "a": "alice",
+      "b": "GW1",
       "snr": 12.0,
       "rssi": -60.0,
       "loss": 0.02,
@@ -1846,7 +8604,7 @@
     },
     {
       "a": "bob",
-      "b": "GA_WICZ_RPT_01",
+      "b": "GD_Hallera_Xiao_Test",
       "snr": 12.0,
       "rssi": -60.0,
       "loss": 0.02,
@@ -1854,7 +8612,7 @@
     },
     {
       "a": "charlie",
-      "b": "Dobrzewino_RPT",
+      "b": "RPT_BORKOWO",
       "snr": 12.0,
       "rssi": -60.0,
       "loss": 0.02,
@@ -1870,47 +8628,7 @@
     },
     {
       "a": "eve",
-      "b": "MIK_DW_RPT",
-      "snr": 12.0,
-      "rssi": -60.0,
-      "loss": 0.02,
-      "latency_ms": 5.0
-    },
-    {
-      "a": "frank",
-      "b": "GDAOlszynka",
-      "snr": 12.0,
-      "rssi": -60.0,
-      "loss": 0.02,
-      "latency_ms": 5.0
-    },
-    {
-      "a": "grace",
-      "b": "GDA-Jasien",
-      "snr": 12.0,
-      "rssi": -60.0,
-      "loss": 0.02,
-      "latency_ms": 5.0
-    },
-    {
-      "a": "heidi",
-      "b": "Hopowo",
-      "snr": 12.0,
-      "rssi": -60.0,
-      "loss": 0.02,
-      "latency_ms": 5.0
-    },
-    {
-      "a": "ivan",
-      "b": "GDA_Przerobka",
-      "snr": 12.0,
-      "rssi": -60.0,
-      "loss": 0.02,
-      "latency_ms": 5.0
-    },
-    {
-      "a": "judy",
-      "b": "GDA1R",
+      "b": "RPT_LOST_01",
       "snr": 12.0,
       "rssi": -60.0,
       "loss": 0.02,
@@ -1918,7 +8636,7 @@
     }
   ],
   "simulation": {
-    "warmup_secs": 31.0,
+    "warmup_secs": 63.0,
     "duration_secs": 300.0,
     "traffic_interval_secs": 15.0,
     "advert_interval_secs": 60.0,

@@ -416,6 +416,164 @@ def _legend_line(color: str, dashed: bool = False) -> None:
     )
 
 
+def _stat_row(label: str, value: str, color: str | None = None) -> None:
+    """Render a compact label: value row."""
+    with ui.row().classes("w-full justify-between items-baseline gap-1"):
+        ui.label(label).classes("text-body2 text-grey-8")
+        lbl = ui.label(value).classes("text-body2 text-weight-medium")
+        if color:
+            lbl.style(f"color: {color}")
+
+
+def _render_summary_stats(stats: dict) -> None:
+    """Render comprehensive statistics cards from compute_trace_stats()."""
+    metrics = stats.get("metrics")
+    timing = stats.get("timing")
+
+    # -- Packet overview --
+    with ui.card().classes("w-full"):
+        ui.label("Packets").classes("text-subtitle2")
+        _stat_row("Total", str(stats["n_packets"]))
+        _stat_row("Flood-routed", f"{stats['n_flood']} ({stats['flood_pct']:.0f}%)")
+        _stat_row("Direct-routed", str(stats.get("n_direct", 0)))
+        _stat_row("Total hops", str(stats.get("total_hops", 0)))
+        amp = stats.get("flood_amplification", 0)
+        if amp > 0:
+            _stat_row("Flood amplification", f"{amp:.1f}x")
+        _stat_row("Avg witnesses", f"{stats['avg_witnesses']:.1f}")
+        if stats["n_collisions"] > 0:
+            _stat_row("Collisions", str(stats["n_collisions"]),
+                       color=COLLISION_COLOUR)
+
+    # -- Message delivery (from embedded metrics) --
+    if metrics:
+        delivery = metrics.get("delivery", {})
+        attempted = delivery.get("attempted", 0)
+        if attempted > 0:
+            delivered = delivery.get("delivered", 0)
+            rate = delivery.get("rate", 0) * 100
+            with ui.card().classes("w-full"):
+                ui.label("Message Delivery").classes("text-subtitle2")
+                _stat_row("Delivered", f"{delivered}/{attempted}")
+                rate_color = "#4caf50" if rate >= 80 else "#ff9800" if rate >= 50 else "#f44336"
+                _stat_row("Delivery rate", f"{rate:.1f}%", color=rate_color)
+
+                lat = metrics.get("latency", {})
+                if lat:
+                    _stat_row("Latency min", f"{lat['min_ms']:.0f} ms")
+                    _stat_row("Latency p50", f"{lat['p50_ms']:.0f} ms")
+                    _stat_row("Latency avg", f"{lat['avg_ms']:.0f} ms")
+                    _stat_row("Latency p95", f"{lat['p95_ms']:.0f} ms")
+                    _stat_row("Latency max", f"{lat['max_ms']:.0f} ms")
+
+        # ACK outcomes
+        ack = metrics.get("ack_outcomes", {})
+        ack_total = sum(ack.get(k, 0) for k in ("confirmed", "retries", "failed"))
+        if ack_total > 0:
+            with ui.card().classes("w-full"):
+                ui.label("ACK Outcomes").classes("text-subtitle2")
+                _stat_row("Confirmed", str(ack.get("confirmed", 0)),
+                           color="#4caf50")
+                retries = ack.get("retries", 0)
+                if retries:
+                    _stat_row("Retries", str(retries), color="#ff9800")
+                failed = ack.get("failed", 0)
+                if failed:
+                    _stat_row("Failed", str(failed), color="#f44336")
+
+        # Channel messages
+        ch = metrics.get("channel_messages", {})
+        if ch.get("sent", 0) > 0 or ch.get("recv", 0) > 0:
+            with ui.card().classes("w-full"):
+                ui.label("Channel Messages").classes("text-subtitle2")
+                _stat_row("Sent", str(ch.get("sent", 0)))
+                _stat_row("Received", str(ch.get("recv", 0)))
+
+        # Drops breakdown
+        drops = metrics.get("drops", {})
+        total_drops = sum(drops.values()) if drops else 0
+        if total_drops > 0:
+            with ui.card().classes("w-full"):
+                ui.label("Drops").classes("text-subtitle2")
+                for key, label in [
+                    ("collisions", "RF collisions"),
+                    ("halfduplex", "Half-duplex"),
+                    ("link_loss", "Link loss"),
+                    ("adversarial_drop", "Adversarial drop"),
+                    ("adversarial_corrupt", "Adversarial corrupt"),
+                    ("adversarial_replay", "Adversarial replay"),
+                ]:
+                    val = drops.get(key, 0)
+                    if val > 0:
+                        _stat_row(label, str(val), color=COLLISION_COLOUR)
+
+        # Contact discovery
+        contacts = metrics.get("contacts", {})
+        if contacts:
+            with ui.card().classes("w-full"):
+                ui.label("Contact Discovery").classes("text-subtitle2")
+                for name in sorted(contacts):
+                    c = contacts[name]
+                    disc = c["discovered"]
+                    tot = c["total"]
+                    pct = disc / tot * 100 if tot else 0
+                    pct_color = "#4caf50" if pct >= 80 else "#ff9800" if pct >= 50 else "#f44336"
+                    _stat_row(
+                        short_name(name),
+                        f"{disc}/{tot} ({pct:.0f}%)",
+                        color=pct_color,
+                    )
+
+    # -- Timing (from embedded timing stats) --
+    if timing:
+        with ui.card().classes("w-full"):
+            ui.label("Timing").classes("text-subtitle2")
+            if "avg_airtime_ms" in timing:
+                _stat_row("Avg airtime/hop",
+                           f"{timing['avg_airtime_ms']:.0f} ms")
+            if "relay_delay_avg_ms" in timing:
+                _stat_row("Relay delay",
+                           f"{timing['relay_delay_min_ms']:.0f} / "
+                           f"{timing['relay_delay_avg_ms']:.0f} / "
+                           f"{timing['relay_delay_max_ms']:.0f} ms")
+            if "flood_prop_avg_ms" in timing:
+                _stat_row("Flood propagation",
+                           f"{timing['flood_prop_min_ms']:.0f} / "
+                           f"{timing['flood_prop_avg_ms']:.0f} / "
+                           f"{timing['flood_prop_max_ms']:.0f} ms")
+            if "channel_utilization_pct" in timing:
+                _stat_row("Channel utilization",
+                           f"{timing['channel_utilization_pct']:.1f}%")
+
+    # -- Per-type breakdown --
+    by_type = stats.get("by_type", {})
+    if len(by_type) > 1:
+        with ui.card().classes("w-full"):
+            ui.label("By Type").classes("text-subtitle2")
+            rows = []
+            for tname, info in sorted(by_type.items()):
+                rows.append({
+                    "type": tname[:12],
+                    "count": info["count"],
+                    "avg_w": f"{info['avg_witnesses']:.1f}",
+                    "col": info["collisions"],
+                })
+            ui.table(
+                columns=[
+                    {"name": "type", "label": "Type", "field": "type",
+                     "align": "left"},
+                    {"name": "count", "label": "#", "field": "count",
+                     "align": "right"},
+                    {"name": "avg_w", "label": "Avg W", "field": "avg_w",
+                     "align": "right"},
+                    {"name": "col", "label": "Col", "field": "col",
+                     "align": "right"},
+                ],
+                rows=rows,
+                row_key="type",
+            ).classes("w-full").style("font-size: 0.7em")
+
+
 def _sidebar_content(state: AppState) -> None:
     ui.label("Trace Viewer").classes("text-h6")
 
@@ -443,17 +601,7 @@ def _sidebar_content(state: AppState) -> None:
     stats = compute_trace_stats(trace)
 
     # -- Summary stats --
-    with ui.card().classes("w-full"):
-        ui.label("Summary").classes("text-subtitle2")
-        ui.label(f"Packets: {stats['n_packets']}").classes("text-body2")
-        ui.label(f"Flood: {stats['flood_pct']:.0f}%").classes("text-body2")
-        ui.label(f"Avg witnesses: {stats['avg_witnesses']:.1f}").classes(
-            "text-body2"
-        )
-        if stats["n_collisions"] > 0:
-            ui.label(f"Collisions: {stats['n_collisions']}").classes(
-                "text-body2"
-            ).style(f"color: {COLLISION_COLOUR}")
+    _render_summary_stats(stats)
 
     # -- Legend --
     ui.separator()

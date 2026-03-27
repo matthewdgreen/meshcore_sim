@@ -111,6 +111,13 @@ public:
     // ---- Application-level commands (called from main.cpp) ----
     bool sendTextTo(const std::string& dest_pub_hex, const std::string& text);
     void broadcastAdvert(const std::string& name = "");
+
+    // Group channel support (stub — experiment agents use mesh::Mesh, not BaseChatMesh)
+    void setupPublicChannel(const std::string& name);
+    bool sendChannelText(const std::string& text);
+
+    // Drive Dispatcher timing (BaseChatMesh loop equivalent).
+    void loop();
 };
 
 // RoomServerNode is included for binary compatibility with main.cpp.

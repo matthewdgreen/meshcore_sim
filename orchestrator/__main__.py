@@ -136,7 +136,8 @@ async def run(args: object) -> int:
     #   - flood_timeout: ACK wait with retries (companion_radio formula)
     # Together they cover propagation + round-trip ACK for the last message.
     grace_secs = stagger_secs + flood_timeout_secs(
-        radio.sf, radio.bw_hz, radio.cr, radio.preamble_symbols)
+        radio.sf, radio.bw_hz, radio.cr, radio.preamble_symbols,
+        retries=1)
 
     total_time = sim.warmup_secs + sim.duration_secs + grace_secs
     log.info(
@@ -221,6 +222,8 @@ async def run(args: object) -> int:
                 tracer.to_dict(
                     topology_path=args.topology,
                     node_names=list(agents.keys()),
+                    metrics=metrics.to_dict(),
+                    total_sim_secs=total_time,
                 ),
                 fh, indent=2,
             )
