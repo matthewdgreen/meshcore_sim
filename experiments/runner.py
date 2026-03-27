@@ -209,17 +209,13 @@ async def _run_async(
 
     # Build RF model objects — always use contention (airtime + collision).
     radio = topo_cfg.radio or RadioConfig()
-    neighbors_map = {
-        name: {link.other for link in topology.neighbours(name)}
-        for name in topology.all_names()
-    }
-    positions = None
-    nodes_with_pos = [n for n in topo_cfg.nodes
-                      if n.lat is not None and n.lon is not None]
-    if len(nodes_with_pos) == len(topo_cfg.nodes):
-        positions = {n.name: (n.lat, n.lon)   # type: ignore[arg-type]
-                     for n in topo_cfg.nodes}
-    channel = ChannelModel(neighbors=neighbors_map, positions=positions)
+    link_rssi: dict[str, dict[str, float]] = {}
+    for name in topology.all_names():
+        link_rssi[name] = {
+            link.other: link.rssi
+            for link in topology.neighbours(name)
+        }
+    channel = ChannelModel(link_rssi=link_rssi)
 
     # Wire routing and traffic.
     PacketRouter(topology, agents, metrics, rng, tracer=tracer,

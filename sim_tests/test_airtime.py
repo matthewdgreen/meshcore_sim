@@ -96,45 +96,49 @@ class TestLoraAirtimeFormula(unittest.TestCase):
 # ---------------------------------------------------------------------------
 
 class TestChannelModelHardCollision(unittest.TestCase):
+    """Equal-RSSI collisions (no capture effect)."""
 
-    def _model(self, neighbors: dict) -> ChannelModel:
-        return ChannelModel(neighbors=neighbors, positions=None)
+    def _model(self, link_rssi: dict) -> ChannelModel:
+        return ChannelModel(link_rssi=link_rssi)
+
+    # Helper: equal RSSI → neither can capture → hard collision
+    _EQUAL = {"A": {"R": -90.0}, "B": {"R": -90.0}}
 
     def test_no_collision_when_no_other_tx(self):
-        m = self._model({"A": {"R"}, "B": {"R"}})
+        m = self._model(self._EQUAL)
         m.register_tx("A", 0.0, 0.3, tx_id=1)
         self.assertFalse(m.is_lost("A", "R", 0.0, 0.3, tx_id=1))
 
     def test_no_collision_non_overlapping_windows(self):
         """B transmits after A's window ends → no collision."""
-        m = self._model({"A": {"R"}, "B": {"R"}})
+        m = self._model(self._EQUAL)
         m.register_tx("A", 0.0, 0.3, tx_id=1)
         m.register_tx("B", 0.4, 0.7, tx_id=2)
         self.assertFalse(m.is_lost("A", "R", 0.0, 0.3, tx_id=1))
 
     def test_collision_overlapping_windows(self):
         """A and B transmit simultaneously, both reach R → collision."""
-        m = self._model({"A": {"R"}, "B": {"R"}})
+        m = self._model(self._EQUAL)
         m.register_tx("A", 0.0, 0.3, tx_id=1)
         m.register_tx("B", 0.1, 0.4, tx_id=2)
         self.assertTrue(m.is_lost("A", "R", 0.0, 0.3, tx_id=1))
 
     def test_no_collision_interferer_cannot_reach_receiver(self):
         """B overlaps in time but cannot reach R → no collision."""
-        m = self._model({"A": {"R"}, "B": set()})  # B cannot reach R
+        m = self._model({"A": {"R": -90.0}, "B": {}})  # B cannot reach R
         m.register_tx("A", 0.0, 0.3, tx_id=1)
         m.register_tx("B", 0.1, 0.4, tx_id=2)
         self.assertFalse(m.is_lost("A", "R", 0.0, 0.3, tx_id=1))
 
     def test_expire_removes_old_records(self):
-        m = self._model({"A": {"R"}, "B": {"R"}})
+        m = self._model(self._EQUAL)
         m.register_tx("A", 0.0, 0.3, tx_id=1)
         m.register_tx("B", 0.1, 0.4, tx_id=2)
         m.expire_before(0.5)   # both windows have ended
         self.assertFalse(m.is_lost("A", "R", 0.0, 0.3, tx_id=1))
 
     def test_expire_keeps_active_records(self):
-        m = self._model({"A": {"R"}, "B": {"R"}})
+        m = self._model(self._EQUAL)
         m.register_tx("A", 0.0, 0.3, tx_id=1)
         m.register_tx("B", 0.1, 0.4, tx_id=2)
         m.expire_before(0.2)   # B's window hasn't ended yet
@@ -142,7 +146,7 @@ class TestChannelModelHardCollision(unittest.TestCase):
 
     def test_touching_windows_not_collision(self):
         """Windows that touch but don't overlap: B starts exactly when A ends."""
-        m = self._model({"A": {"R"}, "B": {"R"}})
+        m = self._model(self._EQUAL)
         m.register_tx("A", 0.0, 0.3, tx_id=1)
         m.register_tx("B", 0.3, 0.6, tx_id=2)   # start == A's end
         self.assertFalse(m.is_lost("A", "R", 0.0, 0.3, tx_id=1))
@@ -154,46 +158,37 @@ class TestChannelModelHardCollision(unittest.TestCase):
 
 class TestChannelModelCaptureEffect(unittest.TestCase):
     """
-    Two nodes: A is close to R (strong signal), B is far (weak signal).
+    Two nodes: A has strong RSSI to R, B has weak RSSI to R.
     With the capture effect enabled, A should survive B's interference.
     """
 
-    # Positions: A at (0,0), R at (0, 0.001) ≈ 111 m away
-    #            B at (0, 1.0) ≈ 111 km away
-    _POS = {
-        "A": (0.0, 0.0),
-        "R": (0.0, 0.001),
-        "B": (0.0, 1.0),
-    }
-    _NEIGHBORS = {"A": {"R"}, "B": {"R"}}
+    # A is strong (-60 dBm), B is weak (-100 dBm) → 40 dB difference >> 6 dB
+    _RSSI = {"A": {"R": -60.0}, "B": {"R": -100.0}}
 
     def _model(self, cap_db: float = 6.0) -> ChannelModel:
         return ChannelModel(
-            neighbors=self._NEIGHBORS,
-            positions=self._POS,
+            link_rssi=self._RSSI,
             capture_threshold_db=cap_db,
-            path_loss_exp=3.0,
         )
 
     def test_strong_primary_survives_weak_interferer(self):
-        """A (111 m) should be much stronger than B (111 km) → capture."""
+        """A (-60 dBm) is much stronger than B (-100 dBm) → capture."""
         m = self._model()
         m.register_tx("A", 0.0, 0.3, tx_id=1)
         m.register_tx("B", 0.1, 0.4, tx_id=2)
         self.assertFalse(m.is_lost("A", "R", 0.0, 0.3, tx_id=1))
 
     def test_weak_primary_lost_to_strong_interferer(self):
-        """B (111 km) cannot capture against A (111 m) → B is lost."""
+        """B (-100 dBm) cannot capture against A (-60 dBm) → B is lost."""
         m = self._model()
         m.register_tx("A", 0.0, 0.3, tx_id=1)
         m.register_tx("B", 0.1, 0.4, tx_id=2)
         self.assertTrue(m.is_lost("B", "R", 0.1, 0.4, tx_id=2))
 
-    def test_equal_distance_hard_collision(self):
-        """Two equidistant senders: neither captures → both lost (no positions)."""
+    def test_equal_rssi_hard_collision(self):
+        """Two equal-RSSI senders: neither captures → both lost."""
         m_hard = ChannelModel(
-            neighbors={"A": {"R"}, "C": {"R"}},
-            positions=None,
+            link_rssi={"A": {"R": -90.0}, "C": {"R": -90.0}},
         )
         m_hard.register_tx("A", 0.0, 0.3, tx_id=1)
         m_hard.register_tx("C", 0.1, 0.4, tx_id=2)
@@ -207,41 +202,43 @@ class TestChannelModelCaptureEffect(unittest.TestCase):
 class TestChannelModelHalfDuplex(unittest.TestCase):
     """LoRa is half-duplex: a node cannot receive while it is transmitting."""
 
-    def _model(self, neighbors: dict) -> ChannelModel:
-        return ChannelModel(neighbors=neighbors, positions=None)
+    def _model(self, link_rssi: dict) -> ChannelModel:
+        return ChannelModel(link_rssi=link_rssi)
+
+    _RSSI = {"A": {"R": -90.0}, "R": {"A": -90.0}}
 
     def test_receiver_busy_during_own_tx(self):
         """R transmits [0.0, 0.5]; RX window [0.1, 0.4] fully inside → busy."""
-        m = self._model({"A": {"R"}, "R": {"A"}})
+        m = self._model(self._RSSI)
         m.register_tx("R", 0.0, 0.5, tx_id=1)
         self.assertTrue(m.is_receiver_busy("R", 0.1, 0.4))
 
     def test_receiver_idle(self):
         """No active TX from R → not busy."""
-        m = self._model({"A": {"R"}})
+        m = self._model({"A": {"R": -90.0}})
         self.assertFalse(m.is_receiver_busy("R", 0.1, 0.4))
 
     def test_partial_overlap_start(self):
         """R TX [0.0, 0.3]; RX window [0.2, 0.6] overlaps at the start."""
-        m = self._model({"A": {"R"}, "R": {"A"}})
+        m = self._model(self._RSSI)
         m.register_tx("R", 0.0, 0.3, tx_id=1)
         self.assertTrue(m.is_receiver_busy("R", 0.2, 0.6))
 
     def test_partial_overlap_end(self):
         """R TX [0.4, 0.7]; RX window [0.2, 0.6] overlaps at the end."""
-        m = self._model({"A": {"R"}, "R": {"A"}})
+        m = self._model(self._RSSI)
         m.register_tx("R", 0.4, 0.7, tx_id=1)
         self.assertTrue(m.is_receiver_busy("R", 0.2, 0.6))
 
     def test_no_overlap_touching(self):
         """R TX [0.0, 0.3]; RX window [0.3, 0.6] — touching but not overlapping."""
-        m = self._model({"A": {"R"}, "R": {"A"}})
+        m = self._model(self._RSSI)
         m.register_tx("R", 0.0, 0.3, tx_id=1)
         self.assertFalse(m.is_receiver_busy("R", 0.3, 0.6))
 
     def test_other_node_tx_ignored(self):
         """A transmits but R does not → R is not busy."""
-        m = self._model({"A": {"R"}, "R": {"A"}})
+        m = self._model(self._RSSI)
         m.register_tx("A", 0.0, 0.5, tx_id=1)
         self.assertFalse(m.is_receiver_busy("R", 0.1, 0.4))
 

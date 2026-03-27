@@ -12,6 +12,8 @@ I put attention to make radio as much realistic as possible - through -
 - Node binary connected to simulated radio in missing touch points (e.g. missing retry, duty cycle, tx airtime.
 - Listen before TX
 - Realistic Advert
+- SNR and RSSI reception model implemented (in topology we define SNR)
+- ...
 More details in attached documentation.
 
 ---

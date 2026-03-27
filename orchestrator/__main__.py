@@ -10,7 +10,6 @@ import logging
 import random
 import resource
 import sys
-from typing import Optional
 
 from .airtime import flood_timeout_secs
 from .channel import ChannelModel
@@ -84,22 +83,14 @@ async def run(args: object) -> int:
     # radio section.
     radio = topo_cfg.radio or RadioConfig()
 
-    neighbors: dict[str, set[str]] = {
-        name: {link.other for link in topology.neighbours(name)}
-        for name in topology.all_names()
-    }
-    nodes_with_pos = [n for n in topo_cfg.nodes
-                      if n.lat is not None and n.lon is not None]
-    if len(nodes_with_pos) == len(topo_cfg.nodes):
-        positions: Optional[dict[str, tuple[float, float]]] = {
-            n.name: (n.lat, n.lon)   # type: ignore[arg-type]
-            for n in topo_cfg.nodes
+    link_rssi: dict[str, dict[str, float]] = {}
+    for name in topology.all_names():
+        link_rssi[name] = {
+            link.other: link.rssi
+            for link in topology.neighbours(name)
         }
-        log.info("RF contention: capture effect enabled (6 dB threshold)")
-    else:
-        positions = None
-        log.info("RF contention: hard collision (not all nodes have lat/lon)")
-    channel = ChannelModel(neighbors=neighbors, positions=positions)
+    channel = ChannelModel(link_rssi=link_rssi)
+    log.info("RF contention: capture effect using edge RSSI (6 dB threshold)")
 
     log.info(
         "RF: SF=%d  BW=%d Hz  CR=4/%d",
@@ -135,7 +126,8 @@ async def run(args: object) -> int:
     #     (scales with node count × airtime)
     #   - flood_timeout: ACK wait with retries (companion_radio formula)
     # Together they cover propagation + round-trip ACK for the last message.
-    grace_secs = stagger_secs + flood_timeout_secs(
+    propagation_margin = min(stagger_secs, 30.0)
+    grace_secs = propagation_margin + flood_timeout_secs(
         radio.sf, radio.bw_hz, radio.cr, radio.preamble_symbols,
         retries=1)
 
@@ -155,7 +147,8 @@ async def run(args: object) -> int:
     # and relay Dispatchers (with LBT) forward them; round 2 fills in any
     # endpoints that were missed due to hidden-terminal collisions.
     await traffic.run_initial_adverts()
-    await asyncio.sleep(stagger_secs + 2.0)   # let relays re-flood round 1
+    reflood_wait = min(stagger_secs + 2.0, 30.0)
+    await asyncio.sleep(reflood_wait)          # let relays re-flood round 1
     await traffic.run_initial_adverts()
 
     # Long-running tasks: traffic stops sending after duration_secs, then the

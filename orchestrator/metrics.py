@@ -34,6 +34,7 @@ class MetricsCollector:
         self._adv_replay_count: int = 0
         self._collision_count: int = 0
         self._halfduplex_drop_count: int = 0
+        self._snr_drop_count: int = 0
 
         # Message delivery tracking — keyed by message text
         # (unique per send because TrafficGenerator embeds a timestamp)
@@ -82,6 +83,9 @@ class MetricsCollector:
 
     def record_halfduplex_drop(self, sender: str, receiver: str) -> None:
         self._halfduplex_drop_count += 1
+
+    def record_snr_drop(self, sender: str, receiver: str) -> None:
+        self._snr_drop_count += 1
 
     def record_rss(self, node: str, rss_kb: int) -> None:
         self._rss_kb[node] = rss_kb
@@ -175,6 +179,10 @@ class MetricsCollector:
     def halfduplex_drop_count(self) -> int:
         return self._halfduplex_drop_count
 
+    @property
+    def snr_drop_count(self) -> int:
+        return self._snr_drop_count
+
     def to_dict(self) -> dict:
         """Export all metrics as a JSON-serialisable dict.
 
@@ -232,6 +240,7 @@ class MetricsCollector:
                 "recv": self._channel_recv,
             },
             "drops": {
+                "snr_below_threshold": self._snr_drop_count,
                 "link_loss": self._link_loss_count,
                 "collisions": self._collision_count,
                 "halfduplex": self._halfduplex_drop_count,
@@ -313,6 +322,7 @@ class MetricsCollector:
         lines.append("")
 
         # Drop / adversarial counts
+        lines.append(f"  SNR below threshold:     {self._snr_drop_count}")
         lines.append(f"  Link-level packet loss:  {self._link_loss_count}")
         lines.append(f"  RF collisions dropped:   {self._collision_count}")
         lines.append(f"  Half-duplex RX drops:    {self._halfduplex_drop_count}")

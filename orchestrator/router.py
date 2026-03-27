@@ -45,7 +45,12 @@ class PacketRouter:
         self._topology = topology
         self._agents = agents
         self._metrics = metrics
-        self._rng = rng
+        # Derive a private RNG so that link-loss decisions are independent of
+        # the traffic generator's RNG consumption (stagger jitter, sender
+        # selection, etc.).  Without this, concurrent async tasks sharing a
+        # single RNG create coupling where changing the stagger algorithm
+        # shifts which packets hit the loss threshold.
+        self._rng = random.Random(rng.randrange(2**63))
         self._tracer = tracer
         self._radio = radio
         self._channel = channel
@@ -55,7 +60,7 @@ class PacketRouter:
         for name, agent in agents.items():
             if agent.config.adversarial is not None:
                 self._filters[name] = AdversarialFilter(
-                    agent.config.adversarial, rng
+                    agent.config.adversarial, self._rng
                 )
 
         # Register callbacks on every agent
@@ -121,6 +126,18 @@ class PacketRouter:
         tx_end: Optional[float] = None,
     ) -> None:
         receiver_name = link.other
+
+        # 0. SNR decode gate: below SF threshold the radio cannot demodulate.
+        #    Also skips LBT notification — real CAD doesn't trigger for
+        #    below-threshold signals (RadioLibWrappers.cpp:171).
+        if self._radio is not None:
+            from .airtime import SNR_THRESHOLD
+            snr_min = SNR_THRESHOLD.get(self._radio.sf, -20.0)
+            if link.snr < snr_min:
+                self._metrics.record_snr_drop(sender, receiver_name)
+                log.debug("[router] SNR drop %s→%s (%.1f < %.1f dB)",
+                          sender, receiver_name, link.snr, snr_min)
+                return
 
         # 1. Link-level loss
         if link.loss > 0.0 and self._rng.random() < link.loss:

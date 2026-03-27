@@ -141,7 +141,9 @@ class TestFloodExposureBaseline(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.agents, cls.tracer = asyncio.run(_run_privacy_sim(rounds=1))
+        cls.agents, cls.tracer = asyncio.run(
+            _run_privacy_sim(rounds=1, warmup_secs=15.0, settle_secs=20.0)
+        )
         traces = _txt_traces(cls.tracer)
         assert traces, f"No TXT_MSG observed. Tracer report:\n{cls.tracer.report()}"
         cls.flood_trace = traces[0]
@@ -252,7 +254,9 @@ class TestCollusionAttack(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.agents, cls.tracer = asyncio.run(_run_privacy_sim(rounds=1, seed=7))
+        cls.agents, cls.tracer = asyncio.run(
+            _run_privacy_sim(rounds=1, seed=7, warmup_secs=15.0, settle_secs=20.0)
+        )
         traces = _txt_traces(cls.tracer)
         assert traces, f"No TXT_MSG observed. Tracer report:\n{cls.tracer.report()}"
         cls.flood_trace = traces[0]
@@ -367,9 +371,14 @@ class TestDirectRoutingPrivacyReduction(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.agents, cls.tracer = asyncio.run(
-            _run_privacy_sim(rounds=2, warmup_secs=10.0, settle_secs=5.0)
+            _run_privacy_sim(rounds=2, warmup_secs=15.0, settle_secs=20.0)
         )
         cls.txt_traces = _txt_traces(cls.tracer)
+        # Separate flood and direct traces (retransmits may add extra floods)
+        from orchestrator.packet import ROUTE_TYPE_DIRECT
+        cls.flood_traces = [tr for tr in cls.txt_traces if tr.is_flood()]
+        cls.direct_traces = [tr for tr in cls.txt_traces
+                             if any(h.route_type == ROUTE_TYPE_DIRECT for h in tr.hops)]
 
     def test_two_txt_messages_observed(self):
         self.assertGreaterEqual(
@@ -385,8 +394,10 @@ class TestDirectRoutingPrivacyReduction(unittest.TestCase):
 
     def test_direct_has_fewer_witnesses_than_flood(self):
         """The key privacy improvement: direct routing reduces witness_count."""
-        flood_wc  = self.txt_traces[0].witness_count
-        direct_wc = self.txt_traces[1].witness_count
+        if not self.direct_traces:
+            self.fail("No direct-routed messages found")
+        flood_wc  = self.flood_traces[0].witness_count
+        direct_wc = self.direct_traces[0].witness_count
         self.assertLess(
             direct_wc, flood_wc,
             f"Expected direct witness_count < flood witness_count; "
@@ -404,9 +415,11 @@ class TestDirectRoutingPrivacyReduction(unittest.TestCase):
         edge count in a zero-loss network — the meaningful improvement is
         the reduction RATIO relative to flood, not an absolute number.
         """
+        if not self.direct_traces:
+            self.fail("No direct-routed messages found")
         # Edges in an R×C grid: R*(C-1) horizontal + (R-1)*C vertical
         max_edges = _ROWS * (_COLS - 1) + (_ROWS - 1) * _COLS
-        direct_wc = self.txt_traces[1].witness_count
+        direct_wc = self.direct_traces[0].witness_count
         self.assertLessEqual(
             direct_wc, max_edges,
             f"Direct witness_count={direct_wc} exceeds total grid edges={max_edges}",
@@ -418,7 +431,9 @@ class TestDirectRoutingPrivacyReduction(unittest.TestCase):
         direct path still see the packet (with a stable fingerprint).
         This test confirms residual exposure exists even after path exchange.
         """
-        direct_tr = self.txt_traces[1]
+        if not self.direct_traces:
+            self.fail("No direct-routed messages found")
+        direct_tr = self.direct_traces[0]
         # At least one relay node must appear as sender (it forwarded the packet)
         relay_senders = direct_tr.unique_senders & _RELAYS
         self.assertTrue(
@@ -432,20 +447,22 @@ class TestDirectRoutingPrivacyReduction(unittest.TestCase):
         Quantifies the improvement: direct routing should achieve a measurable
         reduction in witness_count relative to the flood.
 
-        Observed baseline: flood≈22, direct≈12–14, ratio≈1.6–1.8×.
+        Observed baseline: flood~22, direct~12-14, ratio~1.6-1.8x.
         Direct routing alone is insufficient for privacy (PLAN.md §4), so we
-        assert a modest ≥1.2× reduction rather than a hard 2× target.  The
+        assert a modest >=1.2x reduction rather than a hard 2x target.  The
         meaningful benchmark is that improvement exists; how much is tracked
         in PLAN.md and compared against future privacy-protocol experiments.
         """
-        flood_wc  = self.txt_traces[0].witness_count
-        direct_wc = self.txt_traces[1].witness_count
+        if not self.direct_traces:
+            self.fail("No direct-routed messages found")
+        flood_wc  = self.flood_traces[0].witness_count
+        direct_wc = self.direct_traces[0].witness_count
         if direct_wc == 0:
             self.skipTest("direct_wc=0; cannot compute ratio")
         ratio = flood_wc / direct_wc
         self.assertGreaterEqual(
             ratio, 1.2,
-            f"Expected ≥1.2× witness reduction (flood/direct); got {ratio:.1f}x "
+            f"Expected >=1.2x witness reduction (flood/direct); got {ratio:.1f}x "
             f"(flood={flood_wc}, direct={direct_wc})",
         )
 

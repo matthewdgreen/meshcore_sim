@@ -74,6 +74,7 @@ def advert_stagger_secs(
     node_count: int,
     preamble_symbols: int = 8,
     margin: float = 2.0,
+    max_stagger: float = 45.0,
 ) -> float:
     """Compute a safe stagger window for initial advert floods.
 
@@ -84,6 +85,12 @@ def advert_stagger_secs(
     relay forwarding overhead; Listen-Before-Talk (LBT) in the node's
     Dispatcher provides additional collision avoidance at the MAC layer.
 
+    For large topologies the raw stagger (node_count × airtime × margin) can
+    grow very large, but LBT prevents most collisions once the initial burst
+    passes.  *max_stagger* caps the window so that runtime scales sub-linearly
+    with node count; the default 45 s still gives each of 80 nodes a 0.56 s
+    slot — well above the preamble time (~50 ms).
+
     This mimics reality: nodes in the field don't all power on at the same
     instant — they boot over seconds to minutes, naturally avoiding collisions.
 
@@ -91,7 +98,18 @@ def advert_stagger_secs(
     """
     airtime_ms = lora_airtime_ms(sf, bw_hz, cr, _TYPICAL_ADVERT_BYTES,
                                  preamble_symbols)
-    return node_count * airtime_ms / 1000.0 * margin
+    raw = node_count * airtime_ms / 1000.0 * margin
+    return min(raw, max_stagger)
+
+
+# ---------------------------------------------------------------------------
+# SNR decode thresholds per spreading factor (dB).
+# From Semtech datasheets / MeshCore RadioLibWrappers.cpp:185-192.
+# Below these values the LoRa radio cannot demodulate the chirp signal.
+# ---------------------------------------------------------------------------
+SNR_THRESHOLD: dict[int, float] = {
+    7: -7.5, 8: -10.0, 9: -12.5, 10: -15.0, 11: -17.5, 12: -20.0,
+}
 
 
 # Typical MeshCore text message size (encrypted payload + framing).

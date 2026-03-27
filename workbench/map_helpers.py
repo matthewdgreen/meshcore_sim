@@ -164,8 +164,8 @@ def _escape_html(s: str) -> str:
     return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("'", "&#39;")
 
 
-def _node_popup_html(node: NodeConfig) -> str:
-    """Build HTML for a marker popup showing node properties."""
+def _node_popup_html(node: NodeConfig, edges: list | None = None) -> str:
+    """Build HTML for a marker popup showing node properties and edges."""
     role = node_role(node)
     colour = ROLE_COLOUR.get(role, ROLE_COLOUR["endpoint"])
     lines = [
@@ -180,6 +180,30 @@ def _node_popup_html(node: NodeConfig) -> str:
             f'<span style="color:#888">Key:</span> '
             f'<code style="font-size:0.85em">{node.prv_key[:16]}\u2026</code>'
         )
+    if edges:
+        lines.append('<hr style="margin:4px 0;border-color:#555">')
+        lines.append(f'<span style="color:#888">Edges ({len(edges)}):</span>')
+        for edge in edges:
+            peer = edge.b if edge.a == node.name else edge.a
+            # SNR in direction from this node to peer
+            if edge.a == node.name and edge.a_to_b and edge.a_to_b.snr is not None:
+                snr = edge.a_to_b.snr
+            elif edge.b == node.name and edge.b_to_a and edge.b_to_a.snr is not None:
+                snr = edge.b_to_a.snr
+            else:
+                snr = edge.snr
+            loss = edge.loss
+            if edge.a == node.name and edge.a_to_b and edge.a_to_b.loss is not None:
+                loss = edge.a_to_b.loss
+            elif edge.b == node.name and edge.b_to_a and edge.b_to_a.loss is not None:
+                loss = edge.b_to_a.loss
+            parts = [f'SNR:{snr:.1f}']
+            if loss > 0:
+                parts.append(f'L:{loss*100:.0f}%')
+            lines.append(
+                f'&nbsp;\u2192 {_escape_html(short_name(peer))}'
+                f' <span style="color:#aaa;font-size:0.9em">{" ".join(parts)}</span>'
+            )
     return '<br>'.join(lines)
 
 
@@ -231,6 +255,13 @@ def bind_popups(
 
     node_map = {n.name: n for n in topo.nodes}
 
+    # Pre-build edge lookup: node_name → list of connected edges
+    from collections import defaultdict
+    edges_by_node: dict[str, list] = defaultdict(list)
+    for edge in topo.edges:
+        edges_by_node[edge.a].append(edge)
+        edges_by_node[edge.b].append(edge)
+
     # Build {layer_id: {tooltip, popup}} for all markers and edges
     layer_data: dict = {}
 
@@ -240,7 +271,7 @@ def bind_popups(
             continue
         layer_data[marker.id] = {
             "tooltip": short_name(name),
-            "popup": _node_popup_html(node),
+            "popup": _node_popup_html(node, edges_by_node.get(name)),
         }
 
     for edge, layer in edge_layers:
