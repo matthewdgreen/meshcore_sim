@@ -201,7 +201,16 @@ def _node_popup_html(node: NodeConfig, edges: list | None = None) -> str:
     if edges:
         lines.append('<hr style="margin:4px 0;border-color:#555">')
         lines.append(f'<span style="color:#888">Edges ({len(edges)}):</span>')
-        for edge in edges:
+
+        def _rx_snr_for_sort(edge):
+            """SNR as received by this node (peer→node direction)."""
+            if edge.a == node.name and edge.b_to_a and edge.b_to_a.snr is not None:
+                return edge.b_to_a.snr
+            if edge.b == node.name and edge.a_to_b and edge.a_to_b.snr is not None:
+                return edge.a_to_b.snr
+            return edge.snr
+
+        for edge in sorted(edges, key=_rx_snr_for_sort, reverse=True):
             peer = edge.b if edge.a == node.name else edge.a
             # TX direction: this node → peer
             if edge.a == node.name and edge.a_to_b and edge.a_to_b.snr is not None:

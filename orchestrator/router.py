@@ -105,6 +105,28 @@ class PacketRouter:
             # Prune records older than 5 s to bound memory growth.
             self._channel.expire_before(tx_start - 5.0)
 
+        # Listen-Before-Talk: notify all reachable neighbours synchronously
+        # BEFORE creating delivery tasks.  This eliminates the asyncio race
+        # where traffic injection or autonomous retransmissions could fire
+        # before a delayed rx_start notification arrived.  The propagation
+        # delay for preamble detection (5-20 ms) is below the simulator's
+        # timing resolution and real LoRa hardware detects preambles near-
+        # instantaneously relative to packet airtime (400-1100 ms).
+        if airtime_ms > 0:
+            snr_min = None
+            if self._radio is not None:
+                from .airtime import SNR_THRESHOLD
+                snr_min = SNR_THRESHOLD.get(self._radio.sf, -20.0)
+            lbt_coros = []
+            for link in self._topology.neighbours(sender_name):
+                if snr_min is not None and link.snr < snr_min:
+                    continue  # below SF threshold — real CAD wouldn't detect
+                receiver = self._agents.get(link.other)
+                if receiver is not None:
+                    lbt_coros.append(receiver.notify_rx_start(airtime_ms))
+            if lbt_coros:
+                await asyncio.gather(*lbt_coros)
+
         for link in self._topology.neighbours(sender_name):
             # Fire-and-forget: each delivery is independent
             asyncio.create_task(
@@ -166,21 +188,8 @@ class PacketRouter:
                 log.debug("[router] adv-corrupt %s→%s", sender, receiver_name)
                 hex_data = result
 
-        # 2b. Listen-Before-Talk: notify receiver that a preamble has arrived.
-        # On real hardware the radio detects the preamble at rx_start
-        # (= tx_start + propagation delay), before the full packet is decoded.
-        # This must fire even for packets that will later fail half-duplex or
-        # collision checks — the radio would still sense the energy.
-        if tx_start is not None and tx_end is not None:
-            preamble_arrival = tx_start + link.latency_ms / 1000.0
-            now = asyncio.get_event_loop().time()
-            preamble_wait = max(preamble_arrival - now, 0.0)
-            if preamble_wait > 0.0:
-                await asyncio.sleep(preamble_wait)
-            airtime_ms = (tx_end - tx_start) * 1000.0
-            receiver = self._agents.get(receiver_name)
-            if receiver is not None:
-                await receiver.notify_rx_start(airtime_ms)
+        # 2b. LBT notification is now sent synchronously in _on_tx() before
+        # delivery tasks are created — see the comment there for rationale.
 
         # 3. Propagation delay.
         # When airtime is modelled (tx_end is set), we wait until the full

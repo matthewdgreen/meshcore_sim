@@ -18,7 +18,10 @@ static void bytes_to_hex(char* out, const uint8_t* in, int len) {
 }
 
 void SimRadio::notifyRxStart(uint32_t duration_ms) {
-    _rx_active_until = _ms.getMillis() + duration_ms;
+    unsigned long new_until = _ms.getMillis() + duration_ms;
+    if (new_until > _rx_active_until) {
+        _rx_active_until = new_until;
+    }
 }
 
 bool SimRadio::isReceiving() {

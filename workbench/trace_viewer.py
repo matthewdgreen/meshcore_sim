@@ -1213,12 +1213,18 @@ def _update_waterfall(
             sender_color[s] = _WF_COLORS[color_idx % len(_WF_COLORS)]
             color_idx += 1
 
-    # Group events by receiver, then by sender within each receiver
+    # Group events by receiver, then by sender within each receiver.
+    # Self-TX events (sender == receiver) go into a separate dict
+    # to render on the header row.
     by_rx: dict[str, dict[str, list[dict]]] = {}
+    self_tx: dict[str, list[dict]] = {}  # receiver → list of own TX events
     for ev in waterfall_data:
         rx = ev["receiver"]
         sx = ev["sender"]
-        by_rx.setdefault(rx, {}).setdefault(sx, []).append(ev)
+        if ev.get("self_tx"):
+            self_tx.setdefault(rx, []).append(ev)
+        else:
+            by_rx.setdefault(rx, {}).setdefault(sx, []).append(ev)
     rx_order = sorted(by_rx.keys())
 
     wf_window = 2.0
@@ -1263,6 +1269,34 @@ def _update_waterfall(
             f'border-bottom:1px solid #bdbdbd">'
             f'{medium_name(rx)}</div>'
         )
+        # Self-TX bars on the header row (this node's own transmissions)
+        for ev in self_tx.get(rx, []):
+            bar_left = (ev["t_start"] - t_lo) / total_w * 100
+            bar_right = (ev["t_end"] - t_lo) / total_w * 100
+            bar_w = max(bar_right - bar_left, 0.3)
+            tx_id_val = ev["tx_id"]
+            pkt_info = tx_id_to_pkt.get(tx_id_val) if tx_id_to_pkt else None
+            pkt_num = pkt_info[0] if pkt_info else "?"
+            pkt_type = pkt_info[1] if pkt_info else ""
+            airtime_ms = (ev["t_end"] - ev["t_start"]) * 1000
+            title = (
+                f"{medium_name(rx)} TX"
+                f" pkt#{pkt_num} {pkt_type} tx#{tx_id_val}"
+                f" {airtime_ms:.0f}ms"
+            )
+            parts.append(
+                f'<div class="wf-bar" style="position:absolute;'
+                f'left:{bar_left:.2f}%;'
+                f'top:{y + 2}px;width:{bar_w:.2f}%;height:{header_h - 4}px;'
+                f'background:{SENDER_COLOUR};opacity:0.7;border-radius:2px;'
+                f'z-index:3;overflow:hidden;cursor:pointer;'
+                f'color:#fff;font-size:0.75em;line-height:{header_h - 4}px;'
+                f'text-align:center;white-space:nowrap" '
+                f'data-sender="{rx}" data-receiver="{rx}" '
+                f'data-txid="{tx_id_val}" '
+                f'title="{title}">'
+                f'\u2191#{pkt_num}</div>'
+            )
         y += header_h
 
         # Sender sub-rows
@@ -1740,6 +1774,17 @@ def _update_map_overlay(state: AppState) -> None:
                         "tx_id": tid,
                         "snr": snr_val,
                     })
+                # Self-TX entry: show the sender's own transmission on
+                # its receiver row so you can see when it's busy.
+                waterfall_data.append({
+                    "sender": sender_name,
+                    "receiver": sender_name,
+                    "t_start": t_start_ev,
+                    "t_end": t_end_ev,
+                    "tx_id": tid,
+                    "snr": None,
+                    "self_tx": True,
+                })
             waterfall_data.sort(key=lambda x: x["t_start"])
 
     # --- Single JS call to update everything ---

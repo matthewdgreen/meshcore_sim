@@ -74,7 +74,7 @@ _MAX_GAP_KM = 30.0   # max practical LoRa range (km)
 _DEFAULT_SIGMA = 8.0     # dB — typical outdoor log-normal shadow fading
 _MIN_EDGES_FOR_FIT = 5   # need at least this many measured edges to fit model
 _MAX_GOOD_LINKS = 3  # cap SNR > 0 edges per node (measured + inferred); typical 2-4
-_MAX_EDGES_PER_NODE = 30  # hard cap on total edges per node
+_MAX_EDGES_PER_NODE = 12  # hard cap on total edges per node (real-world: 8-15 recent)
 _MAX_RANGE_FACTOR = 1.5  # auto max range = max measured distance * this
 
 # Reverse-direction SNR penalty when only one direction is measured
@@ -84,6 +84,20 @@ _REVERSE_SNR_PENALTY = 5.0  # dB
 _COMPANION_SNR = 12.0
 _COMPANION_LOSS = 0.02
 _COMPANION_LATENCY_MS = 5.0
+
+# Antenna penalty: repeaters have directional/elevated antennas (~+6 dBi),
+# companions (phones) have basic antennas (~0 dBi).
+# The penalty is split per direction:
+#   companion TX → repeater RX: repeater antenna helps on RX side only → half penalty
+#   repeater TX → companion RX: companion's weak RX antenna → half penalty
+# Both directions lose half the gain difference compared to repeater↔repeater.
+_COMPANION_ANTENNA_PENALTY = 6.0  # dB total (repeater gain advantage)
+
+# Companion edge limits — phones hear fewer nodes than repeaters.
+# Real-world reference: a well-positioned repeater sees 8-15 recent neighbours;
+# a phone at the same spot with a basic antenna hears only the strongest.
+_COMPANION_SNR_FLOOR = -6.0   # dB — stricter than repeater floor (-12 dB)
+_COMPANION_MAX_NEIGHBOUR_EDGES = 5  # max edges to relay's neighbours (strongest kept)
 
 # EU Narrow defaults — standard European MeshCore configuration.
 # Edit the radio section in the output JSON to match your network.
@@ -532,7 +546,24 @@ def import_topology(
             n_companions = min(companions, len(relay_list), len(_COMPANION_NAMES))
             selected = rng.sample(relay_list, n_companions)
 
-            # Create companion nodes and edges
+            # Build relay adjacency from existing edges for neighbour lookup.
+            # relay_neighbours[name] -> {neighbour_name: edge_dict}
+            relay_neighbours: dict[str, dict[str, dict]] = {}
+            for e in merged_edges:
+                a_name, b_name = e["a"], e["b"]
+                relay_neighbours.setdefault(a_name, {})[b_name] = e
+                relay_neighbours.setdefault(b_name, {})[a_name] = e
+
+            # Build name → (lat, lon) lookup for all relay nodes
+            relay_positions = {n["name"]: (n["lat"], n["lon"]) for n in nodes_out}
+
+            # Penalty: companion loses half the antenna advantage on each
+            # side of the link compared to a repeater↔repeater edge.
+            # repeater TX → companion RX: companion has worse RX antenna
+            # companion TX → repeater RX: companion has worse TX antenna
+            # Both sides lose the same amount (half of total penalty).
+            half_penalty = _COMPANION_ANTENNA_PENALTY / 2.0
+
             for i, (relay_name, lat, lon) in enumerate(selected):
                 comp_name = _COMPANION_NAMES[i]
                 nodes_out.append({
@@ -541,6 +572,8 @@ def import_topology(
                     "lat": lat,
                     "lon": lon,
                 })
+
+                # (a) Direct link to co-located relay (excellent, short-range)
                 merged_edges.append({
                     "a": comp_name,
                     "b": relay_name,
@@ -549,13 +582,83 @@ def import_topology(
                     "latency_ms": _COMPANION_LATENCY_MS,
                 })
 
+                # (b) Edges to the relay's neighbours — companion is at the
+                # same position but with a weaker antenna.  Collect
+                # candidates, then keep only the strongest N.
+                neighbours = relay_neighbours.get(relay_name, {})
+                candidates = []  # (best_snr, edge_dict) for sorting
+                for nbr_name, nbr_edge in neighbours.items():
+                    # Get the SNR the relay sees on this edge (both dirs)
+                    # and penalise for companion's weaker antenna.
+                    ab = nbr_edge.get("a_to_b")
+                    ba = nbr_edge.get("b_to_a")
+
+                    if nbr_edge["a"] == relay_name:
+                        # relay is "a": a_to_b = relay→nbr, b_to_a = nbr→relay
+                        snr_relay_to_nbr = ab["snr"] if ab else nbr_edge["snr"]
+                        snr_nbr_to_relay = ba["snr"] if ba else nbr_edge["snr"]
+                    else:
+                        # relay is "b": b_to_a = relay→nbr, a_to_b = nbr→relay
+                        snr_relay_to_nbr = ba["snr"] if ba else nbr_edge["snr"]
+                        snr_nbr_to_relay = ab["snr"] if ab else nbr_edge["snr"]
+
+                    # companion TX → nbr RX:
+                    #   companion has weaker TX antenna → lose half_penalty
+                    snr_comp_to_nbr = snr_relay_to_nbr - half_penalty
+
+                    # nbr TX → companion RX:
+                    #   companion has weaker RX antenna → lose half_penalty
+                    snr_nbr_to_comp = snr_nbr_to_relay - half_penalty
+
+                    # Use the better direction as the ranking key
+                    best_snr = max(snr_comp_to_nbr, snr_nbr_to_comp)
+
+                    # Drop if both directions below companion floor
+                    if best_snr <= _COMPANION_SNR_FLOOR:
+                        continue
+
+                    # Clamp each direction to demodulation floor
+                    snr_comp_to_nbr = max(snr_comp_to_nbr, _SNR_FLOOR)
+                    snr_nbr_to_comp = max(snr_nbr_to_comp, _SNR_FLOOR)
+
+                    loss_comp_to_nbr = snr_to_loss(snr_comp_to_nbr)
+                    loss_nbr_to_comp = snr_to_loss(snr_nbr_to_comp)
+
+                    edge = {
+                        "a": comp_name,
+                        "b": nbr_name,
+                        "snr": round(snr_comp_to_nbr, 2),
+                        "loss": loss_comp_to_nbr,
+                        "latency_ms": 20.0,
+                    }
+                    # Add directional overrides if asymmetric
+                    if abs(snr_comp_to_nbr - snr_nbr_to_comp) > 0.01:
+                        edge["a_to_b"] = {
+                            "snr": round(snr_comp_to_nbr, 2),
+                            "loss": loss_comp_to_nbr,
+                        }
+                        edge["b_to_a"] = {
+                            "snr": round(snr_nbr_to_comp, 2),
+                            "loss": loss_nbr_to_comp,
+                        }
+                    candidates.append((best_snr, edge))
+
+                # Keep only the strongest N neighbour edges
+                candidates.sort(key=lambda x: -x[0])
+                comp_edge_count = 0
+                for _, edge in candidates[:_COMPANION_MAX_NEIGHBOUR_EDGES]:
+                    merged_edges.append(edge)
+                    comp_edge_count += 1
+
+                if verbose:
+                    print(f"    {comp_name} → {relay_name} "
+                          f"(+{comp_edge_count} neighbour edges)",
+                          file=sys.stderr)
+
             if verbose:
                 print(f"  Companions: {len(selected)} added "
                       f"({', '.join(_COMPANION_NAMES[i] for i in range(len(selected)))})",
                       file=sys.stderr)
-                for i, (relay_name, _, _) in enumerate(selected):
-                    print(f"    {_COMPANION_NAMES[i]} → {relay_name}",
-                          file=sys.stderr)
 
     # ------------------------------------------------------------------
     # 6. Compute warmup and assemble topology
